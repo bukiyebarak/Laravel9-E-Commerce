@@ -25,6 +25,7 @@
     <!-- End Page Title -->
     <!-- Start Product Details Area -->
     <section class="product-details-area pt-100 pb-70">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-12">
@@ -84,22 +85,20 @@
                         </div>
 
                         <div class="products-add-to-cart">
-                            <div class="input-counter">
-                                <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                <input type="text" value="1">
-                                <span class="plus-btn"><i class='bx bx-plus'></i></span>
-                            </div>
+                            <form action="{{route('user_shopcart_add',['id'=>$data->id])}}" method="post">
+                                @csrf
+                                <div class="input-counter">
+                                    <span class="minus-btn"><i class='bx bx-minus'></i></span>
+                                    <input type="text" name="quantity" value="1" max="{{$data->quantity}}" min="1">
+                                    <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                                </div>
 
-                            <a href="{{route('addtocart',['id'=>$rs->id])}}" class="default-btn"><i
-                                    class="fas fa-cart-plus"></i> Add to Cart
-                            </a>
+                                <input type="submit" class="default-btn" value="Add to Cart">
+                            </form>
                         </div>
-
                         <div class="wishlist-compare-btn">
-                            <a href="#" class="optional-btn"><i class='bx bx-heart'></i> Add to Wishlist</a>
-                            <a href="#" class="optional-btn"><i class='bx bx-refresh'></i> Add to Compare</a>
+                         <a href="#" class="optional-btn"><i class='bx bx-heart'></i> Add to Wishlist</a>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -196,9 +195,11 @@
                                                     </div>
                                                     <br>
                                                     <div class="d-flex align-items-center mb-2">
-                                                        <h5 class="mb-0"> <i class="bx bx-user"> &nbsp;{{$rs->user->name}}</i></h5>
+                                                        <h5 class="mb-0"><i class="bx bx-user">
+                                                                &nbsp;{{$rs->user->name}}</i></h5>
 
-                                                        <p class="mb-0 ms-auto">  <i class="bx bx-time"></i>&nbsp;{{$rs->created_at}}</p>
+                                                        <p class="mb-0 ms-auto"><i
+                                                                class="bx bx-time"></i>&nbsp;{{$rs->created_at}}</p>
                                                     </div>
 
                                                     <p>{{$rs->review}}</p>

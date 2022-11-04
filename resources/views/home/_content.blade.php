@@ -98,14 +98,7 @@
                                             </a>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="compare-btn">
-                                            <a href="#">
-                                                <i class='bx bx-refresh'></i>
-                                                <span class="tooltip-label">Compare</span>
-                                            </a>
-                                        </div>
-                                    </li>
+
                                     <li>
                                         <div class="quick-view-btn">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
@@ -141,11 +134,11 @@
                                 <span class="old-price">{{$rs->price* 1.2}}₺</span>
                                 <span class="new-price">{{$rs->price}}₺</span>
                             </div>
-                            <a href="{{route('addtocart',['id'=>$rs->id])}}" class="add-to-cart">Add to Cart</a>
+                            <a href="#" class="add-to-cart">Add to Cart</a>
                         </div>
 
                         <!--düzenle -->
-                        <span class="products-discount"><span>20% OFF</span></span>
+{{--                        <span class="products-discount"><span>20% OFF</span></span>--}}
                     </div>
                 </div>
             @endforeach
@@ -232,14 +225,6 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="compare-btn">
-                                            <a href="#">
-                                                <i class='bx bx-refresh'></i>
-                                                <span class="tooltip-label">Compare</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
                                         <div class="quick-view-btn">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                 <i class='bx bx-search-alt'></i>
@@ -275,7 +260,7 @@
                                 <span class="old-price">{{$rs->price* 1.2}}₺</span>
                                 <span class="new-price">{{$rs->price}}₺</span>
                             </div>
-                            <a href="{{route('addtocart',['id'=>$rs->id])}}" class="add-to-cart">Add to Cart</a>
+                            <a href="#" class="add-to-cart">Add to Cart</a>
                         </div>
 
 {{--                        <span class="products-discount">--}}
@@ -417,7 +402,7 @@
                             <span class="old-price">{{$rs->price* 1.2}}₺</span>
                             <span class="new-price">{{$rs->price}}₺</span>
                         </div>
-                        <a href="{{route('addtocart',['id'=>$rs->id])}}" class="add-to-cart">Add to Cart</a>
+                        <a href="{{route('user_shopcart_add',['id'=>$rs->id])}}" class="add-to-cart">Add to Cart</a>
                     </div>
                 </div>
             </div>

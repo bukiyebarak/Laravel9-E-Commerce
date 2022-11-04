@@ -137,14 +137,6 @@
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <div class="compare-btn">
-                                                        <a href="#">
-                                                            <i class='bx bx-refresh'></i>
-                                                            <span class="tooltip-label">Compare</span>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
                                                     <div class="quick-view-btn">
                                                         <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                             <i class='bx bx-search-alt'></i>
@@ -177,7 +169,7 @@
                                         </div>
                                         <br>
                                         <div class="btn-box">
-                                            <a class="add-to-cart" href="{{route('addtocart',['id'=>$rs->id])}}">Add to cart</a>
+                                            <a class="add-to-cart" href="{{route('user_shopcart_add',['id'=>$rs->id])}}">Add to cart</a>
                                         </div>
                                     </div>
                                 </div>

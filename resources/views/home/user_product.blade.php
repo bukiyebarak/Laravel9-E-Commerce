@@ -3,19 +3,17 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', $setting->title)
-@section('description', $setting->description)
-@section('keywords', $setting->keywords)
+@section('title', 'My Product')
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Blank Page</h2>
+                <h2>User Product</h2>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Blank Page</li>
+                    <li>User Product</li>
                 </ul>
             </div>
         </div>

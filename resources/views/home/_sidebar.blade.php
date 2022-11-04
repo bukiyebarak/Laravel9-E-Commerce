@@ -14,18 +14,29 @@
                         <p>One of the most popular on the web is shopping. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
                         <ul class="sidebar-contact-info">
-                            <li><i class='bx bx-map'></i> <a href="#" target="_blank">Wonder Street, USA, New York</a></li>
-                            <li><i class='bx bx-phone-call'></i> <a href="tel:+01321654214">+01 321 654 214</a></li>
-                            <li><i class='bx bx-envelope'></i> <a href="mailto:hello@xton.com">hello@xton.com</a></li>
+                            <li><i class='bx bx-map'></i> <a href="#" target="_blank">{{$setting->address}}</a></li>
+                            <li><i class='bx bx-phone-call'></i> <a href="tel:+01321654214">{{$setting->phone}}</a></li>
+                            <li><i class='bx bx-envelope'></i> <a href="mailto:hello@xton.com">{{$setting->email}}</a></li>
                         </ul>
                     </div>
 
                     <ul class="social-link">
-                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-facebook'></i></a></li>
-                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-twitter'></i></a></li>
-                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-instagram'></i></a></li>
-                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-linkedin'></i></a></li>
-                        <li><a href="#" class="d-block" target="_blank"><i class='bx bxl-pinterest-alt'></i></a></li>
+                        @if($setting->facebook !=null)
+                            <li><a href="{{$setting->facebook}}" class="d-block" target="_blank"><i
+                                        class='bx bxl-facebook'></i></a></li>
+                        @endif
+                        @if($setting->twitter !=null)
+                            <li><a href="{{$setting->twitter}}" class="d-block" target="_blank"><i
+                                        class='bx bxl-twitter'></i></a></li>
+                        @endif
+                        @if($setting->instagram !=null)
+                            <li><a href="{{$setting->instagram}}" class="d-block" target="_blank"><i
+                                        class='bx bxl-instagram'></i></a></li>
+                        @endif
+                        @if($setting->linkedin !=null)
+                            <li><a href="{{$setting->linkedin}}" class="d-block" target="_blank"><i
+                                        class='bx bxl-linkedin'></i></a></li>
+                        @endif
                     </ul>
                 </div>
 
@@ -51,7 +62,7 @@
                     </ul>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a href="#" class="shop-now-btn">Shop Now</a>
+                    <a href="{{route('home')}}" class="shop-now-btn">Shop Now</a>
                 </div>
             </div>
         </div>

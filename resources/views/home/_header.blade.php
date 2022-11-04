@@ -4,7 +4,6 @@
 
     <!-- Start Navbar Area -->
 <div class="navbar-area">
-
     <div class="xton-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
@@ -21,11 +20,12 @@
                         </li>
 
                         <li class="nav-item megamenu"><a href="#" class="nav-link">Kampanyalar</a></li>
+
                         <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i class='bx bx-chevron-down'></i></a>
                             <ul class="dropdown-menu">
                                 @foreach($parentCategories as $rs)
-                                    <li class="nav-item"><a href="#" class="nav-link">{{$rs->title}}<i
-                                                class='bx bx-chevron-right'></i></a>
+                                    <li class="nav-item"><a href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"  class="nav-link">{{$rs->title}}<i
+                                                class='bx bx-chevron-left'></i></a>
                                         <ul class="dropdown-menu">
                                             @foreach($rs->children as $childCategory )
                                                 @include('home.categorytree',['childCategory'=>$childCategory])
@@ -72,6 +72,7 @@
             </nav>
         </div>
     </div>
+
 </div>
 <!-- End Navbar Area -->
 <!-- Start Search Overlay -->

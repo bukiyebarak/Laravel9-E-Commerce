@@ -48,7 +48,7 @@
 
             <div class="col-lg-4 col-md-12">
                 <div class="top-header-discount-info">
-                    <p><strong>50% OFF</strong> all new collections! <a href="#">Discover Now!</a></p>
+                    @include('home.message')
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
 
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
                                 class='bx bx-heart'></i> Wishlist</a></li>
-                    <li><a href="compare.html"><i class='bx bx-shuffle'></i> Compare</a></li>
+
 
                 </ul>
 

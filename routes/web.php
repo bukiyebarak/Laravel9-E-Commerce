@@ -40,7 +40,6 @@ Route::get('/references', [HomeController::class, 'references'])->name('referenc
 Route::post('sendmessage', [HomeController::class, 'sendmessage'])->name('sendmessage');
 Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('product');
 Route::get('categoryproducts/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
-Route::get('/addtocart/{id}', [HomeController::class, 'addtocart'])->name('addtocart'); #wherenumber iel sayısal değer gönderilir
 Route::post('/getproduct', [HomeController::class, 'getproduct'])->name('getproduct');
 Route::get('/productlist/{search}', [HomeController::class, 'productlist'])->name('productlist');
 

@@ -13,14 +13,14 @@
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
                 Reviews</b>
             <i class='bx bx-comment-check fs-5'></i></a>
-        <a href="#"
+        <a href="{{route('user_shopcart')}}"
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
                 ShopCart</b>
             <i class='bx bx-credit-card fs-5'></i></a>
-        <a href="{{route('user_products')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
-                Product</b>
-            <i class='bx bxs-shopping-bag-alt fs-5'></i></a>
+{{--        <a href="{{route('user_products')}}"--}}
+{{--           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My--}}
+{{--                Product</b>--}}
+{{--            <i class='bx bxs-shopping-bag-alt fs-5'></i></a>--}}
         <a href="{{route('logout')}}"
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>Logout</b>
             <i
