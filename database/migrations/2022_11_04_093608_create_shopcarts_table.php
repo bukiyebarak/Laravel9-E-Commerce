@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('shopcarts', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->integer('user_id');
-            $table->integer('product_id');
+            $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });

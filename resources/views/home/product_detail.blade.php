@@ -85,16 +85,19 @@
                         </div>
 
                         <div class="products-add-to-cart">
+
                             <form action="{{route('user_shopcart_add',['id'=>$data->id])}}" method="post">
                                 @csrf
                                 <div class="input-counter">
                                     <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                    <input type="text" name="quantity" value="1" max="{{$data->quantity}}" min="1">
+                                    <input type="text" name="quantity" value="1" max="{{(int)$data->quantity}}" min="1">
                                     <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                 </div>
 
                                 <input type="submit" class="default-btn" value="Add to Cart">
+
                             </form>
+
                         </div>
                         <div class="wishlist-compare-btn">
                          <a href="#" class="optional-btn"><i class='bx bx-heart'></i> Add to Wishlist</a>

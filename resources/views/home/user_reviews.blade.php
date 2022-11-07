@@ -31,7 +31,7 @@
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>Id</th>
+
                                 <th>Product</th>
                                 <th>Subject</th>
                                 <th>Review</th>
@@ -44,7 +44,6 @@
                             <tbody>
                             @foreach($datalist as $rs)
                                 <tr>
-                                    <td>{{$rs->id}}</td>
                                     <td>
                                         <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
                                            target="_blank"> {{$rs->product->title}} </a>

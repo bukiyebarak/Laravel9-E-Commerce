@@ -9,6 +9,7 @@ use App\Models\Image;
 use App\Models\Message;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,11 @@ class HomeController extends Controller
     public static function categorylist()
     {
         return Category::where('parent_id', "=", 0)->with('children')->get();
+    }
+
+    public static function headerShopCart()
+    {
+        return Shopcart::with('product')->where('user_id', Auth::id())->get();
     }
 
     public static function countreview($id)
@@ -53,6 +59,13 @@ class HomeController extends Controller
             'picked' => $picked,
         ];
         return view('home.index', $data);
+    }
+
+
+    public function header()
+    {
+        $datalist = Shopcart::with('product')->where('user_id', Auth::id())->get();
+        return view('home._header', ['datalist' => $datalist]);
     }
 
     public function login()
@@ -143,19 +156,15 @@ class HomeController extends Controller
         $datalist = Product::where('title', 'like', '%' . $search . '%')->get();
         return view('home.search_products', ['search' => $search, 'datalist' => $datalist]);
     }
+
     #endregion
 
     public function product($id, $slug)
     {
         $data = Product::find($id);
         $datalist = Image::where('product_id', $id)->get();
-        $reviews=Review::where('product_id',$id)->get();
-        return view('home.product_detail', ['data' => $data, 'datalist' => $datalist,'reviews' => $reviews]);
-    }
-
-    public function addtocart($id)
-    {
-        echo "Add to cart";
+        $reviews = Review::where('product_id', $id)->get();
+        return view('home.product_detail', ['data' => $data, 'datalist' => $datalist, 'reviews' => $reviews]);
     }
 
     public function categoryproducts($id, $slug)

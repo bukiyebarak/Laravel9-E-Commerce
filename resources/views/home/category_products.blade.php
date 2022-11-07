@@ -164,12 +164,18 @@
                                                 <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}})
+                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
+                                                )
                                             </div>
                                         </div>
                                         <br>
                                         <div class="btn-box">
-                                            <a class="add-to-cart" href="{{route('user_shopcart_add',['id'=>$rs->id])}}">Add to cart</a>
+                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                @csrf
+                                                <input name="quantity" type="hidden" value="1">
+                                                <button type="submit" class="default-btn add-to-cart">Add to Cart
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

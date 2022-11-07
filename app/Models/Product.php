@@ -12,7 +12,6 @@ class Product extends Model
     //One to Many (Inverse)/ Belongs to
     public function category()
     {
-
         return $this->belongsTo(Category::class);
     }
 

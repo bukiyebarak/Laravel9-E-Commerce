@@ -23,7 +23,8 @@
                             <div class="col-lg-6">
                                 <div class="banner-image">
                                     <div class="circle"></div>
-                                    <img style="height: 575px; width:375px " src="{{Storage::url($rs->image)}}" alt="image">
+                                    <img style="height: 575px; width:375px " src="{{Storage::url($rs->image)}}"
+                                         alt="image">
                                 </div>
                             </div>
                         </div>
@@ -126,7 +127,9 @@
                                     <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)({{$countreview}} İnceleme)@endif
+                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
+                                        ({{$countreview}} İnceleme)
+                                    @endif
                                 </div>
                             </div>
 
@@ -134,11 +137,15 @@
                                 <span class="old-price">{{$rs->price* 1.2}}₺</span>
                                 <span class="new-price">{{$rs->price}}₺</span>
                             </div>
-                            <a href="#" class="add-to-cart">Add to Cart</a>
+                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                @csrf
+                                <input name="quantity" type="hidden" value="1">
+                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                            </form>
                         </div>
 
                         <!--düzenle -->
-{{--                        <span class="products-discount"><span>20% OFF</span></span>--}}
+                        {{--                        <span class="products-discount"><span>20% OFF</span></span>--}}
                     </div>
                 </div>
             @endforeach
@@ -235,9 +242,9 @@
                                 </ul>
                             </div>
 
-{{--                            <div class="new-tag">New!</div>--}}
+                            {{--                            <div class="new-tag">New!</div>--}}
 
-{{--                            <div class="sale-tag">Sale!</div>--}}
+                            {{--                            <div class="sale-tag">Sale!</div>--}}
                         </div>
 
                         <div class="products-content">
@@ -253,20 +260,26 @@
                                     <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)({{$countreview}} İnceleme)@endif
+                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
+                                        ({{$countreview}} İnceleme)
+                                    @endif
                                 </div>
                             </div>
                             <div class="price">
                                 <span class="old-price">{{$rs->price* 1.2}}₺</span>
                                 <span class="new-price">{{$rs->price}}₺</span>
                             </div>
-                            <a href="#" class="add-to-cart">Add to Cart</a>
+                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                @csrf
+                                <input name="quantity" type="hidden" value="1">
+                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                            </form>
                         </div>
 
-{{--                        <span class="products-discount">--}}
-{{--                                <span>--}}
-{{--                                    20% OFF--}}
-{{--                                </span>--}}
+                        {{--                        <span class="products-discount">--}}
+                        {{--                                <span>--}}
+                        {{--                                    20% OFF--}}
+                        {{--                                </span>--}}
 
                     </div>
                 </div>
@@ -342,70 +355,76 @@
         </div>
 
         <div class="row">
-         @foreach($daily as $rs)
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-productsBox">
-                    <div class="products-image">
-                        <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                            <img style="height: 200px" src="{{Storage::url($rs->image)}}" class="main-image"
-                                 alt="image">
-                            <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
-                        </a>
+            @foreach($daily as $rs)
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-productsBox">
+                        <div class="products-image">
+                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                <img style="height: 200px" src="{{Storage::url($rs->image)}}" class="main-image"
+                                     alt="image">
+                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                            </a>
 
-                        <div class="products-button">
-                            <ul>
-                                <li>
-                                    <div class="wishlist-btn">
-                                        <a href="#">
-                                            <i class='bx bx-heart'></i>
-                                            <span class="tooltip-label">Add to Wishlist</span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="compare-btn">
-                                        <a href="#">
-                                            <i class='bx bx-refresh'></i>
-                                            <span class="tooltip-label">Compare</span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="quick-view-btn">
-                                        <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                            <i class='bx bx-search-alt'></i>
-                                            <span class="tooltip-label">Quick View</span>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="products-content">
-                        <span class="category"></span>
-                        <h3><a href="products-type-3.html">{{$rs->title}}</a></h3>
-                        @php
-                            $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
-                            $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
-                        @endphp
-                        <div class="star-rating">
-                            <div class="rating">
-                                <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
-                                <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
-                                <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
-                                <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)({{$countreview}} İnceleme)@endif
+                            <div class="products-button">
+                                <ul>
+                                    <li>
+                                        <div class="wishlist-btn">
+                                            <a href="#">
+                                                <i class='bx bx-heart'></i>
+                                                <span class="tooltip-label">Add to Wishlist</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="compare-btn">
+                                            <a href="#">
+                                                <i class='bx bx-refresh'></i>
+                                                <span class="tooltip-label">Compare</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="quick-view-btn">
+                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                <i class='bx bx-search-alt'></i>
+                                                <span class="tooltip-label">Quick View</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="price">
-                            <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                            <span class="new-price">{{$rs->price}}₺</span>
+
+                        <div class="products-content">
+                            <span class="category"></span>
+                            <h3><a href="products-type-3.html">{{$rs->title}}</a></h3>
+                            @php
+                                $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
+                                $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                            @endphp
+                            <div class="star-rating">
+                                <div class="rating">
+                                    <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
+                                    <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
+                                    <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
+                                    <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
+                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
+                                        ({{$countreview}} İnceleme)
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="price">
+                                <span class="old-price">{{$rs->price* 1.2}}₺</span>
+                                <span class="new-price">{{$rs->price}}₺</span>
+                            </div>
+                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                @csrf
+                                <input name="quantity" type="hidden" value="1">
+                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                            </form>
                         </div>
-                        <a href="{{route('user_shopcart_add',['id'=>$rs->id])}}" class="add-to-cart">Add to Cart</a>
                     </div>
                 </div>
-            </div>
             @endforeach
 
         </div>

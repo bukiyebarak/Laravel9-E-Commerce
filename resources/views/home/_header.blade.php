@@ -1,14 +1,17 @@
 @php
     $parentCategories=\App\Http\Controllers\HomeController::categorylist()
 @endphp
-
+@php
+    $shopcart=\App\Http\Controllers\HomeController::headerShopCart()
+@endphp
     <!-- Start Navbar Area -->
 <div class="navbar-area">
     <div class="xton-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="" href="{{route('home')}}">
-                    <img src="{{asset('assets')}}/home/assets/img/logognc.jpg"  style="height: 70px; width: 90px" class="white-logo" alt="logo">
+                    <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" style="height: 70px; width: 90px"
+                         class="white-logo" alt="logo">
                 </a>
 
                 <div class="collapse navbar-collapse mean-menu">
@@ -24,7 +27,9 @@
                         <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i class='bx bx-chevron-down'></i></a>
                             <ul class="dropdown-menu">
                                 @foreach($parentCategories as $rs)
-                                    <li class="nav-item"><a href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"  class="nav-link">{{$rs->title}}<i
+                                    <li class="nav-item"><a
+                                            href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                            class="nav-link">{{$rs->title}}<i
                                                 class='bx bx-chevron-left'></i></a>
                                         <ul class="dropdown-menu">
                                             @foreach($rs->children as $childCategory )
@@ -56,7 +61,7 @@
                         <div class="option-item">
                             <div class="cart-btn">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
-                                        class='bx bx-shopping-bag'></i><span>0</span></a>
+                                        class='bx bx-shopping-bag'></i><span>{{\App\Http\Controllers\ShopCartController::countshopcart()}}</span></a>
                             </div>
                         </div>
 
@@ -111,73 +116,51 @@
             </button>
 
             <div class="modal-body">
-                <h3>My Cart (3)</h3>
+                <h3>My Cart ({{\App\Http\Controllers\ShopCartController::countshopcart()}})</h3>
+                @php
+                    $total=0;
+                @endphp
+                @foreach($shopcart as $rs)
+                    <div class="products-cart-content">
 
-                <div class="products-cart-content">
-                    <div class="products-cart">
-                        <div class="products-image">
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img1.jpg"
-                                             alt="image"></a>
-                        </div>
-
-                        <div class="products-content">
-                            <h3><a href="#">Long Sleeve Leopard T-Shirt</a></h3>
-                            <span>Blue / XS</span>
-                            <div class="products-price">
-                                <span>1</span>
-                                <span>x</span>
-                                <span class="price">$250.00</span>
+                        <div class="products-cart">
+                            <div class="products-image">
+                                @if($rs->product->image!=null)
+                                    <img src="{{Storage::url($rs->product->image)}}"
+                                         style="height: 70px" alt="">
+                                @endif
                             </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
-                        </div>
-                    </div>
 
-                    <div class="products-cart">
-                        <div class="products-image">
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img2.jpg"
-                                             alt="image"></a>
-                        </div>
-
-                        <div class="products-content">
-                            <h3><a href="#">Causal V-Neck Soft Raglan</a></h3>
-                            <span>Blue / XS</span>
-                            <div class="products-price">
-                                <span>1</span>
-                                <span>x</span>
-                                <span class="price">$200.00</span>
+                            <div class="products-content">
+                                <h3>
+                                    <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
+                                </h3>
+                                <div class="products-price">
+                                    <span>{{$rs->quantity}}</span>
+                                    <span>x</span>
+                                    <span class="price"> {{$rs->product->price}}€</span>
+                                </div>
+                                <a href="{{route('user_shopcart_delete',['id'=>$rs->id])}}"
+                                   onclick="return confirm('Delete! Are you sure?')" class="remove-btn"><i
+                                        class='bx bx-trash'></i></a>
                             </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
-                        </div>
-                    </div>
-
-                    <div class="products-cart">
-                        <div class="products-image">
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img3.jpg"
-                                             alt="image"></a>
                         </div>
 
-                        <div class="products-content">
-                            <h3><a href="#">Hanes Men's Pullover</a></h3>
-                            <span>Blue / XS</span>
-                            <div class="products-price">
-                                <span>1</span>
-                                <span>x</span>
-                                <span class="price">$200.00</span>
-                            </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
-                        </div>
                     </div>
-                </div>
+                    @php
+                        $total += $rs->product->price * $rs->quantity;
+                    @endphp
+                @endforeach
 
                 <div class="products-cart-subtotal">
                     <span>Subtotal</span>
 
-                    <span class="subtotal">$524.00</span>
+                    <span class="subtotal">{{$total}}€</span>
                 </div>
 
                 <div class="products-cart-btn">
                     <a href="#" class="default-btn">Proceed to Checkout</a>
-                    <a href="#" class="optional-btn">View Shopping Cart</a>
+                    <a href="{{route('user_shopcart')}}" class="optional-btn">View Shopping Cart</a>
                 </div>
             </div>
         </div>

@@ -159,16 +159,28 @@
                                             <span class="old-price">{{$rs->price* 1.2}}₺</span>
                                             <span class="new-price">{{$rs->price}}₺</span>
                                         </div>
+                                        @php
+                                            $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
+                                            $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                                        @endphp
                                         <div class="star-rating">
-                                            <i class='bx bxs-star'></i>
-                                            <i class='bx bxs-star'></i>
-                                            <i class='bx bxs-star'></i>
-                                            <i class='bx bxs-star'></i>
-                                            <i class='bx bxs-star'></i>
+                                            <div class="rating">
+                                                <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
+                                                <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
+                                                <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
+                                                <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
+                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
+                                                )
+                                            </div>
                                         </div>
                                         <br>
                                         <div class="btn-box">
-                                            <a class="add-to-cart" href="{{route('addtocart',['id'=>$rs->id])}}">Add to cart</a>
+                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                @csrf
+                                                <input name="quantity" type="hidden" value="1">
+                                                <button type="submit" class="default-btn add-to-cart">Add to Cart
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
