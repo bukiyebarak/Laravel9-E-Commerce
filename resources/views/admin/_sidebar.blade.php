@@ -28,6 +28,29 @@
                 &nbsp;Products
             </a>
         </li>
+
+        <li class="menu-label">ORDERS INFORMATION</li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bxs-shopping-bags' ></i>
+                </div>
+                <div class="menu-title">ORDERS</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin_orders')}}"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
+                </li>
+{{--                <li> <a href="{{route('admin_order_list',['status'=>'new'])}}"><i class="bx bx-right-arrow-alt"></i>New Orders</a>--}}
+{{--                </li>--}}
+{{--                <li> <a href="{{route('admin_order_list',['status'=>'accepted'])}}"><i class="bx bx-right-arrow-alt"></i>Accepted Orders</a>--}}
+{{--                </li>--}}
+{{--                <li> <a href="{{route('admin_order_list',['status'=>'canceled'])}}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>--}}
+{{--                </li>--}}
+{{--                <li> <a href="{{route('admin_order_list',['status'=>'shipping'])}}"><i class="bx bx-right-arrow-alt"></i>Shipping Orders</a>--}}
+{{--                </li>--}}
+{{--                <li> <a href="{{route('admin_order_list',['status'=>'completed'])}}"><i class="bx bx-right-arrow-alt"></i>Completed Orders</a>--}}
+{{--                </li>--}}
+            </ul>
+        </li>
         <li class="menu-label">MESSAGES</li>
         <li>
             <a href="{{route('admin_messages')}}">

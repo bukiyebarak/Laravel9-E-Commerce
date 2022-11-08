@@ -3,18 +3,17 @@
 @endphp
 @extends('layouts.home')
 
-@section('title','My Reviews')
-
+@section('title', 'My Orders')
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Kullanıcı Yorumları</h2>
+                <h2>User Order</h2>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Kullanıcı Yorumları</li>
+                    <li>User Order</li>
                 </ul>
             </div>
         </div>
@@ -26,38 +25,32 @@
             <div class="row">
                 @include('home.usermenu')
                 <div class="col-lg-10 col-md-12">
-
-                    <div class="table-responsive">
-                        <table id="example2" class="table table-striped table-bordered">
+                    <div class="table-responsive" >
+                        <table id="example2" class="table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
-
-                                <th>Product</th>
-                                <th>Subject</th>
-                                <th>Review</th>
-                                <th>Rate</th>
-                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Total</th>
                                 <th>Date</th>
-                                <th>Delete</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($datalist as $rs)
                                 <tr>
-                                    <td>
-                                        <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
-                                           target="_blank"> {{$rs->product->title}} </a>
-
-                                    </td>
-                                    <td>{{$rs->subject}}</td>
-                                    <td>{{$rs->review}}</td>
-                                    <td>{{$rs->rate}}</td>
-                                    <td>{{$rs->status}}</td>
+                                    <td>{{$rs->name}}</td>
+                                    <td>{{$rs->email}}</td>
+                                    <td>{{$rs->phone}}</td>
+                                    <td>{{$rs->address}}</td>
+                                    <td>{{$rs->total}}</td>
                                     <td>{{$rs->created_at}}</td>
-                                    <td>
-                                        <a href="{{route('user_review_delete',['id'=>$rs->id])}}"
-                                           onclick="return confirm('Delete! Are you Sure')">
-                                            <div class="font-22 text-primary"><i class="bx bx-trash fs-4"></i>
+                                    <td>{{$rs->status}}</td>
+                                    <td><a href="{{route('user_order_show',['id'=>$rs->id])}}">
+                                            <div class="font-22 text-primary"><i class="bx bxs-cart-add fs-2"></i>
                                             </div>
                                         </a>
                                     </td>
@@ -69,7 +62,6 @@
 
                 </div>
             </div>
-        </div>
         </div>
     </section>
 

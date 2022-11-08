@@ -59,6 +59,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
@@ -67,5 +68,15 @@ class User extends Authenticatable
     public function shopcart()
     {
         return $this->hasMany(Shopcart::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function orderitem()
+    {
+        return $this->hasMany(Orderitem::class);
     }
 }

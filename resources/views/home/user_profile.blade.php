@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 @include('home.usermenu')
-                <div class="col-lg-8 col-md-12">
+                <div class="col-lg-10 col-md-12">
                     <div id="products-collections-filter" class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 products-col-item">
                             <div class="single-products-box">

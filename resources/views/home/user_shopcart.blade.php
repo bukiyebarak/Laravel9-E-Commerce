@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                 @include('home.usermenu')
-                <div class="col-lg-9 col-md-12">
+                <div class="col-lg-10 col-md-12">
 
                     <div class="cart-table table-responsive">
                         <table class="table table-bordered">
@@ -109,16 +109,22 @@
                         <ul>
                             <li>Subtotal <span>{{$total}}€</span></li>
                             <li>Shipping <span>30 €</span></li>
-                            <li>Total <span>{{$total + 30}}€</span></li>
+                            @php
+                                $total += 30;
+                            @endphp
+                            <li>Total <span>@if($total>30) {{$total}}€ @else 0€ @endif</span></li>
                         </ul>
 
-                        <a href="#" class="default-btn">Proceed to Checkout</a>
+                        <form action="{{route('user_order_add')}}"method="post">
+                            @csrf
+                            <input type="hidden" name="total" value="{{$total}}">
+                            <button type="submit" class="default-btn">Proceed to Checkout</button>
+                        </form>
                     </div>
 
                 </div>
             </div>
         </div>
     </section>
-
 
 @endsection

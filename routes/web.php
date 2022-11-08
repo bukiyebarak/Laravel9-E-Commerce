@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\ShopCartController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 });
 
+#region Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
@@ -42,6 +45,7 @@ Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('pro
 Route::get('categoryproducts/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
 Route::post('/getproduct', [HomeController::class, 'getproduct'])->name('getproduct');
 Route::get('/productlist/{search}', [HomeController::class, 'productlist'])->name('productlist');
+#endregion
 
 #region Admin
 Route::middleware('auth')->prefix('admin')->group(function () {
@@ -88,6 +92,17 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::get('show', [FaqController::class, 'show'])->name('admin_faq_show');
     });
 
+    #Order
+    Route::prefix('order')->group(function () {
+
+        Route::get('/', [AdminOrderController::class, 'index'])->name('admin_orders');
+        Route::post('create', [AdminOrderController::class, 'create'])->name('admin_order_add');
+        Route::post('store', [AdminOrderController::class, 'store'])->name('admin_order_store');
+        Route::get('edit/{id}', [AdminOrderController::class, 'edit'])->name('admin_order_edit');
+        Route::post('update/{id}', [AdminOrderController::class, 'update'])->name('admin_order_update');
+        Route::get('delete/{id}', [AdminOrderController::class, 'destroy'])->name('admin_order_delete');
+        Route::get('show/{id}', [AdminOrderController::class, 'show'])->name('admin_order_show');
+    });
 
     #Message(Contact Form)
     Route::prefix('message')->group(function () {
@@ -151,9 +166,23 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::get('delete/{id}', [ShopCartController::class, 'destroy'])->name('user_shopcart_delete');
     });
 
+    #Order
+    Route::prefix('order')->group(function () {
+
+        Route::get('/', [OrderController::class, 'index'])->name('user_orders');
+        Route::post('create', [OrderController::class, 'create'])->name('user_order_add');
+        Route::post('store', [OrderController::class, 'store'])->name('user_order_store');
+        Route::get('edit/{id}', [OrderController::class, 'edit'])->name('user_order_edit');
+        Route::post('update/{id}', [OrderController::class, 'update'])->name('user_order_update');
+        Route::get('delete/{id}', [OrderController::class, 'destroy'])->name('user_order_delete');
+        Route::get('show/{id}', [OrderController::class, 'show'])->name('user_order_show');
+    });
+
 });
 #endregion
 
+#region Login-Logout
 Route::get('/login', [\App\Http\Controllers\HomeController::class, 'login'])->name('adminlogin');
 Route::post('/admin/logincheck', [HomeController::class, 'logincheck'])->name('admin_logincheck');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+#endregion

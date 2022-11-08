@@ -1,11 +1,11 @@
-<div class="col-lg-3 col-md-12">
-    <h1 style="text-align:center; font-size:30px; background-color:darkgray"><b>USER PANEL</b></h1> <br>
+<div class="col-lg-2 col-md-12">
+    <h1 style="text-align:center; font-size:30px; background-color: #ff87af"><b>USER PANEL</b></h1> <br>
     <div class="list-group list-group-flush ">
         <a href="{{route('myprofile')}}"
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
                 Profile</b> <i
                 class='bx bx-user-circle fs-5'></i></a>
-        <a href="#"
+        <a href="{{route('user_orders')}}"
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
                 Orders</b>
             <i class='bx bx-cart-alt fs-5'></i></a>

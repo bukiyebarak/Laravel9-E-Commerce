@@ -159,7 +159,11 @@
                 </div>
 
                 <div class="products-cart-btn">
-                    <a href="#" class="default-btn">Proceed to Checkout</a>
+                    <form action="{{route('user_order_add')}}"method="post">
+                        @csrf
+                        <input type="hidden" name="total" value="{{$total +30}}">
+                        <button type="submit" class="default-btn">Proceed to Checkout</button>
+                    </form>
                     <a href="{{route('user_shopcart')}}" class="optional-btn">View Shopping Cart</a>
                 </div>
             </div>
