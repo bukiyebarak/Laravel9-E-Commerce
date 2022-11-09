@@ -1,3 +1,4 @@
+@auth
 <div class="col-lg-2 col-md-12">
     <h1 style="text-align:center; font-size:30px; background-color: #ff87af"><b>USER PANEL</b></h1> <br>
     <div class="list-group list-group-flush ">
@@ -25,5 +26,15 @@
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>Logout</b>
             <i
                 class='bx bx-log-out fs-5'></i></a>
+        @php
+            $userRoles = \Illuminate\Support\Facades\Auth::user()->roles->pluck('name');
+        @endphp
+
+        @if($userRoles->contains('admin'))
+            <a href="{{route('adminhome')}}"
+               class="list-group-item d-flex justify-content-between align-items-center bg-transparent" target="_blank"><b>Admin Panel</b> <i
+                    class='bx bx-home fs-5'></i></a>
+        @endif
     </div>
 </div>
+@endauth

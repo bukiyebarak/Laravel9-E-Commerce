@@ -323,11 +323,12 @@
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{asset('assets')}}/admin/assets/images/avatars/avatar-2.png" class="user-img"
-                         alt="user avatar">
+                    @if(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)
+                        <img src="{{\Illuminate\Support\Facades\Storage::url(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)}}" class="user-img">
+                    @endif
                     <div class="user-info ps-3">
                         @auth
-                            <p  class="user-name mb-0 text-white">{{Auth::user()->name}}</p>
+                            <p class="user-name mb-0 text-white">{{Auth::user()->name}}</p>
                             <p class="user-name mb-0 text-white">{{Auth::user()->email}}</p>
                     </div>
                 </a>
@@ -349,7 +350,7 @@
                     <li>
                         <div class="dropdown-divider mb-0"></div>
                     </li>
-                    <li> <a class="dropdown-item" href="{{route('logout')}}"> <i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+                    <li><a class="dropdown-item" href="{{route('logout')}}"> <i class='bx bx-log-out-circle'></i><span>Logout</span></a>
                     </li>
                     @endauth
 

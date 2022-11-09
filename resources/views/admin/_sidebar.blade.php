@@ -39,16 +39,16 @@
             <ul>
                 <li> <a href="{{route('admin_orders')}}"><i class="bx bx-right-arrow-alt"></i>All Orders</a>
                 </li>
-{{--                <li> <a href="{{route('admin_order_list',['status'=>'new'])}}"><i class="bx bx-right-arrow-alt"></i>New Orders</a>--}}
-{{--                </li>--}}
-{{--                <li> <a href="{{route('admin_order_list',['status'=>'accepted'])}}"><i class="bx bx-right-arrow-alt"></i>Accepted Orders</a>--}}
-{{--                </li>--}}
-{{--                <li> <a href="{{route('admin_order_list',['status'=>'canceled'])}}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>--}}
-{{--                </li>--}}
-{{--                <li> <a href="{{route('admin_order_list',['status'=>'shipping'])}}"><i class="bx bx-right-arrow-alt"></i>Shipping Orders</a>--}}
-{{--                </li>--}}
-{{--                <li> <a href="{{route('admin_order_list',['status'=>'completed'])}}"><i class="bx bx-right-arrow-alt"></i>Completed Orders</a>--}}
-{{--                </li>--}}
+                <li> <a href="{{route('admin_order_list',['status'=>'new'])}}"><i class="bx bx-right-arrow-alt"></i>New Orders</a>
+                </li>
+                <li> <a href="{{route('admin_order_list',['status'=>'accepted'])}}"><i class="bx bx-right-arrow-alt"></i>Accepted Orders</a>
+                </li>
+                <li> <a href="{{route('admin_order_list',['status'=>'canceled'])}}"><i class="bx bx-right-arrow-alt"></i>Canceled Orders</a>
+                </li>
+                <li> <a href="{{route('admin_order_list',['status'=>'shipping'])}}"><i class="bx bx-right-arrow-alt"></i>Shipping Orders</a>
+                </li>
+                <li> <a href="{{route('admin_order_list',['status'=>'completed'])}}"><i class="bx bx-right-arrow-alt"></i>Completed Orders</a>
+                </li>
             </ul>
         </li>
         <li class="menu-label">MESSAGES</li>
@@ -64,7 +64,7 @@
             <a href="{{route('admin_review')}}">
                 <div class="parent-icon"><i class="bx bx-comment-check"></i>
                 </div>
-                Reviews
+                &nbsp;Reviews
             </a>
         </li>
         <li class="menu-label">FAQS</li>
@@ -72,7 +72,15 @@
             <a href="{{route('admin_faq')}}">
                 <div class="parent-icon"><i class="bx bx-question-mark"></i>
                 </div>
-                Faqs
+                &nbsp;Faqs
+            </a>
+        </li>
+        <li class="menu-label">USERS</li>
+        <li>
+            <a href="{{route('admin_users')}}">
+                <div class="parent-icon"><i class="bx bx-user"></i>
+                </div>
+                &nbsp;Users
             </a>
         </li>
         <li class="menu-label">SETTINGS</li>

@@ -23,8 +23,8 @@
                             <div class="col-lg-6">
                                 <div class="banner-image">
                                     <div class="circle"></div>
-                                    <img style="height: 575px; width:375px " src="{{Storage::url($rs->image)}}"
-                                         alt="image">
+                                    <img  src="{{Storage::url($rs->image)}}" style="height: 575px; width:375px; border-radius: 900px "
+                                          alt="image">
                                 </div>
                             </div>
                         </div>

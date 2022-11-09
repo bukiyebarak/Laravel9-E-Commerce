@@ -54,6 +54,7 @@
 
             <div class="col-lg-4 col-md-12">
                 <ul class="header-top-menu">
+
                     @auth
                         <li><a href="{{route('myprofile')}}"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
                             </a></li>

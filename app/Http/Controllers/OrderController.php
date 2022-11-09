@@ -48,6 +48,7 @@ class OrderController extends Controller
         $data->email = $request->input('email');
         $data->phone = $request->input('phone');
         $data->total = $request->input('total');
+        $data->note = $request->input('note');
         $data->user_id = Auth::id();
         $data->IP = $_SERVER['REMOTE_ADDR'];
         $data->save();
@@ -63,6 +64,7 @@ class OrderController extends Controller
             $data2->quantity = $rs->quantity;
             $data2->amount = $rs->quantity * $rs->product->price;
             $data2->total = $data->total;
+            $data2->note = $data->note;
 
             $data2->save();
         }
