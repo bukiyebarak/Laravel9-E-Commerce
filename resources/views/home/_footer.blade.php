@@ -59,8 +59,7 @@
 
                     <ul class="customer-support">
                         <li><a href="{{route('myprofile')}}">My Account</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="{{route('user_shopcart')}}">Cart</a></li>
                         <li><a href="{{route('faq')}}">FAQ's</a></li>
                         <li><a href="track-order.html">Order Tracking</a></li>
                         <li><a href="{{route('contact')}}">Help & Support</a></li>

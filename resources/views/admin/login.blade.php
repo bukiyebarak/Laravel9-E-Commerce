@@ -43,19 +43,7 @@
                                     </p>
                                    @include('home.message')
                                 </div>
-                                <div class="d-grid">
-                                    <a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span
-                                            class="d-flex justify-content-center align-items-center">
-                          <img class="me-2" src="{{asset('assets')}}/admin/assets/images/icons/search.svg" width="16"
-                               alt="Image Description">
-                          <span>Sign in with Google</span>
-											</span>
-                                    </a> <a href="javascript:;" class="btn btn-facebook"><i class="bx bxl-facebook"></i>Sign
-                                        in with Facebook</a>
-                                </div>
-                                <div class="login-separater text-center mb-4"><span>OR SIGN IN WITH EMAIL</span>
-                                    <hr/>
-                                </div>
+
                                 <div class="form-body">
                                     <form class="row g-3" action="{{route('admin_logincheck')}}" method="post">
                                         @csrf
@@ -82,7 +70,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 text-end"><a href="authentication-forgot-password.html">Forgot
+                                        <div class="col-md-6 text-end"><a href="{{ route('password.request') }}">Forgot
                                                 Password ?</a>
                                         </div>
                                         <div class="col-12">

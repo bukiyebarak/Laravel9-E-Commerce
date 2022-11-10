@@ -1,117 +1,111 @@
-@extends('layouts.admin')
+<!--favicon-->
+<link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32.png" type="image/png"/>
+<!--plugins-->
+<link href="{{asset('assets')}}/admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
+<link href="{{asset('assets')}}/admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
+<link href="{{asset('assets')}}/admin/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
+<!-- loader-->
+<link href="{{asset('assets')}}/admin/assets/css/pace.min.css" rel="stylesheet"/>
+<script src="{{asset('assets')}}/admin/assets/js/pace.min.js"></script>
+<!-- Bootstrap CSS -->
+<link href="{{asset('assets')}}/admin/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{asset('assets')}}/admin/assets/css/bootstrap-extended.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link href="{{asset('assets')}}/admin/assets/css/app.css" rel="stylesheet">
+<link href="{{asset('assets')}}/admin/assets/css/icons.css" rel="stylesheet">
 
-@section('title', 'User List')
+<title>{{$data->name}}</title>
 
-@section('content')
-    <!--start page wrapper -->
-    <div class="page-wrapper">
-        <div class="page-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Users</div>
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">User</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-            <!--end breadcrumb-->
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Roles</th>
-                                    <th style="..." colspan="2">Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($datalist as $rs)
-                                    <p></p>
-                                    <tr>
-                                        <td>{{$rs->id}}</td>
-                                        <td>
-                                            @if($rs->profile_photo_path)
-                                                <img src="{{Storage::url($rs->profile_photo_path)}}" height="50" style="border-radius: 10px" alt="">
-                                            @endif
-                                        </td>
-                                        <td>{{$rs->name}}</td>
-                                        <td>{{$rs->email}}</td>
-                                        <td>{{$rs->phone}}</td>
-                                        <td>{{$rs->address}}</td>
-                                        <td>
-                                            @foreach($rs->roles as $row)
-                                                {{$row->name}},
+<div class="page-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="mb-0">User Detail</h4>
+            @include('home.message')
+            <hr/>
+            <div class="row gy-3">
+                <div class="col-md-12">
+                    <table class="table-bordered" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Profile Photo</th>
+                                <td>
+                                    @if($data->profile_photo_path)
+                                        <img src="{{Storage::url($data->profile_photo_path)}}" style="height: 60px; border-radius: 90px" alt="">
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{$data->id}}</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{$data->name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{$data->email}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{{$data->phone}}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{{$data->address}}</td>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{{$data->created_at}}</td>
+                            </tr>
+                            <tr>
+                                <th>Roles</th>
+                                <td>
+                                    <table>
+                                        @foreach($data->roles as $row)
+                                            <tr>
+                                                <td>{{$row->name}}</td>
+                                                <td>
+                                                    <a href="{{route('admin_user_role_delete',['userid'=>$data->id,'roleid'=>$row->id])}} "
+                                                       onclick="return confirm('Delete! Are you sure?')">
+                                                        <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-trash-alt"></i>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Add Role</th>
+                                <td>
+                                    <br>
+                                    <form class="" novalidate=""
+                                          action="{{route('admin_user_role_add',['id'=>$data->id])}}" method="post"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        <select name="roleid">
+                                            @foreach($datalist as $rs)
+                                                <option value="{{$rs->id}}">{{$rs->name}}</option>
                                             @endforeach
-                                            <a href="{{route('admin_user_roles',['id'=>$rs->id])}}" onclick="return !window.open(this.href, '', 'top=50 left=300 width=800 height=700')">
-                                                <div class="font-18 text-primary">	<i class="fadeIn animated bx bx-plus-circle"></i>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td><a href="{{route('admin_user_edit',['id'=>$rs->id])}}">
-                                                <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-edit-alt"></i>
-                                                </div>
+                                        </select> &nbsp;&nbsp;&nbsp;
+                                        <button class="btn btn-danger" type="submit">Add Role</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                                            </a></td>
-                                        <td><a href="{{route('admin_user_delete',['id'=>$rs->id])}} "
-                                               onclick="return confirm('Delete! Are you sure?')">
-                                                <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-trash-alt"></i>
-                                                </div>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
+                        </table>
 
-                    <div class="row gy-3">
-                        <div class="col-md-10">
-
-                        </div>
-                    </div>
-                    <div class="form-row mt-3">
-                        <div class="col-12">
-                            <div id="todo-container"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--end page wrapper -->
-@endsection
 
-@section('footer')
+</div>
 
-    <script src="{{asset('assets')}}/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('assets')}}/admin/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            var table = $('#example2').DataTable({
-                lengthChange: false,
-                buttons: ['copy', 'excel', 'pdf', 'print']
-            });
-            table.buttons().container()
-                .appendTo('#example2_wrapper .col-md-6:eq(0)');
-        });
-    </script>
 
-@endsection
+

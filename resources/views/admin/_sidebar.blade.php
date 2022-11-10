@@ -10,6 +10,7 @@
         <div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
         </div>
     </div>
+
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li class="menu-label">CATEGORY & PRODUCTS</li>
@@ -20,7 +21,7 @@
                 &nbsp;Category
             </a>
         </li>
-        <br>
+
         <li>
             <a href="{{route('admin_products')}}">
                 <div class="parent-icon"><i class="bx bx-cart-alt"></i>
@@ -28,6 +29,7 @@
                 &nbsp;Products
             </a>
         </li>
+
 
         <li class="menu-label">ORDERS INFORMATION</li>
         <li>
@@ -51,6 +53,7 @@
                 </li>
             </ul>
         </li>
+
         <li class="menu-label">MESSAGES</li>
         <li>
             <a href="{{route('admin_messages')}}">
@@ -59,6 +62,7 @@
                 &nbsp; Contact Messages
             </a>
         </li>
+
         <li class="menu-label">REVİEWS</li>
         <li>
             <a href="{{route('admin_review')}}">
@@ -67,6 +71,7 @@
                 &nbsp;Reviews
             </a>
         </li>
+
         <li class="menu-label">FAQS</li>
         <li>
             <a href="{{route('admin_faq')}}">
@@ -75,6 +80,7 @@
                 &nbsp;Faqs
             </a>
         </li>
+
         <li class="menu-label">USERS</li>
         <li>
             <a href="{{route('admin_users')}}">
@@ -83,6 +89,7 @@
                 &nbsp;Users
             </a>
         </li>
+
         <li class="menu-label">SETTINGS</li>
         <li>
             <a href="{{route('admin_setting')}}">
@@ -91,7 +98,7 @@
                 &nbsp; Settings
             </a>
         </li>
-
+        <br><br><br><br><br><br>
     </ul>
     <!--end navigation-->
 </div>

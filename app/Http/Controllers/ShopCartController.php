@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ShopCartController extends Controller
 {
+
     public static function countshopcart()
     {
         return Shopcart::where('user_id',Auth::id())->count();
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +24,6 @@ class ShopCartController extends Controller
         $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
         return view('home.user_shopcart',['datalist'=>$datalist]);
     }
-
-
 
 
     /**

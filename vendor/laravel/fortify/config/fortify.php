@@ -10,18 +10,18 @@ return [
     'username' => 'email',
     'email' => 'email',
     'views' => true,
-    'home' => '/home',
+    'home' => 'myaccount',
     'prefix' => '',
     'domain' => null,
     'limiters' => [
-        'login' => null,
+        'login' => 'adminlogin',
     ],
     'redirects' => [
-        'login' => null,
+        'login' => 'adminlogin',
         'logout' => null,
         'password-confirmation' => null,
         'register' => null,
-        'email-verification' => null,
+        'email-verification' => 'myaccount',
         'password-reset' => null,
     ],
     'features' => [

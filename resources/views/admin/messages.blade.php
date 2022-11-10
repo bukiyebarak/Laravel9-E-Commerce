@@ -46,7 +46,10 @@
                                     @foreach($datalist as $rs)
                                         <tr>
                                             <td>{{$rs->id}}</td>
-                                            <td>{{$rs->name}}</td>
+                                            <td>
+                                                <a href="{{route('admin_user_show',['id'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
+                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
+                                                    {{$rs->name}}</a></td>
                                             <td>{{$rs->email}}</td>
                                             <td>{{$rs->phone}}</td>
                                             <td>{{$rs->subject}}</td>

@@ -376,14 +376,6 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="compare-btn">
-                                            <a href="#">
-                                                <i class='bx bx-refresh'></i>
-                                                <span class="tooltip-label">Compare</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
                                         <div class="quick-view-btn">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                 <i class='bx bx-search-alt'></i>

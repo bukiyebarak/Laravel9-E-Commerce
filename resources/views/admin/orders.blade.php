@@ -46,7 +46,7 @@
                                         <tr>
                                             <td>{{$rs->id}}</td>
                                             <td>
-                                                <a href="#"
+                                                <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"
                                                    onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
 
                                                     {{$rs->user->name}}</a>

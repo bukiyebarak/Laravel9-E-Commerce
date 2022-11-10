@@ -6,15 +6,18 @@
                 <div class="card radius-10 overflow-hidden bg-gradient-cosmic">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
+                            @php
+                                $countorder=\App\Http\Controllers\Admin\HomeController::countOrder()
+                            @endphp
                             <div>
                                 <p class="mb-0 text-white">Total Orders</p>
-                                <h5 class="mb-0 text-white">867</h5>
+                                <h5 class="mb-0 text-white">{{$countorder}}</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-cart font-30'></i>
                             </div>
                         </div>
                         <div class="progress bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 46%"></div>
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 10%"></div>
                         </div>
                     </div>
                 </div>
@@ -23,15 +26,18 @@
                 <div class="card radius-10 overflow-hidden bg-gradient-burning">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
+                            @php
+                                $sumOrderTotal=\App\Http\Controllers\Admin\HomeController::sumOrderTotal()
+                            @endphp
                             <div>
                                 <p class="mb-0 text-white">Total Income</p>
-                                <h5 class="mb-0 text-white">$52,945</h5>
+                                <h5 class="mb-0 text-white">{{$sumOrderTotal}}€</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-wallet font-30'></i>
                             </div>
                         </div>
                         <div class="progress bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 72%"></div>
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 45%"></div>
                         </div>
                     </div>
                 </div>
@@ -40,15 +46,18 @@
                 <div class="card radius-10 overflow-hidden bg-gradient-Ohhappiness">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
+                            @php
+                                $countuser=\App\Http\Controllers\Admin\HomeController::countUser()
+                            @endphp
                             <div>
                                 <p class="mb-0 text-white">Total Users</p>
-                                <h5 class="mb-0 text-white">24.5K</h5>
+                                <h5 class="mb-0 text-white">{{$countuser}}</h5>
                             </div>
-                            <div class="ms-auto text-white"><i class='bx bx-bulb font-30'></i>
+                            <div class="ms-auto text-white"><i class='bx bx-user font-30'></i>
                             </div>
                         </div>
                         <div class="progress bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 68%"></div>
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 10%"></div>
                         </div>
                     </div>
                 </div>
@@ -57,15 +66,18 @@
                 <div class="card radius-10 overflow-hidden bg-gradient-moonlit">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
+                            @php
+                                $countmessage=\App\Http\Controllers\Admin\HomeController::countMessage()
+                            @endphp
                             <div>
                                 <p class="mb-0 text-white">Comments</p>
-                                <h5 class="mb-0 text-white">869</h5>
+                                <h5 class="mb-0 text-white">{{$countmessage}}</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-chat font-30'></i>
                             </div>
                         </div>
                         <div class="progress  bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 66%"></div>
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 10%"></div>
                         </div>
                     </div>
                 </div>

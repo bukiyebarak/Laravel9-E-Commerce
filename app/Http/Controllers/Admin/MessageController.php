@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
+
+    public static function countmessages()
+    {
+        return Message::where('user_id',Auth::id())->count();
+    }
+
     /**
      * Display a listing of the resource.
      *
