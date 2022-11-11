@@ -199,24 +199,26 @@
         </div>
     </div>
 </section>
+<br><br>
 <!-- End Offer Products Area -->
 
-
-<!-- Start Products Area -->
-<section class="products-area pt-100 pb-70">
+<section class="all-products-area ptb-100 bg-f5f5f5">
     <div class="container">
-        <div class="section-title">
-            <span class="sub-title">See Our Collection</span>
-            <h2>Popular Products</h2>
-        </div>
+        <!-- Start Products Area -->
+        <section class="products-area pt-100 pb-70">
+            <div class="container">
+                <div class="section-title text-start">
+                    <span class="sub-title">See Our Collection</span>
+                    <h2>Recent Products</h2>
+                    <a href="{{route('allproducts')}}" class="default-btn">Shop More</a>
+                </div>
 
-        <div class="row">
-            @foreach($picked as $rs)
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-productsBox">
+                <div class="products-slides owl-carousel owl-theme">
+                    @foreach($picked as $rs)
+                    <div class="single-products-box">
                         <div class="products-image">
                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 250px" src="{{Storage::url($rs->image)}}" class="main-image"
+                                <img style="height: 380px;width: 320px" src="{{Storage::url($rs->image)}}" class="main-image"
                                      alt="image">
                                 <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
                             </a>
@@ -241,15 +243,16 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            {{--                            <div class="new-tag">New!</div>--}}
-
-                            {{--                            <div class="sale-tag">Sale!</div>--}}
                         </div>
+                        {{--                            <div class="new-tag">New!</div>--}}
 
+                        {{--                            <div class="sale-tag">Sale!</div>--}}
                         <div class="products-content">
-                            <span class="category"></span>
-                            <h3><a href="products-type-3.html">{{$rs->title}}</a></h3>
+                            <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a></h3>
+                            <div class="price">
+                                <span class="old-price">{{$rs->price* 1.2}}₺</span>
+                                <span class="new-price">{{$rs->price}}₺</span>
+                            </div>
                             @php
                                 $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                 $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
@@ -265,14 +268,10 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="price">
-                                <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                <span class="new-price">{{$rs->price}}₺</span>
-                            </div>
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                                <button type="submit" class="add-to-cart btn-outline-dark">Add to Cart</button>
                             </form>
                         </div>
 
@@ -282,12 +281,100 @@
                         {{--                                </span>--}}
 
                     </div>
+                    @endforeach
                 </div>
-            @endforeach
-        </div>
+            </div>
+        </section>
+        <!-- End Products Area -->
     </div>
 </section>
-<!-- End Products Area -->
+<br><br><br><br>
+{{--<!-- Start Products Area -->--}}
+{{--<section class="products-area pt-100 pb-70">--}}
+{{--    <div class="container">--}}
+{{--        <div class="section-title">--}}
+{{--            <span class="sub-title">See Our Collection</span>--}}
+{{--            <h2>Popular Products</h2>--}}
+{{--        </div>--}}
+
+{{--        <div class="row">--}}
+{{--            @foreach($picked as $rs)--}}
+{{--                <div class="col-lg-4 col-md-6 col-sm-6">--}}
+{{--                    <div class="single-productsBox">--}}
+{{--                        <div class="products-image">--}}
+{{--                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">--}}
+{{--                                <img style="height: 250px" src="{{Storage::url($rs->image)}}" class="main-image"--}}
+{{--                                     alt="image">--}}
+{{--                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">--}}
+{{--                            </a>--}}
+
+{{--                            <div class="products-button">--}}
+{{--                                <ul>--}}
+{{--                                    <li>--}}
+{{--                                        <div class="wishlist-btn">--}}
+{{--                                            <a href="#">--}}
+{{--                                                <i class='bx bx-heart'></i>--}}
+{{--                                                <span class="tooltip-label">Add to Wishlist</span>--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <div class="quick-view-btn">--}}
+{{--                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">--}}
+{{--                                                <i class='bx bx-search-alt'></i>--}}
+{{--                                                <span class="tooltip-label">Quick View</span>--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+
+{{--                                                        <div class="new-tag">New!</div>--}}
+
+{{--                                                        <div class="sale-tag">Sale!</div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="products-content">--}}
+{{--                            <span class="category"></span>--}}
+{{--                            <h3><a href="products-type-3.html">{{$rs->title}}</a></h3>--}}
+{{--                            @php--}}
+{{--                                $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);--}}
+{{--                                $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);--}}
+{{--                            @endphp--}}
+{{--                            <div class="star-rating">--}}
+{{--                                <div class="rating">--}}
+{{--                                    <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>--}}
+{{--                                    <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>--}}
+{{--                                    <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>--}}
+{{--                                    <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>--}}
+{{--                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)--}}
+{{--                                        ({{$countreview}} İnceleme)--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="price">--}}
+{{--                                <span class="old-price">{{$rs->price* 1.2}}₺</span>--}}
+{{--                                <span class="new-price">{{$rs->price}}₺</span>--}}
+{{--                            </div>--}}
+{{--                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <input name="quantity" type="hidden" value="1">--}}
+{{--                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
+
+{{--                        --}}{{--                        <span class="products-discount">--}}
+{{--                        --}}{{--                                <span>--}}
+{{--                        --}}{{--                                    20% OFF--}}
+{{--                        --}}{{--                                </span>--}}
+
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
+{{--<!-- End Products Area -->--}}
 
 <!-- Start Facility Area -->
 <section class="facility-area pb-70">

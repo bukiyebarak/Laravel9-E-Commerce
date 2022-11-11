@@ -167,6 +167,7 @@ class HomeController extends Controller
         return view('home.product_detail', ['data' => $data, 'datalist' => $datalist, 'reviews' => $reviews]);
     }
 
+    //alt kategori ürün bulma
     public function categoryproducts($id, $slug)
     {
         $datalist = Product::where('category_id', $id)->get();
@@ -174,5 +175,14 @@ class HomeController extends Controller
         //print_r($data);
         //exit();
         return view('home.category_products', ['data' => $data, 'datalist' => $datalist]);
+    }
+
+
+    //Tüm ürümleri listeleme
+    public function allproducts()
+    {
+        $datalist = Product::all();
+
+        return view('home.all_product', ['datalist' => $datalist]);
     }
 }

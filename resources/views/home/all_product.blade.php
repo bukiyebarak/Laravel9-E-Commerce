@@ -5,25 +5,25 @@
 
 @extends('layouts.home')
 
-@section('title', $search. '  Products List')
+@section('title','All Products' )
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h5>İçerisinde "{{$search}}" Geçen Ürünler</h5>
+                <h2>Product Page</h2>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Ürün Listesi</li>
+                    <li>Product Page</li>
                 </ul>
             </div>
         </div>
     </div>
     <!-- End Page Title -->
-    <!-- Start Products Area -->
-    <section class="products-area products-collections-area pt-100 pb-70">
-        <div class="container-fluid">
+    <!-- Start Blog Area -->
+    <section class="blog-area ptb-100">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-12">
                     <aside class="widget-area">
@@ -100,27 +100,24 @@
                         <div class="row align-items-center">
                             <div class="col-lg-4 col-md-4">
                                 <div class="d-lg-flex d-md-flex align-items-center">
-                                    <span class="sub-title d-lg-none"><a href="#" data-bs-toggle="modal"
-                                                                         data-bs-target="#productsFilterModal"><i
-                                                class='bx bx-filter-alt'></i> Filter</a></span>
+                                            <span class="sub-title d-lg-none"><a href="#" data-bs-toggle="modal"
+                                                                                 data-bs-target="#productsFilterModal"><i
+                                                        class='bx bx-filter-alt'></i> Filter</a></span>
 
                                     <span class="sub-title d-none d-lg-block d-md-block">View:</span>
 
                                     <div class="view-list-row d-none d-lg-block d-md-block">
                                         <div class="view-column">
-                                            <a href="#" class="icon-view-two">
+                                            <a href="#" class="icon-view-one">
+                                                <span></span>
+                                            </a>
+
+                                            <a href="#" class="icon-view-two active">
                                                 <span></span>
                                                 <span></span>
                                             </a>
 
-                                            <a href="#" class="icon-view-three active">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
-                                            </a>
-
-                                            <a href="#" class="icon-view-four">
-                                                <span></span>
+                                            <a href="#" class="icon-view-three">
                                                 <span></span>
                                                 <span></span>
                                                 <span></span>
@@ -153,18 +150,20 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Single Product Start-->
 
                     <div id="products-collections-filter" class="row">
+
                         @foreach($datalist as $rs)
-                            <div class="col-lg-4 col-md-6 col-sm-6 products-col-item">
+                            <div class="col-lg-4 col-md-4 col-sm-4 products-col-item">
                                 <div class="single-products-box">
                                     <div class="products-image">
                                         <a href="#">
-                                            <img style="height: 150px" src="{{Storage::url($rs->image)}}"
-                                                 class="main-image" alt="image">
-                                            <img src="{{Storage::url($rs->image)}}"
-                                                 class="hover-image" alt="image">
+                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                <img style="height: 200px; width: 200px"
+                                                     src="{{Storage::url($rs->image)}}" class="main-image"
+                                                     alt="image">
+                                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                                            </a>
                                         </a>
 
                                         <div class="products-button">
@@ -174,14 +173,6 @@
                                                         <a href="#">
                                                             <i class='bx bx-heart'></i>
                                                             <span class="tooltip-label">Add to Wishlist</span>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="compare-btn">
-                                                        <a href="#">
-                                                            <i class='bx bx-refresh'></i>
-                                                            <span class="tooltip-label">Compare</span>
                                                         </a>
                                                     </div>
                                                 </li>
@@ -198,10 +189,11 @@
                                     </div>
 
                                     <div class="products-content">
-                                        <h3><a href="#">{{$rs->title}}</a></h3>
+                                        <h3>
+                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
+                                        </h3>
                                         <div class="price">
-                                            <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                            <span class="new-price">{{$rs->price}}₺</span>
+                                            <span class="new-price">{{$rs->price}}</span>
                                         </div>
                                         @php
                                             $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
@@ -213,25 +205,23 @@
                                                 <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
-                                                )
+                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
+                                                    ({{$countreview}} İnceleme)
+                                                @endif
                                             </div>
                                         </div>
-                                        <br>
-                                        <div class="btn-box">
-                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                                @csrf
-                                                <input name="quantity" type="hidden" value="1">
-                                                <button type="submit" class="default-btn add-to-cart">Add to Cart
-                                                </button>
-                                            </form>
-                                        </div>
+                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                            @csrf
+                                            <input name="quantity" type="hidden" value="1">
+                                            <input type="submit" class="add-to-cart default-btn" style="background-color: whitesmoke" value="Add to Cart">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
-                    <!-- Single Product End-->
+
                     <div class="pagination-area text-center">
                         <a href="#" class="prev page-numbers"><i class='bx bx-chevron-left'></i></a>
                         <span class="page-numbers current" aria-current="page">1</span>
@@ -242,8 +232,10 @@
                         <a href="#" class="next page-numbers"><i class='bx bx-chevron-right'></i></a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
-    <!-- End Products Area -->
+    <!-- End Blog Area -->
+
 @endsection

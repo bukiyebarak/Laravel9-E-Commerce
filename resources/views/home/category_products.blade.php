@@ -29,29 +29,71 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-md-12">
-                    <div class="woocommerce-widget-area">
-                        <div class="woocommerce-widget collections-list-widget">
-                            <h3 class="woocommerce-widget-title">Ürün Çeşitleri</h3>
-                            <ul class="collections-list-row">
+                    <aside class="widget-area">
+                        <section class="widget widget_search">
+                            <form class="search-form" action="{{route('getproduct')}}" method="post">
+                                @csrf
+
+                                <label>
+                                    <span class="screen-reader-text">Search for:</span>
+                                    @livewire('searchproduct')
+
+                                </label>
+                                <button type="submit"><i class="bx bx-search-alt"></i></button>
+                            </form>
+                            @section('footerjs')
+                                @livewireScripts
+                            @endsection
+                        </section>
+                        <section class="widget widget_categories">
+                            <div class="woocommerce-widget price-list-widget">
+                                <h3 class="widget-title">Price</h3>
+
+                                <div class="collection-filter-by-price">
+                                    <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
+                                           name="filter_by_price" data-step="10">
+                                </div>
+                            </div>
+                        </section>
+                        <br>
+                        <section class="widget widget_categories">
+                            <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
+
+                            <ul>
                                 @foreach($parentCategories as $rs)
-                                    <ul class="collections-list-row">
-                                        @foreach($rs->children as $childCategory )
-                                            @include('home.categorytreeproduct',['childCategory'=>$childCategory])
-                                        @endforeach
+                                    <ul>
+                                        <li>{{$rs->title}}
+                                            <ul>
+                                                @foreach($rs->children as $childCategory )
+                                                    @include('home.categorytreeproduct',['childCategory'=>$childCategory])
+                                                @endforeach
+                                            </ul>
+                                        </li>
+
                                     </ul>
                                 @endforeach
                             </ul>
-                        </div>
-                        <div class="woocommerce-widget price-list-widget">
-                            <h3 class="woocommerce-widget-title">Price</h3>
+                        </section>
 
-                            <div class="collection-filter-by-price">
-                                <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
-                                       name="filter_by_price" data-step="10">
+                        <section class="widget widget_tag_cloud">
+                            <h3 class="widget-title">Tags</h3>
+                            <div class="tagcloud">
+                                @foreach($datalist as $rs)
+                                    <a href="#">{{$rs->keywords}} <span class="tag-link-count"></span></a>
+                                @endforeach
                             </div>
-                        </div>
+                        </section>
 
-                    </div>
+                        <section class="widget widget_contact">
+                            <div class="text">
+                                <div class="icon">
+                                    <i class='bx bx-mail-send'></i>
+                                </div>
+                                <span>Emergency</span>
+                                <a href="mailto:hello@xton.com">{{$setting->email}}</a>
+                            </div>
+                        </section>
+                    </aside>
                 </div>
 
                 <div class="col-lg-8 col-md-12">
@@ -120,10 +162,12 @@
                                 <div class="single-products-box">
                                     <div class="products-image">
                                         <a href="#">
-                                            <img style="height: 150px" src="{{Storage::url($rs->image)}}"
-                                                 class="main-image" alt="image">
-                                            <img src="{{Storage::url($rs->image)}}"
-                                                 class="hover-image" alt="image">
+                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                <img style="height: 200px; width: 200px"
+                                                     src="{{Storage::url($rs->image)}}" class="main-image"
+                                                     alt="image">
+                                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                                            </a>
                                         </a>
 
                                         <div class="products-button">
@@ -173,8 +217,7 @@
                                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                                 @csrf
                                                 <input name="quantity" type="hidden" value="1">
-                                                <button type="submit" class="default-btn add-to-cart">Add to Cart
-                                                </button>
+                                                <input type="submit" class="add-to-cart default-btn" style="background-color: #ff87af" value="Add to Cart">
                                             </form>
                                         </div>
                                     </div>
