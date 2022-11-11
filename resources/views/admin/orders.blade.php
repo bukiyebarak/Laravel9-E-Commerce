@@ -52,7 +52,7 @@
                                                     {{$rs->user->name}}</a>
                                             </td>
                                             <td>{{$rs->name}}</td>
-                                            <td>{{$rs->email}}</td>
+                                            <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
                                             <td>{{$rs->phone}}</td>
                                             <td>{{$rs->address}}</td>
                                             <td>{{$rs->total}}</td>

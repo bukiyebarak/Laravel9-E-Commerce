@@ -40,7 +40,7 @@
                             </tr>
                             <tr>
                                 <th>Name</th>
-                                <td>{{$data->name}}</td>
+                                <td><a href="mailto:hello@xton.com">{{$data->email}}</a></td>
                             </tr>
                             <tr>
                                 <th>Email</th>
@@ -48,7 +48,7 @@
                             </tr>
                             <tr>
                                 <th>Phone</th>
-                                <td>{{$data->phone}}</td>
+                                <td><a href="tel:+01321654214">{{$data->phone}}</a></td>
                             </tr>
                             <tr>
                                 <th>Address</th>

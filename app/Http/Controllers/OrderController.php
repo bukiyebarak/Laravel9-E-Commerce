@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Orderitem;
 use App\Models\Shopcart;
+use App\Models\User;
+use App\Notifications\OrderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,9 +51,9 @@ class OrderController extends Controller
         $data->phone = $request->input('phone');
         $data->total = $request->input('total');
         $data->note = $request->input('note');
-        $data->user_id = Auth::id();
-        $data->IP = $_SERVER['REMOTE_ADDR'];
-        $data->save();
+         $data->user_id = Auth::id();
+         $data->IP = $_SERVER['REMOTE_ADDR'];
+         $data->save();
 
         $datalist = Shopcart::where('user_id', Auth::id())->get();
 
@@ -68,11 +70,29 @@ class OrderController extends Controller
 
             $data2->save();
         }
+
+        //sending user
+        $user = Order::first();
+        $user->notify(new OrderMail($data));
+
+
+
         //iyzico ile sağlanacak
         $data3 = Shopcart::where('user_id', Auth::id());
         $data3->delete();
 
         return redirect()->route('user_orders')->with('success', 'Product Order Successfuly');
+    }
+
+    public function userordermail()
+    {
+
+        //sending user
+        $user = Order::select('email')->orderByDesc('id')->get();
+        $user->notify(new OrderMail());
+
+        //sending to email
+        //sending to multiple users
     }
 
     /**

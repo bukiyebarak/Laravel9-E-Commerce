@@ -49,8 +49,8 @@
                                             @endif
                                         </td>
                                         <td>{{$rs->name}}</td>
-                                        <td>{{$rs->email}}</td>
-                                        <td>{{$rs->phone}}</td>
+                                        <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
+                                        <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
                                         <td>{{$rs->address}}</td>
                                         <td>
                                             @foreach($rs->roles as $row)

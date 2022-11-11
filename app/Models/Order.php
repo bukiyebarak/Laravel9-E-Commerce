@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Order extends Model
 {
     use HasFactory;
+    use Notifiable;
+
+    protected $fillable = ['name', 'total', 'email'];
 
     public function user()
     {
@@ -16,7 +20,7 @@ class Order extends Model
 
     public function orderitem()
     {
-        return $this->hasMany(Orderitem::class,'order_id');
+        return $this->hasMany(Orderitem::class, 'order_id');
     }
 
 }
