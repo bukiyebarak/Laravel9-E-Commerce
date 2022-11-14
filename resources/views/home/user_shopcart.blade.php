@@ -31,10 +31,7 @@
                             <tr>
                                 <th scope="col">Product</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Unit Price</th>
                                 <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-
                             </tr>
                             </thead>
 
@@ -56,13 +53,14 @@
                                         <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
                                         <ul>
                                             <li>Max Quantity: <span>{{$rs->product->quantity}}</span></li>
+                                            <li>Unit Price:<span class="subtotal-amount">{{$rs->product->price}}€</span>
+                                            </li>
+                                            <li>Total:<span class="unit-amount"> <b> {{$rs->product->price * $rs->quantity}}€</b></span>
+                                            </li>
 
                                         </ul>
                                     </td>
 
-                                    <td class="product-price">
-                                        <span class="unit-amount">{{$rs->product->price}}€</span>
-                                    </td>
 
                                     <td class="product-quantity">
                                         <form
@@ -78,11 +76,12 @@
                                     </td>
 
                                     <td class="product-subtotal">
-                                        <span class="subtotal-amount">  {{$rs->product->price * $rs->quantity}}€</span>
 
-                                        <a href="{{route('user_shopcart_delete',['id'=>$rs->id])}}"
-                                           onclick="return confirm('Delete! Are you sure?')" class="remove"><i
-                                                class='bx bx-trash'></i></a>
+                                        <a href="#"><i class='bx bx-heart fs-3'></i></a>
+                                        <a
+                                            href="{{route('user_shopcart_delete',['id'=>$rs->id])}}"
+                                            onclick="return confirm('Delete! Are you sure?')" class="remove"><i
+                                                class='bx bx-trash fs-3'></i></a>
                                     </td>
                                 </tr>
                                 @php
@@ -97,7 +96,7 @@
                     <div class="cart-buttons">
                         <div class="row align-items-center">
                             <div class="col-lg-7 col-sm-7 col-md-7">
-                                <a href="{{route('home')}}" class="optional-btn">Continue Shopping</a>
+                                <a href="{{route('allproducts')}}" class="optional-btn">Continue Shopping</a>
                             </div>
 
                         </div>
@@ -112,10 +111,14 @@
                             @php
                                 $total += 30;
                             @endphp
-                            <li>Total <span>@if($total>30) {{$total}}€ @else 0€ @endif</span></li>
+                            <li>Total <span>@if($total>30)
+                                        {{$total}}€
+                                    @else
+                                        0€
+                                    @endif</span></li>
                         </ul>
 
-                        <form action="{{route('user_order_add')}}"method="post">
+                        <form action="{{route('user_order_add')}}" method="post">
                             @csrf
                             <input type="hidden" name="total" value="{{$total}}">
                             <button type="submit" class="default-btn">Proceed to Checkout</button>

@@ -86,11 +86,11 @@
                             <li>Total <span>{{$rs->total}}€</span></li>
                         </ul>
 
-                        <form action="{{route('user_order_add')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="total" value="{{$total}}">
-                            <button type="submit" class="default-btn">Proceed to Checkout</button>
-                        </form>
+{{--                        <form action="{{route('user_order_add')}}" method="post">--}}
+{{--                            @csrf--}}
+{{--                            <input type="hidden" name="total" value="{{$total}}">--}}
+{{--                            <button type="submit" class="default-btn">Proceed to Checkout</button>--}}
+{{--                        </form>--}}
                     </div>
                 </div>
             </div>

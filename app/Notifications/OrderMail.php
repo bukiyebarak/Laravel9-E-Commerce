@@ -3,12 +3,14 @@
 namespace App\Notifications;
 
 use App\Models\Order;
+use App\Models\Orderitem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
-class OrderMail extends Notification
+class OrderMail extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -44,12 +46,17 @@ class OrderMail extends Notification
      */
     public function toMail($notifiable)
     {
+//        $datalist = Orderitem::where('user_id', Auth::id())->where('order_id', $this->order->id)->get();
+//        return (new MailMessage)->view(
+//            'emails.order', ['datalist' => $datalist]
+//        );
         return (new MailMessage)
-            ->greeting($this->order->name)
-            ->line($this->order->total.'€ Fiyatındaki şiparişiniz başarılı bir şekilde alınmıştır.')
-            ->line($this->order->email)
-            ->action('Şipariş detayı', url('/user/order'))
-            ->line('Bizi tercih ettiğiniz için teşekkürler...');
+            ->subject('Şiparişiniz alındı.')
+            ->greeting('Sayın '. $this->order->name)
+            ->line($this->order->total . '€ fiyatındaki şiparişiniz '. $this->order->created_at. ' tarihinde alınmıştır.')
+            ->action('Şipariş Detayı', url('/user/order'))
+            ->line('Bizi tercih ettiğiniz için Teşekkürler')
+            ->line('İyi Günler Dileriz.');
     }
 
     /**

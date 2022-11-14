@@ -20,7 +20,7 @@ return [
         'login' => 'adminlogin',
         'logout' => null,
         'password-confirmation' => null,
-        'register' => null,
+        'register' => '/',
         'email-verification' => 'myaccount',
         'password-reset' => null,
     ],

@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Notifications\OrderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class OrderController extends Controller
 {
@@ -51,9 +53,9 @@ class OrderController extends Controller
         $data->phone = $request->input('phone');
         $data->total = $request->input('total');
         $data->note = $request->input('note');
-         $data->user_id = Auth::id();
-         $data->IP = $_SERVER['REMOTE_ADDR'];
-         $data->save();
+        $data->user_id = Auth::id();
+        $data->IP = $_SERVER['REMOTE_ADDR'];
+        $data->save();
 
         $datalist = Shopcart::where('user_id', Auth::id())->get();
 
@@ -71,10 +73,36 @@ class OrderController extends Controller
             $data2->save();
         }
 
-        //sending user
-        $user = Order::first();
+        #region Send Mail
+
+//        sending user
+        $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
+        $user = Order::orderByDesc('id')->first();
         $user->notify(new OrderMail($data));
 
+//        sending to email
+       // Notification::route('mail',['someexample@example.com'])->notify(new OrderMail($data));
+
+
+        //sending to multiple emails
+//        $receipients = [
+//            'someone@example.com' => 'John  Doe',
+//            'luck@example.com' => 'Lucky'
+//        ];
+//        Notification::route('mail', $receipients)->notify(new OrderMail($data));
+
+
+        //sending to multiple users
+//        $users=User::all();
+//        Notification::route('mail', $users)->notify(new OrderMail($data));
+
+        //User tablosundaki kullanıcıları 10'ar gruplar ve mail atar.
+//        User::chunk(10,function ($users) use($data){
+//            $receipients=$users->pluck('name','email');
+//
+//           Notification::route('mail', $receipients)->notify(new OrderMail($data));
+//        });
+#endregion
 
 
         //iyzico ile sağlanacak
@@ -84,16 +112,6 @@ class OrderController extends Controller
         return redirect()->route('user_orders')->with('success', 'Product Order Successfuly');
     }
 
-    public function userordermail()
-    {
-
-        //sending user
-        $user = Order::select('email')->orderByDesc('id')->get();
-        $user->notify(new OrderMail());
-
-        //sending to email
-        //sending to multiple users
-    }
 
     /**
      * Display the specified resource.
