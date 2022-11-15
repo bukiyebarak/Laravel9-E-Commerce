@@ -11,10 +11,6 @@ class Orderitem extends Model
 {
     use HasFactory;
 
-    use Notifiable;
-
-    protected $fillable = ['user_id', 'order_id', 'product_id','price','total'];
-
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

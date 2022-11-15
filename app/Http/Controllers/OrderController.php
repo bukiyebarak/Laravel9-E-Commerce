@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMailable;
 use App\Models\Order;
 use App\Models\Orderitem;
 use App\Models\Shopcart;
@@ -9,11 +10,19 @@ use App\Models\User;
 use App\Notifications\OrderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class OrderController extends Controller
 {
+
+    public static function orderitemmail($id)
+    {
+        return Orderitem::where('user_id', Auth::id())->where('order_id', $id)->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,9 +85,9 @@ class OrderController extends Controller
         #region Send Mail
 
 //        sending user
-        $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
-        $user = Order::orderByDesc('id')->first();
-        $user->notify(new OrderMail($data));
+       // $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
+//        $user = Order::orderByDesc('id')->first();
+//        $user->notify(new OrderMail($data));
 
 //        sending to email
        // Notification::route('mail',['someexample@example.com'])->notify(new OrderMail($data));
@@ -104,6 +113,8 @@ class OrderController extends Controller
 //        });
 #endregion
 
+        $this->sendOrderConfirmationMail($data);
+
 
         //iyzico ile sağlanacak
         $data3 = Shopcart::where('user_id', Auth::id());
@@ -112,6 +123,10 @@ class OrderController extends Controller
         return redirect()->route('user_orders')->with('success', 'Product Order Successfuly');
     }
 
+    public function sendOrderConfirmationMail($order)
+    {
+        Mail::to($order->email)->send(new OrderMailable($order));
+    }
 
     /**
      * Display the specified resource.

@@ -133,6 +133,7 @@ class HomeController extends Controller
         $data->phone = $request->input('phone');
         $data->subject = $request->input('subject');
         $data->message = $request->input('message');
+        $data->ip_address = $_SERVER['REMOTE_ADDR'] ;
         $data->save();
         return redirect()->route('contact')->with('success', 'Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
 

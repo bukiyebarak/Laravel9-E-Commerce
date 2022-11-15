@@ -40,11 +40,11 @@
                             </tr>
                             <tr>
                                 <th>Name</th>
-                                <td><a href="mailto:hello@xton.com">{{$data->email}}</a></td>
+                                <td>{{$data->name}}</td>
                             </tr>
                             <tr>
                                 <th>Email</th>
-                                <td>{{$data->email}}</td>
+                                <td><a href="mailto:hello@xton.com">{{$data->email}}</a></td>
                             </tr>
                             <tr>
                                 <th>Phone</th>
