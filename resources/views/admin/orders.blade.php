@@ -60,7 +60,7 @@
                                             <td>{{$rs->status}}</td>
                                             <td>
                                                 <a href="{{route('admin_order_show',['id'=>$rs->id])}}" onclick="return !window.open(this.href, '','top=20 left=50 width=1000 height=800')">
-                                                    <div class="font-22 text-primary"> <i class="fadeIn animated bx bx-edit"></i> </div>
+                                                    <div class="font-22 text-primary"> <i class="fadeIn animated bx bxs-eyedropper"></i> </div>
 
                                                 </a>
                                             </td>

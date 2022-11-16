@@ -571,7 +571,8 @@
                                                          style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                         <p style="font-size: 14px; line-height: 140%;"><strong>Ürün
                                                                 İsmi: </strong>
-                                                            <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a></p>
+                                                            <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
+                                                        </p>
                                                     </div>
 
                                                 </td>
@@ -755,7 +756,7 @@
 
                                                 <div class="v-text-align" style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 14px; line-height: 19.6px;">
-                                                            <strong>{{$rs->total-30}}€</strong></span></p>
+                                                            <strong>{{$order->total-30}}€</strong></span></p>
                                                 </div>
 
                                             </td>
@@ -933,7 +934,7 @@
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: right;">
-                                                        <span style="font-size: 14px; line-height: 19.6px;"><strong> {{$rs->total}}€</strong></span>
+                                                        <span style="font-size: 14px; line-height: 19.6px;"><strong> {{$order->total}}€</strong></span>
                                                     </p>
                                                 </div>
 

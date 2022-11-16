@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderMailable;
+use App\Mail\OrderMailableAdmin;
 use App\Models\Order;
 use App\Models\Orderitem;
 use App\Models\Shopcart;
@@ -114,6 +115,7 @@ class OrderController extends Controller
 #endregion
 
         $this->sendOrderConfirmationMail($data);
+        $this->sendOrderConfirmationMailAdmin($data);
 
 
         //iyzico ile sağlanacak
@@ -127,6 +129,12 @@ class OrderController extends Controller
     {
         Mail::to($order->email)->send(new OrderMailable($order));
     }
+
+    public function sendOrderConfirmationMailAdmin($order)
+    {
+        Mail::to('yonetici@admin.com')->send(new OrderMailableAdmin($order));
+    }
+
 
     /**
      * Display the specified resource.
