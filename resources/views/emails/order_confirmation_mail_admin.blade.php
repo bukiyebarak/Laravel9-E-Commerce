@@ -758,7 +758,7 @@
                                                                     <td style="font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; font-size: 15px; color: #9d9d9d; vertical-align: middle;  text-align: center;">
                                                                         <a href="http://127.0.0.1:8000"
                                                                            style="color: #9d9d9d; text-decoration: none;"
-                                                                           target="_blank">Designed with BEE</a></td>
+                                                                           target="_blank">GNC Coffee</a></td>
                                                                 </tr>
                                                             </table>
                                                         </td>

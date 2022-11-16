@@ -2,34 +2,26 @@
 
 namespace App\Mail;
 
-use App\Models\Order;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderMailableAdmin extends Mailable
+class WelcomeMailable extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public User $user;
     /**
      * Create a new message instance.
      *
-     * @var \App\Models\Order
-     */
-
-    public Order $order;
-
-    /**
-     * Create a new message instance.
-     *
-     * @param  \App\Models\Order  $order
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(User $user)
     {
-        $this->order=$order;
+        $this->user=$user;
     }
 
     /**
@@ -40,12 +32,7 @@ class OrderMailableAdmin extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Şipariş Detayı Admin',
-
-            tags: ['sipariş'],
-            metadata: [
-                'order_id' => $this->order->id,
-            ],
+            subject: 'Welcome Mailable',
         );
     }
 
@@ -57,8 +44,7 @@ class OrderMailableAdmin extends Mailable
     public function content()
     {
         return new Content(
-
-            view: 'emails.order_confirmation_mail_admin',
+            view: 'emails.welcome_mail',
         );
     }
 

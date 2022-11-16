@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessageMailable;
+use App\Mail\MessageContactMailable;
 use App\Models\Faq;
 use App\Models\Review;
 use App\Models\Category;
@@ -13,6 +15,7 @@ use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -133,11 +136,20 @@ class HomeController extends Controller
         $data->phone = $request->input('phone');
         $data->subject = $request->input('subject');
         $data->message = $request->input('message');
-        $data->ip_address = $_SERVER['REMOTE_ADDR'] ;
+        $data->ip_address = $_SERVER['REMOTE_ADDR'];
         $data->save();
+
+        $this->sendContactMessageMailAdmin($data);
+
         return redirect()->route('contact')->with('success', 'Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
 
     }
+
+    public function sendContactMessageMailAdmin($contact)
+    {
+        Mail::to('yonetici@admin.com')->send(new MessageContactMailable($contact));
+    }
+
 
     #region Search
     public function getproduct(Request $request)

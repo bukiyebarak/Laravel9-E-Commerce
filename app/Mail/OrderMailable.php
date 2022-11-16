@@ -11,7 +11,6 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
-use function Symfony\Component\Translation\t;
 
 class OrderMailable extends Mailable
 {
@@ -20,8 +19,8 @@ class OrderMailable extends Mailable
 
     /**
      * Create a new message instance.
-     * @param  \App\Models\Order  $order
-     * @param  \App\Models\Orderitem  $orderitem
+     *
+     *
      * @return void
      */
     public function __construct(Order $order)
@@ -38,6 +37,10 @@ class OrderMailable extends Mailable
     {
         return new Envelope(
             subject: 'Şipariş Detayı',
+            tags: ['sipariş'],
+            metadata: [
+                'order_id' => $this->order->id,
+            ],
         );
     }
 
