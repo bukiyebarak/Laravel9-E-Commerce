@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 class ShopCartController extends Controller
 {
@@ -22,6 +24,7 @@ class ShopCartController extends Controller
     public function index()
     {
         $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
+
         return view('home.user_shopcart',['datalist'=>$datalist]);
     }
 

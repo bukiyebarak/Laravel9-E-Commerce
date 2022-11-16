@@ -23,8 +23,8 @@
         <div class="container">
             <div class="row">
                 @include('home.usermenu')
-                <div class="col-lg-10 col-md-12">
 
+                <div class="col-lg-10 col-md-12">
                     <div class="cart-table table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -126,6 +126,7 @@
                     </div>
 
                 </div>
+
             </div>
         </div>
     </section>

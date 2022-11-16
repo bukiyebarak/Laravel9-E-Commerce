@@ -25,49 +25,50 @@
         <div class="container">
             <div class="row">
                 @include('home.usermenu')
-                <div class="col-lg-10 col-md-12">
 
-                    <div class="table-responsive">
-                        <table id="example2" class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
+                    <div class="col-lg-10 col-md-12">
 
-                                <th>Product</th>
-                                <th>Subject</th>
-                                <th>Review</th>
-                                <th>Rate</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Delete</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($datalist as $rs)
+                        <div class="table-responsive">
+                            <table id="example2" class="table table-striped table-bordered">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
-                                           target="_blank"> {{$rs->product->title}} </a>
 
-                                    </td>
-                                    <td>{{$rs->subject}}</td>
-                                    <td>{{$rs->review}}</td>
-                                    <td>{{$rs->rate}}</td>
-                                    <td>{{$rs->status}}</td>
-                                    <td>{{$rs->created_at}}</td>
-                                    <td>
-                                        <a href="{{route('user_review_delete',['id'=>$rs->id])}}"
-                                           onclick="return confirm('Delete! Are you Sure')">
-                                            <div class="font-22 text-primary"><i class="bx bx-trash fs-4"></i>
-                                            </div>
-                                        </a>
-                                    </td>
+                                    <th>Product</th>
+                                    <th>Subject</th>
+                                    <th>Review</th>
+                                    <th>Rate</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Delete</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                @foreach($datalist as $rs)
+                                    <tr>
+                                        <td>
+                                            <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
+                                               target="_blank"> {{$rs->product->title}} </a>
 
-                </div>
+                                        </td>
+                                        <td>{{$rs->subject}}</td>
+                                        <td>{{$rs->review}}</td>
+                                        <td>{{$rs->rate}}</td>
+                                        <td>{{$rs->status}}</td>
+                                        <td>{{$rs->created_at}}</td>
+                                        <td>
+                                            <a href="{{route('user_review_delete',['id'=>$rs->id])}}"
+                                               onclick="return confirm('Delete! Are you Sure')">
+                                                <div class="font-22 text-primary"><i class="bx bx-trash fs-4"></i>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
             </div>
         </div>
         </div>
