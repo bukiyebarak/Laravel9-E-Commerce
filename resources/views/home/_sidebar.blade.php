@@ -45,19 +45,19 @@
 
                     <ul class="products-list">
                         <li>
-                            <a href="#"><img src="assets/img/products/img1.jpg" alt="image"></a>
+                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img1.jpg" alt="image"></a>
                         </li>
 
                         <li>
-                            <a href="#"><img src="assets/img/products/img2.jpg" alt="image"></a>
+                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img2.jpg" alt="image"></a>
                         </li>
 
                         <li>
-                            <a href="#"><img src="assets/img/products/img3.jpg" alt="image"></a>
+                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img3.jpg" alt="image"></a>
                         </li>
 
                         <li>
-                            <a href="#"><img src="assets/img/products/img4.jpg" alt="image"></a>
+                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img4.jpg" alt="image"></a>
                         </li>
                     </ul>
 

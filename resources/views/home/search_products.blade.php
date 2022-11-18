@@ -247,3 +247,6 @@
     </section>
     <!-- End Products Area -->
 @endsection
+@section('footerjs')
+    <script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>
+@endsection

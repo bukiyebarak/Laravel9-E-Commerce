@@ -47,6 +47,8 @@ Route::get('categoryproducts/{id}/{slug}', [HomeController::class, 'categoryprod
 Route::post('/getproduct', [HomeController::class, 'getproduct'])->name('getproduct');
 Route::get('/productlist/{search}', [HomeController::class, 'productlist'])->name('productlist');
 Route::get('allproducts', [HomeController::class, 'allproducts'])->name('allproducts');
+Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
+Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 
 #endregion
 
@@ -198,7 +200,7 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::post('update/{id}', [OrderController::class, 'update'])->name('user_order_update');
         Route::get('delete/{id}', [OrderController::class, 'destroy'])->name('user_order_delete');
         Route::get('show/{id}', [OrderController::class, 'show'])->name('user_order_show');
-        Route::get('mail', [OrderController::class, 'userordermail'])->name('user_order_mail');
+
     });
 
 });

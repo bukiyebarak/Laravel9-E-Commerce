@@ -43,9 +43,33 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $total = $request->input('total');
-        return view('home.user_order_add', ['total' => $total]);
+
+        $getcity = DB::table('city')->orderBy('sehir_key', 'asc')->get();
+        return view('home.user_order_add1', ['total' => $total, 'getcity' => $getcity]);
     }
 
+    public function getDistrict(Request $request)
+    {
+        $cid=$request->post('cid');
+        $getdistrict = DB::table('district')->where('ilce_sehirkey','=',$cid)->orderBy('ilce_key', 'asc')->get();
+        $html='<option value="">İlçe Seçiniz</option>';
+        foreach($getdistrict as $rs)
+        {
+            $html.='<option value="'.$rs->ilce_key.'">'.$rs->ilce_title.'</option>';
+        }
+        echo $html;
+    }
+    public function getNeighbourhood(Request $request)
+    {
+        $did=$request->post('did');
+        $getneighbourhood = DB::table('neighbourhood')->where('mahalle_ilcekey','=',$did)->orderBy('mahalle_key', 'asc')->get();
+        $html='<option value="">Mahalle Seçiniz</option>';
+        foreach($getneighbourhood as $rs)
+        {
+            $html.='<option value="'.$rs->mahalle_key.'">'.$rs->mahalle_title.'</option>';
+        }
+        echo $html;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -63,6 +87,10 @@ class OrderController extends Controller
         $data->phone = $request->input('phone');
         $data->total = $request->input('total');
         $data->note = $request->input('note');
+        $data->city = $request->input('city');
+        $data->country = $request->input('country');
+        $data->district = $request->input('district');
+        $data->zipcode = $request->input('zipcode');
         $data->user_id = Auth::id();
         $data->IP = $_SERVER['REMOTE_ADDR'];
         $data->save();
@@ -86,12 +114,12 @@ class OrderController extends Controller
         #region Send Mail
 
 //        sending user
-       // $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
+        // $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
 //        $user = Order::orderByDesc('id')->first();
 //        $user->notify(new OrderMail($data));
 
 //        sending to email
-       // Notification::route('mail',['someexample@example.com'])->notify(new OrderMail($data));
+        // Notification::route('mail',['someexample@example.com'])->notify(new OrderMail($data));
 
 
         //sending to multiple emails

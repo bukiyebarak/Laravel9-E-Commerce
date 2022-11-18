@@ -123,8 +123,10 @@
 
 <div class="go-top"><i class='bx bx-up-arrow-alt'></i></div>
 
-<!-- Links of JS files -->
+<!-- Links of JS files-->
+
 <script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>
+
 <script src="{{asset('assets')}}/home/assets/js/popper.min.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/owl.carousel.min.js"></script>

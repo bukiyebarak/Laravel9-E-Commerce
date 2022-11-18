@@ -17,10 +17,10 @@ return [
         'login' => 'adminlogin',
     ],
     'redirects' => [
-        'login' => 'adminlogin',
+        'login' => 'login',
         'logout' => null,
         'password-confirmation' => null,
-        'register' => '/',
+        'register' => 'login',
         'email-verification' => 'myaccount',
         'password-reset' => null,
     ],

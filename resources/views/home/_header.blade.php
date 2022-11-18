@@ -159,7 +159,7 @@
                 </div>
 
                 <div class="products-cart-btn">
-                    <form action="{{route('user_order_add')}}"method="post">
+                    <form action="{{route('user_order_add')}}" method="post">
                         @csrf
                         <input type="hidden" name="total" value="{{$total +30}}">
                         <button type="submit" class="default-btn">Proceed to Checkout</button>
@@ -171,3 +171,5 @@
     </div>
 </div>
 <!-- End Shopping Cart Modal -->
+
+{{--<script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>--}}
