@@ -25,27 +25,35 @@
             <div class="row">
                 @include('home.usermenu')
                 <div class="col-lg-10 col-md-12">
-                    <div class="table-responsive" >
+                    <div class="table-responsive">
                         <table id="example2" class="table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>İsim</th>
+                                <th>Soyisim</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>Total</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Telefon</th>
+                                <th>Adres</th>
+                                <th>İl</th>
+                                <th>İlçe</th>
+                                <th>Mahalle</th>
+                                <th>Toplam</th>
+                                <th>Şipariş Tarihi</th>
+                                <th>Durum</th>
+                                <th>Şipariş Detayı</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($datalist as $rs)
                                 <tr>
                                     <td>{{$rs->name}}</td>
+                                    <td>{{$rs->surname}}</td>
                                     <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
                                     <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
                                     <td>{{$rs->address}}</td>
+                                    <td>{{$rs->city}}</td>
+                                    <td>{{$rs->district}}</td>
+                                    <td>{{$rs->neighbourhood}} Mah.</td>
                                     <td>{{$rs->total}}</td>
                                     <td>{{$rs->created_at}}</td>
                                     <td>{{$rs->status}}</td>

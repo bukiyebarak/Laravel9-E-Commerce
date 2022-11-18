@@ -45,7 +45,7 @@ class OrderController extends Controller
         $total = $request->input('total');
 
         $getcity = DB::table('city')->orderBy('sehir_key', 'asc')->get();
-        return view('home.user_order_add1', ['total' => $total, 'getcity' => $getcity]);
+        return view('home.user_order_add', ['total' => $total, 'getcity' => $getcity]);
     }
 
     public function getDistrict(Request $request)
@@ -82,14 +82,15 @@ class OrderController extends Controller
 
         $data = new Order;
         $data->name = $request->input('name');
+        $data->surname = $request->input('surname');
         $data->address = $request->input('address');
         $data->email = $request->input('email');
         $data->phone = $request->input('phone');
         $data->total = $request->input('total');
         $data->note = $request->input('note');
-        $data->city = $request->input('city');
-        $data->country = $request->input('country');
-        $data->district = $request->input('district');
+        $data->city = DB::table('city')->where('sehir_key',$request->input('city'))->pluck('sehir_title')->first();
+        $data->neighbourhood =DB::table('neighbourhood')->where('mahalle_key', $request->input('neighbourhood'))->pluck('mahalle_title')->first();
+        $data->district =DB::table('district')->where('ilce_key', $request->input('district'))->pluck('ilce_title')->first();
         $data->zipcode = $request->input('zipcode');
         $data->user_id = Auth::id();
         $data->IP = $_SERVER['REMOTE_ADDR'];

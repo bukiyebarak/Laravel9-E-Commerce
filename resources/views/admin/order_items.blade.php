@@ -44,6 +44,18 @@
                                     <td>{{$data->address}}</td>
                                 </tr>
                                 <tr>
+                                    <th>City</th>
+                                    <td>{{$data->city}}</td>
+                                </tr>
+                                <tr>
+                                    <th>District</th>
+                                    <td>{{$data->district}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Neighbourhood</th>
+                                    <td>{{$data->neighbourhood}}</td>
+                                </tr>
+                                <tr>
                                     <th>Phone</th>
                                     <td>{{$data->phone}}</td>
                                 </tr>
