@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Symfony\Component\Console\Input\Input;
 
 class OrderController extends Controller
 {
@@ -50,6 +51,10 @@ class OrderController extends Controller
 
     public function getDistrict(Request $request)
     {
+//        $il_id = Input::get('id');
+//        $regencies = DB::table('district')->where('ilce_sehirkey','=',$il_id)->orderBy('ilce_key', 'asc')->get();
+//        return response()->json($regencies);
+
         $cid=$request->post('cid');
         $getdistrict = DB::table('district')->where('ilce_sehirkey','=',$cid)->orderBy('ilce_key', 'asc')->get();
         $html='<option value="">İlçe Seçiniz</option>';

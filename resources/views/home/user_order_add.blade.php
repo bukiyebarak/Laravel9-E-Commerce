@@ -302,31 +302,33 @@
 @endsection
 @section('footerjs')
 
-    <script src="https://code.jquery.com/jquery-3.6.1.js "></script>
     <script>
-        jQuery(document).ready(function () {
-            jQuery('#city').change(function () {
-                let cid = jQuery(this).val();
-                jQuery('#neighbourhood').html('<option value="">Mahalle Seçiniz</option>')
-                jQuery.ajax({
+        $(document).ready(function () {
+            $('#city').change(function () {
+                let cid = $(this).val();
+                $('#neighbourhood').html('<option value="">Mahalle Seçiniz</option>')
+                $.ajax({
                     url: '/getDistrict',
                     type: 'post',
                     data: 'cid=' + cid + '&_token={{csrf_token()}}',
                     success: function (result) {
 
-                        jQuery('#district').html(result);
+                        console.log(result);
+                        $('#district').html(result);
+                        $('#district').niceSelect('update');
                     }
                 });
             });
 
-            jQuery('#district').change(function () {
-                let did = jQuery(this).val();
-                jQuery.ajax({
+            $('#district').change(function () {
+                let did = $(this).val();
+                $.ajax({
                     url: '/getNeighbourhood',
                     type: 'post',
                     data: 'did=' + did + '&_token={{csrf_token()}}',
                     success: function (result) {
-                        jQuery('#neighbourhood').html(result)
+                        $('#neighbourhood').html(result);
+                        $('#neighbourhood').niceSelect('update');
                     }
                 });
             });
