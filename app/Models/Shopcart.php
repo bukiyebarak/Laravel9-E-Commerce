@@ -11,7 +11,7 @@ class Shopcart extends Model
     use HasFactory;
     use Notifiable;
 
-    protected $fillable = ['user_id', 'product_id','quantity'];
+    protected $fillable = ['user_id', 'product_id','quantity','created_at','updated_at'];
 
 
     public function product()

@@ -439,7 +439,7 @@ Top Header CSS
             font-weight: 700;
             position: relative;
             color: $white-color;
-            
+
             &::before {
                 content: '';
                 position: absolute;
@@ -544,7 +544,7 @@ Top Header CSS
         .search-btn-box {
             position: relative;
             top: 2px;
-            
+
             .search-btn {
                 font-size: 20px;
                 cursor: pointer;
@@ -649,7 +649,7 @@ Navbar CSS
         padding: {
             left: 0;
             right: 0;
-        };      
+        };
         .navbar-brand {
             font-size: inherit;
             line-height: 1;
@@ -766,11 +766,11 @@ Navbar CSS
                             opacity: 0;
                             visibility: hidden;
                             transform: scaleY(0);
-                            
+
                             li {
                                 a {
                                     color: #515050;
-                                    
+
                                     &:hover, &:focus, &.active {
                                         color: $main-color;
                                     }
@@ -781,11 +781,11 @@ Navbar CSS
                                     opacity: 0;
                                     visibility: hidden;
                                     transform: scaleY(0);
-        
+
                                     li {
                                         a {
                                             color: #515050;
-        
+
                                             &:hover, &:focus, &.active {
                                                 color: $main-color;
                                             }
@@ -796,11 +796,11 @@ Navbar CSS
                                             opacity: 0;
                                             visibility: hidden;
                                             transform: scaleY(0);
-                
+
                                             li {
                                                 a {
                                                     color: #515050;
-                
+
                                                     &:hover, &:focus, &.active {
                                                         color: $main-color;
                                                     }
@@ -811,11 +811,11 @@ Navbar CSS
                                                     opacity: 0;
                                                     visibility: hidden;
                                                     transform: scaleY(0);
-                        
+
                                                     li {
                                                         a {
                                                             color: #515050;
-                
+
                                                             &:hover, &:focus, &.active {
                                                                 color: $main-color;
                                                             }
@@ -826,11 +826,11 @@ Navbar CSS
                                                             opacity: 0;
                                                             visibility: hidden;
                                                             transform: scaleY(0);
-                                
+
                                                             li {
                                                                 a {
                                                                     color: #515050;
-                
+
                                                                     &:hover, &:focus, &.active {
                                                                         color: $main-color;
                                                                     }
@@ -841,11 +841,11 @@ Navbar CSS
                                                                     opacity: 0;
                                                                     visibility: hidden;
                                                                     transform: scaleY(0);
-                                        
+
                                                                     li {
                                                                         a {
                                                                             color: #515050;
-                
+
                                                                             &:hover, &:focus, &.active {
                                                                                 color: $main-color;
                                                                             }
@@ -1083,7 +1083,7 @@ Navbar CSS
                 .search-btn-box {
                     position: relative;
                     top: 1px;
-                    
+
                     .search-btn {
                         font-size: 25px;
                         cursor: pointer;
@@ -1160,7 +1160,7 @@ Navbar CSS
 
     .xton-responsive-nav {
         display: block;
-        
+
         .xton-responsive-menu {
             position: relative;
 
@@ -1291,7 +1291,7 @@ Navbar CSS
                                         overflow: hidden;
                                         position: relative;
                                         text-align: center;
-        
+
                                         img {
                                             transition: $transition;
                                         }
@@ -1522,7 +1522,7 @@ Search Overlay CSS
         &.search-overlay {
             opacity: 1;
             visibility: visible;
-    
+
             .search-overlay-layer {
                 transform: translateX(0);
             }
@@ -3477,7 +3477,7 @@ Products CSS
                     float: left;
                     border: 1px solid #d0d0d0;
                     transition: $transition;
-        
+
                     &:not(:first-child) {
                         margin-left: 1px;
                     }
@@ -3490,7 +3490,7 @@ Products CSS
             }
             .icon-view-three {
                 margin-left: 2px;
-                
+
                 span {
                     width: 7px;
                     height: 14px;
@@ -3511,7 +3511,7 @@ Products CSS
             }
             .icon-view-four {
                 margin-left: 2px;
-                
+
                 span {
                     width: 7px;
                     height: 14px;
@@ -3532,7 +3532,7 @@ Products CSS
             }
             .icon-view-five {
                 margin-left: 2px;
-                
+
                 span {
                     width: 5px;
                     height: 14px;
@@ -3553,7 +3553,7 @@ Products CSS
             }
             .icon-view-six {
                 margin-left: 2px;
-                
+
                 span {
                     width: 3px;
                     height: 14px;
@@ -3574,7 +3574,7 @@ Products CSS
             }
             .view-grid-switch {
                 margin-left: 2px;
-                
+
                 span {
                     width: 24px;
                     height: 6px;
@@ -4177,7 +4177,7 @@ Products Details CSS
             margin-right: 10px;
             text-align: center;
             display: inline-block;
-            position: relative;    
+            position: relative;
 
             span {
                 position: absolute;
@@ -4339,14 +4339,14 @@ Products Details CSS
             list-style-type: none;
             padding-left: 0;
             margin-bottom: 0;
-            
+
             .accordion-item {
                 border-radius: 5px;
                 display: block;
                 background: $white-color;
                 margin-bottom: 15px;
                 border: none;
-    
+
                 &:last-child {
                     margin-bottom: 0;
                 }
@@ -4495,7 +4495,7 @@ Products Details CSS
                     }
                     .review-comments {
                         margin-top: 35px;
-                        
+
                         .review-item {
                             margin-top: 30px;
                             position: relative;
@@ -4586,7 +4586,7 @@ Products Details CSS
                     border: 1px solid $black-color;
                     transition: $transition;
                     border-radius: 50%;
-        
+
                     &::before {
                         position: absolute;
                         top: 0;
@@ -4749,7 +4749,7 @@ Products Details CSS
                     }
                     .review-comments {
                         margin-top: 35px;
-                        
+
                         .review-item {
                             margin-top: 30px;
                             position: relative;
@@ -4928,7 +4928,7 @@ Offer CSS
         a {
             display: block;
             border-radius: 5px;
-            
+
             img {
                 border-radius: 5px;
             }
@@ -5144,7 +5144,7 @@ Testimonials CSS
     transition: $transition;
     position: relative;
     margin-bottom: 100px;
-    
+
     p {
         margin-bottom: 0;
         transition: $transition;
@@ -5278,7 +5278,7 @@ Blog CSS
         overflow: hidden;
         position: relative;
         border-radius: 5px 5px 0 0;
-        
+
         a {
             display: block;
             border-radius: 5px 5px 0 0;
@@ -5434,7 +5434,7 @@ Blog Details CSS
         &.owl-theme {
             .owl-nav {
                 margin-top: 0;
-    
+
                 [class*=owl-] {
                     color: #87a1c1;
                     font-size: 18px;
@@ -5488,7 +5488,7 @@ Blog Details CSS
                 padding-left: 0;
                 margin-bottom: 0;
                 list-style-type: none;
-    
+
                 li {
                     margin-right: 20px;
                     position: relative;
@@ -5609,7 +5609,7 @@ Blog Details CSS
             flex: 0 0 50%;
             max-width: 50%;
             color: $optional-color;
-            
+
             span {
                 display: inline-block;
                 color: $black-color;
@@ -5630,7 +5630,7 @@ Blog Details CSS
         .article-share {
             flex: 0 0 50%;
             max-width: 50%;
-            
+
             .social {
                 padding-left: 0;
                 list-style-type: none;
@@ -5660,7 +5660,7 @@ Blog Details CSS
                         text-align: center;
                         font-size: 17px;
                         margin-left: 2px;
-        
+
                         &:hover, &:focus {
                             color: $main-color;
                             background-color: transparent;
@@ -6510,7 +6510,7 @@ Modal CSS
                             width: 25px;
                             height: 25px;
                             border-radius: 50%;
-        
+
                             &::before {
                                 position: absolute;
                                 content: '';
@@ -6658,7 +6658,7 @@ Modal CSS
                     margin-right: 10px;
                     text-align: center;
                     display: inline-block;
-                    position: relative;    
+                    position: relative;
 
                     span {
                         position: absolute;
@@ -6829,7 +6829,7 @@ Modal CSS
                             opacity: 0;
                             visibility: hidden;
                             transition: $transition;
-        
+
                             &:hover {
                                 color: red;
                             }
@@ -6957,12 +6957,12 @@ Modal CSS
                         padding-left: 0;
                         margin-bottom: 0;
                         list-style-type: none;
-            
+
                         li {
                             margin-bottom: 12px;
                             position: relative;
                             padding-left: 25px;
-            
+
                             i {
                                 position: absolute;
                                 left: 0;
@@ -6973,7 +6973,7 @@ Modal CSS
                                 display: inline-block;
                                 font-weight: 600;
                                 position: relative;
-                                
+
                                 &:hover {
                                     &::before {
                                         width: 100%;
@@ -7006,7 +7006,7 @@ Modal CSS
                     li {
                         display: inline-block;
                         margin-right: 2px;
-            
+
                         &:last-child {
                             margin-right: 0;
                         }
@@ -7019,7 +7019,7 @@ Modal CSS
                             font-size: 18px;
                             position: relative;
                             border-radius: 2px;
-            
+
                             i {
                                 position: absolute;
                                 left: 0;
@@ -7060,7 +7060,7 @@ Modal CSS
                         a {
                             display: block;
                             position: relative;
-                            
+
                             &::before {
                                 content: '';
                                 position: absolute;
@@ -7174,7 +7174,7 @@ Modal CSS
                 thead {
                     background-color: $black-color;
                     color: $white-color;
-        
+
                     th {
                         border-bottom: none;
                         white-space: nowrap;
@@ -7373,7 +7373,7 @@ Modal CSS
                             opacity: 0;
                             visibility: hidden;
                             transition: $transition;
-        
+
                             &:hover {
                                 color: red;
                             }
@@ -7677,7 +7677,7 @@ Look Book CSS
 .single-lookbook-box {
     position: relative;
     margin-bottom: 30px;
-    
+
     a {
         display: block;
     }
@@ -8120,7 +8120,7 @@ Woocommerce Widget Sidebar CSS
             overflow: hidden;
             position: relative;
             text-align: center;
-        
+
             .category {
                 position: absolute;
                 left: 0;
@@ -8341,8 +8341,8 @@ Cart CSS
                             min-width: 130px;
                             text-align: center;
                             display: inline-block;
-                            position: relative;    
-                
+                            position: relative;
+
                             span {
                                 position: absolute;
                                 top: 0;
@@ -8354,7 +8354,7 @@ Cart CSS
                                 line-height: 50px;
                                 transition: $transition;
                                 font-size: 22px;
-                
+
                                 &.minus-btn {
                                     left: 0;
                                 }
@@ -8418,7 +8418,7 @@ Cart CSS
         padding-left: 0;
         margin: 0 0 25px;
         list-style-type: none;
-        
+
         li {
             border: 1px solid #eaedff;
             padding: 10px 15px;
@@ -8614,7 +8614,7 @@ Checkout CSS
     .order-table {
         table {
             margin-bottom: 0;
-    
+
             thead {
                 tr {
                     th {
@@ -8669,7 +8669,7 @@ Checkout CSS
         box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.06);
         margin-top: 30px;
         padding: 30px;
-        
+
         .payment-method {
             p {
                 [type="radio"] {
@@ -8797,7 +8797,7 @@ FAQ CSS
 .tab {
     .tabs-item {
         display: none;
-        
+
         &:first-child {
             display: block;
         }
@@ -9114,7 +9114,7 @@ Widget Sidebar CSS
     .widget_search {
         form {
             position: relative;
-            
+
             .screen-reader-text {
                 display: none;
             }
@@ -9169,7 +9169,7 @@ Widget Sidebar CSS
     .widget_xton_posts_thumb {
         position: relative;
         overflow: hidden;
-        
+
         .item {
             overflow: hidden;
             margin-bottom: 15px;
@@ -9592,7 +9592,7 @@ Coming Soon CSS
                     color: #A1A1A1;
                     transition: $transition;
                 }
-                &:focus {                    
+                &:focus {
                     &::placeholder {
                         color: transparent;
                     }
@@ -9673,10 +9673,10 @@ Login CSS
     }
     .login-form {
         padding-right: 15px;
-    
+
         .form-group {
             margin-bottom: 20px;
-    
+
             .form-control {
                 height: 50px;
             }
@@ -9703,7 +9703,7 @@ Login CSS
                 transition: $transition;
                 content: '';
             }
-            &:hover {            
+            &:hover {
                 &::before {
                     width: 0;
                 }
@@ -9754,7 +9754,7 @@ Signup CSS
     .signup-form {
         .form-group {
             margin-bottom: 20px;
-    
+
             label {
                 display: block;
                 text-transform: uppercase;
@@ -9779,7 +9779,7 @@ Signup CSS
             color: $optional-color;
             position: relative;
             font-size: 15px;
-            
+
             &::before {
                 width: 100%;
                 height: 1.5px;
@@ -9792,7 +9792,7 @@ Signup CSS
             }
             &:hover {
                 color: $black-color;
-                
+
                 &::before {
                     width: 0;
                 }
@@ -9839,7 +9839,7 @@ Contact CSS
                 display: inline-block;
                 font-weight: 600;
                 position: relative;
-                
+
                 &:hover {
                     &::before {
                         width: 100%;
@@ -9868,7 +9868,7 @@ Contact CSS
 
         li {
             margin-bottom: 10px;
-            
+
             &:last-child {
                 margin-bottom: 0;
             }
@@ -10032,7 +10032,7 @@ Footer CSS
                     color: $white-color;
                     font-weight: 600;
                     position: relative;
-                    
+
                     &:hover {
                         color: $main-color;
 
@@ -10103,13 +10103,13 @@ Footer CSS
             li {
                 margin-bottom: 16px;
                 color: $white-color;
-    
+
                 a {
                     display: inline-block;
                     color: $white-color;
                     font-weight: 600;
                     position: relative;
-                    
+
                     &:hover {
                         color: $main-color;
 
@@ -10141,13 +10141,13 @@ Footer CSS
             li {
                 margin-bottom: 16px;
                 color: $white-color;
-    
+
                 a {
                     display: inline-block;
                     color: $white-color;
                     font-weight: 600;
                     position: relative;
-                    
+
                     &:hover {
                         color: $main-color;
 

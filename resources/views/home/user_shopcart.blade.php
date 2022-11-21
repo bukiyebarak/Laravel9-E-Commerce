@@ -120,6 +120,9 @@
 
                         <form action="{{route('user_order_add')}}" method="post">
                             @csrf
+                            @php
+                                $total=$total- 30;
+                            @endphp
                             <input type="hidden" name="total" value="{{$total}}">
                             <button type="submit" class="default-btn">Proceed to Checkout</button>
                         </form>

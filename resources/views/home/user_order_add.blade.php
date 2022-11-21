@@ -8,7 +8,6 @@
 
 @section('title', 'User Order')
 
-
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
@@ -216,21 +215,18 @@
 
                             <div class="payment-box">
                                 <div class="payment-method">
-                                    <p>
-                                        <input type="radio" id="direct-bank-transfer" name="radio-group" checked>
-                                        <label for="direct-bank-transfer">Direct Bank Transfer</label>
-                                        Make your payment directly into our bank account. Please use your Order ID as
-                                        the payment reference. Your order will not be shipped until the funds have
-                                        cleared in our account.
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="paypal" name="radio-group">
-                                        <label for="paypal">PayPal</label>
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="cash-on-delivery" name="radio-group">
-                                        <label for="cash-on-delivery">Cash on Delivery</label>
-                                    </p>
+
+                                    <h2>Kart Bilgileri</h2>
+                                    <label>Ad Soyad</label>
+                                    <input type="text" name="cartname" class="form-control">
+                                    <label>Kart No</label>
+                                    <input type="text" name="cartno" class="form-control">
+                                    <label>Son Kullanım Ay</label>
+                                    <input type="number" name="expire_month" class="form-control">
+                                    <label>Son Kullanım Yılı</label>
+                                    <input type="number" name="expire_year" class="form-control">
+                                    <label>CVC</label>
+                                    <input type="text" name="cartcvc" class="form-control">
                                 </div>
                                 <button type="submit" class="default-btn">Place Order</button>
                             </div>
@@ -312,9 +308,9 @@
                     type: 'post',
                     data: 'cid=' + cid + '&_token={{csrf_token()}}',
                     success: function (result) {
-
                         console.log(result);
                         $('#district').html(result);
+
                         $('#district').niceSelect('update');
                     }
                 });
@@ -328,6 +324,7 @@
                     data: 'did=' + did + '&_token={{csrf_token()}}',
                     success: function (result) {
                         $('#neighbourhood').html(result);
+
                         $('#neighbourhood').niceSelect('update');
                     }
                 });

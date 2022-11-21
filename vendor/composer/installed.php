@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3407ff74135e8670f34fdb89bea08d5041a81213',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -367,6 +367,15 @@
                 0 => 'v9.37.0',
             ),
         ),
+        'iyzico/iyzipay-php' => array(
+            'pretty_version' => 'v2.0.51',
+            'version' => '2.0.51.0',
+            'reference' => 'fa2a07634cfc099ca47d5397ef6591d06b31cbb4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../iyzico/iyzipay-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'jaybizzle/crawler-detect' => array(
             'pretty_version' => 'v1.2.112',
             'version' => '1.2.112.0',
@@ -419,9 +428,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3407ff74135e8670f34fdb89bea08d5041a81213',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
