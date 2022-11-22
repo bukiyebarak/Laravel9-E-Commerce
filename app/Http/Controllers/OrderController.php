@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\IyzicoApi;
 use App\Helpers\IyzicoRequestHelper;
 use App\Mail\OrderMailable;
 use App\Mail\OrderMailableAdmin;
+use App\Models\CreditCard;
 use App\Models\Order;
 use App\Models\Orderitem;
 use App\Models\Shopcart;
@@ -30,10 +32,23 @@ use Iyzipay\Model\PaymentChannel;
 use Iyzipay\Model\PaymentGroup;
 use Iyzipay\Options;
 use Iyzipay\Request\CreatePaymentRequest;
+use PhpParser\Node\Expr\Array_;
 use Symfony\Component\Console\Input\Input;
 
 class OrderController extends Controller
 {
+    public Arr $array;
+
+    /**
+     * Create a new message instance.
+     *
+     *
+     * @return void
+     */
+    public function __construct(Arr $array)
+    {
+        $this->array=$array;
+    }
 
     public static function orderitemmail($id)
     {
@@ -98,116 +113,171 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $requestt
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $requestt)
+    public function store(Request $request)
     {
         #Get credit card information send to bank webservice if everything is ok next
-        $cart_name = $requestt->get("cartname");
-        $cart_no = $requestt->get("cartno");
-        $expire_month = $requestt->get("expire_month");
-        $expire_year = $requestt->get("expire_year");
-        $cvc = $requestt->get("cartcvc");
+//        $cart_name = $requestt->get("cartname");
+//        $cart_no = $requestt->get("cartno");
+//        $expire_month = $requestt->get("expire_month");
+//        $expire_year = $requestt->get("expire_year");
+//        $cvc = $requestt->get("cartcvc");
         // dd($cart_name, $cart_no, $expire_month, $expire_year, $cvc);
-        $name = $requestt->input('name');
-        $surname = $requestt->input('surname');
-        $address = $requestt->input('address');
-        $email = $requestt->input('email');
-        $phone = $requestt->input('phone');
-        $city = DB::table('city')->where('sehir_key', $requestt->input('city'))->pluck('sehir_title')->first();
-        $zipcode = $requestt->input('zipcode');
+
+        $array = $this->getorderinformation($request);
+        dd($array);
+
+        $name = $request->input('name');
+        $surname = $request->input('surname');
+        $address = $request->input('address');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $city = DB::table('city')->where('sehir_key', $request->input('city'))->pluck('sehir_title')->first();
+        $zipcode = $request->input('zipcode');
 
         //Kullanıcıyı Al
         $user = Auth::user();
-        $date=DB::table('shopcarts')->where('user_id', Auth::id())->first();
+
+        $date = DB::table('shopcarts')->where('user_id', Auth::id())->first();
         //dd($date);
-
         //Sepetteki ürünlerin toplam tutarını hesapla
-        $total = $requestt->input('total');
-
+        $total = $request->input('total');
         // dd($total);
-
         //Option nesnesi oluştur
-        $options = new \Iyzipay\Options();
-        $options->setApiKey(env("TEST_IYZI_API_KEY"));
-        $options->setSecretKey(env("TEST_IYZI_SECRET_KEY"));
-        $options->setBaseUrl(env("TEST_IYZI_BASE_URL"));
+//        $options = new \Iyzipay\Options();
+//        $options->setApiKey(env("TEST_IYZI_API_KEY"));
+//        $options->setSecretKey(env("TEST_IYZI_SECRET_KEY"));
+//        $options->setBaseUrl(env("TEST_IYZI_BASE_URL"));
 
         //Ödeme İsteği Oluştur.
 
-       $request=IyzicoRequestHelper::createRequest((float) $total);
+        //  $request = IyzicoRequestHelper::createRequest((float)$total);
+        $requestIyzico = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
+        $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
+        $requestIyzico->setConversationId(rand());
+        $requestIyzico->setPrice(number_format($total, '2', '.', ''));
+        $requestIyzico->setPaidPrice(number_format($total + 30, '2', '.', ''));//kargo indirim dahil fiyatı
+        $requestIyzico->setCurrency(Currency::TL);
+        $requestIyzico->setBasketId("B67832");
+        $requestIyzico->setPaymentGroup(PaymentGroup::PRODUCT);
+        $requestIyzico->setCallbackUrl(route('iyzico.callback'));
+        $requestIyzico->setEnabledInstallments(array(2, 3, 6, 9));
 
-        //PaymentCard Nesnesi oluştur
-        $paymentCard = new PaymentCard();
-        $paymentCard->setCardHolderName($cart_name);
-        $paymentCard->setCardNumber( $cart_no);
-        $paymentCard->setExpireMonth($expire_month);
-        $paymentCard->setExpireYear($expire_year);
-        $paymentCard->setCvc( $cvc);
-        $paymentCard->setRegisterCard(0);//iyzico kart bilgilerini kayıt altına alınsın mı diye soruyor.
-        $request->setPaymentCard($paymentCard);
-
+//        //PaymentCard Nesnesi oluştur
+//        $paymentCard = new PaymentCard();
+//        $paymentCard->setCardHolderName($cart_name);
+//        $paymentCard->setCardNumber($cart_no);
+//        $paymentCard->setExpireMonth($expire_month);
+//        $paymentCard->setExpireYear($expire_year);
+//        $paymentCard->setCvc($cvc);
+//        $paymentCard->setRegisterCard(0);//iyzico kart bilgilerini kayıt altına alınsın mı diye soruyor.
+//        $request->setPaymentCard($paymentCard);
         //Buyer Nesnesi oluştur.
         $buyer = new Buyer();
         $buyer->setId($user->id);
-        $buyer->setName($name);
-        $buyer->setSurname($surname);
-        $buyer->setGsmNumber($phone);
-        $buyer->setEmail($email);
-        $buyer->setIdentityNumber("74300864791");
-        $buyer->setLastLoginDate((string) $date->created_at);
-        $buyer->setRegistrationDate((string) $user->created_at);
-        $buyer->setRegistrationAddress($address);
+        $buyer->setName($array['name']);
+        $buyer->setSurname($array['surname']);
+        $buyer->setGsmNumber($array['phone']);
+        $buyer->setEmail($array['email']);
+        $buyer->setIdentityNumber(rand());
+        $buyer->setLastLoginDate((string)$date->created_at);
+        $buyer->setRegistrationDate((string)$user->created_at);
+        $buyer->setRegistrationAddress($array['address']);
         $buyer->setIp(\request()->ip());
-        $buyer->setCity((string)$city);
+        $buyer->setCity((string)$array['city']);
         $buyer->setCountry("Turkey");
-        $buyer->setZipCode($zipcode);
-        $request->setBuyer($buyer);
+        $buyer->setZipCode($array['zipcode']);
+        $requestIyzico->setBuyer($buyer);
 
         //Kargo ve fatura adresi nesnlerini oluştur.
         $shippingAddress = new Address();
-        $shippingAddress->setContactName($name .''. $surname);
+        $shippingAddress->setContactName($name . '' . $surname);
         $shippingAddress->setCity($city);
         $shippingAddress->setCountry("Turkey");
         $shippingAddress->setAddress($address);
         $shippingAddress->setZipCode($zipcode);
-        $request->setShippingAddress($shippingAddress);
+        $requestIyzico->setShippingAddress($shippingAddress);
 
         $billingAddress = new Address();
-        $billingAddress->setContactName($name .' '. $surname);
+        $billingAddress->setContactName($name . ' ' . $surname);
         $billingAddress->setCity($city);
         $billingAddress->setCountry("Turkey");
         $billingAddress->setAddress($address);
         $billingAddress->setZipCode($zipcode);
-        $request->setBillingAddress($billingAddress);
+        $requestIyzico->setBillingAddress($billingAddress);
 
         //Sepetteki ürünleri (CartDetails) BasketItem listesi olarak hazırla
-        $basketItems= $this->getBasketItems();
-        $request->setBasketItems($basketItems);
+        $basketItems = $this->getBasketItems();
+        $requestIyzico->setBasketItems($basketItems);
 
         //Ödeme Yap
-        $payment = Payment::create($request, $options);
-        //dd($payment);
-        //İşlem Başarılı ise sipariş ve fatura oluştur.
-        if ($payment->getStatus() == "success") {
-           // dd("ödeme tamamlandı.");
-            #region Order and Orderitem
-            $data = $this->getOrder($requestt);
+        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
+        // İşlem Başarılı ise sipariş ve fatura oluştur.
+//        if ($checkoutFormInitialize->getStatus() == "success") {
+//            // dd("ödeme tamamlandı.");
+//            #region Order and Orderitem
+//            $data = $this->getOrder($requestt);
+//
+//            //Sepeti Kapat
+//            $data3 = Shopcart::where('user_id', Auth::id());
+//            $data3->delete();
+//            $this->sendOrderConfirmationMail($data);
+//            $this->sendOrderConfirmationMailAdmin($data);
+//            #endregion
+//        }
 
-            //Sepeti Kapat
-            $data3 = Shopcart::where('user_id', Auth::id());
-            $data3->delete();
-            $this->sendOrderConfirmationMail($data);
-            $this->sendOrderConfirmationMailAdmin($data);
-            return view('home.iyzico_success');
-            #endregion
-        } else {
-            return view('home.iyzico_failed');
-        }
+        $data = $this->getOrder($request);
+
+        $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
+
+        return view('home.iyzico-form', compact('paymentForm'));
+        //dd($payment);
 
 //        $this->regionSendMail();
 
+    }
+
+    public function callback(Request $request,)
+    {
+        $requestIyzico = new \Iyzipay\Request\RetrieveCheckoutFormRequest();
+        $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
+        $requestIyzico->setToken($request->token);
+        $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($requestIyzico, IyzicoApi::options());
+
+        if ($checkoutForm->getPaymentStatus() == 'SUCCESS') {
+
+            $array = $this->getorderinformation($request);
+            dd($array);
+            $data = new Order;
+            $data->name = $array['name'];
+            $data->surname = $array['surname'];
+            $data->address = $array['address'];
+            $data->email = $array['email'];
+            $data->phone =$array['phone'];
+            $data->total = $array['total'];
+            $data->note = $array['note'];
+            $data->city =$array['city'];
+            $data->neighbourhood = $array['neighbourhood'];
+            $data->district =$array['district'];
+            $data->zipcode = $array['zipcode'];
+            $data->user_id = $array['user_id'];
+            $data->IP = $array['IP'];
+            $data->save();
+
+//            $data = $this->getOrder($request);
+//
+//            //Sepeti Kapat
+//            $data3 = Shopcart::where('user_id', Auth::id());
+//            $data3->delete();
+//           // $this->sendOrderConfirmationMail($data);
+//           // $this->sendOrderConfirmationMailAdmin($data);
+
+            return view('home.iyzico_success');
+        } else {
+            return view('home.iyzico_failed');
+        }
     }
 
     public function sendOrderConfirmationMail($order)
@@ -319,7 +389,7 @@ class OrderController extends Controller
             $item->setId($detail->product->id);
             $item->setName($detail->product->title);
             $item->setCategory1($detail->product->category->title);
-           // $item->setCategory2("Usb / Cable");
+            // $item->setCategory2("Usb / Cable");
             $item->setItemType(BasketItemType::PHYSICAL);
             $item->setPrice(number_format($detail->product->price, '2', '.', ''));
 
@@ -371,5 +441,30 @@ class OrderController extends Controller
             $data2->save();
         }
         return $data;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getorderinformation(Request $request): array
+    {
+        $array =[
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'address' => $request->input('address'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'total' => $request->input('total'),
+            'note' => $request->input('note'),
+            'city' => DB::table('city')->where('sehir_key', $request->input('city'))->pluck('sehir_title')->first(),
+            'neighbourhood' => DB::table('neighbourhood')->where('mahalle_key', $request->input('neighbourhood'))->pluck('mahalle_title')->first(),
+            'district' => DB::table('district')->where('ilce_key', $request->input('district'))->pluck('ilce_title')->first(),
+            'zipcode' => $request->input('zipcode'),
+            'user_id' => Auth::id(),
+            'IP' => $request->ip()
+        ];
+
+        return $array;
     }
 }

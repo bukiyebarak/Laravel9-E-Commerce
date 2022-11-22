@@ -1063,7 +1063,7 @@
 
                                                 <h3 class="v-text-align"
                                                     style="margin: 0px; color: #000000; line-height: 140%; text-align: left; word-wrap: break-word; font-weight: normal; font-family: arial,helvetica,sans-serif; font-size: 14px;">
-                                                    {{$order->email}}
+                                                    {{$order->address}}
                                                 </h3>
 
                                             </td>

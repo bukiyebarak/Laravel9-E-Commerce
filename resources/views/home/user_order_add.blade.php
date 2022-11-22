@@ -214,20 +214,20 @@
                             </div>
 
                             <div class="payment-box">
-                                <div class="payment-method">
+{{--                                <div class="payment-method">--}}
 
-                                    <h2>Kart Bilgileri</h2>
-                                    <label>Ad Soyad</label>
-                                    <input type="text" name="cartname" class="form-control">
-                                    <label>Kart No</label>
-                                    <input type="text" name="cartno" class="form-control">
-                                    <label>Son Kullanım Ay</label>
-                                    <input type="number" name="expire_month" class="form-control">
-                                    <label>Son Kullanım Yılı</label>
-                                    <input type="number" name="expire_year" class="form-control">
-                                    <label>CVC</label>
-                                    <input type="text" name="cartcvc" class="form-control">
-                                </div>
+{{--                                    <h2>Kart Bilgileri</h2>--}}
+{{--                                    <label>Ad Soyad</label>--}}
+{{--                                    <input type="text" name="cartname" class="form-control">--}}
+{{--                                    <label>Kart No</label>--}}
+{{--                                    <input type="text" name="cartno" class="form-control">--}}
+{{--                                    <label>Son Kullanım Ay</label>--}}
+{{--                                    <input type="number" name="expire_month" class="form-control" min="1" max="12">--}}
+{{--                                    <label>Son Kullanım Yılı</label>--}}
+{{--                                    <input type="number" name="expire_year" class="form-control" min="1990" max="2050">--}}
+{{--                                    <label>CVC</label>--}}
+{{--                                    <input type="text" name="cartcvc" class="form-control">--}}
+{{--                                </div>--}}
                                 <button type="submit" class="default-btn">Place Order</button>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
@@ -49,6 +50,8 @@ Route::get('/productlist/{search}', [HomeController::class, 'productlist'])->nam
 Route::get('allproducts', [HomeController::class, 'allproducts'])->name('allproducts');
 Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
 Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
+
+Route::post('/iyzico-callback', [OrderController::class, 'callback'])->name('iyzico.callback');
 
 #endregion
 
@@ -200,7 +203,6 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::post('update/{id}', [OrderController::class, 'update'])->name('user_order_update');
         Route::get('delete/{id}', [OrderController::class, 'destroy'])->name('user_order_delete');
         Route::get('show/{id}', [OrderController::class, 'show'])->name('user_order_show');
-        Route::post('iyzico_callback', [OrderController::class, 'iyzico_callback'])->name('iyzico_callback');
     });
 
 });
