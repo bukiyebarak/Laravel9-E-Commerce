@@ -8,24 +8,23 @@
 @section('keywords', $setting->keywords)
 
 @section('content')
-    <!-- Start Page Title -->
-    <div class="page-title-area">
-        <div class="container">
-            <div class="page-title-content">
-                <h2>Blank Page</h2>
-                <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Blank Page</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- End Page Title -->
+
     <!-- Start Customer Service Area -->
     <section class="customer-service-area ptb-100">
         <div class="container">
             <div class="customer-service-content">
-               Başarısız
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                    </div>
+                    <div class="col-lg-4 col-md-12 " align="center">
+                        <img src="{{asset('assets')}}/home/assets/img/iyzico-failed.png"><br><br>
+                        <h5>Satın alma işleminde sorun oluştu.</h5><br>
+                        <h5>Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.</h5><br>
+                        <a href="{{route('user_shopcart')}}" class="default-btn">SEPETİM</a>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                    </div>
+                </div>
             </div>
         </div>
     </section>

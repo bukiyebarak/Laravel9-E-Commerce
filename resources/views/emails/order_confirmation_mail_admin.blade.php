@@ -538,7 +538,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;text-align:center;">
                                                 <h1 style="margin: 0; color: #555555; font-size: 20px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; line-height: 180%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
-                                                    <span class="tinyMce-placeholder">    Ara Toplam:{{$order->total-30}}€</span></h1>
+                                                    <span class="tinyMce-placeholder">    Ara Toplam:{{$order->total}}€</span></h1>
                                             </td>
                                         </tr>
                                     </table>
@@ -558,7 +558,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;text-align:center;">
                                                 <h1 style="margin: 0; color: #555555; font-size: 27px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; line-height: 180%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
-                                                    <span class="tinyMce-placeholder">   Toplam Ücret: {{$order->total}}€</span></h1>
+                                                    <span class="tinyMce-placeholder">   Toplam Ücret: {{$order->total+30}}€</span></h1>
                                             </td>
                                         </tr>
                                     </table>

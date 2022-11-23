@@ -11,19 +11,19 @@ use Iyzipay\Request\CreatePaymentRequest;
 class IyzicoRequestHelper
 {
 
-    public static function createRequest(float $total): CreatePaymentRequest
+    public static function createRequest(float $total): \Iyzipay\Request\CreateCheckoutFormInitializeRequest
     {
-        $request = new CreatePaymentRequest();
-        $request->setLocale(Locale::TR);
-        $request->setConversationId(rand());
-        $request->setPrice(number_format($total,'2','.',''));
-        $request->setPaidPrice(number_format($total+30,'2','.',''));//kargo indirim dahil fiyatı
-        $request->setCurrency(Currency::TL);
-        $request->setInstallment(1);
-        $request->setBasketId("B67832");
-        $request->setPaymentChannel(PaymentChannel::WEB);
-        $request->setPaymentGroup(PaymentGroup::PRODUCT);
+        $requestIyzico = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
+        $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
+        $requestIyzico->setConversationId(rand());
+        $requestIyzico->setPrice(number_format($total, '2', '.', ''));
+        $requestIyzico->setPaidPrice(number_format($total + 30, '2', '.', ''));//kargo indirim dahil fiyatı
+        $requestIyzico->setCurrency(Currency::TL);
+        $requestIyzico->setBasketId("B67832");
+        $requestIyzico->setPaymentGroup(PaymentGroup::PRODUCT);
+        $requestIyzico->setCallbackUrl(route('iyzico_callback'));
+        $requestIyzico->setEnabledInstallments(array(2, 3, 6, 9));
 
-        return $request;
+        return $requestIyzico;
     }
 }

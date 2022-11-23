@@ -44,7 +44,9 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($datalist as $rs)
+                                @if($rs->is_pay=="True")
                                 <tr>
                                     <td>{{$rs->name}}</td>
                                     <td>{{$rs->surname}}</td>
@@ -63,6 +65,7 @@
                                         </a>
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

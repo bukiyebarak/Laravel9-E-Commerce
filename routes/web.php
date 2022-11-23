@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
@@ -51,10 +50,14 @@ Route::get('allproducts', [HomeController::class, 'allproducts'])->name('allprod
 Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
 Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 
-Route::post('/iyzico-callback', [OrderController::class, 'callback'])->name('iyzico.callback');
 
 #endregion
+Route::middleware('auth')->group(function () {
+    Route::post('/iyzico-callback', [OrderController::class, 'callback'])->name('iyzico_callback');
+    Route::get('category', [CategoryController::class, 'index'])->name('admin_category');
 
+
+});
 #region Admin
 Route::middleware('auth')->prefix('admin')->group(function () {
     #admin roles system

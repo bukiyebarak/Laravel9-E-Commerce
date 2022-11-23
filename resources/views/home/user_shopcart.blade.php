@@ -29,6 +29,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
+                                <th scope="col">ProductId</th>
                                 <th scope="col">Product</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Quantity</th>
@@ -42,6 +43,7 @@
 
                             @foreach($datalist as $rs)
                                 <tr>
+                                    <td>{{$rs->product->id}}</td>
                                     <td class="product-thumbnail">
                                         @if($rs->product->image!=null)
                                             <img src="{{Storage::url($rs->product->image)}}"

@@ -58,22 +58,22 @@
                                 </div>
                                 <div class="col-md-10">
                                     <label>Price</label>
-                                    <input type="number" name="price" value="{{$data->price}}"
+                                    <input type="number" name="price" value="{{$data->price}}" min="0"
                                            class="form-control">
                                 </div>
                                 <div class="col-md-10">
                                     <label>Quantity</label>
-                                    <input type="number" name="quantity" value="{{$data->quantity}}" class="form-control">
+                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="1" class="form-control">
                                 </div>
                                 <div class="col-md-10">
                                     <label>Minquantity</label>
-                                    <input type="number" name="minquantity" value="{{$data->minquantity}}"
+                                    <input type="number" name="minquantity" value="{{$data->minquantity}}"min="1"
                                            class="form-control"
                                     >
                                 </div>
                                 <div class="col-md-10">
                                     <label>Tax</label>
-                                    <input type="number" name="tax" value="{{$data->tax}}" class="form-control">
+                                    <input type="number" name="tax" value="{{$data->tax}}" min="0" class="form-control">
                                 </div>
                                 <div class="col-md-10">
                                     <label>Detail</label>

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\IyzicoApi;
 use Illuminate\Http\Request;
 
-
-class CheckoutController extends Controller
+class CallbackController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +13,8 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-       return view('home.checkout_form');
+        //
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -38,7 +34,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-       echo "aa";
+        //
     }
 
     /**

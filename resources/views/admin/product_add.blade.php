@@ -58,20 +58,20 @@
                                 </div>
                                 <div class="col-md-10">
                                     <label>Price</label>
-                                    <input type="number" value="0" name="price" class="form-control">
+                                    <input type="number" value="0" min="0" name="price" class="form-control">
                                 </div>
                                 <div class="col-md-10">
                                     <label>Quantity</label>
-                                    <input type="number" value="2" name="quantity" class="form-control">
+                                    <input type="number" value="2" min="0" name="quantity" class="form-control">
                                 </div>
                                 <div class="col-md-10">
                                     <label>Minquantity</label>
-                                    <input type="number" value="1" name="minquantity" class="form-control"
+                                    <input type="number" value="1" min="1" name="minquantity" class="form-control"
                                     >
                                 </div>
                                 <div class="col-md-10">
                                     <label>Tax</label>
-                                    <input type="number" name="tax" value="18" class="form-control">
+                                    <input type="number" name="tax" min="0" value="18" class="form-control">
                                 </div>
                                 <div class="col-md-10">
                                     <label>Detail</label>
