@@ -53,10 +53,9 @@ Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 
 #endregion
 Route::middleware('auth')->group(function () {
+
     Route::post('/iyzico-callback', [OrderController::class, 'callback'])->name('iyzico_callback');
-    Route::get('category', [CategoryController::class, 'index'])->name('admin_category');
-
-
+    Route::get('/payment_success', [OrderController::class, 'paymentSuccess'])->name('payment_success');
 });
 #region Admin
 Route::middleware('auth')->prefix('admin')->group(function () {
@@ -91,6 +90,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('update/{id}', [ReviewController::class, 'update'])->name('admin_review_update');
             Route::get('delete/{id}', [ReviewController::class, 'destroy'])->name('admin_review_delete');
             Route::get('show/{id}', [ReviewController::class, 'show'])->name('admin_review_show');
+
         });
 
         #Faq
@@ -208,6 +208,10 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::get('show/{id}', [OrderController::class, 'show'])->name('user_order_show');
     });
 
+    Route::prefix('review')->group(function () {
+
+        Route::post('reply', [ReviewController::class, 'reply'])->name('review_reply');
+    });
 });
 #endregion
 

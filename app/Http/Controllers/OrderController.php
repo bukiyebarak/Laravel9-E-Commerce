@@ -36,14 +36,15 @@ use Iyzipay\Model\Payment;
 use Iyzipay\Model\PaymentCard;
 use Iyzipay\Model\PaymentChannel;
 use Iyzipay\Model\PaymentGroup;
+use Iyzipay\Model\ThreedsPayment;
 use Iyzipay\Options;
 use Iyzipay\Request\CreatePaymentRequest;
+use Iyzipay\Request\CreateThreedsPaymentRequest;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Component\Console\Input\Input;
 
 class OrderController extends Controller
 {
-    public Arr $array;
 
     /**
      * Create a new message instance.
@@ -51,10 +52,6 @@ class OrderController extends Controller
      *
      * @return void
      */
-    public function __construct(Arr $array)
-    {
-        $this->array = $array;
-    }
 
     public static function orderitemmail($id)
     {
@@ -72,10 +69,6 @@ class OrderController extends Controller
         return view('home.user_order', ['datalist' => $datalist]);
     }
 
-    public function iyzico_callback(Request $request)
-    {
-        return view('home.iyzico_success');
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -183,6 +176,18 @@ class OrderController extends Controller
 //        $request->setPaymentCard($paymentCard);
         #endregion
 
+        # create request class
+//        $requestIyzico = new CreateThreedsPaymentRequest();
+//        $requestIyzico->setLocale(Locale::TR);
+//        $requestIyzico->setConversationId(rand());
+//        $requestIyzico->setPaymentId("1");
+//        $requestIyzico->setConversationData("PeA/vSq2nspTXa3mIHveg==");
+//
+//        $threedsPayment = ThreedsPayment::create($requestIyzico, IyzicoApi::options());
+
+        //dd($threedsPayment);
+
+
         #region Buyer Nesnesi oluştur.
         $buyer = new Buyer();
         $buyer->setId($user->id);
@@ -244,34 +249,36 @@ class OrderController extends Controller
 
         $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
 
-        // OrderRecord::dispatch($order);
         return view('home.iyzico-form', compact('paymentForm'));
 
     }
 
     public function callback(Request $request, User $user)
     {
+      dd('callback');
         if (!auth()->check()) {
+            dd('callbackdggg');
             auth()->login($user);
         }
+        //dd('callbackdggg');
         $requestIyzico = new \Iyzipay\Request\RetrieveCheckoutFormRequest();
         $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
         $requestIyzico->setConversationId(rand());
-        $requestIyzico->setToken($request->get('token'));
+         $requestIyzico->setToken($request->get('token'));
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($requestIyzico, IyzicoApi::options());
+        //dd('callbackddo');
 
-        if ($checkoutForm->getPaymentStatus() == 'SUCCESS') {
+        if ($checkoutForm->getPaymentStatus() == 'SUCCESS')
+        {
 
             $orderId = Order::orderByDesc('id')->pluck('id')->first();
             $order = Order::orderByDesc('id')->first();
-//            $order->is_pay="True";
             Order::where("id", $orderId)->update(array(
                 "is_pay" => "True",
                 "total" => $order->total + 30
             ));
 
             // dd($order);
-
             $datalist = Shopcart::where('user_id', Auth::id())->get();
             foreach ($datalist as $rs) {
                 $data2 = new Orderitem;
@@ -285,17 +292,18 @@ class OrderController extends Controller
                 $data2->note = $order->note;
                 $data2->save();
             }
+
             $product = Orderitem::where('order_id', $order->id)->get();
-           // dd($product);
+            // dd($product);
 
-            foreach ($product as $rs){
-
-                Product::find($rs->product_id)->decrement('quantity',$rs->quantity);
+            foreach ($product as $rs) {
+                Product::find($rs->product_id)->decrement('quantity', $rs->quantity);
                 continue;
             }
 
-           Event::dispatch(new OrderRecord($order));
+            //Event::dispatch(new OrderRecord($order));
             // dd($data2);
+
             //Sepeti Kapat
             $data3 = Shopcart::where('user_id', Auth::id());
             $data3->delete();
@@ -303,10 +311,8 @@ class OrderController extends Controller
 //            $this->sendOrderConfirmationMailAdmin($order);
 
             return view('home.iyzico_success');
-        }
-        else
-        {
-            //dd($checkoutForm);
+        } else {
+            dd($checkoutForm);
             $orderDelete = Order::orderByDesc('id')->first();
             //dd($orderDelete);
             $orderDelete->delete();

@@ -100,7 +100,7 @@
 
                         </div>
                         <div class="wishlist-compare-btn">
-                         <a href="#" class="optional-btn"><i class='bx bx-heart'></i> Add to Wishlist</a>
+                            <a href="#" class="optional-btn"><i class='bx bx-heart'></i> Add to Wishlist</a>
                         </div>
                     </div>
                 </div>
@@ -206,6 +206,10 @@
                                                     </div>
 
                                                     <p>{{$rs->review}}</p>
+
+
+
+
                                                 </div>
                                             @endforeach
                                         </div>
@@ -274,7 +278,6 @@
                     </div>
                     <h3>Track Your Package</h3>
                 </div>
-
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-customer-service'></i>

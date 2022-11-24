@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password','surname'
+        'name', 'email', 'password', 'surname'
     ];
 
     /**
@@ -64,6 +64,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+
 
     public function shopcart()
     {
