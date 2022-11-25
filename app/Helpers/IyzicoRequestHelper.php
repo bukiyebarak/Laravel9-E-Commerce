@@ -11,6 +11,7 @@ use Iyzipay\Request\CreatePaymentRequest;
 class IyzicoRequestHelper
 {
 
+
     public static function createRequest(float $total): \Iyzipay\Request\CreateCheckoutFormInitializeRequest
     {
         $requestIyzico = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
@@ -22,7 +23,10 @@ class IyzicoRequestHelper
         $requestIyzico->setBasketId("B67832");
         $requestIyzico->setPaymentGroup(PaymentGroup::PRODUCT);
         $requestIyzico->setCallbackUrl(route('iyzico_callback'));
+        //session.cookie_samesite=”None”;
+
         $requestIyzico->setEnabledInstallments(array(2, 3, 6, 9));
+
 
         return $requestIyzico;
     }

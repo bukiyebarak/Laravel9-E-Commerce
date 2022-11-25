@@ -186,6 +186,7 @@ class OrderController extends Controller
 //        $threedsPayment = ThreedsPayment::create($requestIyzico, IyzicoApi::options());
 
         //dd($threedsPayment);
+        //session(cookie(sameSite: "None"));
 
 
         #region Buyer Nesnesi oluştur.
@@ -229,6 +230,7 @@ class OrderController extends Controller
         $requestIyzico->setBasketItems($basketItems);
 #endregion
         //Ödeme Yap
+
         $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
 
         #region İşlem Başarılı ise sipariş ve fatura oluştur. Yenisi için Callback fonksiyonuna taşındı.
@@ -255,14 +257,17 @@ class OrderController extends Controller
 
     public function callback(Request $request, User $user)
     {
-      dd('callback');
+        //session(cookie(sameSite: "None"));
+     // dd('callback');
         if (!auth()->check()) {
             dd('callbackdggg');
             auth()->login($user);
         }
+
         //dd('callbackdggg');
         $requestIyzico = new \Iyzipay\Request\RetrieveCheckoutFormRequest();
         $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
+
         $requestIyzico->setConversationId(rand());
          $requestIyzico->setToken($request->get('token'));
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($requestIyzico, IyzicoApi::options());
@@ -273,6 +278,7 @@ class OrderController extends Controller
 
             $orderId = Order::orderByDesc('id')->pluck('id')->first();
             $order = Order::orderByDesc('id')->first();
+
             Order::where("id", $orderId)->update(array(
                 "is_pay" => "True",
                 "total" => $order->total + 30
@@ -301,7 +307,7 @@ class OrderController extends Controller
                 continue;
             }
 
-            //Event::dispatch(new OrderRecord($order));
+            Event::dispatch(new OrderRecord($order));
             // dd($data2);
 
             //Sepeti Kapat

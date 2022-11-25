@@ -14,6 +14,7 @@ namespace Illuminate\Support\Facades;
  */
 class Config extends Facade
 {
+
     /**
      * Get the registered name of the component.
      *
@@ -21,6 +22,9 @@ class Config extends Facade
      */
     protected static function getFacadeAccessor()
     {
+
+//        setcookie('same-site-cookie', 'http://127.0.0.1:8000/', ['samesite' => 'Lax']);
+//        setcookie('cross-site-cookie', 'https://sandbox-merchant.iyzipay.com/', ['samesite' => 'None', 'secure' => true]);
         return 'config';
     }
 }

@@ -174,12 +174,12 @@ class CreateCheckoutFormInitializeRequest extends Request
     {
         return $this->enabledInstallments;
     }
-    
+
     public function setDebitCardAllowed($debitCardAllowed)
     {
         $this->debitCardAllowed = $debitCardAllowed;
     }
-    
+
     public function getDebitCardAllowed()
     {
         return $this->debitCardAllowed;

@@ -75,7 +75,7 @@
     <div class="container">
         <div class="section-title">
             <span class="sub-title">See Our Collection</span>
-            <h2>Recent Products</h2>
+            <h2>Favoriler</h2>
         </div>
 
         <div class="row">
@@ -140,7 +140,7 @@
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                                <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>
                             </form>
                         </div>
 
@@ -271,7 +271,7 @@
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart btn-outline-dark">Add to Cart</button>
+                                <button type="submit" class="add-to-cart btn btn-dark">Add to Cart</button>
                             </form>
                         </div>
 

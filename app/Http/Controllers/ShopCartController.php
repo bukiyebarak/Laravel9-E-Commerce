@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shopcart;
+//use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\isNull;
+
 
 class ShopCartController extends Controller
 {
@@ -60,7 +63,12 @@ class ShopCartController extends Controller
             $data->quantity =(int) $request->input('quantity');
         }
         $data->save();
-        return redirect()->back()->with('success','Product Added to Shopcart');
+
+        //Alert::success('Product Added Successfully', 'We have added product to the cart',);
+
+        Alert::success('Product Added Successfully', 'We have added product to the cart');
+
+        return redirect()->back();
     }
 
     /**
@@ -110,6 +118,7 @@ class ShopCartController extends Controller
     {
         $data = Shopcart::find($id);
         $data->delete();
+        Alert::info('Ürün Başarıyla silindi');
         return redirect()->back()->with('success','Product deleted succesfully');
     }
 }

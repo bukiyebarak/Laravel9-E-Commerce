@@ -9,7 +9,6 @@
     <meta name="keywords" content="@yield('keywords')">
     <meta name="author" content="GNC Holding">
 
-
     <!-- Links of CSS files -->
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/animate.min.css">
@@ -26,14 +25,18 @@
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/responsive.css">
     <link rel="icon" type="image/png" href="{{asset('assets')}}/home/assets/img/favicon.png">
 
+
     @yield('css')
     @yield('javascript')
 
 </head>
 <body>
+
+
 @include('home._topheader')
 @include('home._header')
 @include('home._sidebar')
+@include('sweetalert::alert')
 @yield('content')
 @include('home._footer')
 @yield('footerjs')
