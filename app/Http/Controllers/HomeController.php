@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ContactRequest;
 
 class HomeController extends Controller
 {
@@ -130,6 +131,20 @@ class HomeController extends Controller
 
     public function sendmessage(Request $request)
     {
+         $validator=Validator::make($request->all(),[
+             'name'=>'required|min:3',
+             'email'=>'required|email',
+             'phone'=>'required',
+             'subject'=>'required',
+             'message'=>'required'
+        ]);
+       //  dd($validator);
+        if ($validator->fails()) {
+          //  dd($validator->messages()->all());
+            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+
+        }
+
         $data = new Message();
         $data->name = $request->input('name');
         $data->email = $request->input('email');

@@ -6,6 +6,19 @@
 @endphp
     <!-- Start Navbar Area -->
 <div class="navbar-area">
+    <div class="xton-responsive-nav">
+        <div class="container">
+            <div class="xton-responsive-menu">
+                <div class="logo">
+                    <a href="{{route('home')}}">
+                        <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" height="50" width="50" class="main-logo" alt="logo">
+                        <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" height="50" width="50" class="white-logo" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="xton-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
@@ -16,8 +29,6 @@
 
                 <div class="collapse navbar-collapse mean-menu">
                     <ul class="navbar-nav">
-
-
                         <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">Anasayfa
                             </a>
                         </li>
@@ -65,21 +76,79 @@
                             </div>
                         </div>
 
-                        <div class="option-item">
-                            <div class="burger-menu" data-bs-toggle="modal" data-bs-target="#sidebarModal">
-                                <span class="top-bar"></span>
-                                <span class="middle-bar"></span>
-                                <span class="bottom-bar"></span>
+                       <div class="option-item">
+                                <div class="burger-menu" data-bs-toggle="modal" data-bs-target="#sidebarModal">
+                                    <span class="top-bar"></span>
+                                    <span class="middle-bar"></span>
+                                    <span class="bottom-bar"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </nav>
         </div>
     </div>
 
 </div>
 <!-- End Navbar Area -->
+<!-- Start Sticky Navbar Area -->
+<div class="navbar-area header-sticky">
+    <div class="xton-nav">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light">
+                <a class="navbar-brand" href="{{route('home')}}">
+                    <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" style="height: 70px; width: 90px"
+                         class="white-logo" alt="logo">
+                </a>
+
+
+                <div class="collapse navbar-collapse mean-menu">
+                    <ul class="navbar-nav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">Anasayfa
+                                </a>
+                            </li>
+
+                            <li class="nav-item megamenu"><a href="#" class="nav-link">Kampanyalar</a></li>
+
+                            <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i
+                                        class='bx bx-chevron-down'></i></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($parentCategories as $rs)
+                                        <li class="nav-item"><a
+                                                href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                                class="nav-link">{{$rs->title}}<i
+                                                    class='bx bx-chevron-left'></i></a>
+                                            <ul class="dropdown-menu">
+                                                @foreach($rs->children as $childCategory )
+                                                    @include('home.categorytree',['childCategory'=>$childCategory])
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+
+                            <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">Yeni Ürünler</a>
+                            </li>
+                            <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">Hakkımızda</a>
+                            </li>
+                            <li class="nav-item megamenu"><a href="{{route('references')}}"
+                                                             class="nav-link">Referanslar</a>
+                            </li>
+                            <li class="nav-item megamenu"><a href="{{route('faq')}}" class="nav-link">Sıkça Sorulan
+                                    Sorular</a></li>
+                            <li class="nav-item megamenu"><a href="{{route('contact')}}" class="nav-link">İletişim</a>
+                            </li>
+                        </ul>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- End Header Area -->
 <!-- Start Search Overlay -->
 <div class="search-overlay">
     <div class="d-table">
@@ -126,8 +195,8 @@
                         <div class="products-cart">
                             <div class="products-image">
                                 @if($rs->product->image!=null)
-                                    <img src="{{Storage::url($rs->product->image)}}"
-                                         style="height: 70px" alt="">
+                                    <img  src="{{asset('images/'.$rs->product->image)}}"
+                                          style="height: 70px" alt="">
                                 @endif
                             </div>
 

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Events\OrderRecord;
 use App\Events\UpdateProductQuantity;
+use App\Helpers\IyzicoAddressHelper;
 use App\Helpers\IyzicoApi;
+use App\Helpers\IyzicoBasketItemsHelper;
+use App\Helpers\IyzicoBuyerHelper;
+use App\Helpers\IyzicoPaymentCardHelper;
 use App\Helpers\IyzicoRequestHelper;
 use App\Listeners\UpdateProductOrderAfter;
 use App\Mail\OrderMailable;
@@ -117,22 +121,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        #Get credit card information send to bank webservice if everything is ok next
-        #region Cart İnformation and Option object
-//        $cart_name = $requestt->get("cartname");
-//        $cart_no = $requestt->get("cartno");
-//        $expire_month = $requestt->get("expire_month");
-//        $expire_year = $requestt->get("expire_year");
-//        $cvc = $requestt->get("cartcvc");
-        // dd($cart_name, $cart_no, $expire_month, $expire_year, $cvc);
-        //Option nesnesi oluştur
-//        $options = new \Iyzipay\Options();
-//        $options->setApiKey(env("TEST_IYZI_API_KEY"));
-//        $options->setSecretKey(env("TEST_IYZI_SECRET_KEY"));
-//        $options->setBaseUrl(env("TEST_IYZI_BASE_URL"));
-
-#endregion
-
         $order = Order::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -149,13 +137,9 @@ class OrderController extends Controller
             'IP' => $request->ip()
         ]);
         // dd($order);
-
         //Kullanıcıyı Al
-        $user = Auth::user();
 
         $date = DB::table('shopcarts')->where('user_id', Auth::id())->first();
-        //dd($date);
-
         //Sepetteki ürünlerin toplam tutarını hesapla
         $total = $request->input('total');
         // dd($total);
@@ -166,73 +150,30 @@ class OrderController extends Controller
 
         #region PaymentCard Nesnesi oluştur
 
-//        $paymentCard = new PaymentCard();
-//        $paymentCard->setCardHolderName($cart_name);
-//        $paymentCard->setCardNumber($cart_no);
-//        $paymentCard->setExpireMonth($expire_month);
-//        $paymentCard->setExpireYear($expire_year);
-//        $paymentCard->setCvc($cvc);
-//        $paymentCard->setRegisterCard(0);//iyzico kart bilgilerini kayıt altına alınsın mı diye soruyor.
-//        $request->setPaymentCard($paymentCard);
+      //  $paymentCard =IyzicoPaymentCardHelper::getPaymentCard();
+
         #endregion
 
-        # create request class
-//        $requestIyzico = new CreateThreedsPaymentRequest();
-//        $requestIyzico->setLocale(Locale::TR);
-//        $requestIyzico->setConversationId(rand());
-//        $requestIyzico->setPaymentId("1");
-//        $requestIyzico->setConversationData("PeA/vSq2nspTXa3mIHveg==");
-//
-//        $threedsPayment = ThreedsPayment::create($requestIyzico, IyzicoApi::options());
-
-        //dd($threedsPayment);
-        //session(cookie(sameSite: "None"));
-
-
         #region Buyer Nesnesi oluştur.
-        $buyer = new Buyer();
-        $buyer->setId($user->id);
-        $buyer->setName($order['name']);
-        $buyer->setSurname($order['surname']);
-        $buyer->setGsmNumber($order['phone']);
-        $buyer->setEmail($order['email']);
-        $buyer->setIdentityNumber(rand());
-        $buyer->setLastLoginDate((string)$date->created_at);
-        $buyer->setRegistrationDate((string)$user->created_at);
-        $buyer->setRegistrationAddress($order['address']);
-        $buyer->setIp(\request()->ip());
-        $buyer->setCity((string)$order['city']);
-        $buyer->setCountry("Turkey");
-        $buyer->setZipCode($order['zipcode']);
+        $buyer =IyzicoBuyerHelper::getBuyer($order,$date);
         $requestIyzico->setBuyer($buyer);
 #endregion
 
         #region Kargo ve fatura adresi nesnlerini oluştur.
-        $shippingAddress = new Address();
-        $shippingAddress->setContactName($order->name . '' . $order->surname);
-        $shippingAddress->setCity($order->city);
-        $shippingAddress->setCountry("Turkey");
-        $shippingAddress->setAddress($order->address);
-        $shippingAddress->setZipCode($order->zipcode);
+        $shippingAddress =IyzicoAddressHelper::getAddress($order);
         $requestIyzico->setShippingAddress($shippingAddress);
 
-        $billingAddress = new Address();
-        $billingAddress->setContactName($order->name . ' ' . $order->surname);
-        $billingAddress->setCity($order->city);
-        $billingAddress->setCountry("Turkey");
-        $billingAddress->setAddress($order->address);
-        $billingAddress->setZipCode($order->zipcode);
+        $billingAddress = IyzicoAddressHelper::getAddress($order);
         $requestIyzico->setBillingAddress($billingAddress);
 #endregion
 
         #region Sepetteki ürünleri (CartDetails) BasketItem listesi olarak hazırla
-        $basketItems = $this->getBasketItems();
+        $basketItems = IyzicoBasketItemsHelper::getBasketItems();
         $requestIyzico->setBasketItems($basketItems);
 #endregion
         //Ödeme Yap
 
         $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
-
         #region İşlem Başarılı ise sipariş ve fatura oluştur. Yenisi için Callback fonksiyonuna taşındı.
 //        if ($checkoutFormInitialize->getStatus() == "success") {
 //            // dd("ödeme tamamlandı.");
@@ -247,8 +188,6 @@ class OrderController extends Controller
 //            $data = $this->getOrder($request);
 //        }
 #endregion
-
-
         $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
 
         return view('home.iyzico-form', compact('paymentForm'));
@@ -257,21 +196,16 @@ class OrderController extends Controller
 
     public function callback(Request $request, User $user)
     {
-        //session(cookie(sameSite: "None"));
-     // dd('callback');
+
         if (!auth()->check()) {
             dd('callbackdggg');
             auth()->login($user);
         }
-
-        //dd('callbackdggg');
         $requestIyzico = new \Iyzipay\Request\RetrieveCheckoutFormRequest();
         $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
-
         $requestIyzico->setConversationId(rand());
          $requestIyzico->setToken($request->get('token'));
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($requestIyzico, IyzicoApi::options());
-        //dd('callbackddo');
 
         if ($checkoutForm->getPaymentStatus() == 'SUCCESS')
         {
@@ -384,67 +318,5 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * @return void
-     */
-    public function regionSendMail(): void
-    {
-        #region Send Mail
-
-//        sending user
-        // $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
-//        $user = Order::orderByDesc('id')->first();
-//        $user->notify(new OrderMail($data));
-
-//        sending to email
-        // Notification::route('mail',['someexample@example.com'])->notify(new OrderMail($data));
-
-
-        //sending to multiple emails
-//        $receipients = [
-//            'someone@example.com' => 'John  Doe',
-//            'luck@example.com' => 'Lucky'
-//        ];
-//        Notification::route('mail', $receipients)->notify(new OrderMail($data));
-
-
-        //sending to multiple users
-//        $users=User::all();
-//        Notification::route('mail', $users)->notify(new OrderMail($data));
-
-        //User tablosundaki kullanıcıları 10'ar gruplar ve mail atar.
-//        User::chunk(10,function ($users) use($data){
-//            $receipients=$users->pluck('name','email');
-//
-//           Notification::route('mail', $receipients)->notify(new OrderMail($data));
-//        });
-#endregion
-    }
-
-    /**
-     *
-     * @return array
-     */
-    public function getBasketItems(): array
-    {
-        $basketItems = array();
-        $cart = Shopcart::with('product')->where('user_id', Auth::id())->get();
-        foreach ($cart as $detail) {
-
-            $item = new BasketItem();
-            $item->setId($detail->product->id);
-            $item->setName($detail->product->title);
-            $item->setCategory1($detail->product->category->title);
-            // $item->setCategory2("Usb / Cable");
-            $item->setItemType(BasketItemType::PHYSICAL);
-            $item->setPrice(number_format($detail->product->price, '2', '.', ''));
-
-            for ($i = 0; $i < $detail->quantity; $i++) {
-                array_push($basketItems, $item);
-            }
-        }
-        //dd($basketItems);
-        return $basketItems;
-    }
 
 }

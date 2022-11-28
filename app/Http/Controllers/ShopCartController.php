@@ -7,8 +7,6 @@ use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\isNull;
 
 
 class ShopCartController extends Controller
@@ -66,9 +64,9 @@ class ShopCartController extends Controller
 
         //Alert::success('Product Added Successfully', 'We have added product to the cart',);
 
-        Alert::success('Product Added Successfully', 'We have added product to the cart');
+//        Alert::success('Product Added Successfully', 'We have added product to the cart');
 
-        return redirect()->back();
+        return redirect()->back()->with('toast_success','alsw');
     }
 
     /**

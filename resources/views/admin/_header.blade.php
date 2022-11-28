@@ -1,5 +1,5 @@
 @php
-    $smessage=\App\Http\Controllers\Admin\HomeController::headerMessage()
+    $message=\App\Http\Controllers\Admin\HomeController::headerMessage()
 @endphp
     <!--start header -->
 <header>
@@ -60,7 +60,7 @@
                                 </div>
                             </a>
                             <div class="header-message-list">
-                                @foreach($smessage as $rs)
+                                @foreach($message as $rs)
                                     <a class="dropdown-item" href="javascript:;">
                                         <div class="d-flex align-items-center">
                                             <div>
@@ -88,7 +88,7 @@
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bx bxs-user-detail fs-1" ></i>
+                    <i class="bx bxs-user fs-1" ></i>
 {{--                    @if(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)--}}
 {{--                        <img--}}
 {{--                            src="{{\Illuminate\Support\Facades\Storage::url(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)}}"--}}

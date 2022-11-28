@@ -23,10 +23,7 @@ class IyzicoRequestHelper
         $requestIyzico->setBasketId("B67832");
         $requestIyzico->setPaymentGroup(PaymentGroup::PRODUCT);
         $requestIyzico->setCallbackUrl(route('iyzico_callback'));
-        //session.cookie_samesite=”None”;
-
         $requestIyzico->setEnabledInstallments(array(2, 3, 6, 9));
-
 
         return $requestIyzico;
     }
