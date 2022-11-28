@@ -401,7 +401,7 @@
                                                 style="width:100%;padding-right:0px;padding-left:0px;padding-top:5px;padding-bottom:5px;">
                                                 @if($rs->product->image!=null)
                                                 <div align="center" class="alignment" style="line-height:10px"><img
-                                                        alt="Image"   src="{{ $message->embed(public_path(Storage::url($rs->product->image))) }}"
+                                                        alt="Image"   src="{{ $message->embed(asset('images/'.$rs->product->image))}}"
                                                         style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;"
                                                         title="Image" width="120" height="120"/></div>
                                                 @endif

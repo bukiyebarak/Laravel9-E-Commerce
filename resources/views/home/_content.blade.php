@@ -23,7 +23,7 @@
                             <div class="col-lg-6">
                                 <div class="banner-image">
                                     <div class="circle"></div>
-                                    <img  src="{{Storage::url($rs->image)}}" style="height: 575px; width:375px; border-radius: 900px "
+                                    <img src="{{asset('images/'.$rs->image)}}" style="height: 575px; width:375px; border-radius: 900px "
                                           alt="image">
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
     <div class="container">
         <div class="section-title">
             <span class="sub-title">See Our Collection</span>
-            <h2>Recent Products</h2>
+            <h2>Favoriler</h2>
         </div>
 
         <div class="row">
@@ -84,9 +84,10 @@
                     <div class="single-productsBox">
                         <div class="products-image">
                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 200px" src="{{Storage::url($rs->image)}}" class="main-image"
+                                <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
                                      alt="image">
-                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+
                             </a>
 
                             <div class="products-button">
@@ -140,7 +141,7 @@
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                                <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>
                             </form>
                         </div>
 
@@ -218,9 +219,9 @@
                     <div class="single-products-box">
                         <div class="products-image">
                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 380px;width: 320px" src="{{Storage::url($rs->image)}}" class="main-image"
+                                <img style="height: 380px;width: 320px" src="{{asset('images/'.$rs->image)}}" class="main-image"
                                      alt="image">
-                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                             </a>
 
                             <div class="products-button">
@@ -271,7 +272,7 @@
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart btn-outline-dark">Add to Cart</button>
+                                <button type="submit" class="add-to-cart btn btn-dark">Add to Cart</button>
                             </form>
                         </div>
 
@@ -303,9 +304,9 @@
 {{--                    <div class="single-productsBox">--}}
 {{--                        <div class="products-image">--}}
 {{--                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">--}}
-{{--                                <img style="height: 250px" src="{{Storage::url($rs->image)}}" class="main-image"--}}
+{{--                                <img style="height: 250px" src="{{asset('images/'.$rs->image)}}" class="main-image"--}}
 {{--                                     alt="image">--}}
-{{--                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">--}}
+{{--                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">--}}
 {{--                            </a>--}}
 
 {{--                            <div class="products-button">--}}
@@ -447,9 +448,9 @@
                     <div class="single-productsBox">
                         <div class="products-image">
                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 200px" src="{{Storage::url($rs->image)}}" class="main-image"
+                                <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
                                      alt="image">
-                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                             </a>
 
                             <div class="products-button">

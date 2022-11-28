@@ -47,7 +47,7 @@
                                 <tr>
                                     <td class="product-thumbnail">
                                         @if($rs->product->image!=null)
-                                            <img src="{{Storage::url($rs->product->image)}}"
+                                            <img src="{{asset('images/'.$rs->product->image)}}"
                                                  style="height: 90px;" alt="">
                                         @endif
                                     </td>

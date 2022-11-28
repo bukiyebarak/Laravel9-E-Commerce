@@ -30,6 +30,7 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -41,7 +42,8 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -181,6 +183,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -212,6 +215,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Alert'=>RealRashid\SweetAlert\Facades\Alert::class,
     ])->toArray(),
 
 ];

@@ -28,7 +28,7 @@
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Image</th>
+{{--                                    <th>Image</th>--}}
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -43,11 +43,11 @@
                                     <p></p>
                                     <tr>
                                         <td>{{$rs->id}}</td>
-                                        <td>
-                                            @if($rs->profile_photo_path)
-                                                <img src="{{Storage::url($rs->profile_photo_path)}}" height="50" style="border-radius: 100px" alt="">
-                                            @endif
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            @if($rs->profile_photo_path)--}}
+{{--                                                <img src="{{Storage::url($rs->profile_photo_path)}}" height="50" style="border-radius: 100px" alt="">--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
                                         <td>{{$rs->name}}</td>
                                         <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
                                         <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>

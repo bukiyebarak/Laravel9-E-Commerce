@@ -543,7 +543,7 @@
                                                                 align="center">
                                                                 @if($rs->product->image!=null)
                                                                 <img align="center" border="0"
-                                                                     src="{{ $message->embed(public_path(Storage::url($rs->product->image))) }}"
+                                                                     src="{{ $message->embed(asset('images/'.$rs->product->image))}}"
                                                                      alt="" title=""
                                                                      style="outline: none;text-decoration: none;
                                                                      -ms-interpolation-mode: bicubic;clear: both;

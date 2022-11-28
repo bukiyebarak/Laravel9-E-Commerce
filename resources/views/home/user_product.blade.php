@@ -55,7 +55,7 @@
                                     <td>{{$rs->price}}</td>
                                     <td>
                                         @if($rs->image)
-                                            <img src="{{Storage::url($rs->image)}}" style="width: 50px;height: 50px" alt="">
+                                            <img src="{{asset('images/'.$rs->image)}}" style="width: 50px;height: 50px" alt="">
                                         @endif
                                     </td>
                                     <td>

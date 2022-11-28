@@ -110,7 +110,7 @@
                         <input type="file" name="image" class="form-control">
 
                         @if($data->image)
-                            <img src="{{Storage::url($data->image)}}" style="height: 100px;width: 100px" alt="">
+                            <img src="{{asset('images/'.$data->image)}}" style="height: 100px;width: 100px" alt="">
                         @endif
                     </div>
                     <div class="form-group">

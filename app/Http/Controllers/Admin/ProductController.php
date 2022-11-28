@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -56,7 +57,16 @@ class ProductController extends Controller
         $data->minquantity = $request->input('minquantity');
         $data->tax = $request->input('tax');
         $data->user_id = Auth::id();
-        $data->image = Storage::putFile('images', $request->file('image')); //file upload
+
+        if($request->hasfile('image')){
+
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename= time().'.'.$extension;
+            $file->move('images',$filename);
+            $data->image=$filename;
+        }
+        //$data->image = Storage::putFile('images', $request->file('image')); //file upload
 
         $data->save();
         return redirect()->route('admin_products');
@@ -109,9 +119,18 @@ class ProductController extends Controller
         $data->minquantity = $request->input('minquantity');
         $data->tax = (int)$request->input('tax');
         $data->user_id = Auth::id();
-        if ($request->file('image')!=null)
+        if ($request->hasFile('image'))
         {
-            $data->image = Storage::putFile('images', $request->file('image')); //file upload
+            $destination='images/'.$data->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename= time().'.'.$extension;
+            $file->move('images',$filename);
+            $data->image=$filename;
         }
         $data->save();
         return redirect()->route('admin_products');

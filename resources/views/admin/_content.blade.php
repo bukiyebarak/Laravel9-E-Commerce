@@ -191,8 +191,8 @@
                                 <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i>
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="javaScript:;">Action</a>
-                                    <a class="dropdown-item" href="javaScript:;">Another action</a>
+                                    <a class="dropdown-item" href="javaScript;">Action</a>
+                                    <a class="dropdown-item" href="javaScript;">Another action</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="javaScript:;">Something else here</a>
                                 </div>
@@ -266,10 +266,10 @@
                                 <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded"></i>
                                 </div>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="javaScript:;">Action</a>
-                                    <a class="dropdown-item" href="javaScript:;">Another action</a>
+                                    <a class="dropdown-item" href="javaScript;">Action</a>
+                                    <a class="dropdown-item" href="javaScript;">Another action</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javaScript:;">Something else here</a>
+                                    <a class="dropdown-item" href="javaScript;">Something else here</a>
                                 </div>
                             </div>
                         </div>

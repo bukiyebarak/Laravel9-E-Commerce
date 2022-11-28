@@ -160,9 +160,9 @@
                                         <a href="#">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                 <img style="height: 200px; width: 200px"
-                                                     src="{{Storage::url($rs->image)}}" class="main-image"
+                                                     src="{{asset('images/'.$rs->image)}}" class="main-image"
                                                      alt="image">
-                                                <img src="{{Storage::url($rs->image)}}" class="hover-image" alt="image">
+                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                                             </a>
                                         </a>
 

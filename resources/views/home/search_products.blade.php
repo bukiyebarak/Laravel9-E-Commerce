@@ -161,9 +161,9 @@
                                 <div class="single-products-box">
                                     <div class="products-image">
                                         <a href="#">
-                                            <img style="height: 150px" src="{{Storage::url($rs->image)}}"
+                                            <img style="height: 150px" src="{{asset('images/'.$rs->image)}}"
                                                  class="main-image" alt="image">
-                                            <img src="{{Storage::url($rs->image)}}"
+                                            <img src="{{asset('images/'.$rs->image)}}"
                                                  class="hover-image" alt="image">
                                         </a>
 

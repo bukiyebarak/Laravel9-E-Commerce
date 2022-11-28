@@ -65,11 +65,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row mt-3">
-                        <div class="col-12">
-                            <div id="todo-container"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

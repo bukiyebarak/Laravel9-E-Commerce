@@ -32,17 +32,17 @@
                     <div class="products-details-image">
 
                         <ul class="products-details-image-slides">
-                            <li><img src="{{Storage::url($data->image)}}" alt="image"></li>
+                            <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
                             @foreach($datalist as $rs)
-                                <li><img src="{{Storage::url($rs->image)}}" alt="image"></li>
+                                <li><img src="{{asset('images/'.$rs->image)}}" alt="image"></li>
                             @endforeach
                         </ul>
 
                         <div class="slick-thumbs">
                             <ul>
-                                <li><img src="{{Storage::url($data->image)}}" alt="image"></li>
+                                <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
                                 @foreach($datalist as $rs)
-                                    <li><img src="{{Storage::url($rs->image)}}" alt="image"></li>
+                                    <li><img src="{{asset('images/'.$rs->image)}}" alt="image"></li>
                                 @endforeach
                             </ul>
                         </div>

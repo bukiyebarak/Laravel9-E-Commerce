@@ -104,7 +104,7 @@
                                     <input type="file" name="image" value="{{$data->image}}" class="form-control">
 
                                     @if($data->image)
-                                        <img src="{{Storage::url($data->image)}}" height="100" alt="">
+                                        <img src="{{asset('images/'.$data->image)}}" height="150px" width="150px" alt=Image">
                                     @endif
                                 </div>
                                 <div class="col-md-10">

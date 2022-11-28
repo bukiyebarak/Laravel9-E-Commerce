@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactMessageMailable;
 use App\Mail\MessageContactMailable;
 use App\Models\Faq;
 use App\Models\Review;
@@ -16,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+
 
 class HomeController extends Controller
 {

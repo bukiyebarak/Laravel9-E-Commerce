@@ -77,6 +77,17 @@
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
     ),
   ),
+  'realrashid/sweet-alert' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'RealRashid\\SweetAlert\\SweetAlertServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Alert' => 'RealRashid\\SweetAlert\\Facades\\Alert',
+    ),
+  ),
   'spatie/laravel-ignition' => 
   array (
     'providers' => 

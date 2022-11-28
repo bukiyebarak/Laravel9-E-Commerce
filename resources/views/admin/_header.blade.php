@@ -88,11 +88,13 @@
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)
-                        <img
-                            src="{{\Illuminate\Support\Facades\Storage::url(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)}}"
-                            class="user-img">
-                    @endif
+                    <i class="bx bxs-user-detail fs-1" ></i>
+{{--                    @if(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)--}}
+{{--                        <img--}}
+{{--                            src="{{\Illuminate\Support\Facades\Storage::url(\Illuminate\Support\Facades\Auth::user()->profile_photo_path)}}"--}}
+{{--                            class="user-img">--}}
+{{--                    @endif--}}
+
                     <div class="user-info ps-3">
                         @auth
                             <p class="user-name mb-0 text-white">{{Auth::user()->name}}</p>

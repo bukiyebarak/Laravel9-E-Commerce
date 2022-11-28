@@ -26,14 +26,14 @@
                 <div class="col-md-12">
                     <table class="table-bordered" style="width:100%">
                             <thead>
-                            <tr>
-                                <th>Profile Photo</th>
-                                <td>
-                                    @if($data->profile_photo_path)
-                                        <img src="{{Storage::url($data->profile_photo_path)}}" style="height: 60px; border-radius: 90px" alt="">
-                                    @endif
-                                </td>
-                            </tr>
+{{--                            <tr>--}}
+{{--                                <th>Profile Photo</th>--}}
+{{--                                <td>--}}
+{{--                                    @if($data->profile_photo_path)--}}
+{{--                                        <img src="{{Storage::url($data->profile_photo_path)}}" style="height: 60px; border-radius: 90px" alt="">--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
                             <tr>
                                 <th>Id</th>
                                 <td>{{$data->id}}</td>

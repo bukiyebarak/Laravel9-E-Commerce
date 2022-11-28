@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -82,9 +83,27 @@ class UserController extends Controller
         $data->email = $request->input('email');
         $data->phone = $request->input('phone');
         $data->address = $request->input('address');
+
+        if ($request->hasFile('image'))
+        {
+            $destination='images/profile'.$data->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename= time().'.'.$extension;
+            $file->move('images',$filename);
+            $data->image=$filename;
+        }
         if ($request->file('image')!=null)
         {
-            $data->profile_photo_path = Storage::putFile('profile-photos', $request->file('image')); //file upload
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename= time().'.'.$extension;
+            $file->move('images/profile',$filename);
+            $data->profile_photo_path =$filename;//file upload
         }
         $data->save();
         return redirect()->route('admin_users')->with('success','User Information Updated');
