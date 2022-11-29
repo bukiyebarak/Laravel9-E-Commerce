@@ -25,6 +25,7 @@
 </head>
 <body>
 
+@include('sweetalert::alert')
 <div class="page-wrapper">
     <div class="page-content">
         <!--breadcrumb-->
@@ -41,12 +42,19 @@
                             @csrf
                             <div class="col-md-10">
                                 <label>Title</label>
-                                <input type="text" name="title" class="form-control">
+                                <input type="text" name="title" class="form-control" value="{{old('title')}}">
+                                @if ($errors->has('title'))
+                                    <span class="text-danger">{{ $errors->first('title') }}</span>
+                                @endif
+
                             </div>
 
                             <div class="col-md-10">
                                 <label>Image</label>
                                 <input type="file" name="image" class="form-control">
+                                @if ($errors->has('image'))
+                                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                                @endif
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Add image</button>

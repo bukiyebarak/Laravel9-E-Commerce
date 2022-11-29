@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageAddRequest;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -40,7 +40,7 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$product_id)
+    public function store(ImageAddRequest $request,$product_id)
     {
         $data = new Image;
         $data->title = $request->input('title');
@@ -54,8 +54,9 @@ class ImageController extends Controller
             $data->image=$filename;
         }
         $data->product_id =$product_id;
+
         $data->save();
-        return redirect()->route('admin_image_add',['product_id'=>$product_id]);
+        return redirect()->route('admin_image_add',['product_id'=>$product_id])->with('toast_success','Product Image Added Successfully.');
     }
 
     /**
@@ -102,7 +103,7 @@ class ImageController extends Controller
     {
         $data = Image::find($id);
         $data->delete();
-        return redirect()->route('admin_image_add',['product_id'=>$product_id]);
+        return redirect()->route('admin_image_add',['product_id'=>$product_id])->with('toast_success','Product Image Deleted Successfully.');
         //birinci id ürünü silmek için ikinci id sayfaya geri dönmek için
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $data = new Product;
         $data->keywords = $request->input('keywords');
@@ -69,7 +70,8 @@ class ProductController extends Controller
         //$data->image = Storage::putFile('images', $request->file('image')); //file upload
 
         $data->save();
-        return redirect()->route('admin_products');
+
+        return redirect()->route('admin_products')->with('success','Product Add Successfully' );
     }
 
     /**
@@ -103,7 +105,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product,$id)
+    public function update(ProductRequest $request, Product $product,$id)
     {
         $data = Product::find($id);
 
@@ -133,7 +135,7 @@ class ProductController extends Controller
             $data->image=$filename;
         }
         $data->save();
-        return redirect()->route('admin_products');
+        return redirect()->route('admin_products')->with('success','Product Update Successfully' );
     }
 
     /**
@@ -146,6 +148,6 @@ class ProductController extends Controller
     {
         $data = Product::find($id);
         $data->delete();
-        return redirect()->route('admin_products');
+        return redirect()->route('admin_products')->with('toast_success', 'Product is Deleted.');
     }
 }

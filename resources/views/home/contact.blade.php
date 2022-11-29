@@ -45,47 +45,62 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
-                                            <label>İsim & Soyisim<span>*</span></label>
+                                            <label>İsim & Soyisim <span>*</span></label>
                                             <input type="text" name="name" class="form-control"
-                                                   data-error="Please enter your name" placeholder="İsminizi ve soyadınızı giriniz">
+                                                   data-error="Please enter your name" value="{{old('name')}}" placeholder="İsminizi ve soyadınızı giriniz">
                                             <div class="help-block with-errors"></div>
+                                            @if ($errors->has('name'))
+                                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                            @endif
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
                                             <label>Email <span>*</span></label>
-                                            <input type="email" name="email"  class="form-control"
+                                            <input type="text" name="email" value="{{old('email')}}"  class="form-control"
                                                    data-error="Please enter your email"
                                                    placeholder="Email Adresiniz">
                                             <div class="help-block with-errors"></div>
+                                            @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                            @endif
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Telefon Numarası<span>*</span></label>
-                                            <input type="text" name="phone"
+                                            <label>Telefon Numarası <span>*</span></label>
+                                            <input type="text" name="phone" value="{{old('phone')}}"
                                                    class="form-control"
                                                    data-error="Please enter your phone number"
                                                    placeholder="Telefon Numarası">
+                                            @if ($errors->has('phone'))
+                                                <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                            @endif
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
-                                            <label>Konu<span>*</span></label>
-                                            <input type="text" name="subject"  class="form-control"
+                                            <label>Konu <span>*</span></label>
+                                            <input type="text" name="subject" value="{{old('subject')}}"  class="form-control"
                                                    data-error="Please enter your name" placeholder="Konu">
+                                            @if ($errors->has('subject'))
+                                                <span class="text-danger">{{ $errors->first('subject') }}</span>
+                                            @endif
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Mesajınız<span>*</span></label>
+                                            <label>Mesajınız <span>*</span></label>
                                             <textarea name="message" id="message" cols="30" rows="5"
                                                       data-error="Please enter your message" class="form-control"
-                                                      placeholder="Write your message..."></textarea>
+                                                      placeholder="Write your message...">{{old('message')}}</textarea>
+                                            @if ($errors->has('message'))
+                                                <span class="text-danger">{{ $errors->first('message') }}</span>
+                                            @endif
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -97,7 +112,7 @@
                                     </div>
                                 </div>
                             </form>
-                            @include('sweetalert::alert')
+
                         </div>
                     </div>
 

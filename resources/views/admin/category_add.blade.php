@@ -30,7 +30,7 @@
                                   action="{{route('admin_category_create')}}" method="post">
                                 @csrf
                                 <div class="col-md-10">
-                                    <label>Parent</label>
+                                    <label>Parent *</label>
                                     <select class="form-select" name="parent_id" required>
                                         <option value="0" selected="">Main Category</option>
                                         @foreach($datalist as $rs)
@@ -41,25 +41,36 @@
                                     </select>
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Title</label>
-                                    <input type="text" name="title" class="form-control" required="">
+                                    <label>Title *</label>
+                                    <input type="text" name="title" class="form-control" value=" {{old('title')}}" >
+                                    @if ($errors->has('title'))
+                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Keywords</label>
-                                    <input type="text" name="keywords" class="form-control" required="">
+                                    <label>Keywords *</label>
+                                    <input type="text" name="keywords" class="form-control" value=" {{old('keywords')}}" >
+                                    @if ($errors->has('keywords'))
+                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Description</label>
-                                    <input type="text" name="description" class="form-control" id="validationCustom02" required="">
+                                    <label>Description *</label>
+                                    <input type="text" name="description" class="form-control" id="validationCustom02" value=" {{old('description')}}" >
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Slug</label>
-                                    <input type="text" name="slug" class="form-control"
-                                           required="">
+                                    <label>Slug *</label>
+                                    <input type="text" name="slug" class="form-control" value=" {{old('slug')}}">
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Status</label>
-                                    <select class="form-select" name="status" required>
+                                    <label>Status *</label>
+                                    <select class="form-select" name="status" >
                                         <option selected="">False</option>
                                         <option>True</option>
                                     </select>

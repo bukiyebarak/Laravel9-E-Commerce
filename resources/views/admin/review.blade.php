@@ -22,7 +22,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    @include('home.message')
+                    @include('sweetalert::alert')
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example2" class="table table-bordered table-striped">

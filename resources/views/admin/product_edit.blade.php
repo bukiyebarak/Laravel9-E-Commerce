@@ -2,7 +2,9 @@
 
 @section('title', 'Edit Product')
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 @endsection
@@ -46,34 +48,55 @@
                                 <div class="col-md-10">
                                     <label>Title</label>
                                     <input type="text" name="title" value="{{$data->title}}" class="form-control">
+                                    @if ($errors->has('title'))
+                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Keywords</label>
                                     <input type="text" name="keywords" value="{{$data->keywords}}" class="form-control">
+                                    @if ($errors->has('keywords'))
+                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Description</label>
                                     <input type="text" name="description" value="{{$data->description}}"
                                            class="form-control">
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Price</label>
                                     <input type="number" name="price" value="{{$data->price}}" min="0"
                                            class="form-control">
+                                    @if ($errors->has('price'))
+                                        <span class="text-danger">{{ $errors->first('price') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Quantity</label>
-                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="1" class="form-control">
+                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="1"
+                                           class="form-control">
+                                    @if ($errors->has('quantity'))
+                                        <span class="text-danger">{{ $errors->first('quantity') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Minquantity</label>
-                                    <input type="number" name="minquantity" value="{{$data->minquantity}}"min="1"
-                                           class="form-control"
-                                    >
+                                    <input type="number" name="minquantity" value="{{$data->minquantity}}" min="1"
+                                           class="form-control" >
+                                    @if ($errors->has('minquantity'))
+                                        <span class="text-danger">{{ $errors->first('minquantity') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Tax</label>
                                     <input type="number" name="tax" value="{{$data->tax}}" min="0" class="form-control">
+                                    @if ($errors->has('tax'))
+                                        <span class="text-danger">{{ $errors->first('tax') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Detail</label>
@@ -94,17 +117,28 @@
                                             ]
                                         });
                                     </script>
+                                    @if ($errors->has('detail'))
+                                        <span class="text-danger">{{ $errors->first('detail') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Slug</label>
                                     <input type="text" name="slug" value="{{$data->slug}}" class="form-control">
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Image</label>
                                     <input type="file" name="image" value="{{$data->image}}" class="form-control">
 
                                     @if($data->image)
-                                        <img src="{{asset('images/'.$data->image)}}" height="150px" width="150px" alt=Image">
+                                        <img src="{{asset('images/'.$data->image)}}" height="150px" width="150px"
+                                             alt=Image">
+                                    @endif
+
+                                    @if ($errors->has('image'))
+                                        <span class="text-danger">{{ $errors->first('image') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">

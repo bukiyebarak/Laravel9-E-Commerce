@@ -19,7 +19,8 @@
                     </nav>
                 </div>
 
-            </div> @include('home.message')
+            </div>
+            @include('sweetalert::alert')
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
@@ -50,8 +51,8 @@
                                                 <a href="{{route('admin_user_show',['id'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
                                                    onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
                                                     {{$rs->name}}</a></td>
-                                            <td>{{$rs->email}}</td>
-                                            <td>{{$rs->phone}}</td>
+                                            <td> <a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
+                                            <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
                                             <td>{{$rs->subject}}</td>
                                             <td>{{$rs->message}}</td>
                                             <td>{{$rs->note}}</td>

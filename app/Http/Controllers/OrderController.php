@@ -4,48 +4,25 @@ namespace App\Http\Controllers;
 
 
 use App\Events\OrderRecord;
-use App\Events\UpdateProductQuantity;
 use App\Helpers\IyzicoAddressHelper;
 use App\Helpers\IyzicoApi;
 use App\Helpers\IyzicoBasketItemsHelper;
 use App\Helpers\IyzicoBuyerHelper;
-use App\Helpers\IyzicoPaymentCardHelper;
 use App\Helpers\IyzicoRequestHelper;
-use App\Listeners\UpdateProductOrderAfter;
+use App\Http\Requests\CheckoutRequest;
 use App\Mail\OrderMailable;
 use App\Mail\OrderMailableAdmin;
-use App\Models\CreditCard;
 use App\Models\Order;
 use App\Models\Orderitem;
 use App\Models\Product;
 use App\Models\Shopcart;
 use App\Models\User;
-use App\Notifications\OrderMail;
-use Config;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
-use Iyzipay\Model\Address;
-use Iyzipay\Model\BasketItem;
-use Iyzipay\Model\BasketItemType;
-use Iyzipay\Model\Buyer;
-use Iyzipay\Model\Currency;
-use Iyzipay\Model\Locale;
-use Iyzipay\Model\Payment;
-use Iyzipay\Model\PaymentCard;
-use Iyzipay\Model\PaymentChannel;
-use Iyzipay\Model\PaymentGroup;
-use Iyzipay\Model\ThreedsPayment;
-use Iyzipay\Options;
-use Iyzipay\Request\CreatePaymentRequest;
-use Iyzipay\Request\CreateThreedsPaymentRequest;
-use PhpParser\Node\Expr\Array_;
-use Symfony\Component\Console\Input\Input;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
@@ -89,10 +66,6 @@ class OrderController extends Controller
 
     public function getDistrict(Request $request)
     {
-//        $il_id = Input::get('id');
-//        $regencies = DB::table('district')->where('ilce_sehirkey','=',$il_id)->orderBy('ilce_key', 'asc')->get();
-//        return response()->json($regencies);
-
         $cid = $request->post('cid');
         $getdistrict = DB::table('district')->where('ilce_sehirkey', '=', $cid)->orderBy('ilce_key', 'asc')->get();
         $html = '<option value="">İlçe Seçiniz</option>';
@@ -113,14 +86,12 @@ class OrderController extends Controller
         echo $html;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(CheckoutRequest $request)
     {
+//        $input = $request->all();
+//        $order = Order::create($input);
+
         $order = Order::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -134,63 +105,67 @@ class OrderController extends Controller
             'district' => DB::table('district')->where('ilce_key', $request->input('district'))->pluck('ilce_title')->first(),
             'zipcode' => $request->input('zipcode'),
             'user_id' => Auth::id(),
+            'payment' => $request->input('payment'),
             'IP' => $request->ip()
         ]);
         // dd($order);
         //Kullanıcıyı Al
 
-        $date = DB::table('shopcarts')->where('user_id', Auth::id())->first();
-        //Sepetteki ürünlerin toplam tutarını hesapla
-        $total = $request->input('total');
-        // dd($total);
+        $fields = $request->get('payment');
+     //   dd($fields);
 
-        //Ödeme İsteği Oluştur.
+        if($fields == 'iyzico'){
+            //dd('aa');
+            $date = DB::table('shopcarts')->where('user_id', Auth::id())->first();
+            //Sepetteki ürünlerin toplam tutarını hesapla
+            $total = $request->input('total');
+            // dd($total);
 
-        $requestIyzico = IyzicoRequestHelper::createRequest((float)$total);
+            //Ödeme İsteği Oluştur.
 
-        #region PaymentCard Nesnesi oluştur
+            $requestIyzico = IyzicoRequestHelper::createRequest((float)$total);
 
-      //  $paymentCard =IyzicoPaymentCardHelper::getPaymentCard();
+            #region PaymentCard Nesnesi oluştur
 
-        #endregion
+            //  $paymentCard =IyzicoPaymentCardHelper::getPaymentCard();
 
-        #region Buyer Nesnesi oluştur.
-        $buyer =IyzicoBuyerHelper::getBuyer($order,$date);
-        $requestIyzico->setBuyer($buyer);
+            #endregion
+
+            #region Buyer Nesnesi oluştur.
+            $buyer =IyzicoBuyerHelper::getBuyer($order,$date);
+            $requestIyzico->setBuyer($buyer);
 #endregion
 
-        #region Kargo ve fatura adresi nesnlerini oluştur.
-        $shippingAddress =IyzicoAddressHelper::getAddress($order);
-        $requestIyzico->setShippingAddress($shippingAddress);
+            #region Kargo ve fatura adresi nesnlerini oluştur.
+            $shippingAddress =IyzicoAddressHelper::getAddress($order);
+            $requestIyzico->setShippingAddress($shippingAddress);
 
-        $billingAddress = IyzicoAddressHelper::getAddress($order);
-        $requestIyzico->setBillingAddress($billingAddress);
+            $billingAddress = IyzicoAddressHelper::getAddress($order);
+            $requestIyzico->setBillingAddress($billingAddress);
 #endregion
 
-        #region Sepetteki ürünleri (CartDetails) BasketItem listesi olarak hazırla
-        $basketItems = IyzicoBasketItemsHelper::getBasketItems();
-        $requestIyzico->setBasketItems($basketItems);
+            #region Sepetteki ürünleri (CartDetails) BasketItem listesi olarak hazırla
+            $basketItems = IyzicoBasketItemsHelper::getBasketItems();
+            $requestIyzico->setBasketItems($basketItems);
 #endregion
-        //Ödeme Yap
+            //Ödeme Yap
 
-        $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
-        #region İşlem Başarılı ise sipariş ve fatura oluştur. Yenisi için Callback fonksiyonuna taşındı.
-//        if ($checkoutFormInitialize->getStatus() == "success") {
-//            // dd("ödeme tamamlandı.");
-//            #region Order and Orderitem
-//            $data = $this->getOrder($requestt);
-//
-//            //Sepeti Kapat
-//            $data3 = Shopcart::where('user_id', Auth::id());
-//            $data3->delete();
-//            $this->sendOrderConfirmationMail($data);
-//            $this->sendOrderConfirmationMailAdmin($data);
-//            $data = $this->getOrder($request);
-//        }
-#endregion
-        $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
+            $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
+            $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
 
-        return view('home.iyzico-form', compact('paymentForm'));
+            return view('home.iyzico-form', compact('paymentForm'));
+        }
+        else{
+
+            $this->getOrder();
+           // dd($order);
+
+            //Sepeti Kapat
+            $data3 = Shopcart::where('user_id', Auth::id());
+            $data3->delete();
+            return view('home.payment_success');
+        }
+
 
     }
 
@@ -210,38 +185,9 @@ class OrderController extends Controller
         if ($checkoutForm->getPaymentStatus() == 'SUCCESS')
         {
 
-            $orderId = Order::orderByDesc('id')->pluck('id')->first();
-            $order = Order::orderByDesc('id')->first();
+            $order = $this->getOrder();
 
-            Order::where("id", $orderId)->update(array(
-                "is_pay" => "True",
-                "total" => $order->total + 30
-            ));
-
-            // dd($order);
-            $datalist = Shopcart::where('user_id', Auth::id())->get();
-            foreach ($datalist as $rs) {
-                $data2 = new Orderitem;
-                $data2->user_id = Auth::id();
-                $data2->product_id = $rs->product_id;
-                $data2->order_id = $order->id;
-                $data2->price = $rs->product->price;
-                $data2->quantity = $rs->quantity;
-                $data2->amount = $rs->quantity * $rs->product->price;
-                $data2->total = $order->total + 30;
-                $data2->note = $order->note;
-                $data2->save();
-            }
-
-            $product = Orderitem::where('order_id', $order->id)->get();
-            // dd($product);
-
-            foreach ($product as $rs) {
-                Product::find($rs->product_id)->decrement('quantity', $rs->quantity);
-                continue;
-            }
-
-            Event::dispatch(new OrderRecord($order));
+          //  Event::dispatch(new OrderRecord($order));
             // dd($data2);
 
             //Sepeti Kapat
@@ -250,13 +196,14 @@ class OrderController extends Controller
 //            $this->sendOrderConfirmationMail($order);
 //            $this->sendOrderConfirmationMailAdmin($order);
 
-            return view('home.iyzico_success');
-        } else {
-            dd($checkoutForm);
+            return view('home.payment_success');
+        }
+        else {
+           // dd($checkoutForm);
             $orderDelete = Order::orderByDesc('id')->first();
             //dd($orderDelete);
             $orderDelete->delete();
-            return view('home.iyzico_failed');
+            return view('home.payment_failed');
         }
     }
 
@@ -316,6 +263,45 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        $orderId = Order::orderByDesc('id')->pluck('id')->first();
+        $order = Order::orderByDesc('id')->first();
+
+        Order::where("id", $orderId)->update(array(
+            "is_pay" => "True",
+            "total" => $order->total + 30,
+        ));
+
+        // dd($order);
+        $datalist = Shopcart::where('user_id', Auth::id())->get();
+        foreach ($datalist as $rs) {
+            $data2 = new Orderitem;
+            $data2->user_id = Auth::id();
+            $data2->product_id = $rs->product_id;
+            $data2->order_id = $order->id;
+            $data2->price = $rs->product->price;
+            $data2->quantity = $rs->quantity;
+            $data2->amount = $rs->quantity * $rs->product->price;
+            $data2->total = $order->total + 30;
+            $data2->note = $order->note;
+            $data2->save();
+        }
+
+        $product = Orderitem::where('order_id', $order->id)->get();
+        // dd($product);
+
+        foreach ($product as $rs) {
+            Product::find($rs->product_id)->decrement('quantity', $rs->quantity);
+            continue;
+        }
+        Event::dispatch(new OrderRecord($order));
+        return $order;
     }
 
 

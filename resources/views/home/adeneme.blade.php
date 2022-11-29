@@ -245,20 +245,20 @@
                             </div>
 
                             <div class="payment-box">
-{{--                                <div class="payment-method">--}}
+                                {{--                                <div class="payment-method">--}}
 
-{{--                                    <h2>Kart Bilgileri</h2>--}}
-{{--                                    <label>Ad Soyad</label>--}}
-{{--                                    <input type="text" name="cartname" class="form-control">--}}
-{{--                                    <label>Kart No</label>--}}
-{{--                                    <input type="text" name="cartno" class="form-control">--}}
-{{--                                    <label>Son Kullanım Ay</label>--}}
-{{--                                    <input type="number" name="expire_month" class="form-control" min="1" max="12">--}}
-{{--                                    <label>Son Kullanım Yılı</label>--}}
-{{--                                    <input type="number" name="expire_year" class="form-control" min="1990" max="2050">--}}
-{{--                                    <label>CVC</label>--}}
-{{--                                    <input type="text" name="cartcvc" class="form-control">--}}
-{{--                                </div>--}}
+                                {{--                                    <h2>Kart Bilgileri</h2>--}}
+                                {{--                                    <label>Ad Soyad</label>--}}
+                                {{--                                    <input type="text" name="cartname" class="form-control">--}}
+                                {{--                                    <label>Kart No</label>--}}
+                                {{--                                    <input type="text" name="cartno" class="form-control">--}}
+                                {{--                                    <label>Son Kullanım Ay</label>--}}
+                                {{--                                    <input type="number" name="expire_month" class="form-control" min="1" max="12">--}}
+                                {{--                                    <label>Son Kullanım Yılı</label>--}}
+                                {{--                                    <input type="number" name="expire_year" class="form-control" min="1990" max="2050">--}}
+                                {{--                                    <label>CVC</label>--}}
+                                {{--                                    <input type="text" name="cartcvc" class="form-control">--}}
+                                {{--                                </div>--}}
                                 <div class="payment-method">
                                     <p>
                                         <input type="radio" id="paypal" name="payment" value="iyzico">
@@ -267,14 +267,12 @@
                                     <p>
                                         <input type="radio" id="bank" name="payment" value="bank">
                                         <label for="bank">Kuveyt Türk</label>
-
                                     </p>
-
+                                    @if ($errors->has('payment'))
+                                        <span class="text-danger">{{ $errors->first('address') }}</span>
+                                    @endif
                                 </div>
 
-                                @if ($errors->has('payment'))
-                                    <span class="text-danger">{{ $errors->first('payment') }}</span>
-                                @endif
                                 <button type="submit" class="default-btn">Place Order</button>
                             </div>
                         </div>

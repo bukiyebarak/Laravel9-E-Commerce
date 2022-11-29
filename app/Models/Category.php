@@ -9,6 +9,9 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'parent_id', 'keywords', 'description','slug',
+    ];
     protected $appends=[
         'parent',
     ];

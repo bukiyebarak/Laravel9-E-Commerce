@@ -3,7 +3,9 @@
 @section('title', 'Add Product')
 
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 @endsection
@@ -40,42 +42,64 @@
 
                                     <select class="form-select" name="category_id" required>
                                         @foreach($datalist as $rs)
-                                            <option value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}} </option>
+                                            <option
+                                                value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}} </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-10">
                                     <label>Title</label>
-                                    <input type="text" name="title" class="form-control">
+                                    <input type="text" name="title" class="form-control" value="{{old('title')}}">
+                                    @if ($errors->has('title'))
+                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Keywords</label>
-                                    <input type="text" name="keywords" class="form-control">
+                                    <input type="text" name="keywords" class="form-control" value="{{old('keywords')}}">
+                                    @if ($errors->has('keywords'))
+                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Description</label>
-                                    <input type="text" name="description" class="form-control">
+                                    <input type="text" name="description" class="form-control" value="{{old('description')}}">
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Price</label>
-                                    <input type="number" value="0" min="0" name="price" class="form-control">
+                                    <input type="number"  min="0" name="price" class="form-control" value="{{old('price')}}">
+                                    @if ($errors->has('price'))
+                                        <span class="text-danger">{{ $errors->first('price') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Quantity</label>
-                                    <input type="number" value="2" min="0" name="quantity" class="form-control">
+                                    <input type="number"  min="1" name="quantity" class="form-control" value="{{old('quantity')}}">
+                                    @if ($errors->has('quantity'))
+                                        <span class="text-danger">{{ $errors->first('quantity') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Minquantity</label>
-                                    <input type="number" value="1" min="1" name="minquantity" class="form-control"
-                                    >
+                                    <input type="number"  min="1" name="minquantity" class="form-control"
+                                           value="{{old('minquantity')}}" >
+                                    @if ($errors->has('minquantity'))
+                                        <span class="text-danger">{{ $errors->first('minquantity') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Tax</label>
-                                    <input type="number" name="tax" min="0" value="18" class="form-control">
+                                    <input type="number" name="tax" min="0"  class="form-control" value="{{old('tax')}}">
+                                    @if ($errors->has('tax'))
+                                        <span class="text-danger">{{ $errors->first('tax') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Detail</label>
-                                    <textarea id="summernote" name="detail"></textarea>
+                                    <textarea id="summernote" name="detail">{{old('detail')}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
                                             placeholder: 'Product Detail',
@@ -92,14 +116,23 @@
                                             ]
                                         });
                                     </script>
+                                    @if ($errors->has('detail'))
+                                        <span class="text-danger">{{ $errors->first('detail') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Slug</label>
-                                    <input type="text" name="slug" class="form-control">
+                                    <input type="text" name="slug" class="form-control" value="{{old('slug')}}">
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Image</label>
                                     <input type="file" name="image" class="form-control">
+                                    @if ($errors->has('image'))
+                                        <span class="text-danger">{{ $errors->first('image') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="col-md-10">

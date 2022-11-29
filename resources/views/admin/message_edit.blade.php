@@ -17,7 +17,8 @@
 <!--start page wrapper -->
 <div class="page-wrapper">
     <div class="card">
-        <div class="card-body">   @include('home.message')
+        <div class="card-body">
+            @include('sweetalert::alert')
             <h4 class="mb-0">Message Detail</h4>
 
             <hr/>

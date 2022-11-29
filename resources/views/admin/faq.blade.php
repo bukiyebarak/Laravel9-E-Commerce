@@ -20,12 +20,12 @@
                 </div>
             </div>
             <!--end breadcrumb-->
+            @include('sweetalert::alert')
             <div class="card">
                 <div class="card-body">
                     <a class="btn btn-primary" href="{{route('admin_faq_add')}}">Add Question </a>
                     <hr/>
                     <div class="card-body">
-                        @include('home.message')
 
                         <div class="table-responsive">
                             <table id="example2"  class="table table-striped table-hover table-bordered">

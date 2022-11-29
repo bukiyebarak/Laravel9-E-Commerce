@@ -129,32 +129,34 @@ class HomeController extends Controller
         return view('home.references', ['setting' => $setting]);
     }
 
-    public function sendmessage(Request $request)
+    public function sendmessage(ContactRequest $request)
     {
-         $validator=Validator::make($request->all(),[
-             'name'=>'required|min:3',
-             'email'=>'required|email',
-             'phone'=>'required',
-             'subject'=>'required',
-             'message'=>'required'
-        ]);
-       //  dd($validator);
-        if ($validator->fails()) {
-          //  dd($validator->messages()->all());
-            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+//         $validator=Validator::make($request->all(),[
+//             'name' => 'required|min:3',
+//             'email' => 'required|email',
+//             'phone' => 'required|numeric|min:11|max:12',
+//             'subject' => 'required|min:5|max:30',
+//             'message' => 'required|min:5'
+//        ]);
+//       //  dd($validator);
+//        if ($validator->fails()) {
+//            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
+//        }
+//        $validatedData = $request->fails();
+//        dd($validatedData);
+//
+//        $data = new Message();
+//        $data->name = $request->input('name');
+//        $data->email = $request->input('email');
+//        $data->phone = $request->input('phone');
+//        $data->subject = $request->input('subject');
+//        $data->message = $request->input('message');
+//        $data->ip_address = $_SERVER['REMOTE_ADDR'];
+//        $data->save();
+        $input = $request->all();
+        $message = Message::create($input);
 
-        }
-
-        $data = new Message();
-        $data->name = $request->input('name');
-        $data->email = $request->input('email');
-        $data->phone = $request->input('phone');
-        $data->subject = $request->input('subject');
-        $data->message = $request->input('message');
-        $data->ip_address = $_SERVER['REMOTE_ADDR'];
-        $data->save();
-
-        $this->sendContactMessageMailAdmin($data);
+        $this->sendContactMessageMailAdmin($message);
 
         return redirect()->route('contact')->with('success', 'Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
 

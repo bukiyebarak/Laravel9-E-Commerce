@@ -16,7 +16,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="mb-0" style="text-align: center">Order Detail</h4>
-            @include('home.message')
+            @include('sweetalert::alert')
             <hr/>
             <div class="row gy-3">
                 <div class="col-md-12">
@@ -33,11 +33,11 @@
                                 </tr>
                                 <tr>
                                     <th>User</th>
-                                    <td>{{$data->user->name}}</td>
+                                    <td>{{$data->user->name}} {{$data->user->surname}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
-                                    <td>{{$data->name}}</td>
+                                    <th>Name Surname</th>
+                                    <td>{{$data->name}} {{$data->surname}}</td>
                                 </tr>
                                 <tr>
                                     <th>Address</th>
@@ -127,8 +127,8 @@
                                         <div class="d-lg-flex align-items-center gap-2">
                                             <div class="cart-img text-center text-lg-start">
                                                 @if($rs->product->image!=null)
-                                                    <img src="{{Storage::url($rs->product->image)}}"
-                                                         height="60" alt="">
+                                                    <img src="{{asset('images/'.$rs->product->image)}}" height="50" alt="">
+
                                                 @endif
                                             </div>
                                             <div class="cart-detail text-center text-lg-start">
@@ -170,10 +170,14 @@
 
                         <!-- end one product-->
                         <br>
-                        <div class="checkout-form p-3 bg-dark-1">
+                        <div class="checkout-form p-3 bg-dark-1" style="text-align:center; ">
                             <div class="card rounded-0 border bg-transparent mb-0 shadow-none">
-                                <div class="card-body">
-                                    <h5 class="mb-0">Subtotal: <span class="float-end">{{$rs->order->total}}₺</span>
+                                <div class="card-body"  >
+                                    <h5 class="mb-0">Subtotal : <span>{{$rs->order->total-30}}₺</span>
+                                    </h5>
+                                    <h5 class="mb-0">Shipping : <span>30₺</span>
+                                    </h5>
+                                    <h5 class="mb-0">Total : <span class="float-end">{{$rs->order->total}}₺</span>
                                     </h5>
 
                                 </div>

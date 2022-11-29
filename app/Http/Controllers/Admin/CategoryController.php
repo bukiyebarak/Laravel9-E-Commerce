@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +48,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function add()
     {
@@ -59,19 +60,20 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function create(Request $request)
+    public function create(CategoryRequest $request)
     {
-        DB::table('categories')->insert([
-            'parent_id' => $request->input('parent_id'),
-            'title' => $request->input('title'),
-            'keywords' => $request->input('keywords'),
-            'description' => $request->input('description'),
-            'slug' => $request->input('slug'),
-            'status' => $request->input('status')
+         Category::create([
+             'parent_id' => $request->input('parent_id'),
+             'title' => $request->input('title'),
+             'keywords' => $request->input('keywords'),
+             'description' => $request->input('description'),
+             'slug' => $request->input('slug'),
+             'status' => $request->input('status')
         ]);
-        return redirect()->route('admin_category');
+
+        return redirect()->route('admin_category')->with('success','Category Add Successfully' );
     }
 
     /**
@@ -116,7 +118,7 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $data = Category::find($id);
         $data->parent_id = $request->input('parent_id');
@@ -126,7 +128,7 @@ class CategoryController extends Controller
         $data->slug = $request->input('slug');
         $data->status = $request->input('status');
         $data->save();
-        return redirect()->route('admin_category');
+        return redirect()->route('admin_category')->with('success','Category Update Successfully' );
     }
 
     /**

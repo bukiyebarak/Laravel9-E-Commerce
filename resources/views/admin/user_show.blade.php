@@ -20,7 +20,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="mb-0">User Detail</h4>
-            @include('home.message')
+            @include('sweetalert::alert')
             <hr/>
             <div class="row gy-3">
                 <div class="col-md-12">

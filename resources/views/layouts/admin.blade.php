@@ -35,6 +35,7 @@
 <div class="wrapper">
 @include('admin._sidebar')
 @include('admin._header')
+@include('sweetalert::alert')
 @yield('content')
 @include('admin._footer')
 @yield('footer')

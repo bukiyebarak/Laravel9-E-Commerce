@@ -16,6 +16,23 @@ class ContactRequest extends FormRequest
         return true;
     }
 
+    public function attributes()
+    {
+        return [
+            'name'=>'Name and Surname',
+            'email'=>'Email',
+            'phone'=>'Telephone Number',
+            'subject'=>'Subject',
+            'message'=>'Message'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'phone.numeric'=>'Telephone Number is numeric (0-9)',
+            'email.email'=>'Please enter the e-mail address in the correct format.(example@example.com)'
+        ];
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,10 +42,10 @@ class ContactRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'email' => 'required|email',
-            'phone' => 'required|numeric|min:11|max:12',
-            'subject' => 'required|min:15|max:60',
-            'message' => 'required|min:15'
+            'email' => 'required|email|max:255',
+            'phone' => 'required|numeric|min:10',
+            'subject' => 'required|min:5|max:60',
+            'message' => 'required|min:5'
 
         ];
     }

@@ -9,6 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'keywords', 'description', 'image', 'detail', 'price', 'quantity', 'minquantity', 'tax', 'slug',
+    ];
+
     //One to Many (Inverse)/ Belongs to
     public function category()
     {

@@ -29,9 +29,8 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Kullanıcı İsmi</th>
-                                        <th>Şipariş Ver. İsim</th>
-                                        <th>Şipariş Ver. Soyisim</th>
+                                        <th>Kullanıcı İsmi-Soyisim</th>
+                                        <th>Şipariş Ver. İsim-Soyisim</th>
                                         <th>Email</th>
                                         <th>Telefon</th>
                                         <th>Adres</th>
@@ -53,12 +52,11 @@
                                                 <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"
                                                    onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
 
-                                                    {{$rs->user->name}}</a>
+                                                    {{$rs->user->name}} {{$rs->user->surname}}</a>
                                             </td>
-                                            <td>{{$rs->name}}</td>
-                                            <td>{{$rs->surname}}</td>
+                                            <td>{{$rs->name}} {{$rs->surname}}</td>
                                             <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
-                                            <td>{{$rs->phone}}</td>
+                                            <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
                                             <td>{{$rs->address}}</td>
                                             <td>{{$rs->city}}</td>
                                             <td>{{$rs->district}}</td>

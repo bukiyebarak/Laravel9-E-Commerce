@@ -91,7 +91,7 @@ class ReviewController extends Controller
         $data = Review::find($id);
         $data->status = $request->input('status');
         $data->save();
-        return back()->with('success', 'Review Updated');
+        return back()->with('toast_success', 'Review Updated');
     }
 
     /**

@@ -48,7 +48,7 @@
 
             <div class="col-lg-4 col-md-12">
                 <div class="top-header-discount-info">
-                    @include('home.message')
+{{--                    @include('home.message')--}}
                 </div>
             </div>
 

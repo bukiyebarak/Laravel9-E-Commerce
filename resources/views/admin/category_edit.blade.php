@@ -41,19 +41,28 @@
                                 <div class="col-md-10">
                                     <label>Title</label>
                                     <input type="text" name="title" value="{{$data->title}}" class="form-control">
+                                    @if ($errors->has('title'))
+                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Keywords</label>
                                     <input type="text" name="keywords" value="{{$data->keywords}}" class="form-control" >
-                                </div>
+                                    @if ($errors->has('keywords'))
+                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>
+                                    @endif </div>
                                 <div class="col-md-10">
                                     <label>Description</label>
                                     <input type="text" name="description"  value="{{$data->description}}" class="form-control" >
-                                </div>
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @endif</div>
                                 <div class="col-md-10">
                                     <label>Slug</label>
                                     <input type="text" name="slug"  value="{{$data->slug}}" class="form-control">
-                                </div>
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
+                                    @endif</div>
                                 <div class="col-md-10">
                                     <label>Status</label>
                                     <select class="form-select" name="status" required>

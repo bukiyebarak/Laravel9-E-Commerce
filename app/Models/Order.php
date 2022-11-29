@@ -23,6 +23,7 @@ class Order extends Model
         'zipcode',
         'user_id',
         'IP',
+        'payment',
     ];
     public function user()
     {

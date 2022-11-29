@@ -85,7 +85,7 @@ class MessageController extends Controller
         $data = Message::find($id);
         $data->note = $request->input('note');
         $data->save();
-        return back()->with('success','Message Updated');
+        return back()->with('toast_success','Message Updated');
     }
 
     /**
@@ -98,6 +98,6 @@ class MessageController extends Controller
     {
         $data = Message::find($id);
         $data->delete();
-        return redirect()->route('admin_messages')->with('info', 'Mesaj Başarıyla Silindi.');
+        return redirect()->route('admin_messages')->with('toast_success', 'Mesaj Başarıyla Silindi.');
     }
 }
