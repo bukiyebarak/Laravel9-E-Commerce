@@ -63,55 +63,59 @@
                                 </div>
                                 <div class="col-md-10">
                                     <label>Description</label>
-                                    <input type="text" name="description" class="form-control" value="{{old('description')}}">
+                                    <input type="text" name="description" class="form-control"
+                                           value="{{old('description')}}">
                                     @if ($errors->has('description'))
                                         <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Price</label>
-                                    <input type="number"  min="0" name="price" class="form-control" value="{{old('price')}}">
+                                    <input type="number" min="0" name="price" class="form-control"
+                                           value="{{old('price')}}">
                                     @if ($errors->has('price'))
                                         <span class="text-danger">{{ $errors->first('price') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
+                                    <label>Is Sale?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_sale"
+                                               id="flexRadioDefault1" value="Yes">
+                                        <label class="form-check-label" for="flexRadioDefault1">Yes</label>
+                                        <br></div>
+                                    <div id="sale">
+                                        <label>How many percent discount is there?</label>
+                                        <input type="number" name="sale" min="0" class="form-control">
+                                        <br>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="is_sale"
+                                               id="flexRadioDefault2" value="No" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
                                     <label>Quantity</label>
-                                    <input type="number"  min="1" name="quantity" class="form-control" value="{{old('quantity')}}">
+                                    <input type="number" min="1" name="quantity" class="form-control"
+                                           value="{{old('quantity')}}">
                                     @if ($errors->has('quantity'))
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Minquantity</label>
-                                    <input type="number"  min="1" name="minquantity" class="form-control"
-                                           value="{{old('minquantity')}}" >
+                                    <input type="number" min="1" name="minquantity" class="form-control"
+                                           value="{{old('minquantity')}}">
                                     @if ($errors->has('minquantity'))
                                         <span class="text-danger">{{ $errors->first('minquantity') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Is Sale?</label>
-                                    <hr>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="flexRadioDefault1" value="Yes">
-                                        <label class="form-check-label" for="flexRadioDefault1">Yes</label>
-                                    </div>
-                                    <div id="sale" >
-                                        <label>How many percent discount is there?</label>
-                                        <input type="number" name="sale" min="0"  class="form-control" >
 
-                                    </div>
-                                    <div class="form-check ">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="flexRadioDefault2" value="No" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">No</label>
-                                    </div>
-                                    <hr>
-                                </div>
 
                                 <div class="col-md-10">
                                     <label>Tax</label>
-                                    <input type="number" name="tax" min="0"  class="form-control" value="{{old('tax')}}">
+                                    <input type="number" name="tax" min="0" class="form-control" value="{{old('tax')}}">
                                     @if ($errors->has('tax'))
                                         <span class="text-danger">{{ $errors->first('tax') }}</span>
                                     @endif
@@ -181,20 +185,20 @@
 @endsection
 
 @section('footer')
-<script>
+    <script>
 
-    $(document).ready(function() {
-        $('#sale').hide();
-        $('input[type="radio"]').click(function () {
-            if ($(this).attr("value") == "Yes") {
-                $('#sale').show();
-            }
-           if ($(this).attr("value") == "No") {
-                $('#sale').hide();
-            }
+        $(document).ready(function () {
+            $('#sale').hide();
+            $('input[type="radio"]').click(function () {
+                if ($(this).attr("value") == "Yes") {
+                    $('#sale').show();
+                }
+                if ($(this).attr("value") == "No") {
+                    $('#sale').hide();
+                }
 
+            });
         });
-    });
-    $('input[type="radio"]').trigger('click');
-</script>
+        $('input[type="radio"]').trigger('click');
+    </script>
 @endsection

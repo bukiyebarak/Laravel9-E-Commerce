@@ -155,23 +155,21 @@ class OrderController extends Controller
 
             return view('home.iyzico-form', compact('paymentForm'));
         }
-        else{
-
+        else
+        {
             $this->getOrder();
            // dd($order);
-
             //Sepeti Kapat
             $data3 = Shopcart::where('user_id', Auth::id());
             $data3->delete();
             return view('home.payment_success');
         }
 
-
+       // return redirect()->back()->with('success','Product Add Successfully' );
     }
 
     public function callback(Request $request, User $user)
     {
-
         if (!auth()->check()) {
             dd('callbackdggg');
             auth()->login($user);

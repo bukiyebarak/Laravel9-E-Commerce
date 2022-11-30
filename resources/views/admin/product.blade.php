@@ -35,6 +35,8 @@
                                         <th>Title</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th>Sale</th>
+                                        <th>Sale Price</th>
                                         <th>Image</th>
                                         <th>Image Gallery</th>
                                         <th>Status</th>
@@ -52,6 +54,17 @@
                                             <td>{{$rs->title}}</td>
                                             <td>{{$rs->quantity}}</td>
                                             <td>{{$rs->price}}</td>
+                                            <td>{{$rs->is_sale}}  <br>
+                                               @if($rs->is_sale=="Yes")
+                                                   Sale: %{{$rs->sale}}
+                                                @endif
+                                            </td>
+                                            @php
+                                                $sale=$rs->price*$rs->sale;
+                                                $total=$sale/100;
+                                                $totalsale=$rs->price-$total
+                                            @endphp
+                                            <td>{{$totalsale}}</td>
                                             <td>
                                                 @if($rs->image)
                                                     <img src="{{asset('images/'.$rs->image)}}" height="50" alt="">

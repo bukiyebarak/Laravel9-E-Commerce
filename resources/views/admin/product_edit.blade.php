@@ -76,6 +76,22 @@
                                     @endif
                                 </div>
                                 <div class="col-md-10">
+                                    <label>Is Sale?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_sale" id="flexRadioDefault1" value="Yes">
+                                        <label class="form-check-label" for="flexRadioDefault1">Yes</label>
+                                        <br> </div>
+                                    <div id="sale" >
+                                        <label>How many percent discount is there?</label>
+                                        <input type="number" name="sale" min="0" value="{{$data->sale}}" class="form-control" >
+                                        <br>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="is_sale" id="flexRadioDefault2" value="No">
+                                        <label class="form-check-label" for="flexRadioDefault2">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
                                     <label>Quantity</label>
                                     <input type="number" name="quantity" value="{{$data->quantity}}" min="1"
                                            class="form-control">
@@ -167,3 +183,21 @@
     <!--end page wrapper -->
 @endsection
 
+@section('footer')
+    <script>
+
+        $(document).ready(function() {
+            $('#sale').hide();
+            $('input[type="radio"]').click(function () {
+                if ($(this).attr("value") == "Yes") {
+                    $('#sale').show();
+                }
+                if ($(this).attr("value") == "No") {
+                    $('#sale').hide();
+                }
+
+            });
+        });
+        $('input[type="radio"]').trigger('click');
+    </script>
+@endsection
