@@ -42,29 +42,48 @@
                                 <div class="col-md-10">
                                     <label>Name</label>
                                     <input type="text" name="name" value="{{$data->name}}" class="form-control">
+                                    @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-10">
+                                    <label>Surname</label>
+                                    <input type="text" name="surname" value="{{$data->surname}}" class="form-control">
+                                    @if ($errors->has('surname'))
+                                        <span class="text-danger">{{ $errors->first('surname') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Email</label>
                                     <input type="text" name="email" value="{{$data->email}}" class="form-control">
+                                    @if ($errors->has('email'))
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Phone</label>
                                     <input type="text" name="phone" value="{{$data->phone}}"
                                            class="form-control">
+                                    @if ($errors->has('phone'))
+                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label>Address</label>
                                     <input type="text" name="address" value="{{$data->address}}"
                                            class="form-control">
-                                </div>
-
-                                <div class="col-md-10">
-                                    <label>Image</label>
-                                    <input type="file" name="image" class="form-control">
-                                    @if($data->profile_photo_path)
-                                        <img src="{{Storage::url($data->profile_photo_path)}}" height="200" style="border-radius: 10px" alt="">
+                                    @if ($errors->has('address'))
+                                        <span class="text-danger">{{ $errors->first('address') }}</span>
                                     @endif
                                 </div>
+
+{{--                                <div class="col-md-10">--}}
+{{--                                    <label>Image</label>--}}
+{{--                                    <input type="file" name="image" class="form-control">--}}
+{{--                                    @if($data->profile_photo_path)--}}
+{{--                                        <img src="{{Storage::url($data->profile_photo_path)}}" height="200" style="border-radius: 10px" alt="">--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
                                 <div class="col-12">
                                     <button class="btn btn-primary" type="submit">Update User</button>
                                 </div>

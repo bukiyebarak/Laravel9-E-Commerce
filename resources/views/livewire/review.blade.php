@@ -27,7 +27,7 @@
                 <br>
                 <div class="col-lg-12 col-md-12">
                     <label>Rating (1-5)</label>
-                    @error('rate')<span class="text-danger">{{$message}}</span>@enderror
+
                     <div class="review-title">
                         <div class="rating">
                             1 <input type="radio" wire:model="rate" value="1"/>
@@ -37,6 +37,7 @@
                             5 <input type="radio" wire:model="rate" value="5"/>
                         </div>
                     </div>
+                    @error('rate')<span class="text-danger">{{$message}}</span>@enderror
                 </div>
                 <br>
                 <div class="col-lg-12 col-md-12">
@@ -47,6 +48,7 @@
                     @endauth
                 </div>
             </div>
+        </div>
     </form>
 
 </div>

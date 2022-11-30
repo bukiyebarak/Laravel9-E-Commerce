@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FaqRequest;
 use App\Models\Faq;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -37,10 +38,9 @@ class FaqController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FaqRequest $request)
     {
         $data = new Faq;
-        $data->position = $request->input('position');
         $data->question = $request->input('question');
         $data->answer = $request->input('answer');
         $data->status = $request->input('status');
@@ -78,10 +78,9 @@ class FaqController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product,$id)
+    public function update(FaqRequest $request, Product $product,$id)
     {
         $data = Faq::find($id);
-        $data->position = $request->input('position');
         $data->question = $request->input('question');
         $data->answer = $request->input('answer');
         $data->status = $request->input('status');
@@ -99,6 +98,6 @@ class FaqController extends Controller
     {
         $data = Faq::find($id);
         $data->delete();
-        return redirect()->route('admin_faq')->with('success','FAQ Deleted Successfully' );
+        return redirect()->route('admin_faq')->with('toast_success','FAQ Deleted Successfully' );
     }
 }

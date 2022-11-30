@@ -34,20 +34,19 @@
                     <div class="row gy-3">
                         <div class="col-md-12">
                             <form class="row g-3 needs-validation" novalidate=""
-                                  action="{{route('admin_faq_store')}}" method="post" enctype="multipart/form-data">
+                                  action="{{route('admin_faq_store')}}" method="post" >
                                 @csrf
                                 <div class="col-md-10">
-                                    <label>Position</label>
-                                    <input type="number" value="0" name="position" class="form-control">
-                                </div>
-                                <div class="col-md-10">
                                     <label>Question</label>
-                                    <input type="text" name="question" class="form-control">
+                                    <input type="text" name="question" class="form-control" value="{{old(('question'))}}">
+                                    @if ($errors->has('question'))
+                                        <span class="text-danger">{{ $errors->first('question') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="col-md-10">
                                     <label>Answer</label>
-                                    <textarea id="summernote" name="answer"></textarea>
+                                    <textarea id="summernote" name="answer">{{old('answer')}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
                                             placeholder: 'Answer',
@@ -64,6 +63,9 @@
                                             ]
                                         });
                                     </script>
+                                    @if ($errors->has('answer'))
+                                        <span class="text-danger">{{ $errors->first('answer') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="col-md-10">

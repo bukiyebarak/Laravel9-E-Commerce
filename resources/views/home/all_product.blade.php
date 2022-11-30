@@ -79,7 +79,7 @@
                             <h3 class="widget-title">Tags</h3>
                             <div class="tagcloud">
                                 @foreach($datalist as $rs)
-                                    <a href="#">{{$rs->keywords}} <span class="tag-link-count"></span></a>
+                                    <a href="javascript:void(0);">{{$rs->keywords}} <span class="tag-link-count"></span></a>
                                 @endforeach
                             </div>
                         </section>

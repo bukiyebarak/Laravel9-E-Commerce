@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <div class="select-box">
                                             <label>MAHALLE <span class="required">*</span></label>
-                                            <select id="neighbourhood" name="neighbourhood" class="form-control">
+                                            <select id="neighbourhood" name="neighbourhood" class="single-select form-control">
                                                 <option value="">Mahalle Seçiniz</option>
                                             </select>
 
@@ -349,7 +349,8 @@
         $(document).ready(function () {
             $('#city').change(function () {
                 let cid = $(this).val();
-                $('#neighbourhood').html('<option value="">Mahalle Seçiniz</option>')
+                $('#neighbourhood').html('<option value="">Mahalle Seçiniz</option><input type="text" class="nice-select-search" placeholder="Поиск..."/>')
+
                 $.ajax({
                     url: '/getDistrict',
                     type: 'post',
@@ -358,7 +359,17 @@
                         console.log(result);
                         $('#district').html(result);
 
+                        $('#district').niceSelect({
+                            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                            placeholder: $(this).data('placeholder'),
+                            allowClear: Boolean($(this).data('allow-clear')),
+                        });
                         $('#district').niceSelect('update');
+                        $('#district').niceSelect({
+                            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                            placeholder: $(this).data('placeholder'),
+                            allowClear: Boolean($(this).data('allow-clear')),
+                        });
                     }
                 });
             });
@@ -379,4 +390,5 @@
         });
 
     </script>
+
 @endsection

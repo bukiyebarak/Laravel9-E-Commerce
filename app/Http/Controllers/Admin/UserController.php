@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,35 +77,35 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user,$id)
+    public function update(UserRequest $request, User $user,$id)
     {
         $data = User::find($id);
         $data->name = $request->input('name');
         $data->email = $request->input('email');
         $data->phone = $request->input('phone');
         $data->address = $request->input('address');
-
-        if ($request->hasFile('image'))
-        {
-            $destination='images/profile'.$data->image;
-            if(File::exists($destination)){
-                File::delete($destination);
-            }
-
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename= time().'.'.$extension;
-            $file->move('images',$filename);
-            $data->image=$filename;
-        }
-        if ($request->file('image')!=null)
-        {
-            $file=$request->file('image');
-            $extension=$file->getClientOriginalExtension();
-            $filename= time().'.'.$extension;
-            $file->move('images/profile',$filename);
-            $data->profile_photo_path =$filename;//file upload
-        }
+//
+//        if ($request->hasFile('image'))
+//        {
+//            $destination='images/profile'.$data->image;
+//            if(File::exists($destination)){
+//                File::delete($destination);
+//            }
+//
+//            $file=$request->file('image');
+//            $extension=$file->getClientOriginalExtension();
+//            $filename= time().'.'.$extension;
+//            $file->move('images',$filename);
+//            $data->image=$filename;
+//        }
+//        if ($request->file('image')!=null)
+//        {
+//            $file=$request->file('image');
+//            $extension=$file->getClientOriginalExtension();
+//            $filename= time().'.'.$extension;
+//            $file->move('images/profile',$filename);
+//            $data->profile_photo_path =$filename;//file upload
+//        }
         $data->save();
         return redirect()->route('admin_users')->with('success','User Information Updated');
     }
@@ -140,6 +141,6 @@ class UserController extends Controller
     {
         $data = User::find($id);
         $data->delete();
-        return redirect()->back()->with('success', 'User Deleted');
+        return redirect()->back()->with('toast_success', 'User Deleted');
     }
 }

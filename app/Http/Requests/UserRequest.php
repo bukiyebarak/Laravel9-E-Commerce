@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,22 +15,23 @@ class ContactRequest extends FormRequest
     {
         return true;
     }
-
     public function attributes()
     {
         return [
-            'name'=>'Name and Surname',
-            'email'=>'Email',
-            'phone'=>'Telephone Number',
-            'subject'=>'Subject',
-            'message'=>'Message'
+            'name' => 'Name',
+            'surname' => 'Surname',
+            'email' => 'Email',
+            'phone' => 'Telephone Number',
+            'address' => 'Address',
         ];
     }
+
     public function messages()
     {
         return [
             'phone.numeric'=>'Telephone Number is numeric (0-9)',
-            'email.email'=>'Please enter the e-mail address in the correct format.(example@example.com)'
+            'email.email'=>'Please enter the e-mail address in the correct format.(example@example.com)',
+
         ];
     }
     /**
@@ -42,11 +43,10 @@ class ContactRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
+            'surname' => 'required|min:3',
             'email' => 'required|email|max:255',
             'phone' => 'required|digits:11',
-            'subject' => 'required|min:5|max:60',
-            'message' => 'required|min:5'
-
+            'address' => 'required|min:5|max:100',
         ];
     }
 }

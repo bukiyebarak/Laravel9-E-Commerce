@@ -30,6 +30,7 @@
                                     <th>Id</th>
 {{--                                    <th>Image</th>--}}
                                     <th>Name</th>
+                                    <th>Surname</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Address</th>
@@ -49,6 +50,7 @@
 {{--                                            @endif--}}
 {{--                                        </td>--}}
                                         <td>{{$rs->name}}</td>
+                                        <td>{{$rs->surname}}</td>
                                         <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
                                         <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
                                         <td>{{$rs->address}}</td>

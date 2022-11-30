@@ -31,8 +31,7 @@
                             <table id="example2"  class="table table-striped table-hover table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Position</th>
+{{--                                    <th>Id</th>--}}
                                     <th>Question</th>
                                     <th>Answer</th>
                                     <th>Status</th>
@@ -43,8 +42,7 @@
                                 <tbody>
                                 @foreach($datalist as $rs)
                                     <tr>
-                                        <td >{{$rs->id}}</td>
-                                        <td >{{$rs->position}}</td>
+{{--                                        <td >{{$rs->id}}</td>--}}
                                         <td>{{$rs->question}}</td>
                                         <td > {!!$rs->answer  !!}</td>
                                         <td>{{$rs->status}}</td>
