@@ -190,14 +190,23 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        @if($rs->is_sale=="Yes")
+                                            <div class="sale-tag">Sale!</div>
+                                        @endif
                                     </div>
 
                                     <div class="products-content">
                                         <h3><a href="#">{{$rs->title}}</a></h3>
-                                        <div class="price">
-                                            <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                            <span class="new-price">{{$rs->price}}₺</span>
-                                        </div>
+                                        @if($rs->sale_price==null)
+                                            <div class="price">
+                                                <span class="new-price">{{$rs->price}}₺</span>
+                                            </div>
+                                        @else
+                                            <div class="price">
+                                                <span class="old-price">{{$rs->price}}₺</span>
+                                                <span class="new-price">{{$rs->sale_price}}₺</span>
+                                            </div>
+                                        @endif
                                         @php
                                             $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                             $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);

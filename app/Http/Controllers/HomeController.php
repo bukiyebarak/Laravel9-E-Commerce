@@ -50,10 +50,11 @@ class HomeController extends Controller
     {
         $setting = Setting::first();
         $slider = Product::select('id', 'title', 'image', 'price', 'slug')->limit(4)->get();
-        $daily = Product::select('id', 'title', 'image', 'price', 'slug')->limit(6)->inRandomOrder()->get();
-        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'created_at')->limit(6)->orderByDesc('id')->get();
-        $picked = Product::select('id', 'title', 'image', 'price', 'slug')->limit(6)->inRandomOrder()->get();
-//        dd($slider);
+        $daily = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price')->limit(6)->inRandomOrder()->get();
+        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale','sale','sale_price')->limit(6)->orderByDesc('id')->get();
+        $picked = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price')->limit(6)->inRandomOrder()->get();
+
+        //dd($picked);
 //        exit();
         $data = [
             'setting' => $setting,
@@ -131,28 +132,6 @@ class HomeController extends Controller
 
     public function sendmessage(ContactRequest $request)
     {
-//         $validator=Validator::make($request->all(),[
-//             'name' => 'required|min:3',
-//             'email' => 'required|email',
-//             'phone' => 'required|numeric|min:11|max:12',
-//             'subject' => 'required|min:5|max:30',
-//             'message' => 'required|min:5'
-//        ]);
-//       //  dd($validator);
-//        if ($validator->fails()) {
-//            return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
-//        }
-//        $validatedData = $request->fails();
-//        dd($validatedData);
-//
-//        $data = new Message();
-//        $data->name = $request->input('name');
-//        $data->email = $request->input('email');
-//        $data->phone = $request->input('phone');
-//        $data->subject = $request->input('subject');
-//        $data->message = $request->input('message');
-//        $data->ip_address = $_SERVER['REMOTE_ADDR'];
-//        $data->save();
         $input = $request->all();
         $message = Message::create($input);
 

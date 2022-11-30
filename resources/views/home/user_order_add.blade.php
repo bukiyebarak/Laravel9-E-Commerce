@@ -196,17 +196,26 @@
                                                 <a style="color: #ff5797"
                                                    href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
                                             </td>
-
                                             <td class="product-total">
                                                 <span>{{$rs->quantity}}</span>
                                                 <span>x</span>
+                                                @if($rs->product->sale_price==null)
                                                 <span class="price"> {{$rs->product->price}}€</span>
-                                                <span>=</span>
-                                                <span class="price"> {{$rs->product->price * $rs->quantity}}€</span>
+                                                    <span>=</span>
+                                                    <span class="price"> {{$rs->product->price * $rs->quantity}}€</span>
+                                                @else
+                                                    <span class="price"> {{$rs->product->sale_price}}€</span>
+                                                    <span>=</span>
+                                                    <span class="price"> {{$rs->product->sale_price * $rs->quantity}}€</span>
+                                                @endif
+
                                             </td>
                                         </tr>
                                         @php
-                                            $total += $rs->product->price * $rs->quantity;
+                                            if($rs->product->sale_price==null)
+                                              $total += $rs->product->price * $rs->quantity;
+                                            else
+                                                $total += $rs->product->sale_price * $rs->quantity;
                                         @endphp
                                     @endforeach
                                     <tr>

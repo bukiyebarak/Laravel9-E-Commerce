@@ -55,6 +55,8 @@ class ProductRequest extends FormRequest
             'minquantity' => 'required|numeric|min:1',
             'tax' => 'required|numeric|min:0',
             'slug' => 'required',
+            'sale' => 'nullable',
+            'is_sale' => 'nullable',
         ];
     }
 }

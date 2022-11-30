@@ -207,18 +207,25 @@
                                 <div class="products-price">
                                     <span>{{$rs->quantity}}</span>
                                     <span>x</span>
+                                    @if($rs->product->sale_price==null)
                                     <span class="price"> {{$rs->product->price}}€</span>
+                                    @else
+                                        <span class="price"> {{$rs->product->sale_price}}€</span>
+                                    @endif
                                 </div>
                                 <a href="{{route('user_shopcart_delete',['id'=>$rs->id])}}"
                                    onclick="return confirm('Delete! Are you sure?')" class="remove-btn"><i
                                         class='bx bx-trash'></i></a>
                             </div>
                         </div>
-
                     </div>
                     @php
-                        $total += $rs->product->price * $rs->quantity;
+                        if($rs->product->sale_price==null)
+                          $total += $rs->product->price * $rs->quantity;
+                        else
+                            $total += $rs->product->sale_price * $rs->quantity;
                     @endphp
+
                 @endforeach
 
                 <div class="products-cart-subtotal">

@@ -85,7 +85,7 @@
                                         <label class="form-check-label" for="flexRadioDefault1">Yes</label>
                                         <br></div>
                                     <div id="sale">
-                                        <label>How many percent discount is there?</label>
+                                        <label>How many percent discount is there? (Example:% sale)</label>
                                         <input type="number" name="sale" min="0" class="form-control">
                                         <br>
                                     </div>

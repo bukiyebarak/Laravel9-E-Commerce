@@ -53,11 +53,16 @@
                     <div class="products-details-desc">
                         <h3>{{$data->title}}</h3>
 
-                        <div class="price">
-                            <span class="old-price">{{$data->price* 1.2}}₺</span>
-                            <span class="new-price">{{$data->price}}₺</span>
-                        </div>
-
+                        @if($data->sale_price==null)
+                            <div class="price">
+                                <span class="new-price">{{$data->price}}₺</span>
+                            </div>
+                        @else
+                            <div class="price">
+                                <span class="old-price">{{$data->price}}₺</span>
+                                <span class="new-price">{{$data->sale_price}}₺</span>
+                            </div>
+                        @endif
                         @php
                             $avgrev=\App\Http\Controllers\HomeController::avrgreview($data->id);
                             $countreview=\App\Http\Controllers\HomeController::countreview($data->id);
@@ -206,9 +211,6 @@
                                                     </div>
 
                                                     <p>{{$rs->review}}</p>
-
-
-
 
                                                 </div>
                                             @endforeach

@@ -50,15 +50,26 @@
                                                  style="height: 100px" alt="">
                                         @endif
                                     </td>
-
                                     <td class="product-name">
                                         <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
                                         <ul>
                                             <li>Max Quantity: <span>{{$rs->product->quantity}}</span></li>
-                                            <li>Unit Price:<span class="subtotal-amount">{{$rs->product->price}}€</span>
-                                            </li>
-                                            <li>Total:<span class="unit-amount"> <b> {{$rs->product->price * $rs->quantity}}€</b></span>
-                                            </li>
+
+                                            @if($rs->product->sale_price==null)
+                                                <li>Unit Price:<span
+                                                        class="subtotal-amount">{{$rs->product->price}}€</span>
+                                                </li>
+                                                <li>Total:<span class="unit-amount"> <b> {{$rs->product->price * $rs->quantity}}€</b></span>
+                                                </li>
+                                            @else
+                                                <li>Unit Price:<span class="subtotal-amount ">{{$rs->product->price}}€</span>
+                                                </li>
+                                                <li>Sale Price:<span class="subtotal-amount">{{$rs->product->sale_price}}€</span>
+                                                </li>
+                                                <li>Total:<span class="unit-amount"> <b> {{$rs->product->sale_price * $rs->quantity}}€</b></span>
+                                                </li>
+                                            @endif
+
 
                                         </ul>
                                     </td>
@@ -86,8 +97,12 @@
                                                 class='bx bx-trash fs-3'></i></a>
                                     </td>
                                 </tr>
+
                                 @php
-                                    $total += $rs->product->price * $rs->quantity;
+                                    if($rs->product->sale_price==null)
+                                      $total += $rs->product->price * $rs->quantity;
+                                    else
+                                        $total += $rs->product->sale_price * $rs->quantity;
                                 @endphp
                             @endforeach
 

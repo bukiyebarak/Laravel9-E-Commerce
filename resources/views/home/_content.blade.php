@@ -112,8 +112,12 @@
                                     </li>
                                 </ul>
                             </div>
+                            @if($rs->is_sale=="Yes")
+                                <div class="sale-tag">Sale!</div>
+                            @else
+                                <div class="new-tag">New!</div>
+                            @endif
 
-                            <div class="new-tag">New!</div>
                         </div>
 
                         <div class="products-content">
@@ -135,10 +139,16 @@
                                 </div>
                             </div>
 
-                            <div class="price">
-                                <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                <span class="new-price">{{$rs->price}}₺</span>
-                            </div>
+                            @if($rs->sale_price==null)
+                                <div class="price">
+                                    <span class="new-price">{{$rs->price}}₺</span>
+                                </div>
+                            @else
+                                <div class="price">
+                                    <span class="old-price">{{$rs->price}}₺</span>
+                                    <span class="new-price">{{$rs->sale_price}}₺</span>
+                                </div>
+                            @endif
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
@@ -146,8 +156,13 @@
                             </form>
                         </div>
 
-                        <!--düzenle -->
-                        {{--                        <span class="products-discount"><span>20% OFF</span></span>--}}
+
+                        @if($rs->is_sale=="Yes")
+                            <span class="products-discount">
+                            <span> {{$rs->sale}}% OFF </span>
+                        </span>
+                        @endif
+
                     </div>
                 </div>
             @endforeach
@@ -250,10 +265,16 @@
                             <div class="products-content">
                                 <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
                                 </h3>
-                                <div class="price">
-                                    <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                    <span class="new-price">{{$rs->price}}₺</span>
-                                </div>
+                                @if($rs->sale_price==null)
+                                    <div class="price">
+                                        <span class="new-price">{{$rs->price}}₺</span>
+                                    </div>
+                                @else
+                                    <div class="price">
+                                        <span class="old-price">{{$rs->price}}₺</span>
+                                        <span class="new-price">{{$rs->sale_price}}₺</span>
+                                    </div>
+                                @endif
                                 @php
                                     $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                     $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
@@ -327,12 +348,14 @@
 
                             {{--                            <div class="new-tag">New!</div>--}}
 
-                            <div class="sale-tag">Sale!</div>
+                            @if($rs->is_sale=="Yes")
+                                <div class="sale-tag">Sale!</div>
+                            @endif
                         </div>
 
                         <div class="products-content">
                             <span class="category"></span>
-                            <h3><a href="products-type-3.html">{{$rs->title}}</a></h3>
+                            <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
                             @php
                                 $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                 $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
@@ -348,20 +371,27 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="price">
-                                <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                <span class="new-price">{{$rs->price}}₺</span>
-                            </div>
+                            @if($rs->sale_price==null)
+                                <div class="price">
+                                    <span class="new-price">{{$rs->price}}₺</span>
+                                </div>
+                            @else
+                                <div class="price">
+                                    <span class="old-price">{{$rs->price}}₺</span>
+                                    <span class="new-price">{{$rs->sale_price}}₺</span>
+                                </div>
+                            @endif
                             <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                 @csrf
                                 <input name="quantity" type="hidden" value="1">
                                 <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
                             </form>
                         </div>
-
-                        <span class="products-discount">
-                            <span> 20% OFF </span>
+                        @if($rs->is_sale=="Yes")
+                            <span class="products-discount">
+                            <span> {{$rs->sale}}% OFF </span>
                         </span>
+                        @endif
                     </div>
                 </div>
             @endforeach
@@ -470,7 +500,7 @@
 
                         <div class="products-content">
                             <span class="category"></span>
-                            <h3><a href="products-type-3.html">{{$rs->title}}</a></h3>
+                            <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
                             @php
                                 $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                 $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
