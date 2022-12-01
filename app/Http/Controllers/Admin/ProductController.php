@@ -64,7 +64,12 @@ class ProductController extends Controller
         $data->minquantity = $request->input('minquantity');
         $data->is_sale = $request->input('is_sale');
         $data->sale = $request->input('sale');
-        $data->sale_price = $totalsale;
+
+        if ( $request->input('is_sale')=="Yes"){
+            $data->sale_price = $totalsale;
+        }
+        else
+            $data->sale_price =$request->input('price') ;
 
         $data->tax = $request->input('tax');
         $data->user_id = Auth::id();
@@ -153,7 +158,12 @@ class ProductController extends Controller
         $data->tax = (int)$request->input('tax');
         $data->is_sale = $request->input('is_sale');
         $data->sale = $request->input('sale');
-        $data->sale_price = $totalsale;
+        if ( $request->input('is_sale')=="Yes"){
+            $data->sale_price = $totalsale;
+        }
+        else
+            $data->sale_price = $request->input('price');
+
         $data->user_id = Auth::id();
         if ($request->hasFile('image')) {
             $destination = 'images/' . $data->image;

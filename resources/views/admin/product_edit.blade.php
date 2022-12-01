@@ -88,7 +88,8 @@
                                             <span class="text-danger">{{ $errors->first('sale') }}</span>
                                         @endif
                                         <br>
-                                    </div></div>
+                                    </div>
+                                    </div>
                                     <div class="form-check ">
                                         <input class="form-check-input" type="radio" name="is_sale" id="no" value="No">
                                         <label class="form-check-label" for="no">No</label>

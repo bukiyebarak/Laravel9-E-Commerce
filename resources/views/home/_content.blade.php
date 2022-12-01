@@ -143,7 +143,7 @@
                                     </div>
                                 </div>
 
-                                @if($rs->sale_price==null)
+                                @if($rs->is_sale=="No")
                                     <div class="price">
                                         <span class="new-price">{{$rs->price}}₺</span>
                                     </div>
@@ -272,7 +272,7 @@
                                     <h3>
                                         <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
                                     </h3>
-                                    @if($rs->sale_price==null)
+                                    @if($rs->is_sale=="No")
                                         <div class="price">
                                             <span class="new-price">{{$rs->price}}₺</span>
                                         </div>
@@ -384,7 +384,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                @if($rs->sale_price==null)
+                                @if($rs->is_sale=="No")
                                     <div class="price">
                                         <span class="new-price">{{$rs->price}}₺</span>
                                     </div>
@@ -540,7 +540,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                @if($rs->sale_price==null)
+                                @if($rs->is_sale=="No")
                                     <div class="price">
                                         <span class="new-price">{{$rs->price}}₺</span>
                                     </div>

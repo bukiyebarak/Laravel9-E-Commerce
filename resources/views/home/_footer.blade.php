@@ -90,6 +90,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <p>©2022 ALL RIGHTS REVERSED| {{$setting->title}} </p>
+                    <p>V:1.0.1</p>
                 </div>
 
                 <div class="col-lg-6 col-md-6">
@@ -143,4 +144,5 @@
 <script src="{{asset('assets')}}/home/assets/js/contact-form-script.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/ajaxchimp.min.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/main.js"></script>
-
+<!--Custom-->
+<script src="{{asset('assets')}}/home/assets/js/custom.js"></script>

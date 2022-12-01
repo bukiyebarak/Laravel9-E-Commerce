@@ -62,7 +62,10 @@
                             <ul>
                                 @foreach($parentCategories as $rs)
                                     <ul>
-                                        <li>{{$rs->title}}
+                                        <li><a
+                                                href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                            >{{$rs->title}}<i
+                                                ></i></a>
                                             <ul>
                                                 @foreach($rs->children as $childCategory )
                                                     @include('home.categorytreeproduct',['childCategory'=>$childCategory])
@@ -205,7 +208,7 @@
 
                                     <div class="products-content">
                                         <h3><a href="#">{{$rs->title}}</a></h3>
-                                        @if($rs->sale_price==null)
+                                        @if($rs->is_sale=="No")
                                             <div class="price">
                                                 <span class="new-price">{{$rs->price}}₺</span>
                                             </div>

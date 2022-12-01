@@ -49,10 +49,10 @@ class HomeController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        $slider = Product::select('id', 'title', 'image', 'price', 'slug','status')->limit(4)->get();
-        $daily = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price','status')->limit(6)->inRandomOrder()->get();
-        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale','sale','sale_price','status')->limit(6)->orderByDesc('id')->get();
-        $picked = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price','status')->limit(6)->inRandomOrder()->get();
+        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status')->limit(4)->get();
+        $daily = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->inRandomOrder()->get();
+        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->orderByDesc('id')->get();
+        $picked = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->inRandomOrder()->get();
 
         //dd($picked);
 //        exit();
@@ -164,7 +164,7 @@ class HomeController extends Controller
     {
         $datalist = Product::where('title', 'like', '%' . $search . '%')->paginate(6);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
-        return view('home.search_products', ['search' => $search, 'datalist' => $datalist,'last'=>$last]);
+        return view('home.search_products', ['search' => $search, 'datalist' => $datalist, 'last' => $last]);
     }
 
     #endregion
@@ -180,20 +180,45 @@ class HomeController extends Controller
     //alt kategori ürün bulma
     public function categoryproducts($id, $slug)
     {
-        $datalist = Product::where('category_id', $id)->orderBY('price','desc')->paginate(2);
+        $datalist = Product::where('category_id', $id)->orderBY('price', 'desc')->paginate(2);
         $data = Category::find($id);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         //print_r($data);
         //exit();
-        return view('home.category_products', ['data' => $data, 'datalist' => $datalist,'last' => $last]);
+        return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
     }
 
 
     //Tüm ürümleri listeleme
     public function allproducts()
     {
-        $datalist = Product::orderBY('price','desc')->paginate(6);
-        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
-        return view('home.all_product', ['datalist' => $datalist,'last' => $last]);
+        $productcount = Product::where('status', '=', 'True')->count();
+//        if ($productcount>0){
+        $datalist = Product::where('status', '=', 'True');
+        //checking for sort
+        //dd(isset($_GET['sort']));
+        if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+
+            if ($_GET['sort'] == "product_lastest") {
+                $datalist->orderby('products.id', 'Desc');
+            } elseif ($_GET['sort'] == "price_highest") {
+                $datalist->orderby('products.sale_price', 'Desc');
+            } elseif ($_GET['sort'] == "price_lowest") {
+                $datalist->orderby('products.sale_price', 'Asc');
+            }elseif ($_GET['sort'] == "name_z_a") {
+                $datalist->orderby('products.title', 'Asc');
+            }elseif ($_GET['sort'] == "name_a_z") {
+                $datalist->orderby('products.title', 'Desc');
+            }
+        }
+
+        $datalist = $datalist->paginate(6);
+        $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
+        return view('home.all_product', ['datalist' => $datalist, 'last' => $last]);
+//        }
+//        else{
+//            abort(404);
+//        }
+
     }
 }

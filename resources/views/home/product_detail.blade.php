@@ -55,7 +55,7 @@
                         @if($data->is_sale=="Yes")
                             <h5> <b style="color:darkred"><i class="bx bxs-discount fs-5"> SALE! %{{$data->sale}}</i></b></h5>
                         @endif
-                        @if($data->sale_price==null)
+                        @if($data->is_sale=="No")
                             <div class="price">
                                 <span class="new-price">{{$data->price}}₺</span>
                             </div>
