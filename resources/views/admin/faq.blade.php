@@ -45,7 +45,13 @@
 {{--                                        <td >{{$rs->id}}</td>--}}
                                         <td>{{$rs->question}}</td>
                                         <td > {!!$rs->answer  !!}</td>
-                                        <td>{{$rs->status}}</td>
+                                        <td>
+                                            @if($rs->status=="True")
+                                                <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
+                                            @else
+                                                <span style="color:darkred"><b>{{$rs->status}}</b></span>
+                                            @endif
+                                        </td>
                                         <td ><a href="{{route('admin_faq_edit',['id'=>$rs->id])}}">Edit
                                             </a>
                                         </td>

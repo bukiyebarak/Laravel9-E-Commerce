@@ -57,7 +57,13 @@
                                         <td>{{$rs->subject}}</td>
                                         <td>{{$rs->review}}</td>
                                         <td>{{$rs->rate}}</td>
-                                        <td>{{$rs->status}}</td>
+                                        <td>
+                                            @if($rs->status=="True")
+                                                <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
+                                            @else
+                                                <span style="color:darkred"><b>{{$rs->status}}</b></span>
+                                            @endif
+                                        </td>
                                         <td>{{$rs->created_at}}</td>
 
                                         <td>

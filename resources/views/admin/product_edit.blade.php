@@ -78,17 +78,20 @@
                                 <div class="col-md-10">
                                     <label>Is Sale?</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="flexRadioDefault1" value="Yes">
-                                        <label class="form-check-label" for="flexRadioDefault1">Yes</label>
-                                        <br> </div>
+                                        <input class="form-check-input" type="radio" name="is_sale" id="yes" value="Yes" checked>
+                                        <label class="form-check-label" for="yes">Yes</label>
+                                        <br>
                                     <div id="sale" >
                                         <label>How many percent discount is there? (Example:% sale)</label>
-                                        <input type="number" name="sale" min="0" value="{{$data->sale}}" class="form-control" >
+                                        <input type="number" name="sale" value="{{$data->sale}}" class="form-control" >
+                                        @if ($errors->has('sale'))
+                                            <span class="text-danger">{{ $errors->first('sale') }}</span>
+                                        @endif
                                         <br>
-                                    </div>
+                                    </div></div>
                                     <div class="form-check ">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="flexRadioDefault2" value="No">
-                                        <label class="form-check-label" for="flexRadioDefault2">No</label>
+                                        <input class="form-check-input" type="radio" name="is_sale" id="no" value="No">
+                                        <label class="form-check-label" for="no">No</label>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -161,8 +164,11 @@
                                     <label>Status</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="">{{$data->status}}</option>
-                                        <option>True</option>
-                                        <option>False</option>
+                                        <option>@if($data->status=="True")
+                                                False
+                                            @else
+                                                True
+                                            @endif</option>
                                     </select>
                                 </div>
                                 <div class="col-12">

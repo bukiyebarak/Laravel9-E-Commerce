@@ -87,6 +87,9 @@
                                     <div id="sale">
                                         <label>How many percent discount is there? (Example:% sale)</label>
                                         <input type="number" name="sale" min="0" class="form-control">
+                                        @if ($errors->has('sale'))
+                                            <span class="text-danger">{{ $errors->first('sale') }}</span>
+                                        @endif
                                         <br>
                                     </div>
                                     <div class="form-check ">

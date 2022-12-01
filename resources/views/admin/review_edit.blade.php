@@ -71,8 +71,11 @@
                                     <td>
                                         <select name="status">
                                             <option>{{$data->status}}</option>
-                                            <option>True</option>
-                                            <option>False</option>
+                                            <option>@if($data->status=="True")
+                                                    False
+                                                @else
+                                                    True
+                                                @endif</option>
                                         </select>
                                     </td>
                                 </tr>

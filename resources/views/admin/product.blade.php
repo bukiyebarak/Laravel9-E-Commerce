@@ -38,7 +38,7 @@
                                         <th>Discount</th>
                                         <th>Discount Price</th>
                                         <th>Image</th>
-                                        <th>Image Gallery</th>
+                                        <th>Gallery</th>
                                         <th>Status</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -73,12 +73,18 @@
                                             <td>
                                                 <a href="{{route('admin_image_add',['product_id'=>$rs->id])}}"
                                                    onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
-                                                    <div class="font-22 text-primary"><i
-                                                            class="fadeIn animated bx bx-images"></i>
+                                                    <div style="text-align: center;"><i
+                                                            class="fadeIn animated bx bx-images fs-3"></i>
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td>{{$rs->status}}</td>
+                                            <td>
+                                                @if($rs->status=="True")
+                                                    <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
+                                                @else
+                                                    <span style="color:darkred"><b>{{$rs->status}}</b></span>
+                                                @endif
+                                            </td>
 
                                             <td><a href="{{route('admin_product_edit',['id'=>$rs->id])}}">
                                                     <div class="font-22 text-primary"><i

@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
             'minquantity' => 'Product Minimum Quantity',
             'tax' => 'Product Tax',
             'slug' => 'Product Slug',
+            'sale'=>'Product Discount',
         ];
     }
 
@@ -35,6 +36,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'image.max'=>'Image must be maximum 10000kb ',
+            'sale.required_if'=>'The Product Discount field is required'
         ];
     }
     /**
@@ -55,7 +57,7 @@ class ProductRequest extends FormRequest
             'minquantity' => 'required|numeric|min:1',
             'tax' => 'required|numeric|min:0',
             'slug' => 'required',
-            'sale' => 'nullable',
+            'sale' => 'required_if:is_sale,Yes',
             'is_sale' => 'nullable',
         ];
     }

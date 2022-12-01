@@ -49,10 +49,10 @@ class HomeController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        $slider = Product::select('id', 'title', 'image', 'price', 'slug')->limit(4)->get();
-        $daily = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price')->limit(6)->inRandomOrder()->get();
-        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale','sale','sale_price')->limit(6)->orderByDesc('id')->get();
-        $picked = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price')->limit(6)->inRandomOrder()->get();
+        $slider = Product::select('id', 'title', 'image', 'price', 'slug','status')->limit(4)->get();
+        $daily = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price','status')->limit(6)->inRandomOrder()->get();
+        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale','sale','sale_price','status')->limit(6)->orderByDesc('id')->get();
+        $picked = Product::select('id', 'title', 'image', 'price', 'slug','is_sale','sale','sale_price','status')->limit(6)->inRandomOrder()->get();
 
         //dd($picked);
 //        exit();
@@ -162,8 +162,9 @@ class HomeController extends Controller
 
     public function productlist($search)
     {
-        $datalist = Product::where('title', 'like', '%' . $search . '%')->get();
-        return view('home.search_products', ['search' => $search, 'datalist' => $datalist]);
+        $datalist = Product::where('title', 'like', '%' . $search . '%')->paginate(6);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        return view('home.search_products', ['search' => $search, 'datalist' => $datalist,'last'=>$last]);
     }
 
     #endregion
@@ -179,19 +180,20 @@ class HomeController extends Controller
     //alt kategori ürün bulma
     public function categoryproducts($id, $slug)
     {
-        $datalist = Product::where('category_id', $id)->get();
+        $datalist = Product::where('category_id', $id)->orderBY('price','desc')->paginate(2);
         $data = Category::find($id);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         //print_r($data);
         //exit();
-        return view('home.category_products', ['data' => $data, 'datalist' => $datalist]);
+        return view('home.category_products', ['data' => $data, 'datalist' => $datalist,'last' => $last]);
     }
 
 
     //Tüm ürümleri listeleme
     public function allproducts()
     {
-        $datalist = Product::all();
-
-        return view('home.all_product', ['datalist' => $datalist]);
+        $datalist = Product::orderBY('price','desc')->paginate(6);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        return view('home.all_product', ['datalist' => $datalist,'last' => $last]);
     }
 }

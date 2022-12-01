@@ -136,7 +136,9 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <p>Showing 1 – 18 of 100</p>
+                                Showing {{($datalist->currentpage()-1)* $datalist->perpage()+1}}
+                                to {{(($datalist->currentpage()-1)*$datalist->perpage())+$datalist->count()}}
+                                of {{$datalist->total()}} entries
                             </div>
 
                             <div class="col-lg-4 col-md-4">
@@ -195,14 +197,29 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        @if($rs->is_sale=="Yes")
+                                            <div class="sale-tag">Sale!</div>
+                                        @else
+                                            @foreach($last as $data)
+                                                @if($rs->id==$data->id)
+                                                    <div class="new-tag">New!</div>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
 
                                     <div class="products-content">
                                         <h3><a href="#">{{$rs->title}}</a></h3>
-                                        <div class="price">
-                                            <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                            <span class="new-price">{{$rs->price}}₺</span>
-                                        </div>
+                                        @if($rs->sale_price==null)
+                                            <div class="price">
+                                                <span class="new-price">{{$rs->price}}₺</span>
+                                            </div>
+                                        @else
+                                            <div class="price">
+                                                <span class="old-price">{{$rs->price}}₺</span>
+                                                <span class="new-price">{{$rs->sale_price}}₺</span>
+                                            </div>
+                                        @endif
                                         @php
                                             $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                             $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
@@ -231,15 +248,9 @@
                             </div>
                         @endforeach
                     </div>
-                    <!-- Single Product End-->
-                    <div class="pagination-area text-center">
-                        <a href="#" class="prev page-numbers"><i class='bx bx-chevron-left'></i></a>
-                        <span class="page-numbers current" aria-current="page">1</span>
-                        <a href="#" class="page-numbers">2</a>
-                        <a href="#" class="page-numbers">3</a>
-                        <a href="#" class="page-numbers">4</a>
-                        <a href="#" class="page-numbers">5</a>
-                        <a href="#" class="next page-numbers"><i class='bx bx-chevron-right'></i></a>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        {!! $datalist->links() !!}
                     </div>
                 </div>
             </div>

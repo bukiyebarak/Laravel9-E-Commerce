@@ -169,6 +169,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'minquantity' => 'Product Minimum Quantity',
+        'sale'=>'Product Discount',
+        ],
 
 ];

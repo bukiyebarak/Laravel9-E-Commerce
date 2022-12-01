@@ -56,7 +56,13 @@
                                             <td>{{$rs->subject}}</td>
                                             <td>{{$rs->message}}</td>
                                             <td>{{$rs->note}}</td>
-                                            <td>{{$rs->status}}</td>
+                                            <td>
+                                                @if($rs->status=="True")
+                                                    <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
+                                                @else
+                                                    <span style="color:darkred"><b>{{$rs->status}}</b></span>
+                                                @endif
+                                            </td>
                                             <td>{{$_SERVER['REMOTE_ADDR']}}</td>
                                             <td>
                                                 <a href="{{route('admin_message_edit',['id'=>$rs->id])}}"

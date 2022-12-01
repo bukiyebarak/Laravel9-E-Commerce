@@ -115,8 +115,22 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|min:3',
+            'keywords' => 'required|min:3|max:60',
+            'description' => 'required|min:5|max:100',
+            'detail' => 'required|min:5',
+            'price' => 'required|min:0',
+            'quantity' => 'required|numeric|min:1',
+            'minquantity' => 'required|numeric|min:1',
+            'tax' => 'required|numeric|min:0',
+            'slug' => 'required',
+            'sale' => 'required_if:is_sale,Yes',
+            'is_sale' => 'nullable',
+        ]);
+
         $price = $request->get('price');
         $sale = $request->get('sale');
         $salee = $price * $sale;

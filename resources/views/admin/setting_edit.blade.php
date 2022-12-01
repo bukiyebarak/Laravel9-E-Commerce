@@ -150,11 +150,11 @@
                                             <label>Status</label>
                                             <select class="form-select" name="status" required>
                                                 <option selected="">{{$data->status}}</option>
-                                                @if($data->status=='False')
-                                                    <option>True</option>
-                                                @elseif($data->status=='True')
-                                                    <option>False</option>
-                                                @endif
+                                                <option>@if($data->status=="True")
+                                                        False
+                                                    @else
+                                                        True
+                                                    @endif</option>
                                             </select>
                                         </div>
 

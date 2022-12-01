@@ -46,7 +46,13 @@
                                                 {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title) }}
                                             </td>
                                             <td>{{$rs->title}}</td>
-                                            <td>{{$rs->status}}</td>
+                                            <td>
+                                                @if($rs->status=="True")
+                                                    <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
+                                                @else
+                                                    <span style="color:darkred"><b>{{$rs->status}}</b></span>
+                                                @endif
+                                            </td>
                                             <td><a href="{{route('admin_category_edit',['id'=>$rs->id])}}">
                                                     <div class="font-22 text-primary"><i
                                                             class="fadeIn animated bx bx-edit"></i>

@@ -67,8 +67,11 @@
                                     <label>Status</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="selected">{{$data->status}}</option>
-                                        <option>False</option>
-                                        <option>True</option>
+                                        <option>@if($data->status=="True")
+                                                False
+                                            @else
+                                                True
+                                            @endif</option>
                                     </select>
                                 </div>
                                 <div class="col-12">

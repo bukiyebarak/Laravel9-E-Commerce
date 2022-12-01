@@ -32,16 +32,18 @@
                         <div class="faq-accordion">
                             <ul class="accordion">
                                 @foreach($datalist as $rs)
-                                <li class="accordion-item">
-                                    <a class="accordion-title" href="javascript:void(0)">
-                                        <i class='bx bx-chevron-down'></i>
-                                        {{$rs->question}}
-                                    </a>
+                                    @if($rs->status=="True")
+                                        <li class="accordion-item">
+                                            <a class="accordion-title" href="javascript:void(0)">
+                                                <i class='bx bx-chevron-down'></i>
+                                                {{$rs->question}}
+                                            </a>
 
-                                    <div class="accordion-content">
-                                        <p><b>{!! $rs->answer !!}</b></p>
-                                    </div>
-                                </li>
+                                            <div class="accordion-content">
+                                                <p><b>{!! $rs->answer !!}</b></p>
+                                            </div>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
@@ -52,7 +54,7 @@
         </div>
     </section>
     <!-- End Customer Service Area -->
-<br>
+    <br>
     <!-- Start Facility Area -->
     <section class="facility-area pb-70">
         <div class="container">

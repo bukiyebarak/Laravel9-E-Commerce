@@ -1,38 +1,40 @@
 <!-- Start Main Banner Area  Slider Categories-->
 <div class="home-slides-three owl-carousel owl-theme">
     @foreach($slider as $rs)
-        <div class="hero-banner">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6">
-                                <div class="main-banner-content">
-                                    <span class="sub-title">🤎Coffee Time...🤎</span>
-                                    <br>
-                                    <h1>{{$rs->title}}</h1>
-                                    <p> {{$rs->category}}</p>
-                                    </p>
-                                    <div style="text-align: center" class="btn-box">
-                                        <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}"
-                                           class="default-btn">Shop Now</a>
+        @if($rs->status=="True")
+            <div class="hero-banner">
+                <div class="d-table">
+                    <div class="d-table-cell">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="main-banner-content">
+                                        <span class="sub-title">🤎Coffee Time...🤎</span>
+                                        <br>
+                                        <h1>{{$rs->title}}</h1>
+                                        <p> {{$rs->category}}</p>
+                                        </p>
+                                        <div style="text-align: center" class="btn-box">
+                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}"
+                                               class="default-btn">Shop Now</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-6">
-                                <div class="banner-image">
-                                    <div class="circle"></div>
-                                    <img src="{{asset('images/'.$rs->image)}}"
-                                         style="height: 575px; width:375px; border-radius: 900px "
-                                         alt="image">
+                                <div class="col-lg-6">
+                                    <div class="banner-image">
+                                        <div class="circle"></div>
+                                        <img src="{{asset('images/'.$rs->image)}}"
+                                             style="height: 575px; width:375px; border-radius: 900px "
+                                             alt="image">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     @endforeach
 </div>
 <!-- End Main Banner Area -->
@@ -81,90 +83,93 @@
 
         <div class="row">
             @foreach($last as $rs)
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-productsBox">
-                        <div class="products-image">
-                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
-                                     alt="image">
-                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                @if($rs->status=="True")
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-productsBox">
+                            <div class="products-image">
+                                <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                    <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
+                                         alt="image">
+                                    <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
 
-                            </a>
+                                </a>
 
-                            <div class="products-button">
-                                <ul>
-                                    <li>
-                                        <div class="wishlist-btn">
-                                            <a href="#">
-                                                <i class='bx bx-heart'></i>
-                                                <span class="tooltip-label">Add to Wishlist</span>
-                                            </a>
-                                        </div>
-                                    </li>
+                                <div class="products-button">
+                                    <ul>
+                                        <li>
+                                            <div class="wishlist-btn">
+                                                <a href="#">
+                                                    <i class='bx bx-heart'></i>
+                                                    <span class="tooltip-label">Add to Wishlist</span>
+                                                </a>
+                                            </div>
+                                        </li>
 
-                                    <li>
-                                        <div class="quick-view-btn">
-                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                                <i class='bx bx-search-alt'></i>
-                                                <span class="tooltip-label">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        <li>
+                                            <div class="quick-view-btn">
+                                                <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                    <i class='bx bx-search-alt'></i>
+                                                    <span class="tooltip-label">Quick View</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @if($rs->is_sale=="Yes")
+                                    <div class="sale-tag">Sale!</div>
+                                @else
+                                    <div class="new-tag">New!</div>
+                                @endif
+
                             </div>
+
+                            <div class="products-content">
+                                <span href="" class="category"></span>
+                                <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
+                                </h3>
+                                @php
+                                    $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
+                                    $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                                @endphp
+                                <div class="star-rating">
+                                    <div class="rating">
+                                        <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
+                                            ({{$countreview}} İnceleme)
+                                        @endif
+                                    </div>
+                                </div>
+
+                                @if($rs->sale_price==null)
+                                    <div class="price">
+                                        <span class="new-price">{{$rs->price}}₺</span>
+                                    </div>
+                                @else
+                                    <div class="price">
+                                        <span class="old-price">{{$rs->price}}₺</span>
+                                        <span class="new-price">{{$rs->sale_price}}₺</span>
+                                    </div>
+                                @endif
+                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                    @csrf
+                                    <input name="quantity" type="hidden" value="1">
+                                    <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>
+                                </form>
+                            </div>
+
+
                             @if($rs->is_sale=="Yes")
-                                <div class="sale-tag">Sale!</div>
-                            @else
-                                <div class="new-tag">New!</div>
-                            @endif
-
-                        </div>
-
-                        <div class="products-content">
-                            <span href="" class="category"></span>
-                            <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a></h3>
-                            @php
-                                $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
-                                $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
-                            @endphp
-                            <div class="star-rating">
-                                <div class="rating">
-                                    <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
-                                        ({{$countreview}} İnceleme)
-                                    @endif
-                                </div>
-                            </div>
-
-                            @if($rs->sale_price==null)
-                                <div class="price">
-                                    <span class="new-price">{{$rs->price}}₺</span>
-                                </div>
-                            @else
-                                <div class="price">
-                                    <span class="old-price">{{$rs->price}}₺</span>
-                                    <span class="new-price">{{$rs->sale_price}}₺</span>
-                                </div>
-                            @endif
-                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                @csrf
-                                <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>
-                            </form>
-                        </div>
-
-
-                        @if($rs->is_sale=="Yes")
-                            <span class="products-discount">
+                                <span class="products-discount">
                             <span> {{$rs->sale}}% OFF </span>
                         </span>
-                        @endif
+                            @endif
 
+                        </div>
                     </div>
-                </div>
+                @endif
             @endforeach
         </div>
     </div>
@@ -232,11 +237,99 @@
 
                 <div class="products-slides owl-carousel owl-theme">
                     @foreach($picked as $rs)
-                        <div class="single-products-box">
+                        @if($rs->status=="True")
+                            <div class="single-products-box">
+                                <div class="products-image">
+                                    <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                        <img style="height: 380px;width: 320px" src="{{asset('images/'.$rs->image)}}"
+                                             class="main-image"
+                                             alt="image">
+                                        <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                                    </a>
+
+                                    <div class="products-button">
+                                        <ul>
+                                            <li>
+                                                <div class="wishlist-btn">
+                                                    <a href="#">
+                                                        <i class='bx bx-heart'></i>
+                                                        <span class="tooltip-label">Add to Wishlist</span>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="quick-view-btn">
+                                                    <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                        <i class='bx bx-search-alt'></i>
+                                                        <span class="tooltip-label">Quick View</span>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="products-content">
+                                    <h3>
+                                        <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
+                                    </h3>
+                                    @if($rs->sale_price==null)
+                                        <div class="price">
+                                            <span class="new-price">{{$rs->price}}₺</span>
+                                        </div>
+                                    @else
+                                        <div class="price">
+                                            <span class="old-price">{{$rs->price}}₺</span>
+                                            <span class="new-price">{{$rs->sale_price}}₺</span>
+                                        </div>
+                                    @endif
+                                    @php
+                                        $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
+                                        $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                                    @endphp
+                                    <div class="star-rating">
+                                        <div class="rating">
+                                            <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
+                                            <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
+                                            <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
+                                            <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
+                                            <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
+                                                ({{$countreview}} İnceleme)
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                        @csrf
+                                        <input name="quantity" type="hidden" value="1">
+                                        <input type="submit" class="add-to-cart default-btn"
+                                               style="background-color: whitesmoke" value="Add to Cart">
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </section>
+        <!-- End Products Area -->
+    </div>
+</section>
+<br><br><br><br>
+<!-- Start Products Area -->
+<section class="products-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title">
+            <span class="sub-title">See Our Collection</span>
+            <h2>Popular Products</h2>
+        </div>
+
+        <div class="row">
+            @foreach($picked as $rs)
+                @if($rs->status=="True")
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-productsBox">
                             <div class="products-image">
                                 <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                    <img style="height: 380px;width: 320px" src="{{asset('images/'.$rs->image)}}"
-                                         class="main-image"
+                                    <img style="height: 250px" src="{{asset('images/'.$rs->image)}}" class="main-image"
                                          alt="image">
                                     <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                                 </a>
@@ -261,20 +354,21 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="products-content">
-                                <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
-                                </h3>
-                                @if($rs->sale_price==null)
-                                    <div class="price">
-                                        <span class="new-price">{{$rs->price}}₺</span>
-                                    </div>
+
+                                @if($rs->is_sale=="Yes")
+                                    <div class="sale-tag">Sale!</div>
                                 @else
-                                    <div class="price">
-                                        <span class="old-price">{{$rs->price}}₺</span>
-                                        <span class="new-price">{{$rs->sale_price}}₺</span>
-                                    </div>
+                                    @foreach($last as $data)
+                                        @if($rs->id==$data->id)
+                                            <div class="new-tag">New!</div>
+                                        @endif
+                                    @endforeach
                                 @endif
+                            </div>
+
+                            <div class="products-content">
+                                <span class="category"></span>
+                                <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
                                 @php
                                     $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                     $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
@@ -290,110 +384,30 @@
                                         @endif
                                     </div>
                                 </div>
+                                @if($rs->sale_price==null)
+                                    <div class="price">
+                                        <span class="new-price">{{$rs->price}}₺</span>
+                                    </div>
+                                @else
+                                    <div class="price">
+                                        <span class="old-price">{{$rs->price}}₺</span>
+                                        <span class="new-price">{{$rs->sale_price}}₺</span>
+                                    </div>
+                                @endif
                                 <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                     @csrf
                                     <input name="quantity" type="hidden" value="1">
-                                    <input type="submit" class="add-to-cart default-btn"
-                                           style="background-color: whitesmoke" value="Add to Cart">
+                                    <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
                                 </form>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <!-- End Products Area -->
-    </div>
-</section>
-<br><br><br><br>
-<!-- Start Products Area -->
-<section class="products-area pt-100 pb-70">
-    <div class="container">
-        <div class="section-title">
-            <span class="sub-title">See Our Collection</span>
-            <h2>Popular Products</h2>
-        </div>
-
-        <div class="row">
-            @foreach($picked as $rs)
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-productsBox">
-                        <div class="products-image">
-                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 250px" src="{{asset('images/'.$rs->image)}}" class="main-image"
-                                     alt="image">
-                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
-                            </a>
-
-                            <div class="products-button">
-                                <ul>
-                                    <li>
-                                        <div class="wishlist-btn">
-                                            <a href="#">
-                                                <i class='bx bx-heart'></i>
-                                                <span class="tooltip-label">Add to Wishlist</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="quick-view-btn">
-                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                                <i class='bx bx-search-alt'></i>
-                                                <span class="tooltip-label">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            {{--                            <div class="new-tag">New!</div>--}}
-
                             @if($rs->is_sale=="Yes")
-                                <div class="sale-tag">Sale!</div>
-                            @endif
-                        </div>
-
-                        <div class="products-content">
-                            <span class="category"></span>
-                            <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
-                            @php
-                                $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
-                                $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
-                            @endphp
-                            <div class="star-rating">
-                                <div class="rating">
-                                    <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
-                                        ({{$countreview}} İnceleme)
-                                    @endif
-                                </div>
-                            </div>
-                            @if($rs->sale_price==null)
-                                <div class="price">
-                                    <span class="new-price">{{$rs->price}}₺</span>
-                                </div>
-                            @else
-                                <div class="price">
-                                    <span class="old-price">{{$rs->price}}₺</span>
-                                    <span class="new-price">{{$rs->sale_price}}₺</span>
-                                </div>
-                            @endif
-                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                @csrf
-                                <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
-                            </form>
-                        </div>
-                        @if($rs->is_sale=="Yes")
-                            <span class="products-discount">
+                                <span class="products-discount">
                             <span> {{$rs->sale}}% OFF </span>
                         </span>
-                        @endif
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endif
             @endforeach
         </div>
     </div>
@@ -467,67 +481,89 @@
 
         <div class="row">
             @foreach($daily as $rs)
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-productsBox">
-                        <div class="products-image">
-                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
-                                     alt="image">
-                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
-                            </a>
+                @if($rs->status=="True")
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-productsBox">
+                            <div class="products-image">
+                                <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                    <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
+                                         alt="image">
+                                    <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                                </a>
 
-                            <div class="products-button">
-                                <ul>
-                                    <li>
-                                        <div class="wishlist-btn">
-                                            <a href="#">
-                                                <i class='bx bx-heart'></i>
-                                                <span class="tooltip-label">Add to Wishlist</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="quick-view-btn">
-                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                                <i class='bx bx-search-alt'></i>
-                                                <span class="tooltip-label">Quick View</span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="products-content">
-                            <span class="category"></span>
-                            <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
-                            @php
-                                $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
-                                $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
-                            @endphp
-                            <div class="star-rating">
-                                <div class="rating">
-                                    <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                    <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
-                                        ({{$countreview}} İnceleme)
-                                    @endif
+                                <div class="products-button">
+                                    <ul>
+                                        <li>
+                                            <div class="wishlist-btn">
+                                                <a href="#">
+                                                    <i class='bx bx-heart'></i>
+                                                    <span class="tooltip-label">Add to Wishlist</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="quick-view-btn">
+                                                <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                    <i class='bx bx-search-alt'></i>
+                                                    <span class="tooltip-label">Quick View</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
+                                @if($rs->is_sale=="Yes")
+                                    <div class="sale-tag">Sale!</div>
+                                @else
+                                    @foreach($last as $data)
+                                        @if($rs->id==$data->id)
+                                            <div class="new-tag">New!</div>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </div>
-                            <div class="price">
-                                <span class="old-price">{{$rs->price* 1.2}}₺</span>
-                                <span class="new-price">{{$rs->price}}₺</span>
+
+                            <div class="products-content">
+                                <span class="category"></span>
+                                <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
+                                @php
+                                    $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
+                                    $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                                @endphp
+                                <div class="star-rating">
+                                    <div class="rating">
+                                        <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
+                                            ({{$countreview}} İnceleme)
+                                        @endif
+                                    </div>
+                                </div>
+                                @if($rs->sale_price==null)
+                                    <div class="price">
+                                        <span class="new-price">{{$rs->price}}₺</span>
+                                    </div>
+                                @else
+                                    <div class="price">
+                                        <span class="old-price">{{$rs->price}}₺</span>
+                                        <span class="new-price">{{$rs->sale_price}}₺</span>
+                                    </div>
+                                @endif
+                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                    @csrf
+                                    <input name="quantity" type="hidden" value="1">
+                                    <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
+                                </form>
                             </div>
-                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                @csrf
-                                <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
-                            </form>
+                            @if($rs->is_sale=="Yes")
+                                <span class="products-discount">
+                            <span> {{$rs->sale}}% OFF </span>
+                        </span>
+                            @endif
                         </div>
                     </div>
-                </div>
+                @endif
             @endforeach
 
         </div>

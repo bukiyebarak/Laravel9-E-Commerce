@@ -32,7 +32,7 @@
                     <div class="products-details-image">
 
                         <ul class="products-details-image-slides">
-                            <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
+                            <li><img src="{{asset('images/'.$data->image)}}"  alt="image"></li>
                             @foreach($datalist as $rs)
                                 <li><img src="{{asset('images/'.$rs->image)}}" alt="image"></li>
                             @endforeach
@@ -52,7 +52,9 @@
                 <div class="col-lg-7 col-md-12">
                     <div class="products-details-desc">
                         <h3>{{$data->title}}</h3>
-
+                        @if($data->is_sale=="Yes")
+                            <h5> <b style="color:darkred"><i class="bx bxs-discount fs-5"> SALE! %{{$data->sale}}</i></b></h5>
+                        @endif
                         @if($data->sale_price==null)
                             <div class="price">
                                 <span class="new-price">{{$data->price}}₺</span>
@@ -63,6 +65,8 @@
                                 <span class="new-price">{{$data->sale_price}}₺</span>
                             </div>
                         @endif
+
+
                         @php
                             $avgrev=\App\Http\Controllers\HomeController::avrgreview($data->id);
                             $countreview=\App\Http\Controllers\HomeController::countreview($data->id);

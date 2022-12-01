@@ -86,12 +86,16 @@ class OrderController extends Controller
         echo $html;
     }
 
-
-    public function store(CheckoutRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CheckoutRequest $request): \Illuminate\Http\Response
     {
 //        $input = $request->all();
 //        $order = Order::create($input);
-
         $order = Order::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -168,7 +172,13 @@ class OrderController extends Controller
        // return redirect()->back()->with('success','Product Add Successfully' );
     }
 
-    public function callback(Request $request, User $user)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function callback(Request $request, User $user): \Illuminate\Http\Response
     {
         if (!auth()->check()) {
             dd('callbackdggg');
@@ -182,15 +192,11 @@ class OrderController extends Controller
 
         if ($checkoutForm->getPaymentStatus() == 'SUCCESS')
         {
-
-            $order = $this->getOrder();
-
-          //  Event::dispatch(new OrderRecord($order));
-            // dd($data2);
-
-            //Sepeti Kapat
+            $this->getOrder();
+           //Sepeti Kapat
             $data3 = Shopcart::where('user_id', Auth::id());
             $data3->delete();
+            //getorder da mail atılıyor.
 //            $this->sendOrderConfirmationMail($order);
 //            $this->sendOrderConfirmationMailAdmin($order);
 

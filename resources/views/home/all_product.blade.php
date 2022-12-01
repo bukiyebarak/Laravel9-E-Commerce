@@ -133,7 +133,11 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <p>Showing 1 – 18 of 100</p>
+                                <div>
+                                    Showing {{($datalist->currentpage()-1)* $datalist->perpage()+1}}
+                                    to {{(($datalist->currentpage()-1)*$datalist->perpage())+$datalist->count()}}
+                                    of {{$datalist->total()}} entries
+                                </div>
                             </div>
 
                             <div class="col-lg-4 col-md-4">
@@ -162,7 +166,8 @@
                                                 <img style="height: 200px; width: 200px"
                                                      src="{{asset('images/'.$rs->image)}}" class="main-image"
                                                      alt="image">
-                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image"
+                                                     alt="image">
                                             </a>
                                         </a>
 
@@ -189,6 +194,12 @@
                                         </div>
                                         @if($rs->is_sale=="Yes")
                                             <div class="sale-tag">Sale!</div>
+                                        @else
+                                            @foreach($last as $data)
+                                                @if($rs->id==$data->id)
+                                                    <div class="new-tag">New!</div>
+                                                @endif
+                                            @endforeach
                                         @endif
                                     </div>
 
@@ -224,7 +235,8 @@
                                         <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
                                             @csrf
                                             <input name="quantity" type="hidden" value="1">
-                                            <input type="submit" class="add-to-cart default-btn" style="background-color: whitesmoke" value="Add to Cart">
+                                            <input type="submit" class="add-to-cart default-btn"
+                                                   style="background-color: whitesmoke" value="Add to Cart">
                                         </form>
                                     </div>
                                 </div>
@@ -232,18 +244,12 @@
                         @endforeach
 
                     </div>
-
-                    <div class="pagination-area text-center">
-                        <a href="#" class="prev page-numbers"><i class='bx bx-chevron-left'></i></a>
-                        <span class="page-numbers current" aria-current="page">1</span>
-                        <a href="#" class="page-numbers">2</a>
-                        <a href="#" class="page-numbers">3</a>
-                        <a href="#" class="page-numbers">4</a>
-                        <a href="#" class="page-numbers">5</a>
-                        <a href="#" class="next page-numbers"><i class='bx bx-chevron-right'></i></a>
+                    <br>
+                    {{-- Pagination --}}
+                    <div class="d-flex justify-content-center">
+                        {!! $datalist->appends(['sort' => 'price'])->links() !!}
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
