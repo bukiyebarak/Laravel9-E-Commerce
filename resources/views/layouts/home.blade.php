@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('title')</title>
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="@yield('keywords')">
@@ -24,7 +25,8 @@
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/dark.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/responsive.css">
     <link rel="icon" type="image/png" href="{{asset('assets')}}/home/assets/img/favicon.png">
-
+    <script src="{{asset('assets')}}/home/assets/js/custom.js"></script>
+    <script src="{{asset('assets')}}/home/assets/js/customnotajax.js"></script>
 
     @yield('css')
     @yield('javascript')

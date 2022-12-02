@@ -142,16 +142,18 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <div class="products-ordering-list">
-                                    <select>
-                                        <option>Sort by Price: Low to High</option>
-                                        <option>Default Sorting</option>
-                                        <option>Sort by Popularity</option>
-                                        <option>Sort by Average Rating</option>
-                                        <option>Sort by Latest</option>
-                                        <option>Sort by Price: High to Low</option>
-                                    </select>
-                                </div>
+                                <form name="sortproducts" id="sortProducts">
+                                    <div class="products-ordering-list">
+                                        <select name="sort1" id="sort1">
+                                            <option selected value="">Default Sorting</option>
+                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected @endif >Sort by: Latest</option>
+                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected @endif >Sort by Price: Low to High</option>
+                                            <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
+                                            <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
+                                            <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -250,7 +252,12 @@
                     </div>
                     <br>
                     <div class="d-flex justify-content-center">
-                        {!! $datalist->links() !!}
+                        @if(isset($_GET['sort1']))
+                            {!! $datalist->appends(['sort'=>$_GET['sort1']])->links() !!}
+                        @else
+                            {!! $datalist->links() !!}
+                        @endif
+
                     </div>
                 </div>
             </div>

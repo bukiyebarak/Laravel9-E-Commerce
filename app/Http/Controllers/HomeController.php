@@ -13,10 +13,9 @@ use App\Models\Setting;
 use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\Route;
 
 class HomeController extends Controller
 {
@@ -162,7 +161,23 @@ class HomeController extends Controller
 
     public function productlist($search)
     {
-        $datalist = Product::where('title', 'like', '%' . $search . '%')->paginate(6);
+        $datalist = Product::where('title', 'like', '%' . $search . '%');
+        if (isset($_GET['sort1']) && !empty($_GET['sort1'])) {
+
+            if ($_GET['sort1'] == "product_lastest") {
+                $datalist->orderby('products.id', 'Desc');
+            } elseif ($_GET['sort1'] == "price_highest") {
+                $datalist->orderby('products.sale_price', 'Desc');
+            } elseif ($_GET['sort1'] == "price_lowest") {
+                $datalist->orderby('products.sale_price', 'Asc');
+            } elseif ($_GET['sort1'] == "name_z_a") {
+                $datalist->orderby('products.title', 'Asc');
+            } elseif ($_GET['sort1'] == "name_a_z") {
+                $datalist->orderby('products.title', 'Desc');
+            }
+        }
+        // dd($datalist);
+        $datalist = $datalist->paginate(5);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         return view('home.search_products', ['search' => $search, 'datalist' => $datalist, 'last' => $last]);
     }
@@ -178,47 +193,97 @@ class HomeController extends Controller
     }
 
     //alt kategori ürün bulma
-    public function categoryproducts($id, $slug)
+    public function categoryproducts(Request $request, $id, $slug)
     {
-        $datalist = Product::where('category_id', $id)->orderBY('price', 'desc')->paginate(2);
-        $data = Category::find($id);
-        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
-        //print_r($data);
-        //exit();
-        return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
-    }
-
-
-    //Tüm ürümleri listeleme
-    public function allproducts()
-    {
-        $productcount = Product::where('status', '=', 'True')->count();
-//        if ($productcount>0){
-        $datalist = Product::where('status', '=', 'True');
-        //checking for sort
-        //dd(isset($_GET['sort']));
-        if (isset($_GET['sort']) && !empty($_GET['sort'])) {
-
-            if ($_GET['sort'] == "product_lastest") {
+        $datalist = Product::where('category_id', $id);
+        if (isset($_GET['sort1']) && !empty($_GET['sort1'])) {
+           // dd($_GET['sort1']);
+            if ($_GET['sort1'] == "product_lastest") {
                 $datalist->orderby('products.id', 'Desc');
-            } elseif ($_GET['sort'] == "price_highest") {
+            } elseif ($_GET['sort1'] == "price_highest") {
                 $datalist->orderby('products.sale_price', 'Desc');
-            } elseif ($_GET['sort'] == "price_lowest") {
+            } elseif ($_GET['sort1'] == "price_lowest") {
                 $datalist->orderby('products.sale_price', 'Asc');
-            }elseif ($_GET['sort'] == "name_z_a") {
+            } elseif ($_GET['sort1'] == "name_z_a") {
                 $datalist->orderby('products.title', 'Asc');
-            }elseif ($_GET['sort'] == "name_a_z") {
+            } elseif ($_GET['sort1'] == "name_a_z") {
                 $datalist->orderby('products.title', 'Desc');
             }
         }
+       // dd($datalist);
+        $datalist = $datalist->paginate(1);
+        $data = Category::find($id);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
+    }
 
-        $datalist = $datalist->paginate(6);
-        $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
-        return view('home.all_product', ['datalist' => $datalist, 'last' => $last]);
-//        }
-//        else{
-//            abort(404);
-//        }
+    //Tüm ürümleri listeleme
+    public function allproducts(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            // echo "<pre>"; print_r($request['sort']); die;
+            $url = $data['url'];
+            //print_r($url);
+            $_GET['sort'] = $data['sort'];
+
+            $productCount = Product::where('status', '=', 'True')->count();
+            if ($productCount > 0) {
+                $datalist = Product::where('status', '=', 'True');
+                //checking for sort
+                //dd(isset($_GET['sort']));
+                if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+
+                    if ($_GET['sort'] == "product_lastest") {
+                        $datalist->orderby('products.id', 'Desc');
+                    } elseif ($_GET['sort'] == "price_highest") {
+                        $datalist->orderby('products.sale_price', 'Desc');
+                    } elseif ($_GET['sort'] == "price_lowest") {
+                        $datalist->orderby('products.sale_price', 'Asc');
+                    } elseif ($_GET['sort'] == "name_z_a") {
+                        $datalist->orderby('products.title', 'Desc');
+                    } elseif ($_GET['sort'] == "name_a_z") {
+                        $datalist->orderby('products.title', 'Asc');
+                    }
+                }
+
+                $datalist = $datalist->paginate(6);
+                $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
+                return view('home.ajax_product_listing', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'data' => $data]);
+            } else {
+                abort(404);
+            }
+        } else {
+            $url = Route::getFacadeRoot()->current()->uri();
+            //dd($url);
+            $productcount = Product::where('status', '=', 'True')->count();
+            if ($productcount > 0) {
+                $datalist = Product::where('status', '=', 'True');
+                //checking for sort
+                //dd(isset($_GET['sort']));
+                if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+
+                    if ($_GET['sort'] == "product_lastest") {
+                        $datalist->orderby('products.id', 'Desc');
+                    } elseif ($_GET['sort'] == "price_highest") {
+                        $datalist->orderby('products.sale_price', 'Desc');
+                    } elseif ($_GET['sort'] == "price_lowest") {
+                        $datalist->orderby('products.sale_price', 'Asc');
+                    } elseif ($_GET['sort'] == "name_z_a") {
+                        $datalist->orderby('products.title', 'Desc');
+                    } elseif ($_GET['sort'] == "name_a_z") {
+                        $datalist->orderby('products.title', 'Asc');
+                    }
+                }
+
+                $datalist = $datalist->paginate(6);
+                $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
+                return view('home.all_product', ['datalist' => $datalist, 'last' => $last, 'url' => $url]);
+            } else {
+                abort(404);
+            }
+        }
+
 
     }
 }

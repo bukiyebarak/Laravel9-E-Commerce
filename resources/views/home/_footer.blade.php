@@ -146,3 +146,4 @@
 <script src="{{asset('assets')}}/home/assets/js/main.js"></script>
 <!--Custom-->
 <script src="{{asset('assets')}}/home/assets/js/custom.js"></script>
+<script src="{{asset('assets')}}/home/assets/js/customnotajax.js"></script>

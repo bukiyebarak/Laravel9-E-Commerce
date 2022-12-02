@@ -46,7 +46,7 @@ Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('pro
 Route::get('categoryproducts/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
 Route::post('/getproduct', [HomeController::class, 'getproduct'])->name('getproduct');
 Route::get('/productlist/{search}', [HomeController::class, 'productlist'])->name('productlist');
-Route::get('allproducts', [HomeController::class, 'allproducts'])->name('allproducts');
+Route::match(['get','post'],'allproducts', [HomeController::class, 'allproducts'])->name('allproducts');
 Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
 Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 
