@@ -149,9 +149,9 @@
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
                                         <select name="sort1" id="sort1">
-                                            <option selected value="">Default Sorting</option>
-                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected @endif >Sort by: Latest</option>
-                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected @endif >Sort by Price: Low to High</option>
+                                            <option selected="" value="">Default Sorting</option>
+                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
+                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>
                                             <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
                                             <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
                                             <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
@@ -231,8 +231,7 @@
                                                 <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
-                                                )
+                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}})
                                             </div>
                                         </div>
                                         <br>
@@ -252,7 +251,7 @@
                     <!-- Single Product End-->
                     <div class="d-flex justify-content-center">
                         @if(isset($_GET['sort1']))
-                            {!! $datalist->appends(['sort'=>$_GET['sort1']])->links() !!}
+                            {!! $datalist->appends(['sort1'=>$_GET['sort1']])->links() !!}
                         @else
                             {!! $datalist->links() !!}
                         @endif

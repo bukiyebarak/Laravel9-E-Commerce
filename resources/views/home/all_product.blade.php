@@ -42,14 +42,33 @@
                                 @livewireScripts
                             @endsection
                         </section>
+                        <!--Filter price -->
                         <section class="widget widget_categories">
-                            <div class="woocommerce-widget price-list-widget">
+
+                            <div class="woocommerce-widget brands-list-widget">
                                 <h3 class="widget-title">Price</h3>
 
-                                <div class="collection-filter-by-price">
-                                    <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
-                                           name="filter_by_price" data-step="10">
-                                </div>
+                                <form id="filter_price" name="filter_price">
+                                    <div class="collection-filter-by-price" id="price">
+                                        <input class="range_slider" type="text"
+                                               name="min_price" id="min_price"> <i>-</i>
+                                        <input class="range_slider" type="text"
+                                               name="max_price" id="max_price">
+                                        <button class="btn-default" type="submit" id="btn">Filter</button>
+                                    </div>
+
+                                </form>
+                                {{--                                <form method="post" action="#">--}}
+                                {{--                                    <?php $prices = array('0-100', '100-200', '200-300', '300-400', '400-900') ?>--}}
+
+                                {{--                                    @foreach($prices as $key=>$price)--}}
+                                {{--                                        <ul class="brands-list-row">--}}
+                                {{--                                           <input type="checkbox" class="form-check-input" id="price{{ $key }}"--}}
+                                {{--                                                       name="price[]" value="{{$price}}">--}}
+                                {{--                                            <label class="form-label" for="price{{ $key }}"><b>{{$price}}</b></label>--}}
+                                {{--                                        </ul>--}}
+                                {{--                                    @endforeach--}}
+                                {{--                                </form>--}}
                             </div>
                         </section>
                         <br>
@@ -143,6 +162,8 @@
                             <div class="col-lg-4 col-md-4">
                                 <form name="sortproducts" id="sortProducts">
                                     <input type="hidden" name="url" id="url" value="{{$url}}">
+                                    <input hidden name="min_price" id="min_price" value="{{$min_price}}">
+                                    <input hidden name="max_price" id="max_price" value="{{$max_price}}">
                                     <div class="products-ordering-list">
                                         <select name="sort" id="sort">
                                             <option selected value="">Default Sorting</option>

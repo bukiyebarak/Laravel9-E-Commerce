@@ -15,7 +15,6 @@
         }
     });
 
-
     function submitForm(){
         // Initiate Variables With Form Content
         var name = $("#name").val();

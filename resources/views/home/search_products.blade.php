@@ -253,7 +253,7 @@
                     <br>
                     <div class="d-flex justify-content-center">
                         @if(isset($_GET['sort1']))
-                            {!! $datalist->appends(['sort'=>$_GET['sort1']])->links() !!}
+                            {!! $datalist->appends(['sort1'=>$_GET['sort1']])->links() !!}
                         @else
                             {!! $datalist->links() !!}
                         @endif

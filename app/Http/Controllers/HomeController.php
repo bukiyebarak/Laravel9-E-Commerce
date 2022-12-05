@@ -162,20 +162,7 @@ class HomeController extends Controller
     public function productlist($search)
     {
         $datalist = Product::where('title', 'like', '%' . $search . '%');
-        if (isset($_GET['sort1']) && !empty($_GET['sort1'])) {
-
-            if ($_GET['sort1'] == "product_lastest") {
-                $datalist->orderby('products.id', 'Desc');
-            } elseif ($_GET['sort1'] == "price_highest") {
-                $datalist->orderby('products.sale_price', 'Desc');
-            } elseif ($_GET['sort1'] == "price_lowest") {
-                $datalist->orderby('products.sale_price', 'Asc');
-            } elseif ($_GET['sort1'] == "name_z_a") {
-                $datalist->orderby('products.title', 'Asc');
-            } elseif ($_GET['sort1'] == "name_a_z") {
-                $datalist->orderby('products.title', 'Desc');
-            }
-        }
+        $this->getSort($datalist);
         // dd($datalist);
         $datalist = $datalist->paginate(5);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
@@ -196,21 +183,10 @@ class HomeController extends Controller
     public function categoryproducts(Request $request, $id, $slug)
     {
         $datalist = Product::where('category_id', $id);
-        if (isset($_GET['sort1']) && !empty($_GET['sort1'])) {
-           // dd($_GET['sort1']);
-            if ($_GET['sort1'] == "product_lastest") {
-                $datalist->orderby('products.id', 'Desc');
-            } elseif ($_GET['sort1'] == "price_highest") {
-                $datalist->orderby('products.sale_price', 'Desc');
-            } elseif ($_GET['sort1'] == "price_lowest") {
-                $datalist->orderby('products.sale_price', 'Asc');
-            } elseif ($_GET['sort1'] == "name_z_a") {
-                $datalist->orderby('products.title', 'Asc');
-            } elseif ($_GET['sort1'] == "name_a_z") {
-                $datalist->orderby('products.title', 'Desc');
-            }
-        }
-       // dd($datalist);
+
+        //checking for sort
+        $this->getSort($datalist);
+        // dd($datalist);
         $datalist = $datalist->paginate(1);
         $data = Category::find($id);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
@@ -220,7 +196,14 @@ class HomeController extends Controller
     //Tüm ürümleri listeleme
     public function allproducts(Request $request)
     {
+        $minprice = Product::min('products.sale_price');
+        $maxprice = Product::max('products.sale_price');
+        $min_price = $request->get('min_price');
+        $max_price = $request->get('max_price');
+        //  dd($minprice,$maxprice);
         if ($request->ajax()) {
+            $min_price = $request->get('min_price');
+            $max_price = $request->get('max_price');
             $data = $request->all();
             // echo "<pre>"; print_r($request['sort']); die;
             $url = $data['url'];
@@ -235,6 +218,7 @@ class HomeController extends Controller
                 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
 
                     if ($_GET['sort'] == "product_lastest") {
+
                         $datalist->orderby('products.id', 'Desc');
                     } elseif ($_GET['sort'] == "price_highest") {
                         $datalist->orderby('products.sale_price', 'Desc');
@@ -247,9 +231,13 @@ class HomeController extends Controller
                     }
                 }
 
-                $datalist = $datalist->paginate(6);
+                if (($min_price) && ($max_price)) {
+                   // dd($min_price,$max_price);
+                    $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(30);
+                } else
+                    $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(30);
                 $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
-                return view('home.ajax_product_listing', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'data' => $data]);
+                return view('home.ajax_product_listing', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'data' => $data,'min_price'=>$min_price,'max_price'=>$maxprice]);
             } else {
                 abort(404);
             }
@@ -275,15 +263,41 @@ class HomeController extends Controller
                         $datalist->orderby('products.title', 'Asc');
                     }
                 }
+                if (($min_price) && ($max_price)) {
+                     //dd($min_price,$max_price);
+                    $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(30);
+                } else
+                    $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(30);
 
-                $datalist = $datalist->paginate(6);
                 $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
-                return view('home.all_product', ['datalist' => $datalist, 'last' => $last, 'url' => $url]);
+                return view('home.all_product', ['datalist' => $datalist, 'last' => $last, 'url' => $url,'min_price'=>$min_price,'max_price'=>$maxprice]);
             } else {
                 abort(404);
             }
         }
 
 
+    }
+
+    /**
+     * @param $datalist
+     * @return void
+     */
+    public function getSort($datalist): void
+    {
+        if (isset($_GET['sort1']) && !empty($_GET['sort1'])) {
+            // dd($_GET['sort1']);
+            if ($_GET['sort1'] == "product_lastest") {
+                $datalist->orderby('products.id', 'Desc');
+            } elseif ($_GET['sort1'] == "price_highest") {
+                $datalist->orderby('products.sale_price', 'Desc');
+            } elseif ($_GET['sort1'] == "price_lowest") {
+                $datalist->orderby('products.sale_price', 'Asc');
+            } elseif ($_GET['sort1'] == "name_z_a") {
+                $datalist->orderby('products.title', 'Asc');
+            } elseif ($_GET['sort1'] == "name_a_z") {
+                $datalist->orderby('products.title', 'Desc');
+            }
+        }
     }
 }
