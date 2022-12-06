@@ -60,7 +60,7 @@
                                         </ul>
                                     </td>
                                     <td class="product-name">
-                                        <span class="unit-amount">{{$rs->amount}}€</span>
+                                        <span class="unit-amount">{{$rs->price}}€</span>
                                         <ul>
                                             <li>Total: <span> {{$rs->price*$rs->quantity}}€</span></li>
                                         </ul>

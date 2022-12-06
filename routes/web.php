@@ -131,6 +131,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('itemupdate/{id}', [AdminOrderController::class, 'itemupdate'])->name('admin_order_item_update');
             Route::get('delete/{id}', [AdminOrderController::class, 'destroy'])->name('admin_order_delete');
             Route::get('show/{id}', [AdminOrderController::class, 'show'])->name('admin_order_show');
+            Route::get('showmodal/{id}', [AdminOrderController::class, 'showmodal'])->name('admin_order_showmodal');
         });
 
 

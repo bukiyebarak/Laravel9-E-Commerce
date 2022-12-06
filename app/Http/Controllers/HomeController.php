@@ -233,9 +233,9 @@ class HomeController extends Controller
 
                 if (($min_price) && ($max_price)) {
                    // dd($min_price,$max_price);
-                    $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(30);
+                    $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(6);
                 } else
-                    $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(30);
+                    $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(6);
                 $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
                 return view('home.ajax_product_listing', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'data' => $data,'min_price'=>$min_price,'max_price'=>$maxprice]);
             } else {
@@ -265,9 +265,9 @@ class HomeController extends Controller
                 }
                 if (($min_price) && ($max_price)) {
                      //dd($min_price,$max_price);
-                    $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(30);
+                    $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(6);
                 } else
-                    $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(30);
+                    $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(6);
 
                 $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
                 return view('home.all_product', ['datalist' => $datalist, 'last' => $last, 'url' => $url,'min_price'=>$min_price,'max_price'=>$maxprice]);

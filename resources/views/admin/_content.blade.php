@@ -1,3 +1,9 @@
+<style>
+    nice-select swal2-select{
+        display: none;
+    }
+</style>
+
 <!--start page wrapper -->
 <div class="page-wrapper">
     <div class="page-content">

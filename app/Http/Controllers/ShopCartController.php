@@ -66,7 +66,8 @@ class ShopCartController extends Controller
 
 //        Alert::success('Product Added Successfully', 'We have added product to the cart');
 
-        return redirect()->back()->with('success','Product Added To Cart Successfully');
+        $message=__('Product Added to Shopcart Successfully');
+        return redirect()->back()->with('toast_success',$message);
     }
 
     /**

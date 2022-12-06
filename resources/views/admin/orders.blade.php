@@ -65,13 +65,20 @@
                                             <td>{{$rs->created_at}}</td>
                                             <td>{{$rs->status}}</td>
                                             <td>
+                                                <a href="{{route('admin_order_showmodal',['id'=>$rs->id])}}"
+                                                   class="btn btn-primary" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleExtraLargeModal{{$rs->id}}">Extra large</a>
                                                 <a href="{{route('admin_order_show',['id'=>$rs->id])}}"
                                                    onclick="return !window.open(this.href, '','top=20 left=50 width=1000 height=800')">
                                                     <div class="font-22 text-primary"><i
                                                             class="fadeIn animated bx bxs-eyedropper"></i></div>
-
                                                 </a>
                                             </td>
+                                            @php
+                                                $data = \App\Models\Order::find($rs->id);
+                                                $datalistmodal = \App\Models\Orderitem::where('order_id', $rs->id)->get();
+                                            @endphp
+                                            @include('admin.modal.order_item')
                                         </tr>
                                     @endforeach
                                 </table>

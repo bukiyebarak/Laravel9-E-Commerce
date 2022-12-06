@@ -62,6 +62,13 @@ class OrderController extends Controller
         return view('admin.order_items', ['data' => $data, 'datalist' => $datalist]);
     }
 
+    public function showmodal(Order $order, $id)
+    {
+        $data = Order::find($id);
+        $datalist = Orderitem::where('order_id', $id)->get();
+
+        return  ['data' => $data, 'datalist' => $datalist];
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -89,7 +89,7 @@
         <div class="footer-bottom-area">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
-                    <p>©2022 ALL RIGHTS REVERSED| {{$setting->title}} </p>
+                    <p>© {{$setting->title}} 2022 Tüm Hakları Saklıdır, Kopyalanamaz </p>
                     <p>V:1.0.1</p>
                 </div>
 
