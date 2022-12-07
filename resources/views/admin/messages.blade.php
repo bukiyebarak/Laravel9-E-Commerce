@@ -31,6 +31,7 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>User Name-Surname</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
@@ -48,16 +49,19 @@
                                         <tr>
                                             <td>{{$rs->id}}</td>
                                             <td>
-                                                <a href="{{route('admin_user_show',['id'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
-                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
-                                                    {{$rs->name}}</a></td>
-                                            <td> <a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
+                                                <a href="#" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleLargeModal{{$rs->user->id}}">{{$rs->user->name}} {{$rs->user->surname}}</a>
+                                            {{--                                                <a href="{{route('admin_user_show',['id'=>\Illuminate\Support\Facades\Auth::user()->id])}}"--}}
+                                            {{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">--}}
+                                            {{--                                                    {{$rs->user->name}}  {{$rs->user->surname}}</a></td></td>--}}
+                                            <td>{{$rs->name}}</td>
+                                            <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
                                             <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
                                             <td>{{$rs->subject}}</td>
                                             <td>{{$rs->message}}</td>
                                             <td>{{$rs->note}}</td>
                                             <td>
-                                                @if($rs->status=="True")
+                                                @if($rs->status=="Read")
                                                     <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
                                                 @else
                                                     <span style="color:darkred"><b>{{$rs->status}}</b></span>
@@ -65,12 +69,16 @@
                                             </td>
                                             <td>{{$_SERVER['REMOTE_ADDR']}}</td>
                                             <td>
-                                                <a href="{{route('admin_message_edit',['id'=>$rs->id])}}"
-                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=500')">
-                                                    <div class="font-22 text-primary"><i
+                                                <a href="#" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModal{{$rs->id}}"><div class="font-22 text-primary"><i
                                                             class="fadeIn animated bx bx-edit"></i>
-                                                    </div>
-                                                </a>
+                                                    </div></a>
+{{--                                                <a href="{{route('admin_message_edit',['id'=>$rs->id])}}"--}}
+{{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=500')">--}}
+{{--                                                    <div class="font-22 text-primary"><i--}}
+{{--                                                            class="fadeIn animated bx bx-edit"></i>--}}
+{{--                                                    </div>--}}
+{{--                                                </a>--}}
                                             </td>
                                             <td><a href="{{route('admin_message_delete',['id'=>$rs->id])}} "
                                                    onclick="return confirm('Delete! Are you sure?')">
@@ -79,6 +87,17 @@
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        @php
+                                            $dataUser = \App\Models\User::find($rs->user->id);
+                                            $datalistUser= \App\Models\Role::all()->sortBy('name');
+                                            $dataMessage=\App\Models\Message::find($rs->id);
+                                            $dataMessage->status='Read';
+                                            $dataMessage->save();
+                                        @endphp
+
+                                        @include('admin.modal.user_show')
+                                        @include('admin.modal.message_edit')
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -112,7 +131,6 @@
                 .appendTo('#example2_wrapper .col-md-6:eq(0)');
         });
     </script>
-
 @endsection
 
 

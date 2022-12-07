@@ -30,6 +30,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
+                    <span class="float-end">* : Zorunlu girilmesi gereken yerler</span>
                     <h4 class="mb-0">Add Product</h4>
                     <hr/>
                     <div class="row gy-3">
@@ -37,8 +38,8 @@
                             <form class="row g-3 needs-validation" novalidate=""
                                   action="{{route('admin_product_store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <div class="col-md-10">
-                                    <label>Category</label>
+                                <div class="col-md-12">
+                                    <label>Category*</label>
 
                                     <select class="form-select" name="category_id" required>
                                         @foreach($datalist as $rs)
@@ -47,37 +48,37 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Title</label>
+                                <div class="col-md-12">
+                                    <label>Title*</label>
                                     <input type="text" name="title" class="form-control" value="{{old('title')}}">
                                     @if ($errors->has('title'))
                                         <span class="text-danger">{{ $errors->first('title') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Keywords</label>
+                                <div class="col-md-12">
+                                    <label>Keywords*</label>
                                     <input type="text" name="keywords" class="form-control" value="{{old('keywords')}}">
                                     @if ($errors->has('keywords'))
                                         <span class="text-danger">{{ $errors->first('keywords') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Description</label>
+                                <div class="col-md-12">
+                                    <label>Description*</label>
                                     <input type="text" name="description" class="form-control"
                                            value="{{old('description')}}">
                                     @if ($errors->has('description'))
                                         <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Price</label>
+                                <div class="col-md-12">
+                                    <label>Price*</label>
                                     <input type="number" min="0" name="price" class="form-control"
                                            value="{{old('price')}}">
                                     @if ($errors->has('price'))
                                         <span class="text-danger">{{ $errors->first('price') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Is Sale?</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="is_sale"
@@ -92,22 +93,22 @@
                                         @endif
                                         <br>
                                     </div>
-                                    <div class="form-check ">
+                                    <div class="form-check col-md-12">
                                         <input class="form-check-input" type="radio" name="is_sale"
                                                id="flexRadioDefault2" value="No" checked>
                                         <label class="form-check-label" for="flexRadioDefault2">No</label>
                                     </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Quantity</label>
+                                <div class="col-md-12">
+                                    <label>Quantity*</label>
                                     <input type="number" min="1" name="quantity" class="form-control"
                                            value="{{old('quantity')}}">
                                     @if ($errors->has('quantity'))
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Minquantity</label>
+                                <div class="col-md-12">
+                                    <label>Minquantity*</label>
                                     <input type="number" min="1" name="minquantity" class="form-control"
                                            value="{{old('minquantity')}}">
                                     @if ($errors->has('minquantity'))
@@ -116,15 +117,15 @@
                                 </div>
 
 
-                                <div class="col-md-10">
-                                    <label>Tax</label>
+                                <div class="col-md-12">
+                                    <label>Tax*</label>
                                     <input type="number" name="tax" min="0" class="form-control" value="{{old('tax')}}">
                                     @if ($errors->has('tax'))
                                         <span class="text-danger">{{ $errors->first('tax') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Detail</label>
+                                <div class="col-md-12">
+                                    <label>Detail*</label>
                                     <textarea id="summernote" name="detail">{{old('detail')}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
@@ -146,29 +147,29 @@
                                         <span class="text-danger">{{ $errors->first('detail') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Slug</label>
+                                <div class="col-md-12">
+                                    <label>Slug*</label>
                                     <input type="text" name="slug" class="form-control" value="{{old('slug')}}">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Image</label>
+                                <div class="col-md-12">
+                                    <label>Image*</label>
                                     <input type="file" name="image" class="form-control">
                                     @if ($errors->has('image'))
                                         <span class="text-danger">{{ $errors->first('image') }}</span>
                                     @endif
                                 </div>
 
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Status</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="">False</option>
                                         <option>True</option>
                                     </select>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-md-12">
                                     <button class="btn btn-primary" type="submit">Add Product</button>
                                 </div>
                             </form>

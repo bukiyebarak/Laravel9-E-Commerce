@@ -22,6 +22,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
+                    <span class="float-end">* : Zorunlu girilmesi gereken yerler</span>
                     <h4 class="mb-0">Add Category</h4>
                     <hr/>
                     <div class="row gy-3">
@@ -29,7 +30,7 @@
                             <form class="row g-3 needs-validation" novalidate=""
                                   action="{{route('admin_category_create')}}" method="post">
                                 @csrf
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Parent *</label>
                                     <select class="form-select" name="parent_id" required>
                                         <option value="0" selected="">Main Category</option>
@@ -40,42 +41,42 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-122">
                                     <label>Title *</label>
                                     <input type="text" name="title" class="form-control" value=" {{old('title')}}" >
                                     @if ($errors->has('title'))
                                         <span class="text-danger">{{ $errors->first('title') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Keywords *</label>
                                     <input type="text" name="keywords" class="form-control" value=" {{old('keywords')}}" >
                                     @if ($errors->has('keywords'))
                                         <span class="text-danger">{{ $errors->first('keywords') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Description *</label>
                                     <input type="text" name="description" class="form-control" id="validationCustom02" value=" {{old('description')}}" >
                                     @if ($errors->has('description'))
                                         <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Slug *</label>
                                     <input type="text" name="slug" class="form-control" value=" {{old('slug')}}">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Status *</label>
+                                <div class="col-md-12">
+                                    <label>Status</label>
                                     <select class="form-select" name="status" >
                                         <option selected="">False</option>
                                         <option>True</option>
                                     </select>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-md-12">
                                     <button class="btn btn-primary" type="submit">Add Category</button>
                                 </div>
                             </form>

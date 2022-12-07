@@ -185,22 +185,22 @@
                                     <div class="tab-pane fade" id="socialmedia" role="tabpanel">
 
                                         <div class="col-md-12">
-                                            <label>Facebook <i class="lni lni-facebook-oval"></i></label>
+                                            <label class="text-black">Facebook <i class="lni lni-facebook-oval"></i></label>
                                             <input type="text" name="facebook" value="{{$data->facebook}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Instagram<i class="lni lni-instagram-original"></i></label>
+                                            <label class="text-black">Instagram <i class="lni lni-instagram-original"></i></label>
                                             <input type="text" name="instagram" value="{{$data->instagram}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Twitter<i class="lni lni-twitter-original"></i></label>
+                                            <label class="text-black">Twitter <i class="lni lni-twitter-original"></i></label>
                                             <input type="text" name="twitter" value="{{$data->twitter}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Linkedin<i class="lni lni-linkedin-original"></i></label>
+                                            <label class="text-black">Linkedin <i class="lni lni-linkedin-original"></i></label>
                                             <input type="text" name="linkedin" value="{{$data->linkedin}}"
                                                    class="form-control">
                                         </div>

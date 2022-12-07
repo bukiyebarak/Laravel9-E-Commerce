@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Shopcart::class);
     }
 
+    public function contactmessage()
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function order()
     {
         return $this->hasMany(Order::class);

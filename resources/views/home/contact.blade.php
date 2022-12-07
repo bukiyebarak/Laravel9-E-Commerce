@@ -106,9 +106,14 @@
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
-                                        <button type="submit" class="default-btn">Gönder</button>
-                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                        <div class="clearfix"></div>
+                                        @auth
+                                            <button type="submit" class="default-btn">Gönder</button>
+                                            <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                            <div class="clearfix"></div>
+                                        @else
+                                            <a href="/login" class="default-btn"> Please Login</a>
+                                        @endauth
+
                                     </div>
                                 </div>
                             </form>

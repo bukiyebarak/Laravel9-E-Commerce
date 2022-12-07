@@ -31,12 +31,12 @@ class HomeController extends Controller
 
     public static function countreview($id)
     {
-        return Review::where('product_id', $id)->count();
+        return  Review::where(['product_id'=>$id, 'status'=>'True'])->count();
     }
 
     public static function avrgreview($id)
     {
-        return Review::where('product_id', $id)->average('rate');
+        return Review::where(['product_id'=>$id, 'status'=>'True'])->average('rate');
     }
 
     public static function getsetting()
@@ -131,8 +131,16 @@ class HomeController extends Controller
 
     public function sendmessage(ContactRequest $request)
     {
-        $input = $request->all();
-        $message = Message::create($input);
+        $message = Message::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+            'phone' => $request->input('phone'),
+            'status' => $request->input('total'),
+            'note' => $request->input('note'),
+            'user_id'=>Auth::id(),
+        ]);
 
         $this->sendContactMessageMailAdmin($message);
 
@@ -175,7 +183,7 @@ class HomeController extends Controller
     {
         $data = Product::find($id);
         $datalist = Image::where('product_id', $id)->get();
-        $reviews = Review::where('product_id', $id)->get();
+        $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
         return view('home.product_detail', ['data' => $data, 'datalist' => $datalist, 'reviews' => $reviews]);
     }
 

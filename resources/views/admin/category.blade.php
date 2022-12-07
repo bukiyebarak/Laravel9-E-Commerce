@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Panel Home Page')
+@section('title', 'Category List')
 
 @section('content')
     <!--start page wrapper -->
@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <div class="row gy-3">
                         <div class="col-md-12">
-                            <a class="btn btn-primary" href="{{route('admin_category_add')}}">Add Category</a>
+                            <a class="btn btn-primary" href="{{route('admin_category_add')}}"> <i class="bx bxs-plus-circle"></i>Add Category</a>
                             <hr/>
                             <div class="table-responsive">
                                 <table id="example2" class="table table-striped table-bordered">

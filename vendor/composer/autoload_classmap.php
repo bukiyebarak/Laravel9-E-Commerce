@@ -39,7 +39,6 @@ return array(
     'App\\Http\\Controllers\\Admin\\ReviewController' => $baseDir . '/app/Http/Controllers/Admin/ReviewController.php',
     'App\\Http\\Controllers\\Admin\\SettingController' => $baseDir . '/app/Http/Controllers/Admin/SettingController.php',
     'App\\Http\\Controllers\\Admin\\UserController' => $baseDir . '/app/Http/Controllers/Admin/UserController.php',
-    'App\\Http\\Controllers\\CallbackController' => $baseDir . '/app/Http/Controllers/CallbackController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ImageController' => $baseDir . '/app/Http/Controllers/ImageController.php',

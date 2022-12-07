@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Contact Messages List')
+@section('title', 'Review List')
 
 @section('content')
     <!--start page wrapper -->
@@ -45,10 +45,13 @@
                                     <tr>
                                         <td>{{$rs->id}}</td>
                                         <td>
-                                            <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"
-                                               onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
+                                            <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}" data-bs-toggle="modal"
+                                               data-bs-target="#exampleLargeModal{{$rs->user->id}}">
+                                                {{$rs->user->name}} {{$rs->user->surname}}</a>
+{{--                                            <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"--}}
+{{--                                               onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">--}}
 
-                                                {{$rs->user->name}}</a>
+{{--                                                {{$rs->user->name}}</a>--}}
                                         </td>
                                         <td>
                                             <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
@@ -56,7 +59,13 @@
                                         </td>
                                         <td>{{$rs->subject}}</td>
                                         <td>{{$rs->review}}</td>
-                                        <td>{{$rs->rate}}</td>
+                                        <td>{{$rs->rate}}
+                                            <i class="bx bxs-star text-secondary @if($rs->rate>=1)text-warning @endif"></i>
+                                            <i class="bx bxs-star @if($rs->rate>=2)text-warning @endif"></i>
+                                            <i class="bx bxs-star @if($rs->rate>=3)text-warning @endif"></i>
+                                            <i class="bx bxs-star @if($rs->rate>=4)text-warning @endif"></i>
+                                            <i class="bx bxs-star @if($rs->rate>=5)text-warning @endif"></i>
+                                       </td>
                                         <td>
                                             @if($rs->status=="True")
                                                 <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
@@ -67,22 +76,24 @@
                                         <td>{{$rs->created_at}}</td>
 
                                         <td>
-                                            <a href="{{route('admin_review_show',['id'=>$rs->id])}}"
-                                               onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
-                                                <div class="font-22 text-primary"><i
-                                                        class="fadeIn animated bx bx-edit"></i></div>
-
-                                            </a>
+                                            <div class="d-flex order-actions" >
+                                            <a href="{{route('admin_user_show',['id'=>$rs->id])}}" data-bs-toggle="modal" class=" text-primary bg-light-primary border-0"
+                                                 data-bs-target="#exampleLargeModal{{$rs->id}}">
+                                                <i class="bx bxs-edit"></i></a></div>
                                         </td>
-                                        <td>
-                                            <a href="{{route('admin_review_delete',['id'=>$rs->id])}}"
-                                               onclick="return confirm('Delete! Are you Sure')">
-                                                <div class="font-22 text-primary"><i
-                                                        class="fadeIn animated bx bx-trash"></i></div>
-                                            </a>
+                                        <td><div class="d-flex order-actions">
+                                            <a href="{{route('admin_review_delete',['id'=>$rs->id])}}" class="text-danger bg-light-danger border-0"  onclick="return confirm('Delete! Are you Sure')"><i class="bx bxs-trash"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
+                                    @php
+                                        $dataUser = \App\Models\User::find($rs->user->id);
+                                        $datalistUser= \App\Models\Role::all()->sortBy('name');
+                                         $data = \App\Models\Review::find($rs->id);
+                                    @endphp
 
+                                    @include('admin.modal.user_show')
+                                    @include('admin.modal.review_edit')
                                 @endforeach
                                 </tbody>
 

@@ -49,10 +49,13 @@
                                         <tr>
                                             <td>{{$rs->id}}</td>
                                             <td>
-                                                <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"
-                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">
+                                                <a href="#" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleLargeModal{{$rs->user->id}}">{{$rs->user->name}} {{$rs->user->surname}}</a>
 
-                                                    {{$rs->user->name}} {{$rs->user->surname}}</a>
+{{--                                                <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"--}}
+{{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">--}}
+
+{{--                                                    {{$rs->user->name}} {{$rs->user->surname}}</a>--}}
                                             </td>
                                             <td>{{$rs->name}} {{$rs->surname}}</td>
                                             <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
@@ -64,21 +67,26 @@
                                             <td>{{$rs->total}}</td>
                                             <td>{{$rs->created_at}}</td>
                                             <td>{{$rs->status}}</td>
-                                            <td>
-                                                <a href="{{route('admin_order_showmodal',['id'=>$rs->id])}}"
+                                            <td style="text-align: center">
+                                                <a href="#"
                                                    class="btn btn-primary" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleExtraLargeModal{{$rs->id}}">Extra large</a>
-                                                <a href="{{route('admin_order_show',['id'=>$rs->id])}}"
-                                                   onclick="return !window.open(this.href, '','top=20 left=50 width=1000 height=800')">
-                                                    <div class="font-22 text-primary"><i
-                                                            class="fadeIn animated bx bxs-eyedropper"></i></div>
-                                                </a>
+                                                   data-bs-target="#exampleExtraLargeModal{{$rs->id}}"><i
+                                                        class="lni lni-eye"></i></a>
+
+                                                {{--                                                <a href="{{route('admin_order_show',['id'=>$rs->id])}}"--}}
+                                                {{--                                                   onclick="return !window.open(this.href, '','top=20 left=50 width=1000 height=800')">--}}
+                                                {{--                                                    --}}
+                                                {{--                                                </a>--}}
                                             </td>
                                             @php
                                                 $data = \App\Models\Order::find($rs->id);
-                                                $datalistmodal = \App\Models\Orderitem::where('order_id', $rs->id)->get();
+                                                $datalistOrderItem = \App\Models\Orderitem::where('order_id', $rs->id)->get();
+                                                $dataUser = \App\Models\User::find($rs->user->id);
+                                                $datalistUser= \App\Models\Role::all()->sortBy('name');
                                             @endphp
                                             @include('admin.modal.order_item')
+
+                                            @include('admin.modal.user_show')
                                         </tr>
                                     @endforeach
                                 </table>

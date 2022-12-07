@@ -28,7 +28,7 @@
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-{{--                                    <th>Image</th>--}}
+                                    {{--                                    <th>Image</th>--}}
                                     <th>Name</th>
                                     <th>Surname</th>
                                     <th>Email</th>
@@ -44,11 +44,11 @@
                                     <p></p>
                                     <tr>
                                         <td>{{$rs->id}}</td>
-{{--                                        <td>--}}
-{{--                                            @if($rs->profile_photo_path)--}}
-{{--                                                <img src="{{Storage::url($rs->profile_photo_path)}}" height="50" style="border-radius: 100px" alt="">--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
+                                        {{--                                        <td>--}}
+                                        {{--                                            @if($rs->profile_photo_path)--}}
+                                        {{--                                                <img src="{{Storage::url($rs->profile_photo_path)}}" height="50" style="border-radius: 100px" alt="">--}}
+                                        {{--                                            @endif--}}
+                                        {{--                                        </td>--}}
                                         <td>{{$rs->name}}</td>
                                         <td>{{$rs->surname}}</td>
                                         <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
@@ -58,23 +58,41 @@
                                             @foreach($rs->roles as $row)
                                                 {{$row->name}},
                                             @endforeach
-                                            <a href="{{route('admin_user_roles',['id'=>$rs->id])}}" onclick="return !window.open(this.href, '', 'top=50 left=300 width=800 height=700')">
-                                                <div class="font-18 text-primary">	<i class="fadeIn animated bx bx-plus-circle"></i>
+                                            <a href="{{route('admin_user_roles',['id'=>$rs->id])}}"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#exampleLargeModal{{$rs->id}}">
+                                                <div class="font-18 text-primary"><i
+                                                        class="fadeIn animated bx bx-plus-circle"></i>
                                                 </div>
                                             </a>
+                                            {{--                                            <a href="{{route('admin_user_roles',['id'=>$rs->id])}}"--}}
+                                            {{--                                               onclick="return !window.open(this.href, '', 'top=50 left=300 width=800 height=700')">--}}
+                                            {{--                                                <div class="font-18 text-primary"><i--}}
+                                            {{--                                                        class="fadeIn animated bx bx-plus-circle"></i>--}}
+                                            {{--                                                </div>--}}
+                                            {{--                                            </a>--}}
                                         </td>
                                         <td><a href="{{route('admin_user_edit',['id'=>$rs->id])}}">
-                                                <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-edit-alt"></i>
+                                                <div class="font-22 text-primary"><i
+                                                        class="fadeIn animated bx bx-edit-alt"></i>
                                                 </div>
 
                                             </a></td>
                                         <td><a href="{{route('admin_user_delete',['id'=>$rs->id])}} "
                                                onclick="return confirm('Delete! Are you sure?')">
-                                                <div class="font-22 text-primary">	<i class="fadeIn animated bx bx-trash-alt"></i>
+                                                <div class="font-22 text-primary"><i
+                                                        class="fadeIn animated bx bx-trash-alt"></i>
                                                 </div>
                                             </a>
                                         </td>
                                     </tr>
+                                @php
+                                    $dataUser = \App\Models\User::find($rs->id);
+                                    $datalistUser= \App\Models\Role::all()->sortBy('name');
+                                @endphp
+
+                                @include('admin.modal.user_role')
+
                                 @endforeach
                             </table>
                         </div>
@@ -102,15 +120,15 @@
     <script src="{{asset('assets')}}/admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets')}}/admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable( {
+        $(document).ready(function () {
+            var table = $('#example2').DataTable({
                 lengthChange: false,
-                buttons: [ 'copy', 'excel', 'pdf', 'print']
-            } );
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
 
             table.buttons().container()
-                .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
-        } );
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
     </script>
 
 @endsection

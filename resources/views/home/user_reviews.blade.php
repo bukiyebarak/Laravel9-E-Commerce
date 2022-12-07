@@ -26,49 +26,60 @@
             <div class="row">
                 @include('home.usermenu')
 
-                    <div class="col-lg-10 col-md-12">
+                <div class="col-lg-10 col-md-12">
 
-                        <div class="table-responsive">
-                            <table id="example2" class="table table-striped table-bordered">
-                                <thead>
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+
+                                <th>Product</th>
+                                <th>Subject</th>
+                                <th>Review</th>
+                                <th>Rate</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($datalist as $rs)
                                 <tr>
-
-                                    <th>Product</th>
-                                    <th>Subject</th>
-                                    <th>Review</th>
-                                    <th>Rate</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Delete</th>
+                                    <td>&nbsp;
+                                        <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
+                                           target="_blank"> {{$rs->product->title}} </a>
+                                    </td>
+                                    <td>{{$rs->subject}}</td>
+                                    <td>{{$rs->review}}</td>
+                                    <td>
+                                        {{$rs->rate}}&nbsp;
+                                        <i class="bx bxs-star @if($rs->rate>=1)text-warning @endif"></i>
+                                        <i class="bx bxs-star @if($rs->rate>=2)text-warning @endif"></i>
+                                        <i class="bx bxs-star @if($rs->rate>=3)text-warning @endif"></i>
+                                        <i class="bx bxs-star @if($rs->rate>=4)text-warning @endif"></i>
+                                        <i class="bx bxs-star @if($rs->rate>=5)text-warning @endif"></i>
+                                    <td>
+                                        @if($rs->status=="True")
+                                            <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
+                                        @else
+                                            <span style="color:darkred"><b>{{$rs->status}}</b></span>
+                                        @endif
+                                    </td>
+                                    <td>{{$rs->created_at}}</td>
+                                    <td>
+                                        <a href="{{route('user_review_delete',['id'=>$rs->id])}}"
+                                           onclick="return confirm('Delete! Are you Sure')">
+                                            <div class="font-22 text-primary"><i class="bx bx-trash fs-4"></i>
+                                            </div>
+                                        </a>
+                                    </td>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($datalist as $rs)
-                                    <tr>
-                                        <td>
-                                            <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
-                                               target="_blank"> {{$rs->product->title}} </a>
-
-                                        </td>
-                                        <td>{{$rs->subject}}</td>
-                                        <td>{{$rs->review}}</td>
-                                        <td>{{$rs->rate}}</td>
-                                        <td>{{$rs->status}}</td>
-                                        <td>{{$rs->created_at}}</td>
-                                        <td>
-                                            <a href="{{route('user_review_delete',['id'=>$rs->id])}}"
-                                               onclick="return confirm('Delete! Are you Sure')">
-                                                <div class="font-22 text-primary"><i class="bx bx-trash fs-4"></i>
-                                                </div>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
+
+                </div>
             </div>
         </div>
         </div>
