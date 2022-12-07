@@ -1,16 +1,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    @media only screen and  (max-device-width: 1030px) {
+    @media only screen and  (max-device-width: 1230px) {
         .note {
-            width:100px;
+            width:150px;
         }
 
         .nameProduct {
             font-size: 12px;
         }
         .imageProduct{
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
+            margin-bottom: 10px;
         }
         .productStatus{
             padding-top: 40px;
@@ -171,12 +172,13 @@
                             <div class="col-sm-12 col-md-3">
 
                                 <label>Note</label><br>
-                                <textarea class="note" name="note" placeholder="Note">{{$rs->note}}</textarea>
+                                <textarea class="note" name="note" rows="5" cols="28"  placeholder="Note">{{$rs->note}}</textarea>
                             </div>
                             <div class="col-sm-12 col-md-8">
 
                             </div>
                             <div class="col-sm-12 col-md-3">
+                                <br>
                                 <button type="submit" class="btn btn-primary float-end">Update</button>
 
                             </div>

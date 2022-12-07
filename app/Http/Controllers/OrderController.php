@@ -92,7 +92,7 @@ class OrderController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CheckoutRequest $request): \Illuminate\Http\Response
+    public function store(CheckoutRequest $request)
     {
 //        $input = $request->all();
 //        $order = Order::create($input);
@@ -178,7 +178,7 @@ class OrderController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function callback(Request $request, User $user): \Illuminate\Http\Response
+    public function callback(Request $request, User $user)
     {
         if (!auth()->check()) {
             dd('callbackdggg');
