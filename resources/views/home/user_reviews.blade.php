@@ -51,7 +51,7 @@
                                     </td>
                                     <td>{{$rs->subject}}</td>
                                     <td>{{$rs->review}}</td>
-                                    <td>
+                                    <td style="width: 120px;">
                                         {{$rs->rate}}&nbsp;
                                         <i class="bx bxs-star @if($rs->rate>=1)text-warning @endif"></i>
                                         <i class="bx bxs-star @if($rs->rate>=2)text-warning @endif"></i>

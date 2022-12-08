@@ -127,8 +127,6 @@
 <!-- Links of JS files-->
 
 <script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>
-
-<script src="{{asset('assets')}}/home/assets/js/popper.min.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/owl.carousel.min.js"></script>
 <script src="{{asset('assets')}}/home/assets/js/magnific-popup.min.js"></script>

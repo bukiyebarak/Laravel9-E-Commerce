@@ -72,18 +72,20 @@
                                             {{--                                                </div>--}}
                                             {{--                                            </a>--}}
                                         </td>
-                                        <td><a href="{{route('admin_user_edit',['id'=>$rs->id])}}">
-                                                <div class="font-22 text-primary"><i
-                                                        class="fadeIn animated bx bx-edit-alt"></i>
-                                                </div>
+                                        <td>
+                                            <div class="d-flex order-actions">
+                                                <a href="{{route('admin_user_edit',['id'=>$rs->id])}} "
+                                                   class=" text-primary bg-light-primary border-0">
+                                                    <i class="bx bxs-edit"></i></a></div>
 
-                                            </a></td>
-                                        <td><a href="{{route('admin_user_delete',['id'=>$rs->id])}} "
-                                               onclick="return confirm('Delete! Are you sure?')">
-                                                <div class="font-22 text-primary"><i
-                                                        class="fadeIn animated bx bx-trash-alt"></i>
-                                                </div>
-                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex order-actions">
+                                                <a href="{{route('admin_user_delete',['id'=>$rs->id])}}  "
+                                                   class="text-danger bg-light-danger border-0"
+                                                   onclick="return confirm('Delete! Are you Sure')"><i
+                                                        class="bx bxs-trash"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @php

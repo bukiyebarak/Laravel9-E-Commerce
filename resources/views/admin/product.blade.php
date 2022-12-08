@@ -79,24 +79,31 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                @if($rs->status=="True")
-                                                    <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
-                                                @else
-                                                    <span style="color:darkred"><b>{{$rs->status}}</b></span>
-                                                @endif
+                                                <div style="text-align: center;">
+                                                    @if($rs->status=="True")
+                                                        <div class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
+                                                            True
+                                                        </div>
+                                                    @else
+                                                        <div  class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
+                                                            False</div>
+                                                    @endif
+                                                </div>
                                             </td>
+                                            <td>
+                                                <div class="d-flex order-actions">
+                                                    <a href="{{route('admin_product_edit',['id'=>$rs->id])}}"
+                                                       class=" text-primary bg-light-primary border-0">
+                                                        <i class="bx bxs-edit"></i></a></div>
 
-                                            <td><a href="{{route('admin_product_edit',['id'=>$rs->id])}}">
-                                                    <div class="font-22 text-primary"><i
-                                                            class="fadeIn animated bx bx-edit"></i>
-                                                    </div>
-                                                </a></td>
-                                            <td><a href="{{route('admin_product_delete',['id'=>$rs->id])}} "
-                                                   onclick="return confirm('Delete! Are you sure?')">
-                                                    <div class="font-22 text-primary"><i
-                                                            class="fadeIn animated bx bx-trash-alt"></i>
-                                                    </div>
-                                                </a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex order-actions">
+                                                    <a href="{{route('admin_product_delete',['id'=>$rs->id])}} "
+                                                       class="text-danger bg-light-danger border-0"
+                                                       onclick="return confirm('Delete! Are you Sure')"><i
+                                                            class="bx bxs-trash"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -1,8 +1,24 @@
 @extends('layouts.admin')
 
 @section('title', 'Frequently Asked Question List')
-
+@section('javascript')
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+@endsection
 @section('content')
+    <style>
+        div.scroll {
+            margin: 5px;
+            padding: 5px;
+            width: 400px;
+            height: auto;
+            overflow: auto;
+            text-align: justify;
+        }
+    </style>
     <!--start page wrapper -->
     <div class="page-wrapper">
         <div class="page-content">
@@ -15,6 +31,7 @@
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+
                         </ol>
                     </nav>
                 </div>
@@ -28,12 +45,12 @@
                     <div class="card-body">
 
                         <div class="table-responsive">
-                            <table id="example2"  class="table table-striped table-hover table-bordered">
+                            <table id="example2" class="table table-striped table-hover table-bordered">
                                 <thead>
                                 <tr>
-{{--                                    <th>Id</th>--}}
+                                    <th>Id</th>
                                     <th>Question</th>
-                                    <th>Answer</th>
+                                    <th style="width: 50px">Answer</th>
                                     <th>Status</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -42,23 +59,41 @@
                                 <tbody>
                                 @foreach($datalist as $rs)
                                     <tr>
-{{--                                        <td >{{$rs->id}}</td>--}}
-                                        <td>{{$rs->question}}</td>
-                                        <td > {!!$rs->answer  !!}</td>
+                                        <td>{{$rs->id}}</td>
+                                        <td> <div class="scroll">
+                                                {{$rs->question}}
+                                            </div></td>
                                         <td>
-                                            @if($rs->status=="True")
-                                                <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
-                                            @else
-                                                <span style="color:darkred"><b>{{$rs->status}}</b></span>
-                                            @endif
+                                            <div class="scroll">
+                                                {!! $rs->answer !!}
+                                            </div>
                                         </td>
-                                        <td ><a href="{{route('admin_faq_edit',['id'=>$rs->id])}}">Edit
-                                            </a>
+                                        <td>
+                                            <div style="text-align: center;">
+                                                @if($rs->status=="True")
+                                                    <div class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
+                                                        True
+                                                    </div>
+                                                @else
+                                                    <div  class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
+                                                        False</div>
+                                                @endif
+                                            </div>
                                         </td>
-                                        <td><a href="{{route('admin_faq_delete',['id'=>$rs->id])}} "
-                                               onclick="return confirm('Delete! Are you sure?')">
-                                               Delete
-                                            </a>
+                                        <td>
+                                            <div class="d-flex order-actions">
+                                                <a href="{{route('admin_faq_edit',['id'=>$rs->id])}} "
+                                                   class=" text-primary bg-light-primary border-0">
+                                                    <i class="bx bxs-edit"></i></a></div>
+
+                                        </td>
+                                        <td>
+                                            <div class="d-flex order-actions">
+                                                <a href="{{route('admin_faq_delete',['id'=>$rs->id])}} "
+                                                   class="text-danger bg-light-danger border-0"
+                                                   onclick="return confirm('Delete! Are you Sure')"><i
+                                                        class="bx bxs-trash"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -88,16 +123,23 @@
 
     <script src="{{asset('assets')}}/admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets')}}/admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
-        $(document).ready(function() {
-            var table = $('#example2').DataTable( {
+        $(document).ready(function () {
+            var table = $('#example2').DataTable({
                 lengthChange: false,
-                buttons: [ 'copy', 'excel', 'pdf', 'print']
-            } );
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
 
             table.buttons().container()
-                .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
-        } );
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
     </script>
 
+    <script>
+        $(function () {
+            $('[data-bs-toggle="popover"]').popover();
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        })
+    </script>
 @endsection

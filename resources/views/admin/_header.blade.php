@@ -16,7 +16,7 @@
                         <a class="nav-link" href="{{route('admin_review')}}"><i class='bx bx-message-detail'></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class='bx bx-calendar'></i></a>
+                        <a class="nav-link" href="{{route('calender')}}"><i class='bx bx-calendar'></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class='bx bx-check-square'></i></a>

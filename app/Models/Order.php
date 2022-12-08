@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class Order extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'surname',

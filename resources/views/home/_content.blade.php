@@ -9,10 +9,16 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-6">
                                     <div class="main-banner-content">
-                                        <span class="sub-title">🤎Coffee Time...🤎</span>
+                                        <span class="sub-title animate__animated animate__fadeInUp" style="opacity: 1;">🤎Coffee Time...🤎</span>
                                         <br>
-                                        <h1>{{$rs->title}}</h1>
+                                        <span class="sub-title animate__animated animate__fadeInUp" style="opacity: 1;">Limited Time Offer!</span>
+                                        <h1 class="animate__animated animate__fadeInUp" style="opacity: 1;">{{$rs->title}}</h1>
                                         <p> {{$rs->category}}</p>
+                                        <p class="animate__animated animate__fadeInUp" style="opacity: 1;">
+                                            @if($rs->is_sale=="Yes")
+                                                Take off {{$rs->sale}}% Off 'Sale Must-Haves'
+                                            @endif
+                                        </p>
                                         </p>
                                         <div style="text-align: center" class="btn-box">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}"

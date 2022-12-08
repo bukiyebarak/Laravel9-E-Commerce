@@ -67,11 +67,16 @@
                                             <i class="bx bxs-star @if($rs->rate>=5)text-warning @endif"></i>
                                        </td>
                                         <td>
-                                            @if($rs->status=="True")
-                                                <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
-                                            @else
-                                                <span style="color:darkred"><b>{{$rs->status}}</b></span>
-                                            @endif
+                                            <div style="text-align: center;">
+                                                @if($rs->status=="True")
+                                                    <div class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
+                                                        True
+                                                    </div>
+                                                @else
+                                                    <div  class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
+                                                        False</div>
+                                                @endif
+                                            </div>
                                         </td>
                                         <td>{{$rs->created_at}}</td>
 

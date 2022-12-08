@@ -99,7 +99,7 @@
                                 @csrf
                                 <div class="input-counter">
                                     <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                    <input type="text" name="quantity" value="1" max="{{(int)$data->quantity}}" min="1">
+                                    <input type="text" name="quantity" value="1" max="{{(int)$data->quantity}}" min="1" readonly>
                                     <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                 </div>
 

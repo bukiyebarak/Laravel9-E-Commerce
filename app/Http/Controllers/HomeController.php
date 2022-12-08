@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status')->limit(4)->get();
+        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status','sale', 'is_sale',)->limit(4)->get();
         $daily = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->inRandomOrder()->get();
         $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->orderByDesc('id')->get();
         $picked = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->inRandomOrder()->get();
@@ -137,11 +137,10 @@ class HomeController extends Controller
             'subject' => $request->input('subject'),
             'message' => $request->input('message'),
             'phone' => $request->input('phone'),
-            'status' => $request->input('total'),
             'note' => $request->input('note'),
+            'ip_address' => $request->ip(),
             'user_id'=>Auth::id(),
         ]);
-
         $this->sendContactMessageMailAdmin($message);
 
         return redirect()->route('contact')->with('success', 'Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
@@ -199,6 +198,31 @@ class HomeController extends Controller
         $data = Category::find($id);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
+    }
+
+
+    public function discount_products(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $datalist = Product::where(['is_sale'=>'Yes', 'status'=>'True']);
+       // dd($datalist);
+        //checking for sort
+        $this->getSort($datalist);
+
+        $datalist = $datalist->paginate(6);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        return view('home.discount_products', [ 'datalist' => $datalist, 'last' => $last]);
+    }
+
+    public function new_products()
+    {
+        $datalist = Product::where(['status'=>'True'])->limit(6);
+        // dd($datalist);
+        //checking for sort
+        $this->getSort($datalist);
+
+        $datalist = $datalist->paginate(10);
+        $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
+        return view('home.new_products', ['datalist' => $datalist,'last' => $last]);
     }
 
     //Tüm ürümleri listeleme

@@ -61,30 +61,30 @@
                                             <td>{{$rs->message}}</td>
                                             <td>{{$rs->note}}</td>
                                             <td>
-                                                @if($rs->status=="Read")
-                                                    <span style="color:darkgreen"><b>{{$rs->status}}</b></span>
-                                                @else
-                                                    <span style="color:darkred"><b>{{$rs->status}}</b></span>
-                                                @endif
+                                                <div style="text-align: center;">
+                                                    @if($rs->status=="Read")
+                                                        <div class="badge rounded-pill text-black bg-gradient-blues p-2 text-uppercase px-3">
+                                                            Read
+                                                        </div>
+                                                    @else
+                                                        <div  class="badge rounded-pill text-black bg-gradient-lush p-2 text-uppercase px-3">
+                                                            New</div>
+                                                    @endif
+                                                </div>
                                             </td>
                                             <td>{{$_SERVER['REMOTE_ADDR']}}</td>
                                             <td>
-                                                <a href="#" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleModal{{$rs->id}}"><div class="font-22 text-primary"><i
-                                                            class="fadeIn animated bx bx-edit"></i>
-                                                    </div></a>
-{{--                                                <a href="{{route('admin_message_edit',['id'=>$rs->id])}}"--}}
-{{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=500')">--}}
-{{--                                                    <div class="font-22 text-primary"><i--}}
-{{--                                                            class="fadeIn animated bx bx-edit"></i>--}}
-{{--                                                    </div>--}}
-{{--                                                </a>--}}
+                                                <div class="d-flex order-actions" >
+                                                    <a href="{{route('admin_message_edit',['id'=>$rs->id])}}" data-bs-toggle="modal"  class=" text-primary bg-light-primary border-0"
+                                                       data-bs-target="#exampleModal{{$rs->id}}">
+                                                        <i class="bx bxs-edit"></i></a></div>
+
                                             </td>
-                                            <td><a href="{{route('admin_message_delete',['id'=>$rs->id])}} "
-                                                   onclick="return confirm('Delete! Are you sure?')">
-                                                    <div class="font-22 text-primary"><i
-                                                            class="fadeIn animated bx bx-trash"></i></div>
-                                                </a>
+                                            <td><div class="d-flex order-actions">
+                                                    <a href="{{route('admin_message_delete',['id'=>$rs->id])}} "
+                                                       class="text-danger bg-light-danger border-0"
+                                                       onclick="return confirm('Delete! Are you Sure')"><i class="bx bxs-trash"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
 
@@ -92,12 +92,12 @@
                                             $dataUser = \App\Models\User::find($rs->user->id);
                                             $datalistUser= \App\Models\Role::all()->sortBy('name');
                                             $dataMessage=\App\Models\Message::find($rs->id);
-                                            $dataMessage->status='Read';
-                                            $dataMessage->save();
                                         @endphp
 
                                         @include('admin.modal.user_show')
+
                                         @include('admin.modal.message_edit')
+
                                     @endforeach
                                     </tbody>
                                 </table>

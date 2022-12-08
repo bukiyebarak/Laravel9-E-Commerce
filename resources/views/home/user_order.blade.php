@@ -58,7 +58,30 @@
                                     <td>{{$rs->neighbourhood}} Mah.</td>
                                     <td>{{$rs->total}}</td>
                                     <td>{{$rs->created_at}}</td>
-                                    <td>{{$rs->status}}</td>
+                                    <td>
+                                        <div style="text-align: center;">
+                                            @if($rs->status=="Shipping")
+                                                <button class="badge rounded-pill text-white bg-warning p-2 text-uppercase px-3">
+                                                    Shipping
+                                                </button>
+                                            @elseif($rs->status=="Accepted")
+                                                <button class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
+                                                    Accepted
+                                                </button>
+                                            @elseif($rs->status=="Completed")
+                                                <button class="badge rounded-pill text-white bg-info p-2 text-uppercase px-3">
+                                                    Completed
+                                                </button>
+                                            @elseif($rs->status=="Canceled")
+                                                <button class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
+                                                    Canceled
+                                                </button>
+                                            @else
+                                                <button  class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
+                                                    New</button>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td><a href="{{route('user_order_show',['id'=>$rs->id])}}">
                                             <div class="font-22 text-primary"><i class="bx bxs-cart-add fs-2"></i>
                                             </div>

@@ -29,8 +29,8 @@
                             <form class="row g-3 needs-validation" novalidate=""
                                   action="{{route('admin_category_update', ['id'=>$data->id])}}" method="post">
                                 @csrf
-                                <div class="col-md-10">
-                                    <label>Parent</label>
+                                <div class="col-md-12">
+                                    <label>Parent*</label>
                                     <select class="form-select" name="parent_id" style="...">
                                         <option value="0">Main Category</option>
                                       @foreach($datalist as $rs)
@@ -38,32 +38,32 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Title</label>
+                                <div class="col-md-12">
+                                    <label>Title*</label>
                                     <input type="text" name="title" value="{{$data->title}}" class="form-control">
                                     @if ($errors->has('title'))
                                         <span class="text-danger">{{ $errors->first('title') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
-                                    <label>Keywords</label>
+                                <div class="col-md-12">
+                                    <label>Keywords*</label>
                                     <input type="text" name="keywords" value="{{$data->keywords}}" class="form-control" >
                                     @if ($errors->has('keywords'))
                                         <span class="text-danger">{{ $errors->first('keywords') }}</span>
                                     @endif </div>
-                                <div class="col-md-10">
-                                    <label>Description</label>
+                                <div class="col-md-12">
+                                    <label>Description*</label>
                                     <input type="text" name="description"  value="{{$data->description}}" class="form-control" >
                                     @if ($errors->has('description'))
                                         <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif</div>
-                                <div class="col-md-10">
-                                    <label>Slug</label>
+                                <div class="col-md-12">
+                                    <label>Slug*</label>
                                     <input type="text" name="slug"  value="{{$data->slug}}" class="form-control">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif</div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Status</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="selected">{{$data->status}}</option>

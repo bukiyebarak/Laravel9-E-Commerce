@@ -36,17 +36,20 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 });
 
 #region Home
+Route::get('/calender', [App\Http\Controllers\Admin\HomeController::class, 'calender'])->name('calender');
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
+Route::get('/about-us', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/references', [HomeController::class, 'references'])->name('references');
-Route::post('sendmessage', [HomeController::class, 'sendmessage'])->name('sendmessage');
+Route::post('send-message', [HomeController::class, 'sendmessage'])->name('sendmessage');
 Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('product');
-Route::get('categoryproducts/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
-Route::post('/getproduct', [HomeController::class, 'getproduct'])->name('getproduct');
-Route::get('/productlist/{search}', [HomeController::class, 'productlist'])->name('productlist');
-Route::match(['get','post'],'allproducts', [HomeController::class, 'allproducts'])->name('allproducts');
+Route::get('category-products/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
+Route::get('discount-products', [HomeController::class, 'discount_products'])->name('discount_products');
+Route::get('new-products', [HomeController::class, 'new_products'])->name('new_products');
+Route::post('/get-product', [HomeController::class, 'getproduct'])->name('getproduct');
+Route::get('/product-list/{search}', [HomeController::class, 'productlist'])->name('productlist');
+Route::match(['get','post'],'all-products', [HomeController::class, 'allproducts'])->name('allproducts');
 Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
 Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 
@@ -55,7 +58,8 @@ Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 Route::middleware('auth')->group(function () {
 
     Route::post('/iyzico-callback', [OrderController::class, 'callback'])->name('iyzico_callback');
-    Route::get('/payment_success', [OrderController::class, 'paymentSuccess'])->name('payment_success');
+    Route::get('/payment-success', [OrderController::class, 'paymentSuccess'])->name('payment_success');
+    Route::get('/payment-fail', [OrderController::class, 'paymentFail'])->name('payment_fail');
 });
 #region Admin
 Route::middleware('auth')->prefix('admin')->group(function () {

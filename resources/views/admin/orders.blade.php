@@ -52,10 +52,10 @@
                                                 <a href="#" data-bs-toggle="modal"
                                                    data-bs-target="#exampleLargeModal{{$rs->user->id}}">{{$rs->user->name}} {{$rs->user->surname}}</a>
 
-{{--                                                <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"--}}
-{{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">--}}
+                                                {{--                                                <a href="{{route('admin_user_show',['id'=>$rs->user->id])}}"--}}
+                                                {{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">--}}
 
-{{--                                                    {{$rs->user->name}} {{$rs->user->surname}}</a>--}}
+                                                {{--                                                    {{$rs->user->name}} {{$rs->user->surname}}</a>--}}
                                             </td>
                                             <td>{{$rs->name}} {{$rs->surname}}</td>
                                             <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
@@ -66,7 +66,30 @@
                                             <td>{{$rs->neighbourhood}}</td>
                                             <td>{{$rs->total}}</td>
                                             <td>{{$rs->created_at}}</td>
-                                            <td>{{$rs->status}}</td>
+                                            <td>
+                                                <div style="text-align: center;">
+                                                    @if($rs->status=="Shipping")
+                                                        <div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
+                                                          Shipping
+                                                        </div>
+                                                    @elseif($rs->status=="Accepted")
+                                                        <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                                                           Accepted
+                                                        </div>
+                                                    @elseif($rs->status=="Completed")
+                                                        <div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
+                                                           Completed
+                                                        </div>
+                                                    @elseif($rs->status=="Canceled")
+                                                        <div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3">
+                                                           Canceled
+                                                        </div>
+                                                    @else
+                                                        <div  class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
+                                                            New</div>
+                                                    @endif
+                                                </div>
+                                            </td>
                                             <td style="text-align: center">
                                                 <a href="#"
                                                    class="btn btn-primary" data-bs-toggle="modal"

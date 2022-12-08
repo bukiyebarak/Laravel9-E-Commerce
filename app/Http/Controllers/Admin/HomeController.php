@@ -16,6 +16,10 @@ class HomeController extends Controller
     {
         return view('admin.index');
     }
+    public function calender()
+    {
+        return view('admin.calender_app');
+    }
 
     public static function headerMessage()
     {

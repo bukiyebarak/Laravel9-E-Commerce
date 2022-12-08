@@ -33,7 +33,7 @@
                             </a>
                         </li>
 
-                        <li class="nav-item megamenu"><a href="#" class="nav-link">Kampanyalar</a></li>
+                        <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">Kampanyalar</a></li>
 
                         <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i class='bx bx-chevron-down'></i></a>
                             <ul class="dropdown-menu">
@@ -52,7 +52,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">Yeni Ürünler</a></li>
+                        <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni Ürünler</a></li>
                         <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">Hakkımızda</a>
                         </li>
                         <li class="nav-item megamenu"><a href="{{route('references')}}" class="nav-link">Referanslar</a>

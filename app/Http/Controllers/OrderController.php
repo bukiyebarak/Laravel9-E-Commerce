@@ -96,6 +96,7 @@ class OrderController extends Controller
     {
 //        $input = $request->all();
 //        $order = Order::create($input);
+        $dt=new \Illuminate\Support\Carbon();
         $order = Order::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -110,7 +111,7 @@ class OrderController extends Controller
             'zipcode' => $request->input('zipcode'),
             'user_id' => Auth::id(),
             'payment' => $request->input('payment'),
-            'IP' => $request->ip()
+            'IP' => $request->ip(),
         ]);
         // dd($order);
         //Kullanıcıyı Al
@@ -157,6 +158,7 @@ class OrderController extends Controller
             $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
             $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
 
+
             return view('home.iyzico-form', compact('paymentForm'));
         }
         else
@@ -171,7 +173,12 @@ class OrderController extends Controller
 
        // return redirect()->back()->with('success','Product Add Successfully' );
     }
-
+    public function paymentSuccess(){
+        return view('home.payment_success');
+    }
+    public function paymentFail(){
+        return view('home.payment_fail');
+    }
     /**
      * Store a newly created resource in storage.
      *

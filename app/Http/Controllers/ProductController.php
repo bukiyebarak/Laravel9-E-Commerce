@@ -23,6 +23,7 @@ class ProductController extends Controller
         return view('home.user_product', ['datalist' => $datalist]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

@@ -5,6 +5,16 @@
 
 @section('title', 'User Order Items')
 @section('content')
+    <style>
+        div.scroll {
+            margin: 5px;
+            padding: 20px;
+            width: 150px;
+            height: auto;
+            overflow: auto;
+            text-align: justify;
+        }
+    </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
@@ -30,10 +40,10 @@
                             <thead>
                             <tr>
                                 <th>Product</th>
-                                <th>Name</th>
+                                <th >Name</th>
                                 <th>Unit Price</th>
-                                <th>Note</th>
-                                <th>Status</th>
+                                <th style="text-align: center">Note</th>
+                                <th style="text-align: center">Status</th>
 
                             </tr>
                             </thead>
@@ -65,11 +75,32 @@
                                             <li>Total: <span> {{$rs->price*$rs->quantity}}€</span></li>
                                         </ul>
                                     </td>
-                                    <td>
-                                        {{$rs->note}}
+                                    <td><div class="scroll">
+                                        {{$rs->note}}</div>
                                     </td>
                                     <td class="product-price">
-                                        <span class="unit-amount">{{$rs->status}}</span>
+                                         <div style="text-align: center;">
+                                            @if($rs->status=="Shipping")
+                                                    <button class="badge rounded-pill text-white bg-warning p-2 text-uppercase px-3">
+                                                    Shipping
+                                                </button>
+                                                @elseif($rs->status=="Accepted")
+                                                    <button class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
+                                                    Accepted
+                                                </button>
+                                                @elseif($rs->status=="Completed")
+                                                    <button class="badge rounded-pill text-white bg-info p-2 text-uppercase px-3">
+                                                    Completed
+                                                </button>
+                                                @elseif($rs->status=="Canceled")
+                                                    <button class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
+                                                    Canceled
+                                                </button>
+                                                @else
+                                                    <button  class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
+                                                    New</button>
+                                                @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

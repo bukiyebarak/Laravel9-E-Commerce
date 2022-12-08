@@ -82,7 +82,7 @@
                                             <div class="input-counter">
                                                 <span class="minus-btn"><i class='bx bx-minus'></i></span>
                                                 <input type="text" name="quantity" min="1" value="{{$rs->quantity}}"
-                                                       max="{{$rs->product->quantity}}" onchange="this.form.submit()">
+                                                       max="{{$rs->product->quantity}}" onchange="this.form.submit()" readonly>
                                                 <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                             </div>
                                         </form>

@@ -205,7 +205,7 @@
                                 </h5>
                                 <h5 >Shipping : 30₺
                                 </h5>
-                                <h5 >Total :b{{$rs->total}}₺
+                                <h5 >Total : {{$rs->total}}₺
                                 </h5>
                             </div>
                         </div>

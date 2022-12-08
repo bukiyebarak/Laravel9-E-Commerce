@@ -84,6 +84,7 @@ class MessageController extends Controller
     {
         $data = Message::find($id);
         $data->note = $request->input('note');
+        $data->status=$request->input('status');
         $data->save();
         return back()->with('toast_success','Message Updated');
     }
