@@ -30,8 +30,7 @@ class ImageController extends Controller
     {
         $data = Product::find($product_id);
         $images=DB::table('images')->where('product_id','=', $product_id)->get();
-        return view('admin.image_add',['data'=>$data],['images'=>$images]);
-
+        return view('admin.modal.image_add',['data'=>$data],['images'=>$images]);
     }
 
     /**
@@ -56,7 +55,10 @@ class ImageController extends Controller
         $data->product_id =$product_id;
 
         $data->save();
-        return redirect()->route('admin_image_add',['product_id'=>$product_id])->with('toast_success','Product Image Added Successfully.');
+    //    return view('admin.modal.image_add',['product_id'=>$product_id]);
+
+        return redirect()->route('admin_products')->with('success','Product Image added Successfully.');
+//        return redirect()->route('admin_image_add',['product_id'=>$product_id])->with('toast_success','Product Image Added Successfully.');
     }
 
     /**
@@ -103,7 +105,8 @@ class ImageController extends Controller
     {
         $data = Image::find($id);
         $data->delete();
-        return redirect()->route('admin_image_add',['product_id'=>$product_id])->with('toast_success','Product Image Deleted Successfully.');
+        return redirect()->route('admin_products')->with('toast_success','Product Image Deleted Successfully.');
+//        return redirect()->route('admin_image_add',['product_id'=>$product_id])->with('toast_success','Product Image Deleted Successfully.');
         //birinci id ürünü silmek için ikinci id sayfaya geri dönmek için
     }
 }

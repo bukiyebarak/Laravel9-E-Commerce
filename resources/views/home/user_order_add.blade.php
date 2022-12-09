@@ -95,7 +95,7 @@
                                     <div class="form-group">
                                         <label>İL</label>
                                         <div class="select-box">
-                                            <select id="city" name="city" class="form-control">
+                                            <select id="city" name="city" class="form-control nice-select">
                                                 <option value="">İl Seçiniz</option>
                                                 @foreach($getcity as $rs)
                                                     <option value="{{$rs->sehir_key}}">{{$rs->sehir_title}}</option>
@@ -112,7 +112,7 @@
                                     <div class="form-group">
                                         <div class="select-box">
                                             <label>İLÇE <span class="required">*</span></label>
-                                            <select id="district" name="district" class="form-control">
+                                            <select id="district" name="district" class="form-control nice-select">
                                                 <option value="">İlçe Seçiniz</option>
                                             </select>
                                             @if ($errors->has('district'))
@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <div class="select-box">
                                             <label>MAHALLE <span class="required">*</span></label>
-                                            <select id="neighbourhood" name="neighbourhood" class="single-select form-control">
+                                            <select id="neighbourhood" name="neighbourhood" class="single-select nice-select form-control">
                                                 <option value="">Mahalle Seçiniz</option>
                                             </select>
 
@@ -170,6 +170,7 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12">
+                        @if($total!=0)
                         <div class="order-details">
                             <h3 class="title">Your Order {{$total}}€</h3>
                             <div class="input">
@@ -190,6 +191,7 @@
                                     @php
                                         $total=0;
                                     @endphp
+
                                     @foreach($shopcart as $rs)
                                         <tr>
                                             <td class="product-name">
@@ -286,7 +288,24 @@
                                 @endif
                                 <button type="submit" class="default-btn">Place Order</button>
                             </div>
+
                         </div>
+                        @else
+                            <div class="order-details">
+                                <h3 class="title">Lütfen Sepetinize Ürün Ekleyin...</h3>
+                                <div class="order-table table-responsive">
+                                    <table class="table table-bordered">
+                                       999
+                                    </table>
+                                </div>
+
+                                <div class="payment-box">
+
+                                9999999
+                                </div>
+
+                            </div>
+                        @endif
                     </div>
                 </div>
             </form>

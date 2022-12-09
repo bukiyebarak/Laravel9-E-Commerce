@@ -23,7 +23,7 @@ class HomeController extends Controller
 
     public static function headerMessage()
     {
-        return Message::select('name', 'subject', 'created_at')->orderByDesc('id')->get();
+        return Message::select('name', 'subject', 'created_at')->limit(5)->orderByDesc('id')->get();
     }
 
     public static function countMessage()

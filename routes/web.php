@@ -119,9 +119,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin_user_update');
             Route::get('delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin_user_delete');
             Route::get('show/{id}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('admin_user_show');
-            Route::get('userrole/{id}', [\App\Http\Controllers\Admin\UserController::class, 'user_roles'])->name('admin_user_roles');
-            Route::post('userrolestore/{id}', [\App\Http\Controllers\Admin\UserController::class, 'user_role_store'])->name('admin_user_role_add');
-            Route::get('userroledelete/{userid}/{roleid} ', [\App\Http\Controllers\Admin\UserController::class, 'user_role_delete'])->name('admin_user_role_delete');
+            Route::get('user-role/{id}', [\App\Http\Controllers\Admin\UserController::class, 'user_roles'])->name('admin_user_roles');
+            Route::post('user-role-store/{id}', [\App\Http\Controllers\Admin\UserController::class, 'user_role_store'])->name('admin_user_role_add');
+            Route::get('user-role-delete/{userid}/{roleid} ', [\App\Http\Controllers\Admin\UserController::class, 'user_role_delete'])->name('admin_user_role_delete');
         });
 
         #Order
@@ -132,10 +132,10 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('store', [AdminOrderController::class, 'store'])->name('admin_order_store');
             Route::get('edit/{id}', [AdminOrderController::class, 'edit'])->name('admin_order_edit');
             Route::post('update/{id}', [AdminOrderController::class, 'update'])->name('admin_order_update');
-            Route::post('itemupdate/{id}', [AdminOrderController::class, 'itemupdate'])->name('admin_order_item_update');
+            Route::post('item-update/{id}', [AdminOrderController::class, 'itemupdate'])->name('admin_order_item_update');
             Route::get('delete/{id}', [AdminOrderController::class, 'destroy'])->name('admin_order_delete');
             Route::get('show/{id}', [AdminOrderController::class, 'show'])->name('admin_order_show');
-            Route::get('showmodal/{id}', [AdminOrderController::class, 'showmodal'])->name('admin_order_showmodal');
+            Route::get('show-modal/{id}', [AdminOrderController::class, 'showmodal'])->name('admin_order_showmodal');
         });
 
 
@@ -165,8 +165,8 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 #region MyAcccount
 Route::middleware('auth')->prefix('myaccount')->namespace('myaccount')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('myprofile');
-    Route::get('/myreviews', [UserController::class, 'myreviews'])->name('myreviews');
-    Route::get('/destroymyreview/{id}', [UserController::class, 'destroymyreview'])->name('user_review_delete');
+    Route::get('/my-reviews', [UserController::class, 'myreviews'])->name('myreviews');
+    Route::get('/destroy-my-review/{id}', [UserController::class, 'destroymyreview'])->name('user_review_delete');
 });
 #endregion
 
@@ -194,7 +194,7 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
     });
 
     #ShopCart
-    Route::prefix('shopcart')->group(function () {
+    Route::prefix('shop-cart')->group(function () {
         Route::get('/', [ShopCartController::class, 'index'])->name('user_shopcart');
         Route::post('store/{id}', [ShopCartController::class, 'store'])->name('user_shopcart_add');
         Route::post('update/{id}', [ShopCartController::class, 'update'])->name('user_shopcart_update');

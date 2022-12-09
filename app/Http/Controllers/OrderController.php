@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Iyzipay\Model\Currency;
+use Iyzipay\Model\PaymentGroup;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
@@ -96,7 +98,7 @@ class OrderController extends Controller
     {
 //        $input = $request->all();
 //        $order = Order::create($input);
-        $dt=new \Illuminate\Support\Carbon();
+        $dt = new \Illuminate\Support\Carbon();
         $order = Order::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -117,9 +119,9 @@ class OrderController extends Controller
         //Kullanıcıyı Al
 
         $fields = $request->get('payment');
-     //   dd($fields);
+        // dd($fields);
 
-        if($fields == 'iyzico'){
+        if ($fields == 'iyzico') {
             //dd('aa');
             $date = DB::table('shopcarts')->where('user_id', Auth::id())->first();
             //Sepetteki ürünlerin toplam tutarını hesapla
@@ -128,7 +130,16 @@ class OrderController extends Controller
 
             //Ödeme İsteği Oluştur.
 
-            $requestIyzico = IyzicoRequestHelper::createRequest((float)$total);
+            $requestIyzico = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
+            $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
+            $requestIyzico->setConversationId(rand());
+            $requestIyzico->setPrice(number_format($total, '2', '.', ''));
+            $requestIyzico->setPaidPrice(number_format($total + 30, '2', '.', ''));//kargo indirim dahil fiyatı
+            $requestIyzico->setCurrency(Currency::TL);
+            $requestIyzico->setBasketId("B67832");
+            $requestIyzico->setPaymentGroup(PaymentGroup::PRODUCT);
+            $requestIyzico->setCallbackUrl(route('iyzico_callback'));
+            $requestIyzico->setEnabledInstallments(array(2, 3, 6, 9));
 
             #region PaymentCard Nesnesi oluştur
 
@@ -137,48 +148,55 @@ class OrderController extends Controller
             #endregion
 
             #region Buyer Nesnesi oluştur.
-            $buyer =IyzicoBuyerHelper::getBuyer($order,$date);
+            $buyer = IyzicoBuyerHelper::getBuyer($order, $date);
             $requestIyzico->setBuyer($buyer);
+
 #endregion
 
             #region Kargo ve fatura adresi nesnlerini oluştur.
-            $shippingAddress =IyzicoAddressHelper::getAddress($order);
+            $shippingAddress = IyzicoAddressHelper::getAddress($order);
             $requestIyzico->setShippingAddress($shippingAddress);
 
             $billingAddress = IyzicoAddressHelper::getAddress($order);
             $requestIyzico->setBillingAddress($billingAddress);
+
 #endregion
 
             #region Sepetteki ürünleri (CartDetails) BasketItem listesi olarak hazırla
             $basketItems = IyzicoBasketItemsHelper::getBasketItems();
             $requestIyzico->setBasketItems($basketItems);
+
 #endregion
             //Ödeme Yap
 
             $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
             $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
-
-
+            //  dd($paymentForm);
             return view('home.iyzico-form', compact('paymentForm'));
-        }
-        else
-        {
+        } else {
+            //kredi kartı ile ödeme
             $this->getOrder();
-           // dd($order);
+            // dd($order);
             //Sepeti Kapat
             $data3 = Shopcart::where('user_id', Auth::id());
             $data3->delete();
-            return view('home.payment_success');
+//            return view('home.payment_success');
+            return redirect()->route('payment_success');
         }
 
-       // return redirect()->back()->with('success','Product Add Successfully' );
+        // return redirect()->back()->with('success','Product Add Successfully' );
     }
-    public function paymentSuccess(){
+
+    public function paymentSuccess()
+    {
         return view('home.payment_success');
     }
-    public function paymentFail(){
+
+    public function paymentFail()
+    {
         return view('home.payment_fail');
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -194,27 +212,25 @@ class OrderController extends Controller
         $requestIyzico = new \Iyzipay\Request\RetrieveCheckoutFormRequest();
         $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
         $requestIyzico->setConversationId(rand());
-         $requestIyzico->setToken($request->get('token'));
+        $requestIyzico->setToken($request->get('token'));
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($requestIyzico, IyzicoApi::options());
-
-        if ($checkoutForm->getPaymentStatus() == 'SUCCESS')
-        {
+       // dd($checkoutForm->getPaymentStatus());
+        if ($checkoutForm->getPaymentStatus() == 'SUCCESS') {
             $this->getOrder();
-           //Sepeti Kapat
+            //Sepeti Kapat
             $data3 = Shopcart::where('user_id', Auth::id());
             $data3->delete();
             //getorder da mail atılıyor.
 //            $this->sendOrderConfirmationMail($order);
 //            $this->sendOrderConfirmationMailAdmin($order);
 
-            return view('home.payment_success');
-        }
-        else {
-           // dd($checkoutForm);
+            return redirect()->route('payment_success');
+        } else {
+            // dd($checkoutForm);
             $orderDelete = Order::orderByDesc('id')->first();
             //dd($orderDelete);
             $orderDelete->delete();
-            return view('home.payment_failed');
+            return redirect()->route('payment_fail');
         }
     }
 

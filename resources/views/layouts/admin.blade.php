@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('assets')}}/admin/assets/css/dark-theme.css"/>
     <link rel="stylesheet" href="{{asset('assets')}}/admin/assets/css/semi-dark.css"/>
     <link rel="stylesheet" href="{{asset('assets')}}/admin/assets/css/header-colors.css"/>
+    <link href="{{asset('assets')}}/admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <title>@yield('title')</title>
 
     @yield('css')
@@ -42,6 +43,7 @@
 @include('admin._header')
 @include('sweetalert::alert')
 @yield('content')
+<br><br><br>
 @include('admin._footer')
 @yield('footer')
 

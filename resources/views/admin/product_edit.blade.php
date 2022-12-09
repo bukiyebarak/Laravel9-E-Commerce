@@ -32,8 +32,7 @@
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
-                            <form class="row g-3 needs-validation" novalidate=""
-                                  action="{{route('admin_product_update',['id'=>$data->id])}}" method="post"
+                            <form  action="{{route('admin_product_update',['id'=>$data->id])}}" method="post"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-10">

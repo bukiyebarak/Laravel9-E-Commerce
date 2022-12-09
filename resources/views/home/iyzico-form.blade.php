@@ -8,9 +8,7 @@
     <title>İyzico Payment</title>
 </head>
 <body>
-@php
-   // session(cookie(sameSite: "None"));
-@endphp
+
 {!! $paymentForm !!}
 <div id="iyzipay-checkout-form" class="responsive"></div>
 </body>

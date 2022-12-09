@@ -43,7 +43,7 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request): \Illuminate\Http\RedirectResponse
     {
         $price = $request->get('price');
         $sale = $request->get('sale');
@@ -84,7 +84,6 @@ class ProductController extends Controller
         //$data->image = Storage::putFile('images', $request->file('image')); //file upload
 
         $data->save();
-
 
         return redirect()->route('admin_products')->with('success', 'Product Add Successfully');
     }
