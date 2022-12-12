@@ -77,7 +77,7 @@
                                                     Canceled
                                                 </button>
                                             @else
-                                                <button  class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
+                                                <button  class="badge rounded-pill text-white btn-secondary p-2 text-uppercase px-3">
                                                     New</button>
                                             @endif
                                         </div>

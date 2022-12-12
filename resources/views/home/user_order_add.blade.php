@@ -170,7 +170,6 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12">
-                        @if($total!=0)
                         <div class="order-details">
                             <h3 class="title">Your Order {{$total}}€</h3>
                             <div class="input">
@@ -290,22 +289,7 @@
                             </div>
 
                         </div>
-                        @else
-                            <div class="order-details">
-                                <h3 class="title">Lütfen Sepetinize Ürün Ekleyin...</h3>
-                                <div class="order-table table-responsive">
-                                    <table class="table table-bordered">
-                                       999
-                                    </table>
-                                </div>
 
-                                <div class="payment-box">
-
-                                9999999
-                                </div>
-
-                            </div>
-                        @endif
                     </div>
                 </div>
             </form>

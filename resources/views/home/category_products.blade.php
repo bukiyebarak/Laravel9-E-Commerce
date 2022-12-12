@@ -148,7 +148,7 @@
                             <div class="col-lg-4 col-md-4">
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
-                                        <select name="sort1" id="sort1">
+                                        <select name="sort1" id="sort1" class=" nice-select">
                                             <option selected="" value="">Default Sorting</option>
                                             <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
                                             <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>

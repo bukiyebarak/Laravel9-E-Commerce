@@ -25,8 +25,12 @@
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/dark.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/responsive.css">
     <link rel="icon" type="image/png" href="{{asset('assets')}}/home/assets/img/favicon.png">
+    <link href="{{asset('assets')}}/admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+
+
     <script src="{{asset('assets')}}/home/assets/js/custom.js"></script>
     <script src="{{asset('assets')}}/home/assets/js/customnotajax.js"></script>
+
 
     @yield('css')
     @yield('javascript')

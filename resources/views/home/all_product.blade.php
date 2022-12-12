@@ -165,7 +165,7 @@
                                     <input hidden name="min_price" id="min_price" value="{{$min_price}}">
                                     <input hidden name="max_price" id="max_price" value="{{$max_price}}">
                                     <div class="products-ordering-list">
-                                        <select name="sort" id="sort">
+                                        <select name="sort" id="sort" class=" nice-select">
                                             <option selected value="">Default Sorting</option>
                                             <option value="product_lastest"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="product_lastest") selected @endif>

@@ -56,7 +56,7 @@
                 <ul class="header-top-menu">
 
                     @auth
-                        <li><a href="{{route('myprofile')}}"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
+                        <li><a href="{{route('user_orders')}}"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
                             </a></li>
                         <li><a href="{{route('logout')}}"><i class='bx bx-log-out'></i> Logout</a></li>
                     @endauth

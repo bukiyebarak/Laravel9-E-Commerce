@@ -76,15 +76,15 @@
                             </div>
                         </div>
 
-                       <div class="option-item">
-                                <div class="burger-menu" data-bs-toggle="modal" data-bs-target="#sidebarModal">
-                                    <span class="top-bar"></span>
-                                    <span class="middle-bar"></span>
-                                    <span class="bottom-bar"></span>
-                                </div>
+                        <div class="option-item">
+                            <div class="burger-menu" data-bs-toggle="modal" data-bs-target="#sidebarModal">
+                                <span class="top-bar"></span>
+                                <span class="middle-bar"></span>
+                                <span class="bottom-bar"></span>
                             </div>
                         </div>
                     </div>
+                </div>
             </nav>
         </div>
     </div>
@@ -109,7 +109,7 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item megamenu"><a href="#" class="nav-link">Kampanyalar</a></li>
+                            <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">Kampanyalar</a></li>
 
                             <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i
                                         class='bx bx-chevron-down'></i></a>
@@ -129,7 +129,7 @@
                                 </ul>
                             </li>
 
-                            <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">Yeni Ürünler</a>
+                            <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni Ürünler</a>
                             </li>
                             <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">Hakkımızda</a>
                             </li>
@@ -208,7 +208,7 @@
                                     <span>{{$rs->quantity}}</span>
                                     <span>x</span>
                                     @if($rs->product->sale_price==null)
-                                    <span class="price"> {{$rs->product->price}}€</span>
+                                        <span class="price"> {{$rs->product->price}}€</span>
                                     @else
                                         <span class="price"> {{$rs->product->sale_price}}€</span>
                                     @endif
@@ -248,4 +248,3 @@
 </div>
 <!-- End Shopping Cart Modal -->
 
-{{--<script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>--}}

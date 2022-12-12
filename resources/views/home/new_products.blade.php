@@ -12,7 +12,7 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h5>Discount Product Page</h5>
+                <h5>New Product Page</h5>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
                     <li>Ürün Listesi</li>
@@ -145,7 +145,7 @@
                             <div class="col-lg-4 col-md-4">
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
-                                        <select name="sort1" id="sort1">
+                                        <select name="sort1" id="sort1" class=" nice-select">
                                             <option selected="" value="">Default Sorting</option>
                                             <option value="product_lastest"
                                                     @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >

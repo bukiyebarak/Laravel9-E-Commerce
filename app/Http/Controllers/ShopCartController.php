@@ -7,6 +7,7 @@ use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use function PHPUnit\Framework\isEmpty;
 
 
 class ShopCartController extends Controller
@@ -25,7 +26,7 @@ class ShopCartController extends Controller
     public function index()
     {
         $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
-
+//dd($datalist);
         return view('home.user_shopcart',['datalist'=>$datalist]);
     }
 
@@ -67,7 +68,7 @@ class ShopCartController extends Controller
 //        Alert::success('Product Added Successfully', 'We have added product to the cart');
 
         $message=__('Product Added to Shopcart Successfully');
-        return redirect()->back()->with('toast_success',$message);
+        return redirect()->back()->with('success',$message);
     }
 
     /**

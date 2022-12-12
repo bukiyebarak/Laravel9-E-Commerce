@@ -538,15 +538,15 @@
         prevArrow: false,
         nextArrow: false,
         responsive: [{
-            breakpoint: 800,
-            settings: {
-                arrows: false,
-                centerMode: false,
-                centerPadding: '40px',
-                variableWidth: false,
-                slidesToShow: 1,
-                dots: true
-            },
+            // breakpoint: 800,
+            // settings: {
+            //     arrows: false,
+            //     centerMode: false,
+            //     centerPadding: '40px',
+            //     variableWidth: false,
+            //     slidesToShow: 1,
+            //     dots: true
+            // },
             breakpoint: 1200,
             settings: {
                 arrows: false,
