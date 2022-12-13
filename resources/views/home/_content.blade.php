@@ -1,7 +1,6 @@
 <!-- Start Main Banner Area  Slider Categories-->
 <div class="home-slides-three owl-carousel owl-theme">
     @foreach($slider as $rs)
-        @if($rs->status=="True")
             <div class="hero-banner">
                 <div class="d-table">
                     <div class="d-table-cell">
@@ -40,7 +39,6 @@
                     </div>
                 </div>
             </div>
-        @endif
     @endforeach
 </div>
 <!-- End Main Banner Area -->
@@ -89,8 +87,8 @@
 
         <div class="row">
             @foreach($last as $rs)
-                @if($rs->status=="True")
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-productsBox">
                             <div class="products-image">
                                 <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
@@ -175,7 +173,7 @@
 
                         </div>
                     </div>
-                @endif
+
             @endforeach
         </div>
     </div>
@@ -243,8 +241,7 @@
 
                 <div class="products-slides owl-carousel owl-theme">
                     @foreach($picked as $rs)
-                        @if($rs->status=="True")
-                            <div class="single-products-box">
+                      <div class="single-products-box">
                                 <div class="products-image">
                                     <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                         <img style="height: 380px;width: 320px" src="{{asset('images/'.$rs->image)}}"
@@ -311,7 +308,7 @@
                                     </form>
                                 </div>
                             </div>
-                        @endif
+
                     @endforeach
                 </div>
             </div>
@@ -330,8 +327,7 @@
 
         <div class="row">
             @foreach($picked as $rs)
-                @if($rs->status=="True")
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-productsBox">
                             <div class="products-image">
                                 <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
@@ -413,7 +409,6 @@
                             @endif
                         </div>
                     </div>
-                @endif
             @endforeach
         </div>
     </div>

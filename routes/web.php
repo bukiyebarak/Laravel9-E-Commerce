@@ -49,6 +49,8 @@ Route::get('discount-products', [HomeController::class, 'discount_products'])->n
 Route::get('new-products', [HomeController::class, 'new_products'])->name('new_products');
 Route::post('/get-product', [HomeController::class, 'getproduct'])->name('getproduct');
 Route::get('/product-list/{search}', [HomeController::class, 'productlist'])->name('productlist');
+Route::get('/sidebar', [HomeController::class, 'sidebar'])->name('sidebar');
+
 Route::match(['get','post'],'all-products', [HomeController::class, 'allproducts'])->name('allproducts');
 Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
 Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);

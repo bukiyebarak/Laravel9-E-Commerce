@@ -11,8 +11,10 @@
             <div class="xton-responsive-menu">
                 <div class="logo">
                     <a href="{{route('home')}}">
-                        <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" height="50" width="50" class="main-logo" alt="logo">
-                        <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" height="50" width="50" class="white-logo" alt="logo">
+                        <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" height="50" width="50"
+                             class="main-logo" alt="logo">
+                        <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" height="50" width="50"
+                             class="white-logo" alt="logo">
                     </a>
                 </div>
             </div>
@@ -33,10 +35,15 @@
                             </a>
                         </li>
 
-                        <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">Kampanyalar</a></li>
+                        <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">Kampanyalar</a>
+                        </li>
 
                         <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i class='bx bx-chevron-down'></i></a>
                             <ul class="dropdown-menu">
+                                <li class="nav-item"><a
+                                        href="{{route('allproducts')}}"
+                                        class="nav-link">All Products</a>
+                                </li>
                                 @foreach($parentCategories as $rs)
                                     <li class="nav-item"><a
                                             href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
@@ -52,7 +59,8 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni Ürünler</a></li>
+                        <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni
+                                Ürünler</a></li>
                         <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">Hakkımızda</a>
                         </li>
                         <li class="nav-item megamenu"><a href="{{route('references')}}" class="nav-link">Referanslar</a>
@@ -114,9 +122,13 @@
                             <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i
                                         class='bx bx-chevron-down'></i></a>
                                 <ul class="dropdown-menu">
+                                    <li class="nav-item"><a
+                                            href="{{route('allproducts')}}"
+                                            class="nav-link">All Products</a>
+                                    </li>
                                     @foreach($parentCategories as $rs)
-                                        <li class="nav-item"><a
-                                                href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                        <li class="nav-item">
+                                        <a  href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
                                                 class="nav-link">{{$rs->title}}<i
                                                     class='bx bx-chevron-left'></i></a>
                                             <ul class="dropdown-menu">
@@ -128,7 +140,6 @@
                                     @endforeach
                                 </ul>
                             </li>
-
                             <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni Ürünler</a>
                             </li>
                             <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">Hakkımızda</a>
@@ -190,13 +201,14 @@
                     $total=0;
                 @endphp
                 @foreach($shopcart as $rs)
+
                     <div class="products-cart-content">
 
                         <div class="products-cart">
                             <div class="products-image">
                                 @if($rs->product->image!=null)
-                                    <img  src="{{asset('images/'.$rs->product->image)}}"
-                                          style="height: 70px" alt="">
+                                    <img src="{{asset('images/'.$rs->product->image)}}"
+                                         style="height: 70px" alt="">
                                 @endif
                             </div>
 
@@ -227,24 +239,36 @@
                     @endphp
 
                 @endforeach
+                @if($total!=0)
+                    <div class="products-cart-subtotal">
+                        <span>Subtotal</span>
 
-                <div class="products-cart-subtotal">
-                    <span>Subtotal</span>
+                        <span class="subtotal">{{$total}}€</span>
+                    </div>
 
-                    <span class="subtotal">{{$total}}€</span>
-                </div>
+                    <div class="products-cart-btn">
+                        <form action="{{route('user_order_add')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="total" value="{{$total}}">
+                            <button type="submit" class="default-btn">Proceed to Checkout</button>
+                        </form>
+                        <a href="{{route('user_shopcart')}}" class="optional-btn">View Shopping Cart</a>
+                    </div>
+                @else
+                    <div style="text-align: center"><br><br>
+                        <i class="bx bx-cart fs-1" ></i><br><br>
+                        <h6>Sepetinizde ürün bulunmamaktadır. Lütfen sepetinize ürün ekleyin.</h6><br>
+                        <a href="{{route('discount_products')}}" class="btn btn-danger">İndirim Fırsatı</a>
+                    </div><br>
+                    <div class="products-cart-btn">
+                        <a href="{{route('allproducts')}}" class="btn default-btn">Start Shopping</a>
 
-                <div class="products-cart-btn">
-                    <form action="{{route('user_order_add')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="total" value="{{$total}}">
-                        <button type="submit" class="default-btn">Proceed to Checkout</button>
-                    </form>
-                    <a href="{{route('user_shopcart')}}" class="optional-btn">View Shopping Cart</a>
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 </div>
 <!-- End Shopping Cart Modal -->
 
+{{--<script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>--}}

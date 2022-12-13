@@ -43,15 +43,19 @@ class HomeController extends Controller
     {
         return Setting::first();
     }
-
+    public static function sidebar()
+    {
+       return Product::select('id', 'image', 'slug', 'is_sale', 'sale', 'status')->where([ 'status'=>'True'])->limit(4)->orderByDesc('id')->get();
+       // dd($datalist);
+    }
 
     public function index()
     {
         $setting = Setting::first();
-        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status','sale', 'is_sale',)->limit(4)->get();
-        $daily = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->inRandomOrder()->get();
-        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->orderByDesc('id')->get();
-        $picked = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->limit(6)->inRandomOrder()->get();
+        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status','sale', 'is_sale',)->where('status','=','True')->limit(4)->get();
+        $daily = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->where('status','=','True')->limit(6)->inRandomOrder()->get();
+        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->where('status','=','True')->limit(6)->orderByDesc('id')->get();
+        $picked = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->where('status','=','True')->limit(6)->inRandomOrder()->get();
 
         //dd($picked);
 //        exit();
@@ -71,6 +75,8 @@ class HomeController extends Controller
         $datalist = Shopcart::with('product')->where('user_id', Auth::id())->get();
         return view('home._header', ['datalist' => $datalist]);
     }
+
+
 
     public function login()
     {

@@ -1,3 +1,7 @@
+@php
+    $setting=\App\Http\Controllers\HomeController::getsetting();
+    $datalist=\App\Http\Controllers\HomeController::sidebar()
+@endphp
 <!-- Start Sidebar Modal -->
 <div class="modal right fade sidebarModal" id="sidebarModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -44,25 +48,18 @@
                     <h3>New In Store</h3>
 
                     <ul class="products-list">
+                        @foreach($datalist as $rs)
                         <li>
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img1.jpg" alt="image"></a>
+                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                            </a>
                         </li>
+                        @endforeach
 
-                        <li>
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img2.jpg" alt="image"></a>
-                        </li>
-
-                        <li>
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img3.jpg" alt="image"></a>
-                        </li>
-
-                        <li>
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img4.jpg" alt="image"></a>
-                        </li>
                     </ul>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a href="{{route('home')}}" class="shop-now-btn">Shop Now</a>
+                    <p>Bu fırsat kaçmaz yeni ürünler yeni indirimler...</p>
+                    <a href="{{route('discount_products')}}" class="shop-now-btn">Shop Now</a>
                 </div>
             </div>
         </div>
