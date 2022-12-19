@@ -388,12 +388,12 @@
                                 </div>
                                 @if($rs->is_sale=="No")
                                     <div class="price">
-                                        <span class="new-price">{{$rs->price}}₺</span>
+                                        <span class="new-price">{{$rs->price}} &#8378; </span>
                                     </div>
                                 @else
                                     <div class="price">
-                                        <span class="old-price">{{$rs->price}}₺</span>
-                                        <span class="new-price">{{$rs->sale_price}}₺</span>
+                                        <span class="old-price">{{$rs->price}} &#8378;</span>
+                                        <span class="new-price">{{$rs->sale_price}} &#8378;</span>
                                     </div>
                                 @endif
                                 <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">

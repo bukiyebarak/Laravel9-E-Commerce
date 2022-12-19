@@ -13,7 +13,6 @@ class Product extends Model
         'title', 'keywords', 'description', 'image', 'detail', 'price', 'quantity', 'minquantity', 'tax', 'slug',
     ];
 
-    //One to Many (Inverse)/ Belongs to
     public function category()
     {
         return $this->belongsTo(Category::class);

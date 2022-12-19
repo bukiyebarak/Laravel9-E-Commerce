@@ -57,12 +57,12 @@
                         @endif
                         @if($data->is_sale=="No")
                             <div class="price">
-                                <span class="new-price">{{$data->price}}₺</span>
+                                <span class="new-price">{{$data->price}} &#8378; </span>
                             </div>
                         @else
                             <div class="price">
-                                <span class="old-price">{{$data->price}}₺</span>
-                                <span class="new-price">{{$data->sale_price}}₺</span>
+                                <span class="old-price">{{$data->price}} &#8378; </span>
+                                <span class="new-price">{{$data->sale_price}} &#8378; </span>
                             </div>
                         @endif
 
@@ -79,7 +79,7 @@
                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                 <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>
                             </div>
-                            <a href="#" class="rating-count">{{$countreview}} Review(s) {{$avgrev}}</a>
+                            <a href="#review" class="rating-count">{{$countreview}} Review(s) {{$avgrev}}</a>
                         </div>
 
                         <ul class="products-info">
@@ -131,8 +131,8 @@
                             Neden Bizden Satın Alın
                         </a></li>
 
-                    <li><a href="#">
-                            <div class="dot"></div>
+                    <li ><a href="#">
+                            <div class="dot"  id="review"></div>
                             Yorumlar ({{$countreview}})
                         </a></li>
                 </ul>
@@ -187,11 +187,11 @@
                         </div>
                     </div>
 
-                    <div class="tabs-item">
+                    <div class="tabs-item" >
                         <div class="products-details-tab-content">
                             <div class="products-review-form">
 
-                                <div class="row">
+                                <div class="row" >
                                     <div class="col-lg-7 col-md-12">
                                         <div class="review-comments">
                                             @foreach($reviews as $rs)
