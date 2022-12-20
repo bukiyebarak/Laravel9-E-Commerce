@@ -88,8 +88,8 @@
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
-                                <label>Total</label>
-                                <input type="text" name="total" value="{{$data->total}}€" class="form-control" disabled>
+                                <label>Total & Payment</label>
+                                <input type="text" name="total" value="{{$data->total}}₺  '{{$data->payment}} payment' " class="form-control" disabled>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">

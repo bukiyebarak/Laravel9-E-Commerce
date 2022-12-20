@@ -44,7 +44,7 @@
                         <div class="col-sm-6 col-md-6">
                             <div class="form-group">
                                 <label>Review</label>
-                                <input type="text" name="phone" disabled value="{{$data->review}}" class="form-control">
+                                <textarea type="text" name="phone" disabled class="form-control">{{$data->review}}</textarea>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6">

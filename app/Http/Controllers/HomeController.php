@@ -24,6 +24,12 @@ class HomeController extends Controller
         return Category::where('parent_id', "=", 0)->with('children')->get();
     }
 
+    public static function categorylistall()
+    {
+        return Category::with('children')->get();
+    }
+
+
     public static function headerShopCart()
     {
         return Shopcart::with('product')->where('user_id', Auth::id())->get();
@@ -54,7 +60,7 @@ class HomeController extends Controller
         $setting = Setting::first();
         $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status','sale', 'is_sale',)->where('status','=','True')->limit(4)->get();
         $daily = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->where('status','=','True')->limit(6)->inRandomOrder()->get();
-        $last = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->where('status','=','True')->limit(6)->orderByDesc('id')->get();
+        $last = Product::where('status','=','True')->limit(6)->orderByDesc('id')->get();
         $picked = Product::select('id', 'title', 'image', 'price', 'slug', 'is_sale', 'sale', 'sale_price', 'status')->where('status','=','True')->limit(6)->inRandomOrder()->get();
 
         //dd($picked);

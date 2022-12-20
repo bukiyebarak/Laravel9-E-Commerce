@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $this->hasMany(Shopcart::class);
     }
 
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
     public function contactmessage()
     {
         return $this->hasMany(Message::class);

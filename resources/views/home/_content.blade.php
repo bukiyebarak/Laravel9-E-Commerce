@@ -1,3 +1,13 @@
+@php
+    $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
+@endphp
+<style>
+   .heartbtn{
+       border-style: none;
+       background-color: inherit;
+   }
+</style>
+
 <!-- Start Main Banner Area  Slider Categories-->
 <div class="home-slides-three owl-carousel owl-theme">
     @foreach($slider as $rs)
@@ -102,10 +112,13 @@
                                     <ul>
                                         <li>
                                             <div class="wishlist-btn">
-                                                <a href="#">
-                                                    <i class='bx bx-heart'></i>
-                                                    <span class="tooltip-label">Add to Wishlist</span>
-                                                </a>
+                                                <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                    @csrf
+                                                    <a href="javascript:void(0);">
+                                                        <span class="tooltip-label">Add to Wishlist</span>
+                                                        <button type="submit" class='heartbtn bx bx-heart'></button>
+                                                    </a>
+                                                </form>
                                             </div>
                                         </li>
 
@@ -128,7 +141,11 @@
                             </div>
 
                             <div class="products-content">
-                                <span href="" class="category"></span>
+                                @foreach($parentCategories as $category)
+                                    @if($category->id==$rs->category_id)
+                                        <span class="category">{{$category->title}}</span>
+                                    @endif
+                                @endforeach
                                 <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
                                 </h3>
                                 @php
@@ -254,10 +271,13 @@
                                         <ul>
                                             <li>
                                                 <div class="wishlist-btn">
-                                                    <a href="#">
-                                                        <i class='bx bx-heart'></i>
-                                                        <span class="tooltip-label">Add to Wishlist</span>
-                                                    </a>
+                                                    <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                        @csrf
+                                                        <a href="javascript:void(0);">
+                                                            <span class="tooltip-label">Add to Wishlist</span>
+                                                            <button type="submit" class='heartbtn bx bx-heart'></button>
+                                                        </a>
+                                                    </form>
                                                 </div>
                                             </li>
                                             <li>
@@ -339,11 +359,18 @@
                                 <div class="products-button">
                                     <ul>
                                         <li>
+
                                             <div class="wishlist-btn">
-                                                <a href="#">
-                                                    <i class='bx bx-heart'></i>
+                                                <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                    @csrf
+
+                                                <a href="javascript:void(0);">
+
                                                     <span class="tooltip-label">Add to Wishlist</span>
+                                                    <button type="submit" class='heartbtn bx bx-heart'></button>
                                                 </a>
+
+                                                </form>
                                             </div>
                                         </li>
                                         <li>
@@ -496,10 +523,13 @@
                                     <ul>
                                         <li>
                                             <div class="wishlist-btn">
-                                                <a href="#">
-                                                    <i class='bx bx-heart'></i>
-                                                    <span class="tooltip-label">Add to Wishlist</span>
-                                                </a>
+                                                <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                    @csrf
+                                                    <a href="javascript:void(0);">
+                                                        <span class="tooltip-label">Add to Wishlist</span>
+                                                        <button type="submit" class='heartbtn bx bx-heart'></button>
+                                                    </a>
+                                                </form>
                                             </div>
                                         </li>
                                         <li>

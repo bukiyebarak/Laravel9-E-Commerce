@@ -118,7 +118,6 @@ class ShopCartController extends Controller
     {
         $data = Shopcart::find($id);
         $data->delete();
-        Alert::info('Ürün Başarıyla silindi');
         return redirect()->back()->with('success','Product deleted succesfully');
     }
 }

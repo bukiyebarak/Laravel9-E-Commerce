@@ -18,14 +18,15 @@
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
                 ShopCart</b>
             <i class='bx bx-credit-card fs-5'></i></a>
+        <a href="{{route('user_wishlist')}}"
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+                Wishlist</b>
+            <i class='bx bx-heart fs-5'></i></a>
 {{--        <a href="{{route('user_products')}}"--}}
 {{--           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My--}}
 {{--                Product</b>--}}
 {{--            <i class='bx bxs-shopping-bag-alt fs-5'></i></a>--}}
-        <a href="{{route('logout')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>Logout</b>
-            <i
-                class='bx bx-log-out fs-5'></i></a>
+
         @php
             $userRoles = \Illuminate\Support\Facades\Auth::user()->roles->pluck('name');
         @endphp
@@ -35,6 +36,11 @@
                class="list-group-item d-flex justify-content-between align-items-center bg-transparent" target="_blank"><b>Admin Panel</b> <i
                     class='bx bx-home fs-5'></i></a>
         @endif
+        <a href="{{route('logout')}}"
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>Logout</b>
+            <i
+                class='bx bx-log-out fs-5'></i></a>
+
     </div>
 </div>
 @endauth

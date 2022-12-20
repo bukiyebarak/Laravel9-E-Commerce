@@ -27,7 +27,10 @@ class Product extends Model
     {
         return $this->hasMany(Shopcart::class);
     }
-
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
     public function orderitem()
     {
         return $this->hasMany(Orderitem::class);

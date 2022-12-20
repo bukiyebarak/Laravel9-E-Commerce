@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ShopCartController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -201,6 +202,12 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::post('store/{id}', [ShopCartController::class, 'store'])->name('user_shopcart_add');
         Route::post('update/{id}', [ShopCartController::class, 'update'])->name('user_shopcart_update');
         Route::get('delete/{id}', [ShopCartController::class, 'destroy'])->name('user_shopcart_delete');
+    });
+    Route::prefix('wishlistwishlist')->group(function () {
+        Route::get('/', [WishlistController::class, 'index'])->name('user_wishlist');
+        Route::post('store/{id}', [WishlistController::class, 'store'])->name('user_wishlist_add');
+        Route::post('update/{id}', [WishlistController::class, 'update'])->name('user_wishlist_update');
+        Route::get('delete/{id}', [WishlistController::class, 'destroy'])->name('user_wishlist_delete');
     });
 
     #Order

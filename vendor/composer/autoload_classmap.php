@@ -90,6 +90,7 @@ return array(
     'App\\Models\\Team' => $baseDir . '/app/Models/Team.php',
     'App\\Models\\TeamInvitation' => $baseDir . '/app/Models/TeamInvitation.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\Wishlist' => $baseDir . '/app/Models/Wishlist.php',
     'App\\Notifications\\OrderMail' => $baseDir . '/app/Notifications/OrderMail.php',
     'App\\Policies\\TeamPolicy' => $baseDir . '/app/Policies/TeamPolicy.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

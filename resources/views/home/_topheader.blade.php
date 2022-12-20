@@ -81,7 +81,7 @@
                     <div class="option-item">
                         <div class="cart-btn">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#shoppingCartModal"><i
-                                    class='bx bx-shopping-bag'></i><span>0</span></a>
+                                    class='bx bx-shopping-bag'></i><span>{{\App\Http\Controllers\ShopCartController::countshopcart()}}</span></a>
                         </div>
                     </div>
                 </ul>

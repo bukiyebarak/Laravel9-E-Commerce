@@ -656,6 +656,7 @@ class ComposerStaticInit8c101ac804244d280b66479149bdbd89
         'App\\Models\\Team' => __DIR__ . '/../..' . '/app/Models/Team.php',
         'App\\Models\\TeamInvitation' => __DIR__ . '/../..' . '/app/Models/TeamInvitation.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Wishlist' => __DIR__ . '/../..' . '/app/Models/Wishlist.php',
         'App\\Notifications\\OrderMail' => __DIR__ . '/../..' . '/app/Notifications/OrderMail.php',
         'App\\Policies\\TeamPolicy' => __DIR__ . '/../..' . '/app/Policies/TeamPolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
