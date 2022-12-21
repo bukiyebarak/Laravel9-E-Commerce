@@ -8,6 +8,13 @@
 @section('title', $search. '  Products List')
 
 @section('content')
+    <style>
+        .heartbtn {
+            border-style: none;
+            background-color: inherit;
+        }
+
+    </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
@@ -175,18 +182,13 @@
                                             <ul>
                                                 <li>
                                                     <div class="wishlist-btn">
-                                                        <a href="#">
-                                                            <i class='bx bx-heart'></i>
-                                                            <span class="tooltip-label">Add to Wishlist</span>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="compare-btn">
-                                                        <a href="#">
-                                                            <i class='bx bx-refresh'></i>
-                                                            <span class="tooltip-label">Compare</span>
-                                                        </a>
+                                                        <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                            @csrf
+                                                            <a href="javascript:void(0);">
+                                                                <span class="tooltip-label">Add to Wishlist</span>
+                                                                <button type="submit" class='heartbtn bx bx-heart'></button>
+                                                            </a>
+                                                        </form>
                                                     </div>
                                                 </li>
                                                 <li>

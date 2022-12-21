@@ -368,7 +368,7 @@
                                                         <center
                                                             style="color:#FFFFFF;font-family:arial,helvetica,sans-serif;">
                                                     <![endif]-->
-                                                    <a href="http://127.0.0.1:8000/user/order/show/{{$order->id}}" target="_blank" class="v-button"
+                                                    <a href="{{route('user_order_show',['id'=>$order->id])}}" target="_blank" class="v-button"
                                                        style="box-sizing: border-box;display: inline-block;font-family:arial,helvetica,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #e03e2d; border-radius: 8px;-webkit-border-radius: 8px; -moz-border-radius: 8px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-width: 0px; border-top-style: solid; border-top-color: #CCC; border-left-width: 0px; border-left-style: solid; border-left-color: #CCC; border-right-width: 0px; border-right-style: solid; border-right-color: #CCC; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: #CCC;">
                                                         <span style="display:block;padding:10px 20px;line-height:120%;"><span
                                                                 style="font-size: 14px; line-height: 16.8px;">Şipariş Detayı</span></span>
@@ -608,7 +608,7 @@
                                                     <div class="v-text-align"
                                                          style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                         <p style="font-size: 14px; line-height: 140%;">
-                                                            <strong>Fiyatı: </strong>{{$rs->price*$rs->quantity}}€</p>
+                                                            <strong>Fiyatı: </strong>{{$rs->price*$rs->quantity}}₺</p>
                                                     </div>
 
                                                 </td>
@@ -756,7 +756,7 @@
 
                                                 <div class="v-text-align" style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 14px; line-height: 19.6px;">
-                                                            <strong>{{$order->total}}€</strong></span></p>
+                                                            <strong>{{$order->total}}₺</strong></span></p>
                                                 </div>
 
                                             </td>
@@ -844,7 +844,7 @@
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: right;">
-                                                        <span style="font-size: 14px; line-height: 19.6px;"> 30€</span>
+                                                        <span style="font-size: 14px; line-height: 19.6px;"> 30₺</span>
                                                     </p>
                                                 </div>
 
@@ -934,7 +934,7 @@
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: right;">
-                                                        <span style="font-size: 14px; line-height: 19.6px;"><strong> {{$order->total+30}}€</strong></span>
+                                                        <span style="font-size: 14px; line-height: 19.6px;"><strong> {{$order->total+30}}₺</strong></span>
                                                     </p>
                                                 </div>
 
@@ -1305,7 +1305,7 @@
                                                         <td class="v-text-align"
                                                             style="padding-right: 0px;padding-left: 0px;"
                                                             align="center">
-                                                            <a href="http://127.0.0.1:8000" target="_blank">
+                                                            <a href="{{route('home')}}" target="_blank">
                                                                 <img align="center" border="0"
                                                                      src="https://app.bayengage.com/images/bayengage-logo.png"
                                                                      alt="Image" title="Image"

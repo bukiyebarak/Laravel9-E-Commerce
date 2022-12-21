@@ -5,6 +5,13 @@
 
 @section('title', 'User Shopcart')
 @section('content')
+    <style>
+        .heartbtn {
+            border-style: none;
+            background-color: inherit;
+        }
+
+    </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
@@ -59,17 +66,17 @@
 
                                             @if($rs->product->sale_price==null)
                                                 <li>Unit Price:<span
-                                                        class="subtotal-amount">{{$rs->product->price}}€</span>
+                                                        class="subtotal-amount">{{$rs->product->price}}₺</span>
                                                 </li>
-                                                <li>Total:<span class="unit-amount"> <b> {{$rs->product->price * $rs->quantity}}€</b></span>
+                                                <li>Total:<span class="unit-amount"> <b> {{$rs->product->price * $rs->quantity}}₺</b></span>
                                                 </li>
                                             @else
                                                 <li>Unit Price:<span
-                                                        class="subtotal-amount ">{{$rs->product->price}}€</span>
+                                                        class="subtotal-amount ">{{$rs->product->price}}₺</span>
                                                 </li>
-                                                <li>Sale Price:<span class="subtotal-amount">{{$rs->product->sale_price}}€</span>
+                                                <li>Sale Price:<span class="subtotal-amount">{{$rs->product->sale_price}}₺</span>
                                                 </li>
-                                                <li>Total:<span class="unit-amount"> <b> {{$rs->product->sale_price * $rs->quantity}}€</b></span>
+                                                <li>Total:<span class="unit-amount"> <b> {{$rs->product->sale_price * $rs->quantity}}₺</b></span>
                                                 </li>
                                             @endif
 
@@ -80,7 +87,7 @@
 
                                     <td class="product-quantity">
                                         <form
-                                            action="{{route('user_shopcart_update',['id'=>$rs->id])}}" method="post">
+                                            action="{{route('user_shopcart_update',['id'=>$rs->product->id])}}" method="post">
                                             @csrf
                                             <div class="input-counter">
                                                 <span class="minus-btn"><i class='bx bx-minus'></i></span>
@@ -93,12 +100,21 @@
                                     </td>
 
                                     <td class="product-subtotal">
-
-                                        <a href="#"><i class='bx bx-heart fs-3'></i></a>
                                         <a
                                             href="{{route('user_shopcart_delete',['id'=>$rs->id])}}"
                                             onclick="return confirm('Delete! Are you sure?')" class="remove"><i
                                                 class='bx bx-trash fs-3'></i></a>
+
+                                        <form action="{{route('user_wishlist_add',['id'=>$rs->product->id])}}" method="post">
+                                            @csrf
+                                            <a href="javascript:void(0);" >
+                                                <button type="submit" class="heartbtn bx bx-heart fs-3"></button>
+
+                                            </a>
+                                        </form>
+{{--                                        <a href="#"><i class='bx bx-heart fs-3'></i></a>--}}
+
+
                                     </td>
                                 </tr>
 
@@ -128,15 +144,15 @@
                         @if($total!=0)
                             <h3>Cart Totals </h3>
                             <ul>
-                                <li>Subtotal <span>{{$total}}€</span></li>
-                                <li>Shipping <span>30 €</span></li>
+                                <li>Subtotal <span>{{$total}}₺</span></li>
+                                <li>Shipping <span>30 ₺</span></li>
                                 @php
                                     $total += 30;
                                 @endphp
                                 <li>Total <span>@if($total>30)
-                                            {{$total}}€
+                                            {{$total}}₺
                                         @else
-                                            0€
+                                            0₺
                                         @endif</span></li>
                             </ul>
 

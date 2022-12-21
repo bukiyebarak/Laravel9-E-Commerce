@@ -208,7 +208,7 @@
                             <div class="products-image">
                                 @if($rs->product->image!=null)
                                     <img src="{{asset('images/'.$rs->product->image)}}"
-                                         style="height: 70px" alt="">
+                                         style="height: 50px; max-width: 100%" alt="">
                                 @endif
                             </div>
 

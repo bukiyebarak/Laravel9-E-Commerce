@@ -208,7 +208,7 @@
                                                         <center
                                                             style="color:#000000;font-family:arial,helvetica,sans-serif;">
                                                     <![endif]-->
-                                                    <a href="http://127.0.0.1:8000/myaccount" target="_blank"
+                                                    <a href="{{route('myprofile')}}" target="_blank"
                                                        class="v-button"
                                                        style="box-sizing: border-box;display: inline-block;font-family:arial,helvetica,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #000000; background-color: #e9e8e4; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;">
                                                         <span style="display:block;padding:10px 20px;line-height:120%;">Profilim</span>

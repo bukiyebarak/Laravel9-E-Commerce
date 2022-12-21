@@ -70,9 +70,9 @@
                                         </ul>
                                     </td>
                                     <td class="product-name">
-                                        <span class="unit-amount">{{$rs->price}}€</span>
+                                        <span class="unit-amount">{{$rs->price}}₺</span>
                                         <ul>
-                                            <li>Total: <span> {{$rs->price*$rs->quantity}}€</span></li>
+                                            <li>Total: <span> {{$rs->price*$rs->quantity}}₺</span></li>
                                         </ul>
                                     </td>
                                     <td><div class="scroll">
@@ -112,9 +112,9 @@
                         <h3>Cart Totals</h3>
 
                         <ul>
-                            <li>Subtotal <span>{{$rs->total-30}}€</span></li>
-                            <li>Shipping <span>30 €</span></li>
-                            <li>Total <span>{{$rs->total}}€</span></li>
+                            <li>Subtotal <span>{{$rs->total-30}}₺</span></li>
+                            <li>Shipping <span>30 ₺</span></li>
+                            <li>Total <span>{{$rs->total}}₺</span></li>
                         </ul>
 
 {{--                        <form action="{{route('user_order_add')}}" method="post">--}}

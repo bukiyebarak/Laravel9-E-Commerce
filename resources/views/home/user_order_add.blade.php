@@ -42,12 +42,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>First Name <span class="required">*</span></label>
-                                        @php
-                                            $name=\Illuminate\Support\Facades\Auth::user()->name;
-
-                                          $surname=\Illuminate\Support\Facades\Auth::user()->surname
-                                        @endphp
-                                        <input type="text" name="name" value="{{strtoupper($name)}}"
+                                        <input type="text" name="name" value="{{Auth::user()->name}}"
                                                class="form-control">
                                         @if ($errors->has('name'))
                                             <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -59,7 +54,7 @@
                                     <div class="form-group">
                                         <label>Last Name <span class="required">*</span></label>
                                         <input type="text" name="surname" class="form-control"
-                                               value="{{strtoupper($surname)}}">
+                                               value="{{Auth::user()->surname}}">
                                         @if ($errors->has('surname'))
                                             <span class="text-danger">{{ $errors->first('surname') }}</span>
                                         @endif

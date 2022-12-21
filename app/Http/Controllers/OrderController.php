@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Iyzipay\Model\Buyer;
 use Iyzipay\Model\Currency;
 use Iyzipay\Model\PaymentGroup;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -96,9 +97,6 @@ class OrderController extends Controller
      */
     public function store(CheckoutRequest $request)
     {
-//        $input = $request->all();
-//        $order = Order::create($input);
-        $dt = new \Illuminate\Support\Carbon();
         $order = Order::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
@@ -130,27 +128,17 @@ class OrderController extends Controller
 
             //Ödeme İsteği Oluştur.
 
-            $requestIyzico = new \Iyzipay\Request\CreateCheckoutFormInitializeRequest();
-            $requestIyzico->setLocale(\Iyzipay\Model\Locale::TR);
-            $requestIyzico->setConversationId(rand());
-            $requestIyzico->setPrice(number_format($total, '2', '.', ''));
-            $requestIyzico->setPaidPrice(number_format($total + 30, '2', '.', ''));//kargo indirim dahil fiyatı
-            $requestIyzico->setCurrency(Currency::TL);
-            $requestIyzico->setBasketId("B67832");
-            $requestIyzico->setPaymentGroup(PaymentGroup::PRODUCT);
-            $requestIyzico->setCallbackUrl(route('iyzico_callback'));
-            $requestIyzico->setEnabledInstallments(array(2, 3, 6, 9));
-
+            $requestIyzico = IyzicoRequestHelper::createRequest($total);
+           // dd($requestIyzico);
             #region PaymentCard Nesnesi oluştur
-
             //  $paymentCard =IyzicoPaymentCardHelper::getPaymentCard();
 
             #endregion
 
             #region Buyer Nesnesi oluştur.
-            $buyer = IyzicoBuyerHelper::getBuyer($order, $date);
-            $requestIyzico->setBuyer($buyer);
-
+         $buyer = IyzicoBuyerHelper::getBuyer($order, $date);
+         $requestIyzico->setBuyer($buyer);
+//            dd($a);
 #endregion
 
             #region Kargo ve fatura adresi nesnlerini oluştur.
@@ -171,7 +159,7 @@ class OrderController extends Controller
 
             $checkoutFormInitialize = \Iyzipay\Model\CheckoutFormInitialize::create($requestIyzico, IyzicoApi::options());
             $paymentForm = $checkoutFormInitialize->getCheckoutFormContent();
-            //  dd($paymentForm);
+//            dd($paymentForm);
             return view('home.iyzico-form', compact('paymentForm'));
         } else {
             //kredi kartı ile ödeme
@@ -214,7 +202,7 @@ class OrderController extends Controller
         $requestIyzico->setConversationId(rand());
         $requestIyzico->setToken($request->get('token'));
         $checkoutForm = \Iyzipay\Model\CheckoutForm::retrieve($requestIyzico, IyzicoApi::options());
-       // dd($checkoutForm->getPaymentStatus());
+        // dd($checkoutForm->getPaymentStatus());
         if ($checkoutForm->getPaymentStatus() == 'SUCCESS') {
             $this->getOrder();
             //Sepeti Kapat

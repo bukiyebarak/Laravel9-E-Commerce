@@ -6,6 +6,41 @@
 
 @section('title', 'User Wishlist')
 @section('content')
+    <style>
+        div.wishlist {
+            position: relative;
+            text-align: center;
+            max-width: 60%;
+            height: auto;
+            padding: 10%;
+            background-color: transparent;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .wishlist image {
+            position: absolute;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .wishlist button {
+            position: absolute;
+            float: right;
+            top: 1%;
+            right: 0;
+        }
+
+        @media only screen and (max-device-width: 500px) {
+            .wishlist image {
+                max-width: 100%;
+            }
+        }
+    </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
@@ -26,7 +61,9 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-md-4">
                         <div class="d-lg-flex d-md-flex align-items-center">
-                            <span class="sub-title"><a href="#" data-bs-toggle="modal" data-bs-target="#productsFilterModal"><i class='bx bx-filter-alt'></i> Filter</a></span>
+                            <span class="sub-title"><a href="#" data-bs-toggle="modal"
+                                                       data-bs-target="#productsFilterModal"><i
+                                        class='bx bx-filter-alt'></i> Filter</a></span>
 
                             <span class="sub-title d-none d-lg-block d-md-block">View:</span>
 
@@ -80,37 +117,61 @@
 
             <div id="products-collections-filter" class="row">
                 @foreach($datalist as $rs)
-                <div class="col-lg-4 col-md-6 col-sm-6 products-col-item" >
-                    <div class="products-box" style="border: solid black 1px; max-width: 80%; padding: 8%;">
-                        <div class="image">
-                            <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}">
-                                @if($rs->product->image!=null)
-                                <img src="{{asset('images/'.$rs->product->image)}}" alt="image" style="max-width:200px; height:300px;">@endif
-                            </a>
-                            <div class="sale-tag">Sale!</div>
-                        </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 products-col-item">
+                        <div class="products-box wishlist">
+                            <div>
+                                <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}">
+                                    @if($rs->product->image!=null)
+                                        <img src="{{asset('images/'.$rs->product->image)}}" alt="image">
+                                    @endif
+                                </a>
 
-                        <div class="products-content">
-                            @foreach($parentCategories as $category)
-                                @if($category->id==$rs->product->category_id)
-                                 <span class="category">{{$category->title}}</span>
+                                <button class="btn clearfix remove"><a
+                                        href="{{route('user_wishlist_delete',['id'=>$rs->id])}}"
+                                        onclick="return confirm('Delete! Are you sure?')" class="remove"><i
+                                            class='bx bx-trash fs-3'></i></a></button>
+                                <div class="sale-tag">Sale!</div>
+                            </div>
+                            <div class="products-content">
+                                @foreach($parentCategories as $category)
+                                    @if($category->id==$rs->product->category_id)
+                                        <span class="category">{{$category->title}}</span>
+                                    @endif
+                                @endforeach
+                                <h3>
+                                    <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
+                                </h3>
+
+                                @php
+                                    $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
+                                    $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                                @endphp
+                                <div class="star-rating">
+                                    <div class="rating">
+                                        <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
+                                        <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
+                                            ({{$countreview}} İnceleme)
+                                        @endif
+                                    </div>
+                                </div>
+
+                                @if($rs->product->is_sale=="No")
+                                    <div class="price">
+                                        <span class="new-price">{{$rs->product->price}}₺</span>
+                                    </div>
+                                @else
+                                    <div class="price">
+                                        <span class="old-price">{{$rs->product->price}}₺</span>
+                                        <span class="new-price">{{$rs->product->sale_price}}₺</span>
+                                    </div>
                                 @endif
-                            @endforeach
-                            <h3> <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a></h3>
-                            @if($rs->product->is_sale=="No")
-                                <div class="price">
-                                    <span class="new-price">{{$rs->product->price}}₺</span>
-                                </div>
-                            @else
-                                <div class="price">
-                                    <span class="old-price">{{$rs->product->price}}₺</span>
-                                    <span class="new-price">{{$rs->product->sale_price}}₺</span>
-                                </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-          @endforeach
+                @endforeach
             </div>
 
             <div class="pagination-area text-center">

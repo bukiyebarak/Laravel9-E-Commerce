@@ -8,6 +8,13 @@
 @section('title','All Products' )
 
 @section('content')
+    <style>
+      .heartbtn {
+            border-style: none;
+            background-color: inherit;
+        }
+
+    </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">

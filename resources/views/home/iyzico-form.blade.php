@@ -8,7 +8,6 @@
     <title>İyzico Payment</title>
 </head>
 <body>
-
 {!! $paymentForm !!}
 <div id="iyzipay-checkout-form" class="responsive"></div>
 </body>

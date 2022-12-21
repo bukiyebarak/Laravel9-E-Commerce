@@ -17,10 +17,13 @@
                         <ul>
                             <li>
                                 <div class="wishlist-btn">
-                                    <a href="#">
-                                        <i class='bx bx-heart'></i>
-                                        <span class="tooltip-label">Add to Wishlist</span>
-                                    </a>
+                                    <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                        @csrf
+                                        <a href="javascript:void(0);">
+                                            <span class="tooltip-label">Add to Wishlist</span>
+                                            <button type="submit" class='heartbtn bx bx-heart'></button>
+                                        </a>
+                                    </form>
                                 </div>
                             </li>
                             <li>

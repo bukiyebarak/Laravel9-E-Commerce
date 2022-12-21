@@ -169,7 +169,7 @@
                                                         <v:textbox inset="0px,0px,0px,0px">
                                                             <center
                                                                 style="color:#052d3d; font-family:Tahoma, Verdana, sans-serif; font-size:14px">
-                                                    <![endif]--><a href="http://127.0.0.1:8000/admin/order"
+                                                    <![endif]--><a href="{{route('admin_orders')}}"
                                                                    style="text-decoration:none;display:inline-block;color:#052d3d;background-color:#D4E9F9;border-radius:14px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:3px;padding-bottom:3px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;font-size:14px;text-align:center;mso-border-alt:none;word-break:keep-all;"
                                                                    target="_blank"><span
                                                             style="padding-left:15px;padding-right:15px;font-size:14px;display:inline-block;letter-spacing:normal;"><span
@@ -235,7 +235,7 @@
                                                          style="font-size: 12px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #052D3D; line-height: 1.2;">
                                                         <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">
                                                             <span style="font-size:22px;"><strong><span
-                                                                        style="font-size:22px;">{{$order->name}} isimli kullanıcı tarafından {{$order->created_at}} tarihinde {{$order->total}}€ tutarında  şipariş alındı</span></strong></span>
+                                                                        style="font-size:22px;">{{$order->name}} isimli kullanıcı tarafından {{$order->created_at}} tarihinde {{$order->total}}₺ tutarında  şipariş alındı</span></strong></span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -482,7 +482,7 @@
                                                     <div class=""
                                                          style="font-size: 12px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #555555; line-height: 1.2;">
                                                         <p style="margin: 0; text-align: center; font-size: 12px; mso-line-height-alt: 14.399999999999999px;">
-                                                            <span style="font-size:20px;"><span style="font-size:20px;"><strong>{{$rs->price*$rs->quantity}}€</strong></span></span>
+                                                            <span style="font-size:20px;"><span style="font-size:20px;"><strong>{{$rs->price*$rs->quantity}}₺</strong></span></span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -538,7 +538,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;text-align:center;">
                                                 <h1 style="margin: 0; color: #555555; font-size: 20px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; line-height: 180%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
-                                                    <span class="tinyMce-placeholder">    Ara Toplam:{{$order->total}}€</span></h1>
+                                                    <span class="tinyMce-placeholder">    Ara Toplam:{{$order->total}}₺</span></h1>
                                             </td>
                                         </tr>
                                     </table>
@@ -548,7 +548,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;text-align:center;">
                                                 <h1 style="margin: 0; color: #555555; font-size: 20px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; line-height: 180%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
-                                                    <span class="tinyMce-placeholder">    Kargo Ücreti: 30€</span></h1>
+                                                    <span class="tinyMce-placeholder">    Kargo Ücreti: 30₺</span></h1>
                                             </td>
                                         </tr>
                                     </table>
@@ -558,7 +558,7 @@
                                         <tr>
                                             <td class="pad" style="width:100%;text-align:center;">
                                                 <h1 style="margin: 0; color: #555555; font-size: 27px; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; line-height: 180%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">
-                                                    <span class="tinyMce-placeholder">   Toplam Ücret: {{$order->total+30}}€</span></h1>
+                                                    <span class="tinyMce-placeholder">   Toplam Ücret: {{$order->total+30}}₺</span></h1>
                                             </td>
                                         </tr>
                                     </table>
@@ -597,7 +597,7 @@
                                                         <w:anchorlock/>
                                                         <v:textbox inset="0px,0px,0px,0px">
                                                             <center style="color:#ffffff; font-family:Tahoma, Verdana, sans-serif; font-size:18px">
-                                                    <![endif]--><a href="http://127.0.0.1:8000/admin/order/show/{{$order->id}}"
+                                                    <![endif]--><a href="{{route('user_order_show',['id'=>$order->id])}}"
                                                                    style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#2e8dd8;border-radius:15px;width:auto;border-top:0px solid transparent;font-weight:400;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;font-size:18px;text-align:center;mso-border-alt:none;word-break:keep-all;"
                                                                    target="_blank"><span
                                                             style="padding-left:20px;padding-right:20px;font-size:18px;display:inline-block;letter-spacing:normal;"><span
@@ -747,7 +747,7 @@
                                                                 <!--<![endif]-->
                                                                 <tr>
                                                                     <td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 6px;">
-                                                                        <a href="http://127.0.0.1:8000"
+                                                                        <a href="{{route('home')}}"
                                                                            style="text-decoration: none;"
                                                                            target="_blank"><img align="center"
                                                                                                 alt="GNC Coffee"
@@ -756,7 +756,7 @@
                                                                                                 style="display: block; height: auto; margin: 0 auto; border: 0;"
                                                                                                 width="34"/></a></td>
                                                                     <td style="font-family: Lato, Tahoma, Verdana, Segoe, sans-serif; font-size: 15px; color: #9d9d9d; vertical-align: middle;  text-align: center;">
-                                                                        <a href="http://127.0.0.1:8000"
+                                                                        <a href="{{route('home')}}"
                                                                            style="color: #9d9d9d; text-decoration: none;"
                                                                            target="_blank">GNC Coffee</a></td>
                                                                 </tr>
