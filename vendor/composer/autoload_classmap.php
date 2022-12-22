@@ -46,6 +46,7 @@ return array(
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
     'App\\Http\\Controllers\\ShopCartController' => $baseDir . '/app/Http/Controllers/ShopCartController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+    'App\\Http\\Controllers\\WishlistController' => $baseDir . '/app/Http/Controllers/WishlistController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Livewire\\Review' => $baseDir . '/app/Http/Livewire/Review.php',
     'App\\Http\\Livewire\\Search' => $baseDir . '/app/Http/Livewire/Search.php',

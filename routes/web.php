@@ -232,5 +232,5 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
 #region Login-Logout
 Route::get('/login', [\App\Http\Controllers\HomeController::class, 'login'])->name('adminlogin');
 Route::post('/admin/logincheck', [HomeController::class, 'logincheck'])->name('admin_logincheck');
-Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+Route::get('/logout', [HomeController::class, 'logoutt'])->name('logoutt');
 #endregion

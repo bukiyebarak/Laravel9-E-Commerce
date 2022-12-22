@@ -56,7 +56,7 @@
                                             <label for="inputChoosePassword" class="form-label">Enter Password</label>
                                             <div class="input-group" id="show_hide_password">
                                                 <input type="password" name="password" class="form-control border-end-0"
-                                                       id="inputChoosePassword" value="12345678"
+                                                       id="inputChoosePassword"
                                                        placeholder="Enter Password">
                                                 <a href="javascript:;"   class="input-group-text bg-transparent"><i
                                                         class='bx bx-hide'></i></a>

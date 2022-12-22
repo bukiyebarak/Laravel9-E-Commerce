@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>Quantity*</label>
-                                    <input type="number" min="1" name="quantity" class="form-control"
+                                    <input type="number" min="0" name="quantity" class="form-control"
                                            value="{{old('quantity')}}">
                                     @if ($errors->has('quantity'))
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
@@ -109,14 +109,12 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>Minquantity*</label>
-                                    <input type="number" min="1" name="minquantity" class="form-control"
+                                    <input type="number" min="0" name="minquantity" class="form-control"
                                            value="{{old('minquantity')}}">
                                     @if ($errors->has('minquantity'))
                                         <span class="text-danger">{{ $errors->first('minquantity') }}</span>
                                     @endif
                                 </div>
-
-
                                 <div class="col-md-12">
                                     <label>Tax*</label>
                                     <input type="number" name="tax" min="0" class="form-control" value="{{old('tax')}}">

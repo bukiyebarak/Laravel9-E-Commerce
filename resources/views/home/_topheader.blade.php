@@ -58,7 +58,7 @@
                     @auth
                         <li><a href="{{route('user_orders')}}"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
                             </a></li>
-                        <li><a href="{{route('logout')}}"><i class='bx bx-log-out'></i> Logout</a></li>
+                        <li><a href="{{route('logoutt')}}"><i class='bx bx-log-out'></i> Logout</a></li>
                     @endauth
                     @guest()
                         <li><a href="{{route('adminlogin')}}"><i class='bx bx-log-in'></i> Login</a></li>

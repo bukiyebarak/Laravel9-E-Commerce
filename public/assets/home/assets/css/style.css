@@ -2717,7 +2717,7 @@ Products CSS
 }
 
 .products-box {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -2732,67 +2732,10 @@ Products CSS
   display: block;
 }
 
-.products-box .products-image a img {
-  -webkit-transition: .8s;
-  transition: .8s;
-}
 
-.products-box .products-image a .hover-image {
-  position: absolute;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transform: scale(1.07);
-          transform: scale(1.07);
-}
 
-.products-box .products-image .products-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
-}
 
-.products-box .products-image .products-button ul {
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style-type: none;
-}
 
-.products-box .products-image .products-button ul li {
-  opacity: 0;
-  visibility: hidden;
-  display: inline-block;
-  -webkit-transform: translateX(30px);
-          transform: translateX(30px);
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
-  margin-left: 3px;
-  margin-right: 3px;
-}
-
-.products-box .products-image .products-button ul li a {
-  display: inline-block;
-  font-size: 22px;
-  line-height: 1;
-  color: #000000;
-  position: relative;
-  width: 40px;
-  border-radius: 50%;
-  line-height: 43px;
-  -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  height: 40px;
-}
-
-.products-box .products-image .products-button ul li a:hover {
-  background-color: #f53f85;
-  color: #ffffff;
-}
 
 .products-box .products-image .products-button ul li a .tooltip-label {
   right: 50%;
@@ -2831,26 +2774,8 @@ Products CSS
   font-size: 20px;
 }
 
-.products-box .products-image .products-button ul li a:hover .tooltip-label {
-  visibility: visible;
-  opacity: 1;
-  top: -45px;
-}
 
-.products-box .products-image .products-button ul li:nth-child(1) {
-  -webkit-transition-delay: 0.1s;
-          transition-delay: 0.1s;
-}
 
-.products-box .products-image .products-button ul li:nth-child(2) {
-  -webkit-transition-delay: 0.2s;
-          transition-delay: 0.2s;
-}
-
-.products-box .products-image .products-button ul li:nth-child(3) {
-  -webkit-transition-delay: 0.3s;
-          transition-delay: 0.3s;
-}
 
 .products-box .products-image .sale-tag {
   position: absolute;
@@ -3000,38 +2925,6 @@ Products CSS
   background: red;
 }
 
-.products-box:hover .products-content .price {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.products-box:hover .products-content .add-to-cart {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  opacity: 1;
-  visibility: visible;
-}
-
-.products-box:hover .products-image a .main-image {
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transform: scale(1.07);
-          transform: scale(1.07);
-}
-
-.products-box:hover .products-image a .hover-image {
-  opacity: 1;
-  visibility: visible;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-}
-
-.products-box:hover .products-image .products-button ul li {
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  opacity: 1;
-  visibility: visible;
-}
 
 .single-productsBox {
   margin-bottom: 30px;

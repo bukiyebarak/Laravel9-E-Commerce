@@ -32,7 +32,7 @@
                     <div class="products-details-image">
 
                         <ul class="products-details-image-slides">
-                            <li><img src="{{asset('images/'.$data->image)}}"  alt="image"></li>
+                            <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
                             @foreach($datalist as $rs)
                                 <li><img src="{{asset('images/'.$rs->image)}}" alt="image"></li>
                             @endforeach
@@ -53,7 +53,8 @@
                     <div class="products-details-desc">
                         <h3>{{$data->title}}</h3>
                         @if($data->is_sale=="Yes")
-                            <h5> <b style="color:darkred"><i class="bx bxs-discount fs-5"> SALE! %{{$data->sale}}</i></b></h5>
+                            <h5><b style="color:darkred"><i class="bx bxs-discount fs-5"> SALE! %{{$data->sale}}</i></b>
+                            </h5>
                         @endif
                         @if($data->is_sale=="No")
                             <div class="price">
@@ -83,8 +84,23 @@
                         </div>
 
                         <ul class="products-info">
-                            <li><span>Availability:</span> <a href="#">In stock ({{$data->quantity}} items)</a></li>
-                            <li><span>Products Type:</span> <a href="#"> {{$data->category->title}}</a></li>
+                            <li><span>Availability:</span> <a href="javascript:void(0);">
+                                    @if($data->quantity<=5 && $data->quantity>0)
+                                        <span style="color:darkgreen">In stock (End {{$data->quantity}} items)!!! </span>
+                                    @endif
+                                    @if($data->quantity)
+                                        <span style="background-color: rgba(143,255,61,0.44)">
+                                        </span>
+                                    @else
+                                        <span
+                                            style="background-color: rgba(226,41,23,0.96);  text-decoration: line-through; color: black "> In stock</span>
+                                        ({{$data->quantity}} items)
+                                    @endif
+
+
+                                </a></li>
+                            <li><span>Products Type:</span> <a
+                                    href="javascript:void(0);"> {{$data->category->title}}</a></li>
                         </ul>
                         <br>
                         <div class="products-info-btn">
@@ -99,7 +115,8 @@
                                 @csrf
                                 <div class="input-counter">
                                     <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                    <input type="text" name="quantity" value="1" max="{{(int)$data->quantity}}" min="1" readonly>
+                                    <input type="text" name="quantity" value="1" max="{{(int)$data->quantity}}" min="1"
+                                           readonly>
                                     <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                 </div>
 
@@ -111,7 +128,8 @@
                         <div class="wishlist-compare-btn">
                             <form action="{{route('user_wishlist_add',['id'=>$data->id])}}" method="post">
                                 @csrf
-                                <button type="submit" class='optional-btn'><i class="bx bx-heart"></i> Add to Wishlist</button>
+                                <button type="submit" class='optional-btn'><i class="bx bx-heart"></i> Add to Wishlist
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -134,8 +152,8 @@
                             Neden Bizden Satın Alın
                         </a></li>
 
-                    <li ><a href="#">
-                            <div class="dot"  id="review"></div>
+                    <li><a href="#">
+                            <div class="dot" id="review"></div>
                             Yorumlar ({{$countreview}})
                         </a></li>
                 </ul>
@@ -190,11 +208,11 @@
                         </div>
                     </div>
 
-                    <div class="tabs-item" >
+                    <div class="tabs-item">
                         <div class="products-details-tab-content">
                             <div class="products-review-form">
 
-                                <div class="row" >
+                                <div class="row">
                                     <div class="col-lg-7 col-md-12">
                                         <div class="review-comments">
                                             @foreach($reviews as $rs)
@@ -298,7 +316,8 @@
     </section>
     <!-- End Facility Area -->
     <!-- Start Shipping Modal Area -->
-    <div class="modal fade productsShippingModal" id="productsShippingModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade productsShippingModal" id="productsShippingModal" tabindex="-1" role="dialog"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -311,7 +330,9 @@
                         <li>Complimentary ground shipping within 1 to 7 business days</li>
                         <li>In-store collection available within 1 to 7 business days</li>
                         <li>Next-day and Express delivery options also available</li>
-                        <li>Purchases are delivered in an orange box tied with a Bolduc ribbon, with the exception of certain items</li>
+                        <li>Purchases are delivered in an orange box tied with a Bolduc ribbon, with the exception of
+                            certain items
+                        </li>
                         <li>See the delivery FAQs for details on shipping methods, costs and delivery times</li>
                     </ul>
 

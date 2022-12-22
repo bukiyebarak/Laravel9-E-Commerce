@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <label>Quantity</label>
-                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="1"
+                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="0"
                                            class="form-control">
                                     @if ($errors->has('quantity'))
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <label>Minquantity</label>
-                                    <input type="number" name="minquantity" value="{{$data->minquantity}}" min="1"
+                                    <input type="number" name="minquantity" value="{{$data->minquantity}}" min="0"
                                            class="form-control" >
                                     @if ($errors->has('minquantity'))
                                         <span class="text-danger">{{ $errors->first('minquantity') }}</span>

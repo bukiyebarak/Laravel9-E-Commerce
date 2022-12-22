@@ -13,7 +13,7 @@
             max-width: 60%;
             height: auto;
             padding: 10%;
-            background-color: transparent;
+            background-color: rgba(124,135,151,0.35);
         }
 
         .clearfix::after {
@@ -34,7 +34,6 @@
             top: 1%;
             right: 0;
         }
-
         @media only screen and (max-device-width: 500px) {
             .wishlist image {
                 max-width: 100%;
@@ -143,8 +142,8 @@
                                 </h3>
 
                                 @php
-                                    $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
-                                    $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
+                                    $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->product->id);
+                                    $countreview=\App\Http\Controllers\HomeController::countreview($rs->product->id);
                                 @endphp
                                 <div class="star-rating">
                                     <div class="rating">
