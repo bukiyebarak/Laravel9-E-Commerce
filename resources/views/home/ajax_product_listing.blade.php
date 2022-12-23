@@ -34,6 +34,18 @@
                                     </a>
                                 </div>
                             </li>
+                            <li>
+                                <div class="compare-btn">
+                                    <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                        @csrf
+                                        <input name="quantity" type="hidden" value="1">
+                                        <a href="javascript:void(0);">
+                                            <span class="tooltip-label">Add to Cart</span>
+                                            <button type="submit" class="heartbtn bx bx-cart"></button>
+                                        </a>
+                                    </form>
+                                </div>
+                            </li>
                         </ul>
 
                     </div>
@@ -77,12 +89,12 @@
                             @endif
                         </div>
                     </div>
-                    <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                        @csrf
-                        <input name="quantity" type="hidden" value="1">
-                        <input type="submit" class="add-to-cart default-btn"
-                               style="background-color: whitesmoke" value="Add to Cart">
-                    </form>
+{{--                    <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                        @csrf--}}
+{{--                        <input name="quantity" type="hidden" value="1">--}}
+{{--                        <input type="submit" class="add-to-cart default-btn"--}}
+{{--                               style="background-color: whitesmoke" value="Add to Cart">--}}
+{{--                    </form>--}}
                 </div>
             </div>
         </div>

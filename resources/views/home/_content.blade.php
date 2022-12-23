@@ -149,6 +149,18 @@
                                             </a>
                                         </div>
                                     </li>
+                                    <li>
+                                        <div class="compare-btn">
+                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                @csrf
+                                                <input name="quantity" type="hidden" value="1">
+                                                <a href="javascript:void(0);">
+                                                    <span class="tooltip-label">Add to Cart</span>
+                                                    <button type="submit" class="heartbtn bx bx-cart"></button>
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                             @if($rs->is_sale=="Yes")
@@ -193,11 +205,11 @@
                                     <span class="new-price">{{$rs->sale_price}}₺</span>
                                 </div>
                             @endif
-                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                @csrf
-                                <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>
-                            </form>
+{{--                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <input name="quantity" type="hidden" value="1">--}}
+{{--                                <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>--}}
+{{--                            </form>--}}
                         </div>
 
 
@@ -308,6 +320,18 @@
                                                 </a>
                                             </div>
                                         </li>
+                                        <li>
+                                            <div class="compare-btn">
+                                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                    @csrf
+                                                    <input name="quantity" type="hidden" value="1">
+                                                    <a href="javascript:void(0);">
+                                                        <span class="tooltip-label">Add to Cart</span>
+                                                        <button type="submit" class="heartbtn bx bx-cart"></button>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -345,12 +369,12 @@
                                         @endif
                                     </div>
                                 </div>
-                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                    @csrf
-                                    <input name="quantity" type="hidden" value="1">
-                                    <input type="submit" class="add-to-cart default-btn"
-                                           style="background-color: whitesmoke" value="Add to Cart">
-                                </form>
+{{--                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input name="quantity" type="hidden" value="1">--}}
+{{--                                    <input type="submit" class="add-to-cart default-btn"--}}
+{{--                                           style="background-color: whitesmoke" value="Add to Cart">--}}
+{{--                                </form>--}}
                             </div>
                         </div>
 
@@ -376,8 +400,8 @@
                     <div class="single-productsBox">
                         <div class="products-image">
                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
-                                <img style="height: 250px" src="{{asset('images/'.$rs->image)}}" class="main-image"
-                                     alt="image">
+                                <img style="height: 250px;" src="{{asset('images/'.$rs->image)}}" class="main-image"
+                                     alt="image" >
                                 <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                             </a>
 
@@ -388,9 +412,7 @@
                                         <div class="wishlist-btn">
                                             <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
                                                 @csrf
-
                                                 <a href="javascript:void(0);">
-
                                                     <span class="tooltip-label">Add to Wishlist</span>
                                                     <button type="submit" class='heartbtn bx bx-heart'></button>
                                                 </a>
@@ -404,6 +426,18 @@
                                                 <i class='bx bx-search-alt'></i>
                                                 <span class="tooltip-label">Quick View</span>
                                             </a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="compare-btn">
+                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                            @csrf
+                                            <input name="quantity" type="hidden" value="1">
+                                            <a href="javascript:void(0);">
+                                                <span class="tooltip-label">Add to Cart</span>
+                                                <button type="submit" class="heartbtn bx bx-cart"></button>
+                                            </a>
+                                            </form>
                                         </div>
                                     </li>
                                 </ul>
@@ -453,11 +487,11 @@
                                     <span class="new-price">{{$rs->sale_price}} &#8378;</span>
                                 </div>
                             @endif
-                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                @csrf
-                                <input name="quantity" type="hidden" value="1">
-                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
-                            </form>
+{{--                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <input name="quantity" type="hidden" value="1">--}}
+{{--                                <button type="submit" class="add-to-cart default-btn">Add to Cart</button>--}}
+{{--                            </form>--}}
                         </div>
                         @if($rs->is_sale=="Yes")
                             <span class="products-discount">
@@ -571,6 +605,18 @@
                                                 </a>
                                             </div>
                                         </li>
+                                        <li>
+                                            <div class="compare-btn">
+                                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                    @csrf
+                                                    <input name="quantity" type="hidden" value="1">
+                                                    <a href="javascript:void(0);">
+                                                        <span class="tooltip-label">Add to Cart</span>
+                                                        <button type="submit" class="heartbtn bx bx-cart"></button>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                                 @if($rs->is_sale=="Yes")
@@ -590,7 +636,7 @@
                                         <span class="category">{{$category->title}}</span>
                                     @endif
                                 @endforeach
-                                <h3><a href="javascript:void(0);">{{$rs->title}}</a></h3>
+                                <h3><a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a></h3>
                                 @php
                                     $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
                                     $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
@@ -616,11 +662,11 @@
                                         <span class="new-price">{{$rs->sale_price}}₺</span>
                                     </div>
                                 @endif
-                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                    @csrf
-                                    <input name="quantity" type="hidden" value="1">
-                                    <button type="submit" class="add-to-cart default-btn">Add to Cart</button>
-                                </form>
+{{--                                <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input name="quantity" type="hidden" value="1">--}}
+{{--                                    <button type="submit" class="add-to-cart default-btn">Add to Cart</button>--}}
+{{--                                </form>--}}
                             </div>
                             @if($rs->is_sale=="Yes")
                                 <span class="products-discount">

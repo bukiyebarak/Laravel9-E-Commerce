@@ -89,7 +89,7 @@
                                         <span style="color:darkgreen">In stock (End {{$data->quantity}} items)!!! </span>
                                     @endif
                                     @if($data->quantity)
-                                        <span style="background-color: rgba(143,255,61,0.44)">
+                                        <span style="background-color: rgba(143,255,61,0.44)">In stock
                                         </span>
                                     @else
                                         <span

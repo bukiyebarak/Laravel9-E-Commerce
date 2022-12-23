@@ -199,6 +199,18 @@
                                                         </a>
                                                     </div>
                                                 </li>
+                                                <li>
+                                                    <div class="compare-btn">
+                                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                            @csrf
+                                                            <input name="quantity" type="hidden" value="1">
+                                                            <a href="javascript:void(0);">
+                                                                <span class="tooltip-label">Add to Cart</span>
+                                                                <button type="submit" class="heartbtn bx bx-cart"></button>
+                                                            </a>
+                                                        </form>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                         @if($rs->is_sale=="Yes")
@@ -239,14 +251,14 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <div class="btn-box">
-                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                                @csrf
-                                                <input name="quantity" type="hidden" value="1">
-                                                <button type="submit" class="default-btn add-to-cart">Add to Cart
-                                                </button>
-                                            </form>
-                                        </div>
+{{--                                        <div class="btn-box">--}}
+{{--                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+{{--                                                @csrf--}}
+{{--                                                <input name="quantity" type="hidden" value="1">--}}
+{{--                                                <button type="submit" class="default-btn add-to-cart">Add to Cart--}}
+{{--                                                </button>--}}
+{{--                                            </form>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>

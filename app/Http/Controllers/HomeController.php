@@ -13,6 +13,7 @@ use App\Models\Setting;
 use App\Models\Shopcart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ContactRequest;
 use Illuminate\Support\Facades\Route;
@@ -63,8 +64,6 @@ class HomeController extends Controller
         $last = Product::where('status','=','True')->limit(6)->orderByDesc('id')->get();
         $picked = Product::where('status','=','True')->limit(6)->inRandomOrder()->get();
 
-        //dd($picked);
-//        exit();
         $data = [
             'setting' => $setting,
             'slider' => $slider,
