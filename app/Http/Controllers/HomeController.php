@@ -64,6 +64,9 @@ class HomeController extends Controller
         $last = Product::where('status','=','True')->limit(6)->orderByDesc('id')->get();
         $picked = Product::where('status','=','True')->limit(6)->inRandomOrder()->get();
 
+
+//        $product=DB::table('products')->inRandomOrder()->first();
+//        dd($product->price);
         $data = [
             'setting' => $setting,
             'slider' => $slider,

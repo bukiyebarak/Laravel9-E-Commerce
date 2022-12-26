@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CategoryPaketController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PaketCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
@@ -78,6 +80,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::post('category/update/{id}', [CategoryController::class, 'update'])->name('admin_category_update');
         Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin_category_delete');
         Route::get('category/show', [CategoryController::class, 'show'])->name('admin_category_show');
+
+        #paket category
+        Route::get('paket',[CategoryController::class,'paket'])->name('paket');
 
         #Product
         Route::prefix('product')->group(function () {

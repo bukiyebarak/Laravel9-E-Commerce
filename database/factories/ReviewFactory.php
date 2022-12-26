@@ -19,9 +19,9 @@ class ReviewFactory extends Factory
         return [
             'product_id'=>1,
             'user_id'=>1,
-            'subject'=> $this->faker->title(),
+            'subject'=> $this->faker->words(),
             'review'=>$this->faker->realText(50),
-            'rate'=>4,
+            'rate'=>rand(1,5),
             'status'=>'True'
         ];
     }

@@ -45,6 +45,12 @@ class CategoryController extends Controller
 
     }
 
+    public function paket()
+    {
+
+        echo "aa";
+    }
+
     /**
      * Show the form for creating a new resource.
      *

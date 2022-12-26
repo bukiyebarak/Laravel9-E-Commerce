@@ -63,7 +63,12 @@
                                         @endif
                                     </td>
                                     <td style="text-align: center">
-                                        {{$rs->sale_price}}€
+                                        @if($rs->sale_price)
+                                            {{$rs->sale_price}}€
+                                        @else
+                                            <b>Not Discount</b>
+                                        @endif
+
                                     </td>
                                     <td>
                                         @if($rs->image)

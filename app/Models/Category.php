@@ -34,6 +34,10 @@ class Category extends Model
         return $this->belongsTo(Category::class,'parent_id');
     }
 
+    public function paket()
+    {
+        return $this->belongsTo(PaketCategory::class,'paket_parent_id');
+    }
     //One To Many
     public function children()
     {

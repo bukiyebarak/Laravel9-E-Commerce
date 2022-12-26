@@ -13,9 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('wishlists', function (Blueprint $table) {
-            $table->string('phone',100);
-        });
+        //
     }
 
     /**
@@ -25,8 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('wishlists', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

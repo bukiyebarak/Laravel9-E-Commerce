@@ -19,20 +19,29 @@ class ProductFactory extends Factory
     public function definition()
     {
         $user_id=DB::table('users')->select('id')->inRandomOrder()->first();
+        $cat_id=DB::table('categories')->select('id')->inRandomOrder()->first();
+        $images=[
+            "1670580959.jpg",
+            "1670580959.jpg",
+            "1669621211.jpg",
+            "1669621274.jpg",
+            "1669621091.jpg",
+            "1669620928.jpg",
+            "1669621024.jpg",
+        ];
         return [
-            'title' => $this->faker->title(),
+            'title' => $this->faker->text(15),
             'keywords' => $this->faker->word(),
-            'image' => $this->faker->image(),
-            'description' => $this->faker->words(),
-            'category_id' => 1,
-            'detail' => Str::random(15),
+            'image' =>$images[rand(1,7)],
+            'description' => $this->faker->sentence(6,true),
+            'category_id' => $cat_id->id,
+            'detail' => $this->faker->realText(10),
             'price' => rand(1,500),
             'quantity' => rand(0,40),
             'minquantity' => rand(1,50),
             'user_id' => $user_id->id,
             'slug' => $this->faker->slug(),
             'status'=>'True'
-
         ];
     }
 }

@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="col-sm-6 col-md-6"><br>
-                            <button type="submit" class="btn btn-primary">Update Message</button>
+                            <button type="submit" class="btn btn-primary">Update Image</button>
                         </div>
                     </div>
                     <br>
