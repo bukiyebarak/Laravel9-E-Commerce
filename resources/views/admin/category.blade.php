@@ -25,13 +25,14 @@
                     <div class="row gy-3">
                         <div class="col-md-12">
                             <a class="btn btn-primary" href="{{route('admin_category_add')}}"> <i class="bx bxs-plus-circle"></i>Add Category</a>
-                            <a class="btn btn-primary" href="{{route('paket')}}"> <i class="bx bxs-plus-circle"></i>Add Paket Category</a>
+                            <a class="btn btn-primary" href="{{route('admin_category_paket_add')}}"> <i class="bx bxs-plus-circle"></i>Add Paket Category</a>
                             <hr/>
                             <div class="table-responsive">
                                 <table id="example2" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Paket Id</th>
                                         <th>Parent</th>
                                         <th>Title</th>
                                         <th style="text-align: center;">Status</th>
@@ -40,9 +41,48 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($data as $rs)
+                                        <tr>
+                                            <td>-</td>
+                                            <td>{{$rs->id}}</td>
+                                            <td>
+                                                Paket
+                                            </td>
+                                            <td>{{$rs->title}}</td>
+                                            <td>
+                                                <div style="text-align: center;">
+                                                    @if($rs->status=="True")
+                                                        <div class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
+                                                            True
+                                                        </div>
+                                                    @else
+                                                        <div  class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
+                                                            False</div>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex order-actions">
+                                                    <a href="{{route('admin_category_paket_edit',['id'=>$rs->id])}} "
+                                                       class=" text-primary bg-light-primary border-0">
+                                                        <i class="bx bxs-edit"></i></a></div>
+
+                                            </td>
+                                            <td>
+                                                <div class="d-flex order-actions">
+                                                    <a href="{{route('admin_category_paket_delete',['id'=>$rs->id])}} "
+                                                       class="text-danger bg-light-danger border-0"
+                                                       onclick="return confirm('Delete! Are you Sure')"><i
+                                                            class="bx bxs-trash"></i></a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
                                     @foreach($datalist as $rs)
                                         <tr>
                                             <td>{{$rs->id}}</td>
+                                            <td>-</td>
                                             <td>
                                                 {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title) }}
                                             </td>

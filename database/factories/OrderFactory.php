@@ -17,6 +17,7 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
+
         $user_id=DB::table('users')->select('id')->inRandomOrder()->first();
         return [
             'name' => $this->faker->firstName(),

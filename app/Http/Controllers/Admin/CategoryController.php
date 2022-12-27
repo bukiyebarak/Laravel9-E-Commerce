@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\PaketCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,17 +39,12 @@ class CategoryController extends Controller
     public function index()
     {
         $datalist = Category::with('children')->get();
+        $data=PaketCategory::all();
         //dd($datalist);
         //print_r($datalist);
         //exit();
-        return view('admin.category', ['datalist' => $datalist]);
+        return view('admin.category', ['datalist' => $datalist,'data'=>$data]);
 
-    }
-
-    public function paket()
-    {
-
-        echo "aa";
     }
 
     /**
@@ -59,6 +55,7 @@ class CategoryController extends Controller
     public function add()
     {
         $datalist = Category::with('children')->get();
+
         //dd($datalist);
         return view('admin.category_add', ['datalist' => $datalist]);
     }

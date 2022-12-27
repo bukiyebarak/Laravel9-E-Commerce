@@ -82,8 +82,8 @@
 
                                         <td>
                                             <div class="d-flex order-actions" >
-                                            <a href="{{route('admin_user_show',['id'=>$rs->id])}}" data-bs-toggle="modal" class=" text-primary bg-light-primary border-0"
-                                                 data-bs-target="#exampleLargeModal{{$rs->id}}">
+                                            <a href="{{route('admin_review_update',['id'=>$rs->id])}}" data-bs-toggle="modal" class=" text-primary bg-light-primary border-0"
+                                                 data-bs-target="#exampleExtraLargeModal{{$rs->id}}">
                                                 <i class="bx bxs-edit"></i></a></div>
                                         </td>
                                         <td><div class="d-flex order-actions">

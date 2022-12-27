@@ -104,6 +104,8 @@ class ShopCartController extends Controller
     {
         $data = Shopcart::find($id);
         $data->quantity =(int) $request->input('quantity');
+        if ($data->quantity==0)
+            return $this->destroy($data,$data->id);
         $data->save();
         return redirect()->back()->with('success','Product Updated to Shopcart');
     }

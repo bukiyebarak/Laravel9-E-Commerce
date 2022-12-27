@@ -85,15 +85,17 @@
                                     </td>
 
 
+
                                     <td class="product-quantity">
                                         <form
-                                            action="{{route('user_shopcart_update',['id'=>$rs->product->id])}}" method="post">
+                                            action="{{route('user_shopcart_update',['id'=>$rs->id])}}" method="post">
                                             @csrf
                                             <div class="input-counter">
                                                 <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                                <input type="text" name="quantity" min="1" value="{{$rs->quantity}}"
-                                                       max="{{$rs->product->quantity}}" onchange="this.form.submit()"
-                                                       readonly>
+                                                <label>
+                                                    <input type="text" name="quantity" min="0" value="{{$rs->quantity}}"
+                                                           max="{{$rs->product->quantity}}" onchange="this.form.submit()" readonly>
+                                                </label>
                                                 <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                             </div>
                                         </form>

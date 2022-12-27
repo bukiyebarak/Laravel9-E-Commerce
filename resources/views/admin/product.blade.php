@@ -25,6 +25,9 @@
                 <div class="card-body">
                     <a class="btn btn-primary" href="{{route('admin_product_add')}}"> <i
                             class="bx bxs-plus-circle"></i>Add Product</a>
+                    <a class="btn btn-primary" href="{{route('admin_paket_product_add')}}"> <i
+                            class="bx bxs-plus-circle"></i>Add Paket Product</a>
+
                     <hr>
                     <div class="table-responsive">
                         <table id="example2" class="table table-striped table-bordered">

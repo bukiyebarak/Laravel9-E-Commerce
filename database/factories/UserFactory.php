@@ -24,12 +24,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $faker = \Faker\Factory::create('tr_TR');
         return [
-            'name' => $this->faker->firstName(),
-            'surname' => $this->faker->lastName(),
-            'address' => $this->faker->address(),
-            'phone' => $this->faker->phoneNumber(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name' => $faker->firstName(),
+            'surname' => $faker->lastName(),
+            'address' => $faker->address(),
+            'phone' => $this->faker->numerify('##########'),
+            'email' => $faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('123456789'), // password
             'remember_token' => Str::random(10),

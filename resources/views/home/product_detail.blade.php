@@ -101,6 +101,8 @@
                                 </a></li>
                             <li><span>Products Type:</span> <a
                                     href="javascript:void(0);"> {{$data->category->title}}</a></li>
+                            <li><span>Products Description:</span> <a
+                                    href="javascript:void(0);"> {{$data->description}}</a></li>
                         </ul>
                         <br>
                         <div class="products-info-btn">

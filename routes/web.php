@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PaketCategoryController;
+use App\Http\Controllers\Admin\PaketProductController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
@@ -47,6 +48,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/references', [HomeController::class, 'references'])->name('references');
 Route::post('send-message', [HomeController::class, 'sendmessage'])->name('sendmessage');
 Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('product');
+Route::get('paket-product', [HomeController::class, 'paket_product'])->name('paket_product');
 Route::get('category-products/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
 Route::get('discount-products', [HomeController::class, 'discount_products'])->name('discount_products');
 Route::get('new-products', [HomeController::class, 'new_products'])->name('new_products');
@@ -54,7 +56,7 @@ Route::post('/get-product', [HomeController::class, 'getproduct'])->name('getpro
 Route::get('/product-list/{search}', [HomeController::class, 'productlist'])->name('productlist');
 Route::get('/sidebar', [HomeController::class, 'sidebar'])->name('sidebar');
 
-Route::match(['get','post'],'all-products', [HomeController::class, 'allproducts'])->name('allproducts');
+Route::match(['get', 'post'], 'all-products', [HomeController::class, 'allproducts'])->name('allproducts');
 Route::post('/getDistrict', [OrderController::class, 'getDistrict']);
 Route::post('/getNeighbourhood', [OrderController::class, 'getNeighbourhood']);
 
@@ -69,7 +71,7 @@ Route::middleware('auth')->group(function () {
 #region Admin
 Route::middleware('auth')->prefix('admin')->group(function () {
     #admin roles system
-    Route::middleware('admin')->group(function(){
+    Route::middleware('admin')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('adminhome');
 
         #Category
@@ -82,8 +84,14 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::get('category/show', [CategoryController::class, 'show'])->name('admin_category_show');
 
         #paket category
-        Route::get('paket',[CategoryController::class,'paket'])->name('paket');
-
+        Route::prefix('category')->group(function () {
+            Route::get('/paket', [ProductController::class, 'index'])->name('admin_category_paket');
+            Route::get('paket/create', [CategoryPaketController::class, 'create'])->name('admin_category_paket_add');
+            Route::post('paket/store', [CategoryPaketController::class, 'store'])->name('admin_category_paket_store');
+            Route::get('paket/edit/{id}', [CategoryPaketController::class, 'edit'])->name('admin_category_paket_edit');
+            Route::post('paket/update/{id}', [CategoryPaketController::class, 'update'])->name('admin_category_paket_update');
+            Route::get('paket/delete/{id}', [CategoryPaketController::class, 'destroy'])->name('admin_category_paket_delete');
+        });
         #Product
         Route::prefix('product')->group(function () {
             //Route assigned name "admin_users"...
@@ -94,7 +102,17 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('update/{id}', [ProductController::class, 'update'])->name('admin_product_update');
             Route::get('delete/{id}', [ProductController::class, 'destroy'])->name('admin_product_delete');
             Route::get('show', [ProductController::class, 'show'])->name('admin_product_show');
+
+            #paket product
+            Route::prefix('paket')->group(function () {
+                Route::get('/', [PaketProductController::class, 'index'])->name('admin_paket_products');
+                Route::get('create', [PaketProductController::class, 'create'])->name('admin_paket_product_add');
+                Route::post('store', [PaketProductController::class, 'store'])->name('admin_paket_product_store');
+                Route::get('edit/{id}', [PaketProductController::class, 'edit'])->name('admin_paket_product_edit');
+                Route::get('delete/{id}', [PaketProductController::class, 'destroy'])->name('admin_paket_product_delete');
+            });
         });
+
 
         #Review
         Route::prefix('review')->group(function () {
@@ -207,7 +225,10 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::post('store/{id}', [ShopCartController::class, 'store'])->name('user_shopcart_add');
         Route::post('update/{id}', [ShopCartController::class, 'update'])->name('user_shopcart_update');
         Route::get('delete/{id}', [ShopCartController::class, 'destroy'])->name('user_shopcart_delete');
+        Route::post('update/{id}', [PaketProductController::class, 'update'])->name('admin_paket_product_update');
+
     });
+
     Route::prefix('wishlist')->group(function () {
         Route::get('/', [WishlistController::class, 'index'])->name('user_wishlist');
         Route::post('store/{id}', [WishlistController::class, 'store'])->name('user_wishlist_add');
@@ -217,7 +238,6 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
 
     #Order
     Route::prefix('order')->group(function () {
-
         Route::get('/', [OrderController::class, 'index'])->name('user_orders');
         Route::post('create', [OrderController::class, 'create'])->name('user_order_add');
         Route::post('store', [OrderController::class, 'store'])->name('user_order_store');

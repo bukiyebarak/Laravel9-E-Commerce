@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\MessageContactMailable;
 use App\Models\Faq;
+use App\Models\PaketProduct;
 use App\Models\Review;
 use App\Models\Category;
 use App\Models\Image;
@@ -64,9 +65,6 @@ class HomeController extends Controller
         $last = Product::where('status','=','True')->limit(6)->orderByDesc('id')->get();
         $picked = Product::where('status','=','True')->limit(6)->inRandomOrder()->get();
 
-
-//        $product=DB::table('products')->inRandomOrder()->first();
-//        dd($product->price);
         $data = [
             'setting' => $setting,
             'slider' => $slider,
@@ -192,12 +190,23 @@ class HomeController extends Controller
 
     #endregion
 
-    public function product($id, $slug)
+    public function product($id)
     {
         $data = Product::find($id);
         $datalist = Image::where('product_id', $id)->get();
         $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
         return view('home.product_detail', ['data' => $data, 'datalist' => $datalist, 'reviews' => $reviews]);
+    }
+
+    public function paket_product()
+    {
+        $id=1;
+        $data = PaketProduct::find($id);
+        $products=Product::where('category_id','=',17)->get();
+//       dd($data->category_id,$products) ;
+//        $datalist = Image::where('product_id', $id)->get();
+//        $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
+        return view('home.paket_product_detail', ['data' => $data, 'products' => $products]);
     }
 
     //alt kategori ürün bulma
