@@ -14,7 +14,7 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h4>{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($data->category,$data->category->title)}}</h4>
+                <h4>{{$data->paket_category->title}}</h4>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
                     <li>Ürün Detayı</li>
@@ -87,7 +87,48 @@
                                     class='bx bxs-truck'></i> Shipping</a>
                             <a href="{{route('contact')}}"><i class='bx bx-envelope'></i> Ask about this products</a>
                         </div>
+                        <br>
+                        <div class="row">{{$data->paket_category_id}}
+                            @php
+                                $total=0;
+                            @endphp
+                            {{--                           - {{$total}}--}}
+                            <hr>
+                            @foreach($products as $rs)
 
+                                <div class="col-md-2 col-sm-2">
+                                    <img style="height: 60px" src="{{asset('images/'.$rs->image)}}" class="main-image"
+                                         alt="image">
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="products-add-to-cart">
+{{--                                        <form action="{{route('paket_product_update_cart',['id'=>$data->paket_category_id,'slug'=>$data->slug])}}"--}}
+{{--                                            method="post">--}}
+{{--                                            @csrf--}}
+                                            <div class="input-counter">
+                                                <span class="minus-btn"><i class='bx bx-minus'></i></span>
+                                                <label>
+                                                    <input type="text" name="quantity" min="0" value="0"
+                                                           max="{{$rs->quantity}}" onchange="this.form.submit()"
+                                                           readonly>
+                                                </label>
+                                                <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                                            </div>
+                                            <input type="hidden" name="price" value="{{$rs->price}}">
+{{--                                        </form>--}}
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    {{$rs->price}}₺
+                                </div>
+                                <hr>
+                            @endforeach
+
+                        </div>
+                        <br>
                         <div class="products-add-to-cart">
 
                             <form action="{{route('user_shopcart_add',['id'=>$data->id])}}" method="post">
@@ -103,55 +144,6 @@
 
                             </form>
 
-                        </div>
-                        <div class="wishlist-compare-btn">
-                            <form action="{{route('user_wishlist_add',['id'=>$data->id])}}" method="post">
-                                @csrf
-                                <button type="submit" class='optional-btn'><i class="bx bx-heart"></i> Add to Wishlist
-                                </button>
-                            </form>
-                        </div>
-                        <br>
-                        <div class="row">
-                            @php
-                                $total=0;
-                            @endphp
-                            {{$total}}
-                            <hr>
-                            @foreach($products as $rs)
-
-
-                                <div class="col-md-2 col-sm-2">
-                                    <img style="height: 60px" src="{{asset('images/'.$rs->image)}}" class="main-image"
-                                         alt="image">
-                                </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
-                                </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="products-add-to-cart">
-                                        <div class="input-counter">
-                                            <span class="minus-btn"><i class='bx bx-minus'></i></span>
-
-                                            <label>
-                                                <input type="text" name="quantity" min="0" value="0" class="quantity"
-                                                       onchange="checkForm()" max="{{$rs->quantity}}"
-                                                       readonly>
-                                            </label>
-                                            <span class="plus-btn"><i class='bx bx-plus'></i></span>
-                                        </div>
-                                        <input type="hidden" name="price" value="{{$rs->price}}" class="product_price">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-2">
-                                    {{$rs->price}}₺
-                                </div>
-                                <hr>
-                            @endforeach
-
-                            <div class="sub_total">
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -352,7 +344,6 @@
                         <li>In-store collection available within 1 to 7 business days</li>
                         <li>Next-day and Express delivery options also available</li>
                         <li>Purchases are delivered in an orange box tied with a Bolduc ribbon, with the exception of
-                            certain items
                         </li>
                         <li>See the delivery FAQs for details on shipping methods, costs and delivery times</li>
                     </ul>
@@ -369,15 +360,15 @@
     <!-- End Shipping Modal Area -->
 @endsection
 
-@section('footerjs')
-    <script>
-        function checkForm() {
-            var quantity = document.getElementsByClassName('quantity');
-            var price = document.getElementsByClassName('product_price').value;
-            var a=$("input:text").val;
-            var sub_total=price*quantity;
-             alert(a);
-            document.getElementsByClassName('sub_total').innerHTML= quantity;
-        }
-    </script>
-@endsection
+{{--@section('footerjs')--}}
+{{--    <script>--}}
+{{--        function checkForm() {--}}
+{{--            var quantity = document.getElementsByClassName('quantity');--}}
+{{--            var price = document.getElementsByClassName('product_price').value;--}}
+{{--            var a=$("input:text").val;--}}
+{{--            var sub_total=price*quantity;--}}
+{{--             alert(a);--}}
+{{--            document.getElementsByClassName('sub_total').innerHTML= quantity;--}}
+{{--        }--}}
+{{--    </script>--}}
+{{--@endsection--}}

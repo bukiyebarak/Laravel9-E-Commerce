@@ -1,7 +1,9 @@
 @php
     $setting=\App\Http\Controllers\HomeController::getsetting();
-    $parentCategories=\App\Http\Controllers\HomeController::categorylist()
+    $parentCategories=\App\Http\Controllers\HomeController::categorylist();
+    $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
+
 
 @extends('layouts.home')
 
@@ -232,6 +234,11 @@
                                     </div>
 
                                     <div class="products-content">
+                                        @foreach($parentCategories as $category)
+                                            @if($category->id==$rs->category_id)
+                                                <span class="category">{{$category->title}}</span>
+                                            @endif
+                                        @endforeach
                                         <h3><a href="#">{{$rs->title}}</a></h3>
                                         @if($rs->is_sale=="No")
                                             <div class="price">

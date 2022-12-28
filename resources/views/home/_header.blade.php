@@ -1,9 +1,9 @@
 @php
-    $parentCategories=\App\Http\Controllers\HomeController::categorylist()
+    $parentCategories=\App\Http\Controllers\HomeController::categorylist();
+ $shopcart=\App\Http\Controllers\HomeController::headerShopCart();
+   $parentPaketCategories=\App\Http\Controllers\HomeController::paket_category_list();
 @endphp
-@php
-    $shopcart=\App\Http\Controllers\HomeController::headerShopCart()
-@endphp
+
     <!-- Start Navbar Area -->
 <div class="navbar-area">
     <div class="xton-responsive-nav">
@@ -44,6 +44,17 @@
                                         href="{{route('allproducts')}}"
                                         class="nav-link">All Products</a>
                                 </li>
+                                <li class="nav-item"><a
+                                        href="#"
+                                        class="nav-link">Paket<i
+                                            class='bx bx-chevron-left'></i></a>
+                                    <ul class="dropdown-menu">
+                                        @foreach($parentPaketCategories as $rs)
+                                            @include('home.categorytreepaket',['rs'=>$rs])
+                                        @endforeach
+                                    </ul>
+                                </li>
+
                                 @foreach($parentCategories as $rs)
                                     <li class="nav-item"><a
                                             href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"

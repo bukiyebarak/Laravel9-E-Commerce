@@ -14,22 +14,35 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li class="menu-label">CATEGORY & PRODUCTS</li>
-        <li>
-            <a href="{{route('admin_category')}}">
-                <div class="parent-icon"><i class='bx bx-layer'></i>
-                </div>
-                &nbsp;Category
-            </a>
-        </li>
 
         <li>
-            <a href="{{route('admin_products')}}">
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-layer' ></i>
+                </div>
+                <div class="menu-title">Category</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin_category')}}"><i class="bx bx-right-arrow-alt"></i>Category</a>
+                </li>
+                <li> <a href="{{route('admin_category_paket')}}"><i class="bx bx-right-arrow-alt"></i>Category Paket</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-cart-alt"></i>
                 </div>
-                &nbsp;Products
+                <div class="menu-title">Products</div>
             </a>
-        </li>
+            <ul>
+                <li> <a href="{{route('admin_products')}}"><i class="bx bx-right-arrow-alt"></i>Products</a>
+                </li>
+                <li> <a href="{{route('admin_paket_products')}}"><i class="bx bx-right-arrow-alt"></i>Products Paket</a>
+                </li>
 
+            </ul>
+        </li>
 
         <li class="menu-label">ORDERS INFORMATION</li>
         <li>

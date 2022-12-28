@@ -9,6 +9,7 @@ use App\Models\PaketProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PaketProductController extends Controller
 {
@@ -19,7 +20,9 @@ class PaketProductController extends Controller
      */
     public function index()
     {
-        //
+        $datalist = PaketProduct::with('category')->get();
+
+        return view('admin.product_paket', ['datalist' => $datalist]);
     }
 
     /**
@@ -43,12 +46,6 @@ class PaketProductController extends Controller
      */
     public function store(Request $request)
     {
-
-//        $sale = $request->get('sale');
-//        $salee = $price * $sale;
-//        $totalsale = $salee / 100;
-//        $totalsale = $price - $totalsale;
-
         $data = new PaketProduct;
         $data->keywords = $request->input('keywords');
         $data->paket_category_id=$request->input('paket_category_id');
@@ -61,15 +58,6 @@ class PaketProductController extends Controller
         $data->price = $request->input('price');
         $data->quantity = $request->input('quantity');
         $data->price = $request->get('price');
-//        $data->is_sale = $request->input('is_sale');
-//        $data->sale = $request->input('sale');
-//
-//        if ( $request->input('is_sale')=="Yes"){
-//            $data->sale_price = $totalsale;
-//        }
-//        else
-//            $data->sale_price =$request->input('price') ;
-
         $data->tax = $request->input('tax');
         $data->user_id = Auth::id();
 
@@ -82,10 +70,8 @@ class PaketProductController extends Controller
             $data->image = $filename;
         }
         //$data->image = Storage::putFile('images', $request->file('image')); //file upload
-
         $data->save();
-
-        return redirect()->route('admin_products')->with('success', 'Paket Product Add Successfully');
+        return redirect()->route('admin_paket_products')->with('success', 'Paket Product Add Successfully');
     }
 
     /**
@@ -105,9 +91,13 @@ class PaketProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product,$id)
     {
-        //
+        $data = PaketProduct::find($id);
+        $dataCat=PaketCategory::all();
+
+        $datalist = Category::with('children')->get();
+        return view('admin.product_paket_edit', ['data' => $data, 'datalist' => $datalist,'dataCat'=>$dataCat]);
     }
 
     /**
@@ -119,12 +109,32 @@ class PaketProductController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $data=Product::find($id);
-        $quantity=$request->input('quantity');
-        $price=$data->price;
-        $total=$quantity*$price;
-//        dd($data, $price,$total);
-//        return view('home.paket_product_detail',compact($total));
+        $data = PaketProduct::find($id);
+        $data->keywords = $request->input('keywords');
+        $data->paket_category_id=$request->input('paket_category_id');
+        $data->title = $request->input('title');
+        $data->description = $request->input('description');
+        $data->slug = $request->input('slug');
+        $data->status = $request->input('status');
+        $data->category_id = $request->input('category_id');
+        $data->detail = $request->input('detail');
+        $data->price = $request->input('price');
+        $data->quantity = $request->input('quantity');
+        $data->price = $request->get('price');
+        $data->tax = $request->input('tax');
+        $data->user_id = Auth::id();
+
+        if ($request->hasfile('image')) {
+
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('images', $filename);
+            $data->image = $filename;
+        }
+        //$data->image = Storage::putFile('images', $request->file('image')); //file upload
+        $data->save();
+        return redirect()->route('admin_paket_products')->with('success', 'Paket Product Update Successfully');
     }
 
     /**
@@ -133,8 +143,10 @@ class PaketProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product,$id)
     {
-        //
+        $data = PaketProduct::find($id);
+        $data->delete();
+        return redirect()->route('admin_paket_products')->with('toast_success', 'Paket Product is Deleted.');
     }
 }

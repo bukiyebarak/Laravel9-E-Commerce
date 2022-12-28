@@ -61,14 +61,14 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex order-actions">
-                                                    <a href="{{route('admin_category_edit',['id'=>$rs->id])}} "
+                                                    <a href="{{route('admin_category_paket_edit',['id'=>$rs->id])}} "
                                                        class=" text-primary bg-light-primary border-0">
                                                         <i class="bx bxs-edit"></i></a></div>
 
                                             </td>
                                             <td>
                                                 <div class="d-flex order-actions">
-                                                    <a href="{{route('admin_category_delete',['id'=>$rs->id])}} "
+                                                    <a href="{{route('admin_category_paket_delete',['id'=>$rs->id])}} "
                                                        class="text-danger bg-light-danger border-0"
                                                        onclick="return confirm('Delete! Are you Sure')"><i
                                                             class="bx bxs-trash"></i></a>

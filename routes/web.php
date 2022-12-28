@@ -48,7 +48,8 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/references', [HomeController::class, 'references'])->name('references');
 Route::post('send-message', [HomeController::class, 'sendmessage'])->name('sendmessage');
 Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('product');
-Route::get('paket-product', [HomeController::class, 'paket_product'])->name('paket_product');
+Route::get('paket-product/{id}/{slug}', [HomeController::class, 'paket_product'])->name('paket_product');
+Route::post('paket-product-update/{id}/{slug}', [HomeController::class, 'paket_product_update_cart'])->name('paket_product_update_cart');
 Route::get('category-products/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
 Route::get('discount-products', [HomeController::class, 'discount_products'])->name('discount_products');
 Route::get('new-products', [HomeController::class, 'new_products'])->name('new_products');
@@ -85,7 +86,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
         #paket category
         Route::prefix('category')->group(function () {
-            Route::get('/paket', [ProductController::class, 'index'])->name('admin_category_paket');
+            Route::get('/paket', [CategoryPaketController::class, 'index'])->name('admin_category_paket');
             Route::get('paket/create', [CategoryPaketController::class, 'create'])->name('admin_category_paket_add');
             Route::post('paket/store', [CategoryPaketController::class, 'store'])->name('admin_category_paket_store');
             Route::get('paket/edit/{id}', [CategoryPaketController::class, 'edit'])->name('admin_category_paket_edit');
@@ -109,6 +110,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
                 Route::get('create', [PaketProductController::class, 'create'])->name('admin_paket_product_add');
                 Route::post('store', [PaketProductController::class, 'store'])->name('admin_paket_product_store');
                 Route::get('edit/{id}', [PaketProductController::class, 'edit'])->name('admin_paket_product_edit');
+                Route::post('update/{id}', [PaketProductController::class, 'update'])->name('admin_paket_product_update');
                 Route::get('delete/{id}', [PaketProductController::class, 'destroy'])->name('admin_paket_product_delete');
             });
         });
@@ -225,8 +227,6 @@ Route::middleware('auth')->prefix('user')->namespace('user')->group(function () 
         Route::post('store/{id}', [ShopCartController::class, 'store'])->name('user_shopcart_add');
         Route::post('update/{id}', [ShopCartController::class, 'update'])->name('user_shopcart_update');
         Route::get('delete/{id}', [ShopCartController::class, 'destroy'])->name('user_shopcart_delete');
-        Route::post('update/{id}', [PaketProductController::class, 'update'])->name('admin_paket_product_update');
-
     });
 
     Route::prefix('wishlist')->group(function () {

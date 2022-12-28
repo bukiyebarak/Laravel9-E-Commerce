@@ -17,7 +17,11 @@ class CategoryPaketController extends Controller
      */
     public function index()
     {
-        //
+        $datalist=PaketCategory::all();
+        //dd($datalist);
+        //print_r($datalist);
+        //exit();
+        return view('admin.category_paket', ['datalist' => $datalist]);
     }
 
 
@@ -44,7 +48,7 @@ class CategoryPaketController extends Controller
             'status' => $request->input('status')
         ]);
 
-        return redirect()->route('admin_category')->with('success','Category Add Successfully' );
+        return redirect()->route('admin_category_paket')->with('success','Paket Category Add Successfully' );
     }
 
     /**
@@ -86,7 +90,7 @@ class CategoryPaketController extends Controller
         $data->slug = $request->input('slug');
         $data->status = $request->input('status');
         $data->save();
-        return redirect()->route('admin_category')->with('success','Paket Category Update Successfully' );
+        return redirect()->route('admin_category_paket')->with('success','Paket Category Update Successfully' );
     }
 
     /**
@@ -98,6 +102,6 @@ class CategoryPaketController extends Controller
     public function destroy(PaketCategory $paketCategory,$id)
     {
         DB::table('paket_categories')->where('id', '=', $id)->delete();
-        return redirect()->route('admin_category')->with('toast_success','Paket Category Deleted Successfully!');
+        return redirect()->route('admin_category_paket')->with('toast_success','Paket Category Deleted Successfully!');
     }
 }

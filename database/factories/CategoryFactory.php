@@ -24,7 +24,6 @@ class CategoryFactory extends Factory
             "Kahve Makineleri / Modo Mio Kahve Makineleri",
             "Kahve Kapsülleri / Lavazza Mavi Kapsüller",
             "Kapsül ve Öğütülmüş Kahve / Delta Kahve Çekirdekleri",
-
         ];
         $title=[
            "Paket Kapsül Lavazza MAVİ",

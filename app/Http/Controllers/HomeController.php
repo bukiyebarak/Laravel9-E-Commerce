@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\MessageContactMailable;
 use App\Models\Faq;
+use App\Models\PaketCategory;
 use App\Models\PaketProduct;
 use App\Models\Review;
 use App\Models\Category;
@@ -26,6 +27,11 @@ class HomeController extends Controller
         return Category::where('parent_id', "=", 0)->with('children')->get();
     }
 
+    public static function paket_category_list()
+    {
+        return PaketCategory::where('paket_parent_id', "=", 0)->get();
+    }
+
     public static function categorylistall()
     {
         return Category::with('children')->get();
@@ -39,31 +45,32 @@ class HomeController extends Controller
 
     public static function countreview($id)
     {
-        return  Review::where(['product_id'=>$id, 'status'=>'True'])->count();
+        return Review::where(['product_id' => $id, 'status' => 'True'])->count();
     }
 
     public static function avrgreview($id)
     {
-        return Review::where(['product_id'=>$id, 'status'=>'True'])->average('rate');
+        return Review::where(['product_id' => $id, 'status' => 'True'])->average('rate');
     }
 
     public static function getsetting()
     {
         return Setting::first();
     }
+
     public static function sidebar()
     {
-       return Product::select('id', 'image', 'slug', 'is_sale', 'sale', 'status')->where([ 'status'=>'True'])->limit(4)->orderByDesc('id')->get();
-       // dd($datalist);
+        return Product::select('id', 'image', 'slug', 'is_sale', 'sale', 'status')->where(['status' => 'True'])->limit(4)->orderByDesc('id')->get();
+        // dd($datalist);
     }
 
     public function index()
     {
         $setting = Setting::first();
-        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status','sale', 'is_sale',)->where('status','=','True')->limit(4)->get();
-        $daily = Product::where('status','=','True')->limit(6)->inRandomOrder()->get();
-        $last = Product::where('status','=','True')->limit(6)->orderByDesc('id')->get();
-        $picked = Product::where('status','=','True')->limit(6)->inRandomOrder()->get();
+        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status', 'sale', 'is_sale',)->where('status', '=', 'True')->limit(4)->get();
+        $daily = Product::where('status', '=', 'True')->limit(6)->inRandomOrder()->get();
+        $last = Product::where('status', '=', 'True')->limit(6)->orderByDesc('id')->get();
+        $picked = Product::where('status', '=', 'True')->limit(6)->inRandomOrder()->get();
 
         $data = [
             'setting' => $setting,
@@ -81,7 +88,6 @@ class HomeController extends Controller
         $datalist = Shopcart::with('product')->where('user_id', Auth::id())->get();
         return view('home._header', ['datalist' => $datalist]);
     }
-
 
 
     public function login()
@@ -151,7 +157,7 @@ class HomeController extends Controller
             'phone' => $request->input('phone'),
             'note' => $request->input('note'),
             'ip_address' => $request->ip(),
-            'user_id'=>Auth::id(),
+            'user_id' => Auth::id(),
         ]);
         $this->sendContactMessageMailAdmin($message);
 
@@ -194,20 +200,38 @@ class HomeController extends Controller
     {
         $data = Product::find($id);
         $datalist = Image::where('product_id', $id)->get();
-        $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
+        $reviews = Review::where(['product_id' => $id, 'status' => 'True'])->get();
         return view('home.product_detail', ['data' => $data, 'datalist' => $datalist, 'reviews' => $reviews]);
     }
 
-    public function paket_product()
+    public function paket_product($id, $slug)
     {
-        $id=1;
-        $data = PaketProduct::find($id);
-        $products=Product::where('category_id','=',17)->get();
-//       dd($data->category_id,$products) ;
+//
+        $data = PaketProduct::where(['paket_category_id'=>$id, 'status'=>'True'])->first();
+        $dataid = PaketProduct::where('paket_category_id','=',$id)->select('category_id')->first();
+        if ($data) {
+        $products = Product::where(['category_id'=>$dataid->category_id,'status'=>'True'])->get();
+//        dd($id,$a,$data,$products);
 //        $datalist = Image::where('product_id', $id)->get();
 //        $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
-        return view('home.paket_product_detail', ['data' => $data, 'products' => $products]);
+            return view('home.paket_product_detail', ['data' => $data, 'products' => $products]);
+        } else
+            return redirect()->back()->with('toast_error','Not Find Product');
     }
+    public function paket_product_update_cart(Request $request,$id,$slug)
+    {
+
+        $data = PaketProduct::where('paket_category_id','=',$id)->first();
+        $dataid = PaketProduct::where('paket_category_id','=',$id)->select('category_id')->first();
+        $products = Product::where('category_id', '=', $dataid->category_id)->get();
+
+        $quantity=$request->input('quantity');
+        $price=$request->input('price');
+        $total=$quantity*$price;
+//        dd($data, $price,$total);
+        return view('home.paket_product_detail',['data' => $data, 'products' => $products,'total'=>$total]);
+    }
+
 
     //alt kategori ürün bulma
     public function categoryproducts(Request $request, $id, $slug)
@@ -226,26 +250,26 @@ class HomeController extends Controller
 
     public function discount_products(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $datalist = Product::where(['is_sale'=>'Yes', 'status'=>'True']);
-       // dd($datalist);
+        $datalist = Product::where(['is_sale' => 'Yes', 'status' => 'True']);
+        // dd($datalist);
         //checking for sort
         $this->getSort($datalist);
 
         $datalist = $datalist->paginate(6);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
-        return view('home.discount_products', [ 'datalist' => $datalist, 'last' => $last]);
+        return view('home.discount_products', ['datalist' => $datalist, 'last' => $last]);
     }
 
     public function new_products()
     {
-        $datalist = Product::where(['status'=>'True'])->limit(6);
+        $datalist = Product::where(['status' => 'True'])->limit(6);
         // dd($datalist);
         //checking for sort
         $this->getSort($datalist);
 
         $datalist = $datalist->paginate(10);
         $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
-        return view('home.new_products', ['datalist' => $datalist,'last' => $last]);
+        return view('home.new_products', ['datalist' => $datalist, 'last' => $last]);
     }
 
     //Tüm ürümleri listeleme
@@ -287,12 +311,12 @@ class HomeController extends Controller
                 }
 
                 if (($min_price) && ($max_price)) {
-                   // dd($min_price,$max_price);
+                    // dd($min_price,$max_price);
                     $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(6);
                 } else
                     $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(6);
                 $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
-                return view('home.ajax_product_listing', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'data' => $data,'min_price'=>$min_price,'max_price'=>$maxprice]);
+                return view('home.ajax_product_listing', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'data' => $data, 'min_price' => $min_price, 'max_price' => $maxprice]);
             } else {
                 abort(404);
             }
@@ -319,13 +343,13 @@ class HomeController extends Controller
                     }
                 }
                 if (($min_price) && ($max_price)) {
-                     //dd($min_price,$max_price);
+                    //dd($min_price,$max_price);
                     $datalist = $datalist->wherebetween('products.sale_price', [$min_price, $max_price])->paginate(6);
                 } else
                     $datalist = $datalist->wherebetween('products.sale_price', [$minprice, $maxprice])->paginate(6);
 
                 $last = Product::select('id')->limit(5)->orderByDesc('id')->get();
-                return view('home.all_product', ['datalist' => $datalist, 'last' => $last, 'url' => $url,'min_price'=>$min_price,'max_price'=>$maxprice]);
+                return view('home.all_product', ['datalist' => $datalist, 'last' => $last, 'url' => $url, 'min_price' => $min_price, 'max_price' => $maxprice]);
             } else {
                 abort(404);
             }
