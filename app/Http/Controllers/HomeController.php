@@ -176,12 +176,16 @@ class HomeController extends Controller
     {
         $search = $request->input('search');
         $count = Product::where('title', 'like', '%' . $search . '%')->get()->count();
+        $data1 = Product::where('title', 'like', '%' . $search . '%')->get()->count();
         if ($count == 1) {
             $data = Product::where('title', 'like', '%' . $search . '%')->first();
             return redirect()->route('product', ['id' => $data->id, 'slug' => $data->slug]);
-        } else {
+        } elseif ($count == 0)
+            return redirect()->route('home')->with('toast_error', 'Please,re-enter the product you want to search.');
+        else
             return redirect()->route('productlist', ['search' => $search]);
-        }
+
+
     }
 
     public function productlist($search)
@@ -207,29 +211,30 @@ class HomeController extends Controller
     public function paket_product($id, $slug)
     {
 //
-        $data = PaketProduct::where(['paket_category_id'=>$id, 'status'=>'True'])->first();
-        $dataid = PaketProduct::where('paket_category_id','=',$id)->select('category_id')->first();
+        $data = PaketProduct::where(['paket_category_id' => $id, 'status' => 'True'])->first();
+        $dataid = PaketProduct::where('paket_category_id', '=', $id)->select('category_id')->first();
         if ($data) {
-        $products = Product::where(['category_id'=>$dataid->category_id,'status'=>'True'])->get();
+            $products = Product::where(['category_id' => $dataid->category_id, 'status' => 'True'])->get();
 //        dd($id,$a,$data,$products);
 //        $datalist = Image::where('product_id', $id)->get();
 //        $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
             return view('home.paket_product_detail', ['data' => $data, 'products' => $products]);
         } else
-            return redirect()->back()->with('toast_error','Not Find Product');
+            return redirect()->back()->with('toast_error', 'Not Find Product');
     }
-    public function paket_product_update_cart(Request $request,$id,$slug)
+
+    public function paket_product_update_cart(Request $request, $id, $slug)
     {
 
-        $data = PaketProduct::where('paket_category_id','=',$id)->first();
-        $dataid = PaketProduct::where('paket_category_id','=',$id)->select('category_id')->first();
+        $data = PaketProduct::where('paket_category_id', '=', $id)->first();
+        $dataid = PaketProduct::where('paket_category_id', '=', $id)->select('category_id')->first();
         $products = Product::where('category_id', '=', $dataid->category_id)->get();
 
-        $quantity=$request->input('quantity');
-        $price=$request->input('price');
-        $total=$quantity*$price;
+        $quantity = $request->input('quantity');
+        $price = $request->input('price');
+        $total = $quantity * $price;
 //        dd($data, $price,$total);
-        return view('home.paket_product_detail',['data' => $data, 'products' => $products,'total'=>$total]);
+        return view('home.paket_product_detail', ['data' => $data, 'products' => $products, 'total' => $total]);
     }
 
 

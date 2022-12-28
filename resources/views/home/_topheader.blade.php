@@ -1,3 +1,35 @@
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 130px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 2;
+    }
+
+    .dropdown-content a {
+        color: #0000ff;
+        padding: 20px 12px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {background-color: lightgrey}
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover {
+        background-color: transparent;
+    }
+</style>
 <!-- Start Top Header Area -->
 <div class="top-header">
     <div class="container-fluid">
@@ -48,16 +80,49 @@
 
             <div class="col-lg-4 col-md-12">
                 <div class="top-header-discount-info">
-{{--                    @include('home.message')--}}
+                    @php
+                    $today=\Carbon\Carbon::now()->format('M j, Y \a\t g:i a');
+                    @endphp
+                    <p style="color: lightgrey">{{$today}}</p>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-12">
                 <ul class="header-top-menu">
-
                     @auth
-                        <li><a href="{{route('user_orders')}}"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
-                            </a></li>
+                    <li>
+                        <div class="dropdown">
+                            <a href="#"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="{{route('myprofile')}}"
+                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+                                        Profile</b></a>
+                                <a href="{{route('user_orders')}}"
+                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+                                        Orders</b> </a>
+                                <a href="{{route('myreviews')}}"
+                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+                                        Reviews</b> </a>
+                                <a href="{{route('user_shopcart')}}"
+                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+                                        ShopCart</b> </a>
+                                <a href="{{route('user_wishlist')}}"
+                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+                                        Wishlist</b> </a>
+                                @php
+                                    $userRoles = \Illuminate\Support\Facades\Auth::user()->roles->pluck('name');
+                                @endphp
+
+                                @if($userRoles->contains('admin'))
+                                    <a href="{{route('adminhome')}}"
+                                       class="list-group-item d-flex justify-content-between align-items-center bg-transparent" target="_blank">
+                                        <b>Admin Panel</b></a>
+                                @endif
+                            </div>
+                        </div>
+                    </li>
+
                         <li><a href="{{route('logoutt')}}"><i class='bx bx-log-out'></i> Logout</a></li>
                     @endauth
                     @guest()
