@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
+    public static function count_wishlist()
+    {
+        return Wishlist::where('user_id',Auth::id())->count();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -98,6 +102,6 @@ class WishlistController extends Controller
     {
         $data = Wishlist::find($id);
         $data->delete();
-        return redirect()->back()->with('success','Product deleted succesfully');
+        return redirect()->back()->with('success','Product deleted from the wishlist  succesfully');
     }
 }

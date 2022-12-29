@@ -51,6 +51,9 @@ Route::get('product/{id}/{slug}', [HomeController::class, 'product'])->name('pro
 Route::get('paket-product/{id}/{slug}', [HomeController::class, 'paket_product'])->name('paket_product');
 Route::post('paket-product-update/{id}/{slug}', [HomeController::class, 'paket_product_update_cart'])->name('paket_product_update_cart');
 Route::get('category-products/{id}/{slug}', [HomeController::class, 'categoryproducts'])->name('categoryproducts');
+Route::get('category-product/{id}/{slug}', [HomeController::class, 'main_category_products'])->name('main_category_products');
+Route::get('category-product-paket', [HomeController::class, 'main_category_products_paket'])->name('main_category_products_paket');
+
 Route::get('discount-products', [HomeController::class, 'discount_products'])->name('discount_products');
 Route::get('new-products', [HomeController::class, 'new_products'])->name('new_products');
 Route::post('/get-product', [HomeController::class, 'getproduct'])->name('getproduct');

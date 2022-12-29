@@ -45,7 +45,7 @@
                                         class="nav-link">All Products</a>
                                 </li>
                                 <li class="nav-item"><a
-                                        href="#"
+                                            href="{{route('main_category_products_paket')}}"
                                         class="nav-link">Paket<i
                                             class='bx bx-chevron-left'></i></a>
                                     <ul class="dropdown-menu">
@@ -57,7 +57,7 @@
 
                                 @foreach($parentCategories as $rs)
                                     <li class="nav-item"><a
-                                            href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                            href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
                                             class="nav-link">{{$rs->title}}<i
                                                 class='bx bx-chevron-left'></i></a>
                                         <ul class="dropdown-menu">
@@ -128,7 +128,8 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">Kampanyalar</a></li>
+                            <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">Kampanyalar</a>
+                            </li>
 
                             <li class="nav-item"><a href="#" class="nav-link">Kategoriler <i
                                         class='bx bx-chevron-down'></i></a>
@@ -137,10 +138,21 @@
                                             href="{{route('allproducts')}}"
                                             class="nav-link">All Products</a>
                                     </li>
+                                    <li class="nav-item"><a
+                                            href="#"
+                                            class="nav-link">Paket<i
+                                                class='bx bx-chevron-left'></i></a>
+                                        <ul class="dropdown-menu">
+                                            @foreach($parentPaketCategories as $rs)
+                                                @include('home.categorytreepaket',['rs'=>$rs])
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
                                     @foreach($parentCategories as $rs)
                                         <li class="nav-item">
-                                        <a  href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
-                                                class="nav-link">{{$rs->title}}<i
+                                            <a href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                               class="nav-link">{{$rs->title}}<i
                                                     class='bx bx-chevron-left'></i></a>
                                             <ul class="dropdown-menu">
                                                 @foreach($rs->children as $childCategory )
@@ -151,7 +163,8 @@
                                     @endforeach
                                 </ul>
                             </li>
-                            <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni Ürünler</a>
+                            <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">Yeni
+                                    Ürünler</a>
                             </li>
                             <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">Hakkımızda</a>
                             </li>
@@ -267,7 +280,7 @@
                     </div>
                 @else
                     <div style="text-align: center"><br><br>
-                        <i class="bx bx-cart fs-1" ></i><br><br>
+                        <i class="bx bx-cart fs-1"></i><br><br>
                         <h6>Sepetinizde ürün bulunmamaktadır. Lütfen sepetinize ürün ekleyin.</h6><br>
                         <a href="{{route('discount_products')}}" class="btn btn-danger">İndirim Fırsatı</a>
                     </div><br>

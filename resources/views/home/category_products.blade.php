@@ -1,6 +1,6 @@
 @php
     $setting=\App\Http\Controllers\HomeController::getsetting();
-    $parentCategories=\App\Http\Controllers\HomeController::categorylist();
+    $parentCategoriesdata=\App\Http\Controllers\HomeController::categorylist();
     $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
 
@@ -69,10 +69,10 @@
                             <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
 
                             <ul>
-                                @foreach($parentCategories as $rs)
+                                @foreach($parentCategoriesdata as $rs)
                                     <ul>
                                         <li><a
-                                                href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                                href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
                                             >{{$rs->title}}<i
                                                 ></i></a>
                                             <ul>

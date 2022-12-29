@@ -81,11 +81,11 @@
                     <img src="{{asset('assets')}}/home/assets/img/coffee2.jpg" alt="image" style="width: 750vm;height: 500vm;">
 
                     <div class="content text-white">
-                        <span>Don’t Miss Today</span>
-                        <h3>50% OFF</h3>
-                        <a href="{{route('discount_products')}}" class="default-btn">Discover Now</a>
+                        <span>Build your own package</span>
+                        <h3>Now is the time</h3>
+                        <a href="{{route('main_category_products_paket')}}" class="default-btn">Discover Now</a>
                     </div>
-                    <a href="{{route('discount_products')}}" class="link-btn"></a>
+                    <a href="{{route('main_category_products_paket')}}" class="link-btn"></a>
                 </div>
             </div>
 

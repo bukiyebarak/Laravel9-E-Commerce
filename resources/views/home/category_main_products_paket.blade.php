@@ -1,12 +1,13 @@
 @php
     $setting=\App\Http\Controllers\HomeController::getsetting();
-    $parentCategories=\App\Http\Controllers\HomeController::categorylist()
+    $parentCategoriesdata=\App\Http\Controllers\HomeController::categorylist();
+    $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
+
 
 @extends('layouts.home')
 
-@section('title', $search. '  Products List')
-
+@section('title',"Package Products")
 @section('content')
     <style>
         .heartbtn {
@@ -19,7 +20,7 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h5>İçerisinde "{{$search}}" Geçen Ürünler</h5>
+                <h5>Package Products</h5>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
                     <li>Ürün Listesi</li>
@@ -64,7 +65,7 @@
                             <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
 
                             <ul>
-                                @foreach($parentCategories as $rs)
+                                @foreach($parentCategoriesdata as $rs)
                                     <ul>
                                         <li><a
                                                 href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
@@ -102,6 +103,7 @@
                         </section>
                     </aside>
                 </div>
+
                 <div class="col-lg-8 col-md-12">
                     <div class="products-filter-options">
                         <div class="row align-items-center">
@@ -152,9 +154,9 @@
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
                                         <select name="sort1" id="sort1" class=" nice-select">
-                                            <option selected value="">Default Sorting</option>
-                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected @endif >Sort by: Latest</option>
-                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected @endif >Sort by Price: Low to High</option>
+                                            <option selected="" value="">Default Sorting</option>
+                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
+                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>
                                             <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
                                             <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
                                             <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
@@ -162,6 +164,7 @@
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                     <!-- Single Product Start-->
@@ -172,28 +175,19 @@
                                 <div class="single-products-box">
                                     <div class="products-image">
                                         <a href="#">
-                                            <img style="height: 150px" src="{{asset('images/'.$rs->image)}}"
-                                                 class="main-image" alt="image">
-                                            <img src="{{asset('images/'.$rs->image)}}"
-                                                 class="hover-image" alt="image">
+                                            <a href="javascript:void(0);">
+                                                <img style="height: 200px; width: 200px"
+                                                     src="{{asset('images/'.$rs->image)}}" class="main-image"
+                                                     alt="image">
+                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                                            </a>
                                         </a>
 
                                         <div class="products-button">
                                             <ul>
                                                 <li>
-                                                    <div class="wishlist-btn">
-                                                        <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
-                                                            @csrf
-                                                            <a href="javascript:void(0);">
-                                                                <span class="tooltip-label">Add to Wishlist</span>
-                                                                <button type="submit" class='heartbtn bx bx-heart'></button>
-                                                            </a>
-                                                        </form>
-                                                    </div>
-                                                </li>
-                                                <li>
                                                     <div class="quick-view-btn">
-                                                        <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                        <a href="{{route('paket_product',['id'=>$rs->paket_category->id,'slug'=>$rs->paket_category->slug])}}">
                                                             <i class='bx bx-search-alt'></i>
                                                             <span class="tooltip-label">Quick View</span>
                                                         </a>
@@ -213,58 +207,17 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        @if($rs->is_sale=="Yes")
-                                            <div class="sale-tag">Sale!</div>
-                                        @else
-                                            @foreach($last as $data)
-                                                @if($rs->id==$data->id)
-                                                    <div class="new-tag">New!</div>
-                                                @endif
-                                            @endforeach
-                                        @endif
                                     </div>
 
                                     <div class="products-content">
                                         <h3><a href="#">{{$rs->title}}</a></h3>
-                                        @if($rs->is_sale=="No")
-                                            <div class="price">
-                                                <span class="new-price">{{$rs->price}}₺</span>
-                                            </div>
-                                        @else
-                                            <div class="price">
-                                                <span class="old-price">{{$rs->price}}₺</span>
-                                                <span class="new-price">{{$rs->sale_price}}₺</span>
-                                            </div>
-                                        @endif
-                                        @php
-                                            $avgrev=\App\Http\Controllers\HomeController::avrgreview($rs->id);
-                                            $countreview=\App\Http\Controllers\HomeController::countreview($rs->id);
-                                        @endphp
-                                        <div class="star-rating">
-                                            <div class="rating">
-                                                <i class="bx bx-star @if($avgrev>=1) bx bxs-star  @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
-                                                )
-                                            </div>
-                                        </div>
-                                        <br>
-{{--                                        <div class="btn-box">--}}
-{{--                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
-{{--                                                @csrf--}}
-{{--                                                <input name="quantity" type="hidden" value="1">--}}
-{{--                                                <button type="submit" class="default-btn add-to-cart">Add to Cart--}}
-{{--                                                </button>--}}
-{{--                                            </form>--}}
-{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <br>
+                    <!-- Single Product End-->
                     <div class="d-flex justify-content-center">
                         @if(isset($_GET['sort1']))
                             {!! $datalist->appends(['sort1'=>$_GET['sort1']])->links() !!}
@@ -278,7 +231,4 @@
         </div>
     </section>
     <!-- End Products Area -->
-@endsection
-@section('footerjs')
-    <script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>
 @endsection

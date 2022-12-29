@@ -86,7 +86,7 @@
                                 @foreach($parentCategories as $rs)
                                     <ul>
                                         <li><a
-                                                href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                                href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
                                             >{{$rs->title}}<i
                                                 ></i></a>
                                             <ul>

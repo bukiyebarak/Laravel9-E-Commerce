@@ -1,12 +1,17 @@
 @php
     $setting=\App\Http\Controllers\HomeController::getsetting();
-    $parentCategories=\App\Http\Controllers\HomeController::categorylist()
+    $parentCategoriesdata=\App\Http\Controllers\HomeController::categorylist();
+    $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
+
 
 @extends('layouts.home')
 
-@section('title', $search. '  Products List')
-
+@section('title', $data->title. ' Products List')
+@section('description')
+    {{$data->description}}
+@endsection
+@section('keywords',$data->keywords)
 @section('content')
     <style>
         .heartbtn {
@@ -19,7 +24,7 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h5>İçerisinde "{{$search}}" Geçen Ürünler</h5>
+                <h5>{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($data,$data->title) }}</h5>
                 <ul>
                     <li><a href="{{route('home')}}">Anasayfa</a></li>
                     <li>Ürün Listesi</li>
@@ -64,7 +69,7 @@
                             <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
 
                             <ul>
-                                @foreach($parentCategories as $rs)
+                                @foreach($parentCategoriesdata as $rs)
                                     <ul>
                                         <li><a
                                                 href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
@@ -102,6 +107,7 @@
                         </section>
                     </aside>
                 </div>
+
                 <div class="col-lg-8 col-md-12">
                     <div class="products-filter-options">
                         <div class="row align-items-center">
@@ -152,9 +158,9 @@
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
                                         <select name="sort1" id="sort1" class=" nice-select">
-                                            <option selected value="">Default Sorting</option>
-                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected @endif >Sort by: Latest</option>
-                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected @endif >Sort by Price: Low to High</option>
+                                            <option selected="" value="">Default Sorting</option>
+                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
+                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>
                                             <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
                                             <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
                                             <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
@@ -162,6 +168,7 @@
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                     <!-- Single Product Start-->
@@ -172,10 +179,12 @@
                                 <div class="single-products-box">
                                     <div class="products-image">
                                         <a href="#">
-                                            <img style="height: 150px" src="{{asset('images/'.$rs->image)}}"
-                                                 class="main-image" alt="image">
-                                            <img src="{{asset('images/'.$rs->image)}}"
-                                                 class="hover-image" alt="image">
+                                            <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
+                                                <img style="height: 200px; width: 200px"
+                                                     src="{{asset('images/'.$rs->image)}}" class="main-image"
+                                                     alt="image">
+                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                                            </a>
                                         </a>
 
                                         <div class="products-button">
@@ -225,6 +234,11 @@
                                     </div>
 
                                     <div class="products-content">
+                                        @foreach($parentCategories as $category)
+                                            @if($category->id==$rs->category_id)
+                                                <span class="category">{{$category->title}}</span>
+                                            @endif
+                                        @endforeach
                                         <h3><a href="#">{{$rs->title}}</a></h3>
                                         @if($rs->is_sale=="No")
                                             <div class="price">
@@ -246,8 +260,7 @@
                                                 <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
-                                                )
+                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}})
                                             </div>
                                         </div>
                                         <br>
@@ -255,8 +268,7 @@
 {{--                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
 {{--                                                @csrf--}}
 {{--                                                <input name="quantity" type="hidden" value="1">--}}
-{{--                                                <button type="submit" class="default-btn add-to-cart">Add to Cart--}}
-{{--                                                </button>--}}
+{{--                                                <input type="submit" class="add-to-cart default-btn" style="background-color: #ff87af" value="Add to Cart">--}}
 {{--                                            </form>--}}
 {{--                                        </div>--}}
                                     </div>
@@ -265,6 +277,7 @@
                         @endforeach
                     </div>
                     <br>
+                    <!-- Single Product End-->
                     <div class="d-flex justify-content-center">
                         @if(isset($_GET['sort1']))
                             {!! $datalist->appends(['sort1'=>$_GET['sort1']])->links() !!}
@@ -278,7 +291,4 @@
         </div>
     </section>
     <!-- End Products Area -->
-@endsection
-@section('footerjs')
-    <script src="{{asset('assets')}}/home/assets/js/jquery.min.js"></script>
 @endsection

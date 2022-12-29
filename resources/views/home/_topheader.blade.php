@@ -1,35 +1,9 @@
-<style>
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
+@php
+    $datalist=\App\Http\Controllers\HomeController::topHeaderWishlist();
+    $parentCategories=\App\Http\Controllers\HomeController::categorylistall();
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 130px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 2;
-    }
+@endphp
 
-    .dropdown-content a {
-        color: #0000ff;
-        padding: 20px 12px;
-        text-decoration: none;
-        display: block;
-    }
-
-    .dropdown-content a:hover {background-color: lightgrey}
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    .dropdown:hover {
-        background-color: transparent;
-    }
-</style>
 <!-- Start Top Header Area -->
 <div class="top-header">
     <div class="container-fluid">
@@ -80,49 +54,22 @@
 
             <div class="col-lg-4 col-md-12">
                 <div class="top-header-discount-info">
-                    @php
-                    $today=\Carbon\Carbon::now()->format('M j, Y \a\t g:i a');
-                    @endphp
-                    <p style="color: lightgrey">{{$today}}</p>
+                    {{--                    @php--}}
+                    {{--                    $today=\Carbon\Carbon::now()->format('M j, Y \a\t g:i a');--}}
+                    {{--                    @endphp--}}
+                    <p><b style="color: wheat;
+                          text-shadow: 2px 2px 5px lightpink;
+                          letter-spacing: 1px;
+                          text-transform: capitalize;"
+                        >Welcome &nbsp; {{\Illuminate\Support\Facades\Auth::user()->name}}</b></p>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-12">
                 <ul class="header-top-menu">
                     @auth
-                    <li>
-                        <div class="dropdown">
-                            <a href="#"><i class='bx bxs-user'></i> {{\Illuminate\Support\Facades\Auth::user()->name}}
-                            </a>
-                            <div class="dropdown-content">
-                                <a href="{{route('myprofile')}}"
-                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
-                                        Profile</b></a>
-                                <a href="{{route('user_orders')}}"
-                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
-                                        Orders</b> </a>
-                                <a href="{{route('myreviews')}}"
-                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
-                                        Reviews</b> </a>
-                                <a href="{{route('user_shopcart')}}"
-                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
-                                        ShopCart</b> </a>
-                                <a href="{{route('user_wishlist')}}"
-                                   class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
-                                        Wishlist</b> </a>
-                                @php
-                                    $userRoles = \Illuminate\Support\Facades\Auth::user()->roles->pluck('name');
-                                @endphp
-
-                                @if($userRoles->contains('admin'))
-                                    <a href="{{route('adminhome')}}"
-                                       class="list-group-item d-flex justify-content-between align-items-center bg-transparent" target="_blank">
-                                        <b>Admin Panel</b></a>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-
+                        <li><a href="{{route('user_orders')}}"><i
+                                    class='bx bx-user'></i> My Account</a></li>
                         <li><a href="{{route('logoutt')}}"><i class='bx bx-log-out'></i> Logout</a></li>
                     @endauth
                     @guest()
@@ -131,7 +78,7 @@
                     @endguest
 
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
-                                class='bx bx-heart'></i> Wishlist</a></li>
+                                class='bx bx-heart'></i> Wishlist ({{\App\Http\Controllers\WishlistController::count_wishlist()}})</a></li>
 
 
                 </ul>
@@ -165,66 +112,42 @@
             </button>
 
             <div class="modal-body">
-                <h3>My Wish List (3)</h3>
+                <h3>My Wish List ({{\App\Http\Controllers\WishlistController::count_wishlist()}})</h3>
 
                 <div class="products-cart-content">
+                    @foreach($datalist as $rs)
                     <div class="products-cart">
                         <div class="products-image">
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img1.jpg"
-                                             alt="image"></a>
+                            @if($rs->product->image!=null)
+                                <img src="{{asset('images/'.$rs->product->image)}}"
+                                     style="height: 50px; max-width: 100%" alt="">
+                            @endif
                         </div>
 
                         <div class="products-content">
-                            <h3><a href="#">Long Sleeve Leopard T-Shirt</a></h3>
-                            <span>Blue / XS</span>
+                            <h3><a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}">
+                                    {{$rs->product->title}}</a>
+                            </h3>
+                            @foreach($parentCategories as $category)
+                                @if($category->id==$rs->product->category_id)
+                                    <span class="category">{{$category->title}}</span>
+                                @endif
+                            @endforeach
                             <div class="products-price">
-                                <span>1</span>
-                                <span>x</span>
-                                <span class="price">$250.00</span>
+                                @if($rs->product->sale_price==null)
+                                    <span class="price"> {{$rs->product->price}}₺</span>
+                                @else
+                                    <span class="price"> {{$rs->product->sale_price}}₺</span>
+                                @endif
                             </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
+                            <a href="{{route('user_wishlist_delete',['id'=>$rs->id])}}" class="remove-btn"><i class='bx bx-trash'></i></a>
                         </div>
                     </div>
-
-                    <div class="products-cart">
-                        <div class="products-image">
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img2.jpg"
-                                             alt="image"></a>
-                        </div>
-
-                        <div class="products-content">
-                            <h3><a href="#">Causal V-Neck Soft Raglan</a></h3>
-                            <span>Blue / XS</span>
-                            <div class="products-price">
-                                <span>1</span>
-                                <span>x</span>
-                                <span class="price">$200.00</span>
-                            </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
-                        </div>
-                    </div>
-
-                    <div class="products-cart">
-                        <div class="products-image">
-                            <a href="#"><img src="{{asset('assets')}}/home/assets/img/products/img3.jpg"
-                                             alt="image"></a>
-                        </div>
-
-                        <div class="products-content">
-                            <h3><a href="#">Hanes Men's Pullover</a></h3>
-                            <span>Blue / XS</span>
-                            <div class="products-price">
-                                <span>1</span>
-                                <span>x</span>
-                                <span class="price">$200.00</span>
-                            </div>
-                            <a href="#" class="remove-btn"><i class='bx bx-trash'></i></a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="products-cart-btn">
-                    <a href="#" class="optional-btn">View Shopping Cart</a>
+                    <a href="{{route('user_wishlist')}}" class="optional-btn">All My Wishlist</a>
                 </div>
             </div>
         </div>

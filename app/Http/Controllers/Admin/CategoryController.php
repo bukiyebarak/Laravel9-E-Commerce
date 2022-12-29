@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+
+
     //heryerden erişim sağlar. Static dışardan erişim sağlar
     protected $appends = [
         'getParentsTree',

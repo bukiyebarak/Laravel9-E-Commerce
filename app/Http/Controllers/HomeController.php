@@ -13,6 +13,7 @@ use App\Models\Message;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Shopcart;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +42,11 @@ class HomeController extends Controller
     public static function headerShopCart()
     {
         return Shopcart::with('product')->where('user_id', Auth::id())->get();
+    }
+
+    public static function topHeaderWishlist()
+    {
+        return Wishlist::with('product')->where('user_id', Auth::id())->limit(5)->orderByDesc('id')->get();
     }
 
     public static function countreview($id)
@@ -162,7 +168,6 @@ class HomeController extends Controller
         $this->sendContactMessageMailAdmin($message);
 
         return redirect()->route('contact')->with('success', 'Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
-
     }
 
     public function sendContactMessageMailAdmin($contact)
@@ -181,7 +186,7 @@ class HomeController extends Controller
             $data = Product::where('title', 'like', '%' . $search . '%')->first();
             return redirect()->route('product', ['id' => $data->id, 'slug' => $data->slug]);
         } elseif ($count == 0)
-            return redirect()->route('home')->with('toast_error', 'Please,re-enter the product you want to search.');
+            return redirect()->back()->with('toast_error', 'Please,re-enter the product you want to search.');
         else
             return redirect()->route('productlist', ['search' => $search]);
 
@@ -246,12 +251,61 @@ class HomeController extends Controller
         //checking for sort
         $this->getSort($datalist);
         // dd($datalist);
-        $datalist = $datalist->paginate(1);
+        $datalist = $datalist->paginate(5);
         $data = Category::find($id);
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
     }
 
+    public function main_category_products(Request $request, $id, $slug)
+    {
+        $data2 = Category::where('id', $id)->count();
+
+        if ($data2 == 1) {
+            DB::table('categories')
+                ->where('id', $id)
+                ->update(['main_cat_id' => $id]);
+            $data1 = Category::where('id', $id)->select('id')->get();
+            $datacount = Category::where('id', $id)->count();
+
+        } else {
+            DB::table('categories')
+                ->where('parent_id', $id)
+                ->update(['main_cat_id' => $id]);
+            $data1 = Category::where('parent_id', $id)->select('id')->get();
+            $datacount = Category::where('parent_id', $id)->count();
+        }
+
+        $newcat = Category::where(['main_cat_id' => $id])->get();
+
+//        dd($data1[0]->id);
+        foreach ($newcat as $rs) {
+            if ($rs->main_cat_id == $id) {
+                for ($i = 0; $i < $datacount; $i++) {
+                    DB::table('products')
+                        ->where('category_id', $data1[$i]->id)
+                        ->update(['main_category_id' => $id]);
+                }
+            }
+        }
+        $datalist = Product::where('main_category_id', '=', $id);
+        $this->getSort($datalist);
+        $datalist = $datalist->paginate(10);
+//        dd($datalist);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        $data = Category::find($id);
+        return view('home.category_main_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
+    }
+    public function main_category_products_paket()
+    {
+
+        $datalist = PaketProduct::where('status','=','True');
+        $this->getSort($datalist);
+        $datalist = $datalist->paginate(10);
+//        dd($datalist);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        return view('home.category_main_products_paket', [ 'datalist' => $datalist, 'last' => $last]);
+    }
 
     public function discount_products(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
