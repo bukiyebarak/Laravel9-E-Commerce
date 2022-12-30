@@ -28,7 +28,8 @@ class ReviewFactory extends Factory
             'review'=>$this->faker->realText(50),
             'rate'=>rand(1,5),
             'IP'=>$this->faker->ipv4(),
-            'status'=>'True'
+            'status'=>'True',
+             'created_at'=>now(),
         ];
     }
 }

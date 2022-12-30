@@ -4,7 +4,7 @@
 
 @endphp
 
-<!-- Start Top Header Area -->
+    <!-- Start Top Header Area -->
 <div class="top-header">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -57,11 +57,21 @@
                     {{--                    @php--}}
                     {{--                    $today=\Carbon\Carbon::now()->format('M j, Y \a\t g:i a');--}}
                     {{--                    @endphp--}}
-                    <p><b style="color: wheat;
+                    <p> @auth
+                            <b style="color: wheat;
                           text-shadow: 2px 2px 5px lightpink;
                           letter-spacing: 1px;
                           text-transform: capitalize;"
-                        >Welcome &nbsp; {{\Illuminate\Support\Facades\Auth::user()->name}}</b></p>
+                            >✨ Welcome &nbsp; {{\Illuminate\Support\Facades\Auth::user()->name}} ✨</b>
+                        @endauth
+                        @guest()
+                            <b style="color: wheat;
+                          text-shadow: 2px 2px 5px lightpink;
+                          letter-spacing: 1px;
+                          text-transform: capitalize;"
+                            >Welcome &nbsp; 🤎Coffee Time🤎</b>
+                        @endguest
+                    </p>
                 </div>
             </div>
 
@@ -78,7 +88,8 @@
                     @endguest
 
                     <li><a href="#" data-bs-toggle="modal" data-bs-target="#shoppingWishlistModal"><i
-                                class='bx bx-heart'></i> Wishlist ({{\App\Http\Controllers\WishlistController::count_wishlist()}})</a></li>
+                                class='bx bx-heart'></i> Wishlist
+                            ({{\App\Http\Controllers\WishlistController::count_wishlist()}})</a></li>
 
 
                 </ul>
@@ -111,44 +122,61 @@
                 <span aria-hidden="true"><i class='bx bx-x'></i></span>
             </button>
 
+            @php
+                $count_wishlist=\App\Http\Controllers\WishlistController::count_wishlist();
+            @endphp
             <div class="modal-body">
-                <h3>My Wish List ({{\App\Http\Controllers\WishlistController::count_wishlist()}})</h3>
+                <h3>My Wish List ({{$count_wishlist}})</h3>
 
                 <div class="products-cart-content">
-                    @foreach($datalist as $rs)
-                    <div class="products-cart">
-                        <div class="products-image">
-                            @if($rs->product->image!=null)
-                                <img src="{{asset('images/'.$rs->product->image)}}"
-                                     style="height: 50px; max-width: 100%" alt="">
-                            @endif
-                        </div>
+                    @if($count_wishlist!=0)
+                        @foreach($datalist as $rs)
+                            <div class="products-cart">
+                                <div class="products-image">
+                                    @if($rs->product->image!=null)
+                                        <img src="{{asset('images/'.$rs->product->image)}}"
+                                             style="height: 50px; max-width: 100%" alt="">
+                                    @endif
+                                </div>
 
-                        <div class="products-content">
-                            <h3><a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}">
-                                    {{$rs->product->title}}</a>
-                            </h3>
-                            @foreach($parentCategories as $category)
-                                @if($category->id==$rs->product->category_id)
-                                    <span class="category">{{$category->title}}</span>
-                                @endif
-                            @endforeach
-                            <div class="products-price">
-                                @if($rs->product->sale_price==null)
-                                    <span class="price"> {{$rs->product->price}}₺</span>
-                                @else
-                                    <span class="price"> {{$rs->product->sale_price}}₺</span>
-                                @endif
+                                <div class="products-content">
+                                    <h3>
+                                        <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}">
+                                            {{$rs->product->title}}</a>
+                                    </h3>
+                                    @foreach($parentCategories as $category)
+                                        @if($category->id==$rs->product->category_id)
+                                            <span class="category">{{$category->title}}</span>
+                                        @endif
+                                    @endforeach
+                                    <div class="products-price">
+                                        @if($rs->product->sale_price==null)
+                                            <span class="price"> {{$rs->product->price}}₺</span>
+                                        @else
+                                            <span class="price"> {{$rs->product->sale_price}}₺</span>
+                                        @endif
+                                    </div>
+                                    <a href="{{route('user_wishlist_delete',['id'=>$rs->id])}}" class="remove-btn"><i
+                                            class='bx bx-trash'></i></a>
+                                </div>
                             </div>
-                            <a href="{{route('user_wishlist_delete',['id'=>$rs->id])}}" class="remove-btn"><i class='bx bx-trash'></i></a>
+                        @endforeach
+                        <div class="products-cart-btn">
+                            <a href="{{route('user_wishlist')}}" class="optional-btn">All My Wishlist</a>
                         </div>
-                    </div>
-                    @endforeach
+                    @else
+                        <div style="text-align: center"><br><br>
+                            <i class="bx bx-heart fs-1"></i><br><br>
+                            <h6>Listede ürün bulunmamaktadır. Lütfen favori ürünlerinizi listeye ekleyin.</h6><br>
+                            <a href="{{route('discount_products')}}" class="btn btn-danger">İndirim Fırsatı</a>
+                        </div><br>
+                        <div class="products-cart-btn">
+                            <a href="{{route('allproducts')}}" class="btn default-btn">Start Shopping</a>
+
+                        </div>
+                    @endif
                 </div>
 
-                <div class="products-cart-btn">
-                    <a href="{{route('user_wishlist')}}" class="optional-btn">All My Wishlist</a>
-                </div>
             </div>
         </div>
     </div>

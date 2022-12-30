@@ -131,7 +131,7 @@
                         <br>
                         <div class="products-add-to-cart">
 
-                            <form action="{{route('user_shopcart_add',['id'=>$data->id])}}" method="post">
+                            <form action="#" >
                                 @csrf
                                 <div class="input-counter">
                                     <span class="minus-btn"><i class='bx bx-minus'></i></span>

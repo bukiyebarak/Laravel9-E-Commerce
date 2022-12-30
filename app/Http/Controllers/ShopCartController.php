@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shopcart;
+
 //use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class ShopCartController extends Controller
 
     public static function countshopcart()
     {
-        return Shopcart::where('user_id',Auth::id())->count();
+        return Shopcart::where('user_id', Auth::id())->count();
     }
 
     /**
@@ -25,9 +26,13 @@ class ShopCartController extends Controller
      */
     public function index()
     {
-        $datalist=Shopcart::with('product')->where('user_id',Auth::id())->get();
+        $data="Sepetinizde ürün bulunmamaktadır. Lütfen sepetinize ürün ekleyin.";
+        $datalist = Shopcart::with('product')->where('user_id', Auth::id())->get();
 //dd($datalist);
-        return view('home.user_shopcart',['datalist'=>$datalist]);
+        if ($datalist->count() == 0) {
+            return view('home.blank_data', ['data' => $data]);
+        } else
+            return view('home.user_shopcart', ['datalist' => $datalist]);
     }
 
 
@@ -44,22 +49,19 @@ class ShopCartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request, $id)
     {
-        $data=Shopcart::where('product_id',$id)->where('user_id',Auth::id())->first();
-        if ($data)
-        {
+        $data = Shopcart::where('product_id', $id)->where('user_id', Auth::id())->first();
+        if ($data) {
             $data->quantity = $data->quantity + (int)$request->input('quantity');
-        }
-        else
-        {
+        } else {
             $data = new Shopcart;
-            $data->product_id =$id;
+            $data->product_id = $id;
             $data->user_id = Auth::id();
-            $data->quantity =(int) $request->input('quantity');
+            $data->quantity = (int)$request->input('quantity');
         }
         $data->save();
 
@@ -67,14 +69,14 @@ class ShopCartController extends Controller
 
 //        Alert::success('Product Added Successfully', 'We have added product to the cart');
 
-        $message=__('Product Added to Shopcart Successfully');
-        return redirect()->back()->with('success',$message);
+        $message = __('Product Added to Shopcart Successfully');
+        return redirect()->back()->with('success', $message);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Shopcart  $shopcart
+     * @param \App\Models\Shopcart $shopcart
      * @return \Illuminate\Http\Response
      */
     public function show(Shopcart $shopcart)
@@ -85,7 +87,7 @@ class ShopCartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Shopcart  $shopcart
+     * @param \App\Models\Shopcart $shopcart
      * @return \Illuminate\Http\Response
      */
     public function edit(Shopcart $shopcart)
@@ -96,30 +98,30 @@ class ShopCartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shopcart  $shopcart
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Shopcart $shopcart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shopcart $shopcart,$id)
+    public function update(Request $request, Shopcart $shopcart, $id)
     {
         $data = Shopcart::find($id);
-        $data->quantity =(int) $request->input('quantity');
-        if ($data->quantity==0)
-            return $this->destroy($data,$data->id);
+        $data->quantity = (int)$request->input('quantity');
+        if ($data->quantity == 0)
+            return $this->destroy($data, $data->id);
         $data->save();
-        return redirect()->back()->with('success','Product Updated to Shopcart');
+        return redirect()->back()->with('success', 'Product Updated to Shopcart');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Shopcart  $shopcart
+     * @param \App\Models\Shopcart $shopcart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shopcart $shopcart,$id)
+    public function destroy(Shopcart $shopcart, $id)
     {
         $data = Shopcart::find($id);
         $data->delete();
-        return redirect()->back()->with('success','Product deleted succesfully');
+        return redirect()->back()->with('success', 'Product deleted succesfully');
     }
 }

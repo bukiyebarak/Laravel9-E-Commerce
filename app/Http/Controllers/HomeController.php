@@ -253,15 +253,15 @@ class HomeController extends Controller
         // dd($datalist);
         $datalist = $datalist->paginate(5);
         $data = Category::find($id);
-        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        $last = Product::select('id')->limit(3)->orderByDesc('id')->get();
         return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
     }
 
-    public function main_category_products(Request $request, $id, $slug)
+    public function main_category_products($id, $slug)
     {
-        $data2 = Category::where('id', $id)->count();
-
-        if ($data2 == 1) {
+        $data2 = Category::where('parent_id', $id)->count();
+      //  dd($data2);
+        if ($data2 == 0) {
             DB::table('categories')
                 ->where('id', $id)
                 ->update(['main_cat_id' => $id]);
@@ -274,6 +274,7 @@ class HomeController extends Controller
                 ->update(['main_cat_id' => $id]);
             $data1 = Category::where('parent_id', $id)->select('id')->get();
             $datacount = Category::where('parent_id', $id)->count();
+
         }
 
         $newcat = Category::where(['main_cat_id' => $id])->get();
@@ -421,7 +422,7 @@ class HomeController extends Controller
      * @param $datalist
      * @return void
      */
-    public function getSort($datalist): void
+    public static function getSort($datalist): void
     {
         if (isset($_GET['sort1']) && !empty($_GET['sort1'])) {
             // dd($_GET['sort1']);

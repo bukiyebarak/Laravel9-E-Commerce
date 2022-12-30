@@ -9,7 +9,7 @@
 
 @section('content')
     <style>
-        .heartbtn{
+        .heartbtn {
             border-style: none;
             background-color: inherit;
         }
@@ -199,11 +199,13 @@
                                             <ul>
                                                 <li>
                                                     <div class="wishlist-btn">
-                                                        <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                        <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}"
+                                                              method="post">
                                                             @csrf
                                                             <a href="javascript:void(0);">
                                                                 <span class="tooltip-label">Add to Wishlist</span>
-                                                                <button type="submit" class='heartbtn bx bx-heart'></button>
+                                                                <button type="submit"
+                                                                        class='heartbtn bx bx-heart'></button>
                                                             </a>
                                                         </form>
                                                     </div>
@@ -219,12 +221,14 @@
                                                 </li>
                                                 <li>
                                                     <div class="compare-btn">
-                                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}"
+                                                              method="post">
                                                             @csrf
                                                             <input name="quantity" type="hidden" value="1">
                                                             <a href="javascript:void(0);">
                                                                 <span class="tooltip-label">Add to Cart</span>
-                                                                <button type="submit" class="heartbtn bx bx-cart"></button>
+                                                                <button type="submit"
+                                                                        class="heartbtn bx bx-cart"></button>
                                                             </a>
                                                         </form>
                                                     </div>
@@ -270,21 +274,9 @@
                                                 <span class="new-price">{{$rs->sale_price}}₺</span>
                                             </div>
                                         @endif
-{{--                                        <div class="btn-box">--}}
-{{--                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
-{{--                                                @csrf--}}
-{{--                                                <input name="quantity" type="hidden" value="1">--}}
-{{--                                                <input type="submit" class="add-to-cart default-btn text-black"--}}
-{{--                                                       style="background-color: #ff87af" value="Add to Cart">--}}
-{{--                                            </form>--}}
-{{--                                        </div>--}}
                                     </div>
-
-
                                     @if($rs->is_sale=="Yes")
-                                        <span class="products-discount">
-                            <span> {{$rs->sale}}% OFF </span>
-                        </span>
+                                        <span class="products-discount"> <span> {{$rs->sale}}% OFF </span></span>
                                     @endif
 
                                 </div>

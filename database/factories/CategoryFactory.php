@@ -42,6 +42,7 @@ class CategoryFactory extends Factory
             'image'=>$this->faker->image(),
             'description'=>$description[rand(0,6)],
             'slug'=>$this->faker->slug(),
+            'created_at'=>now(),
         ];
     }
 }

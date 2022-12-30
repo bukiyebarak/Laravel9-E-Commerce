@@ -36,12 +36,11 @@
 
                         <table class="table table-bordered table-responsive-md">
                             <thead>
-                                <tr>
-
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Quantity</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
 
                             </thead>
 
@@ -85,7 +84,6 @@
                                     </td>
 
 
-
                                     <td class="product-quantity">
                                         <form
                                             action="{{route('user_shopcart_update',['id'=>$rs->id])}}" method="post">
@@ -94,7 +92,8 @@
                                                 <span class="minus-btn"><i class='bx bx-minus'></i></span>
                                                 <label>
                                                     <input type="text" name="quantity" min="0" value="{{$rs->quantity}}"
-                                                           max="{{$rs->product->quantity}}" onchange="this.form.submit()" readonly>
+                                                           max="{{$rs->product->quantity}}"
+                                                           onchange="this.form.submit()" readonly>
                                                 </label>
                                                 <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                             </div>
@@ -107,14 +106,15 @@
                                             onclick="return confirm('Delete! Are you sure?')" class="remove"><i
                                                 class='bx bx-trash fs-3'></i></a>
 
-                                        <form action="{{route('user_wishlist_add',['id'=>$rs->product->id])}}" method="post">
+                                        <form action="{{route('user_wishlist_add',['id'=>$rs->product->id])}}"
+                                              method="post">
                                             @csrf
-                                            <a href="javascript:void(0);" >
+                                            <a href="javascript:void(0);">
                                                 <button type="submit" class="heartbtn bx bx-heart fs-3"></button>
 
                                             </a>
                                         </form>
-{{--                                        <a href="#"><i class='bx bx-heart fs-3'></i></a>--}}
+                                        {{--                                        <a href="#"><i class='bx bx-heart fs-3'></i></a>--}}
 
 
                                     </td>
@@ -142,37 +142,28 @@
                     </div>
 
                     <div class="cart-totals">
+                        <h3>Cart Totals </h3>
+                        <ul>
+                            <li>Subtotal <span>{{$total}}₺</span></li>
+                            <li>Shipping <span>30 ₺</span></li>
+                            @php
+                                $total += 30;
+                            @endphp
+                            <li>Total <span>@if($total>30)
+                                        {{$total}}₺
+                                    @else
+                                        0₺
+                                    @endif</span></li>
+                        </ul>
 
-                        @if($total!=0)
-                            <h3>Cart Totals </h3>
-                            <ul>
-                                <li>Subtotal <span>{{$total}}₺</span></li>
-                                <li>Shipping <span>30 ₺</span></li>
-                                @php
-                                    $total += 30;
-                                @endphp
-                                <li>Total <span>@if($total>30)
-                                            {{$total}}₺
-                                        @else
-                                            0₺
-                                        @endif</span></li>
-                            </ul>
-
-                            <form action="{{route('user_order_add')}}" method="post">
-                                @csrf
-                                @php
-                                    $total=$total- 30;
-                                @endphp
-                                <input type="hidden" name="total" value="{{$total}}">
-                                <button type="submit" class="default-btn">Proceed to Checkout</button>
-                            </form>
-                        @else
-                            <div style="text-align: center"><br><br>
-                                <i class="bx bx-cart fs-1"></i><br><br>
-                                <h6>Sepetinizde ürün bulunmamaktadır. Lütfen sepetinize ürün ekleyin.</h6><br>
-                                <a href="{{route('discount_products')}}" class="btn btn-danger">İndirimleri Kaçırma</a>
-                            </div><br>
-                        @endif
+                        <form action="{{route('user_order_add')}}" method="post">
+                            @csrf
+                            @php
+                                $total=$total- 30;
+                            @endphp
+                            <input type="hidden" name="total" value="{{$total}}">
+                            <button type="submit" class="default-btn">Proceed to Checkout</button>
+                        </form>
                     </div>
 
                 </div>

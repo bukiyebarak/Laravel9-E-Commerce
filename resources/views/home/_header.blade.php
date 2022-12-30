@@ -45,7 +45,7 @@
                                         class="nav-link">All Products</a>
                                 </li>
                                 <li class="nav-item"><a
-                                            href="{{route('main_category_products_paket')}}"
+                                        href="{{route('main_category_products_paket')}}"
                                         class="nav-link">Paket<i
                                             class='bx bx-chevron-left'></i></a>
                                     <ul class="dropdown-menu">
@@ -139,7 +139,7 @@
                                             class="nav-link">All Products</a>
                                     </li>
                                     <li class="nav-item"><a
-                                            href="#"
+                                            href="{{route('main_category_products_paket')}}"
                                             class="nav-link">Paket<i
                                                 class='bx bx-chevron-left'></i></a>
                                         <ul class="dropdown-menu">

@@ -49,8 +49,12 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $data="Şipariş bulunumadı. Keyifli alışveriler dileriz. ";
         $datalist = Order::where('user_id', Auth::id())->get();
-        return view('home.user_order', ['datalist' => $datalist]);
+        if($datalist->count()==0){
+            return view('home.blank_data', ['data' => $data]);
+        }
+            return view('home.user_order', ['datalist' => $datalist]);
     }
 
 

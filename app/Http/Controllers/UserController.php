@@ -21,8 +21,15 @@ class UserController extends Controller
 
     public function myreviews()
     {
+        $data="Yaptığınız yorumları burada görebilirsiniz. Daha önce yapılan yorum sayısı sıfır.";
+
         $datalist = Review::where('user_id', '=', Auth::user()->id)->get();
-        return view('home.user_reviews', ['datalist' => $datalist]);
+
+        if($datalist->count()==0){
+            return view('home.blank_data', ['data' => $data]);
+        }
+        else
+            return view('home.user_reviews', ['datalist' => $datalist]);
     }
 
     public function destroymyreview(Review $review, $id)

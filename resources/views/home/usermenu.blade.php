@@ -1,6 +1,39 @@
+<style>
+    .profile{
+        text-align:center;
+        font-size:30px;
+        background-color: grey;
+        border-radius: 50%;
+        margin: 0 15px 10px 40px;
+        height:100px;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight:bold ;
+    }
+    .profile-name{
+        text-align:center;
+        margin: 0 15px 15px 40px;
+        height:10px;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight:bold ;
+    }
+</style>
+
 @auth
 <div class="col-lg-2 col-md-12">
-    <h1 style="text-align:center; font-size:30px; background-color: #ff87af"><b>USER PANEL</b></h1> <br>
+    <div class="profile"><i class=" bx bx-user"></i>
+    </div>
+    <div class="profile-name">
+        <p style="  text-transform: capitalize;">{{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->surname}}</p>
+    </div>
+    <div class="profile-name">
+        <p>{{\Illuminate\Support\Facades\Auth::user()->email}} </p>
+    </div>
     <div class="list-group list-group-flush ">
         <a href="{{route('myprofile')}}"
            class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My

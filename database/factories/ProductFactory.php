@@ -54,7 +54,8 @@ class ProductFactory extends Factory
             'minquantity' => rand(1, 50),
             'user_id' => $user_id->id,
             'slug' => $this->faker->slug(),
-            'status' => 'True'
+            'status' => 'True',
+            'created_at'=>now(),
         ];
     }
 }
