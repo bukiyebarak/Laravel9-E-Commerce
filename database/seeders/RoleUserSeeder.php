@@ -21,8 +21,8 @@ class RoleUserSeeder extends Seeder
         $role_id=DB::table('roles')->select('id')->where('name','=','admin')->first();
 
         DB::table('role_user')->insert([
-            'role_id'=>$user_id->id,
-            'user_id'=>$role_id->id,
+            'role_id'=>$role_id->id,
+            'user_id'=> $user_id->id,
         ]);
     }
 }

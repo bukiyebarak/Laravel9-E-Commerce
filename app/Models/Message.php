@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name', 'email', 'phone', 'subject','message','user_id','ip_address'
     ];
@@ -15,5 +17,5 @@ class Message extends Model
     {
         return $this->belongsTo(User::class);
     }
-    use HasFactory;
+
 }

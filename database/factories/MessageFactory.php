@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Message>
  */
-class ReviewFactory extends Factory
+class MessageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,19 +17,17 @@ class ReviewFactory extends Factory
      */
     public function definition()
     {
+        $faker = \Faker\Factory::create('tr_TR');
         $user_id=DB::table('users')->select('id')->inRandomOrder()->first();
-
-        $product_id=DB::table('products')->select('id')->inRandomOrder()->first();
-
         return [
-            'product_id'=>$product_id->id,
             'user_id'=>$user_id->id,
+            'name'=>$faker->name(),
+            'phone' => $faker->numerify('##########'),
+            'email' => $faker->unique()->safeEmail(),
             'subject'=> $this->faker->words(5,true),
-            'review'=>$this->faker->realText(50),
-            'rate'=>rand(1,5),
-            'IP'=>$this->faker->ipv4(),
-            'status'=>'True',
-            'created_at'=>now(),
+            'message'=>$this->faker->realText(50),
+            'ip_address'=>$this->faker->ipv4(),
+            'status'=>'New',
         ];
     }
 }

@@ -22,11 +22,11 @@ class UserController extends Controller
     public function myreviews()
     {
         $data="Yaptığınız yorumları burada görebilirsiniz. Daha önce yapılan yorum sayısı sıfır.";
-
+        $name="User Reviews";
         $datalist = Review::where('user_id', '=', Auth::user()->id)->get();
 
         if($datalist->count()==0){
-            return view('home.blank_data', ['data' => $data]);
+            return view('home.blank_data', ['data' => $data,'name'=>$name]);
         }
         else
             return view('home.user_reviews', ['datalist' => $datalist]);

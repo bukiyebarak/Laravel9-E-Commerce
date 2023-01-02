@@ -22,10 +22,11 @@ class WishlistController extends Controller
     public function index()
     {
         $data="Favoriler listeniz boş bulunmaktadır. Favori ürünlerinizi buraya ekleyebilirsiniz.";
+        $name="User Wishlist";
         $datalist = Wishlist::with('product')->where('user_id', Auth::id());
         $datalist = $datalist->cursorPaginate(10);
         if($datalist->count()==0){
-            return view('home.blank_data', ['data' => $data]);
+            return view('home.blank_data', ['data' => $data,'name'=>$name]);
         }
         else
             return view('home.user_wishlist', ['datalist' => $datalist]);

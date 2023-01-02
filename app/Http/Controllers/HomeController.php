@@ -290,12 +290,11 @@ class HomeController extends Controller
             }
         }
         $datalist = Product::where('main_category_id', '=', $id);
-        $this->getSort($datalist);
         $datalist = $datalist->paginate(10);
 //        dd($datalist);
-        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         $data = Category::find($id);
-        return view('home.category_main_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
+        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
+        return view('home.category_main_products', ['data' => $data, 'datalist' => $datalist,'last' => $last]);
     }
     public function main_category_products_paket()
     {
@@ -304,8 +303,7 @@ class HomeController extends Controller
         $this->getSort($datalist);
         $datalist = $datalist->paginate(10);
 //        dd($datalist);
-        $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
-        return view('home.category_main_products_paket', [ 'datalist' => $datalist, 'last' => $last]);
+        return view('home.category_main_products_paket', [ 'datalist' => $datalist]);
     }
 
     public function discount_products(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

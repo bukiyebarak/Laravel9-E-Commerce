@@ -145,24 +145,11 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                Showing {{($datalist->currentpage()-1)* $datalist->perpage()+1}}
-                                to {{(($datalist->currentpage()-1)*$datalist->perpage())+$datalist->count()}}
-                                of {{$datalist->total()}} entries
+
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <form name="sortproducts" id="sortProducts">
-                                    <div class="products-ordering-list">
-                                        <select name="sort1" id="sort1" class=" nice-select">
-                                            <option selected="" value="">Default Sorting</option>
-                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
-                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>
-                                            <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
-                                            <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
-                                            <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
-                                        </select>
-                                    </div>
-                                </form>
+
                             </div>
 
                         </div>
@@ -171,7 +158,10 @@
 
                     <div id="products-collections-filter" class="row">
                         @foreach($datalist as $rs)
-                            <div class="col-lg-4 col-md-6 col-sm-6 products-col-item">
+                            <div class="col-lg-4 col-md-6 col-sm-6 products-col-item"
+                                 style="box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                  margin: 10px 30px 10px 5px; padding-top: 15px;
+                                  width: 260px;">
                                 <div class="single-products-box">
                                     <div class="products-image">
                                         <a href="#">
@@ -193,24 +183,17 @@
                                                         </a>
                                                     </div>
                                                 </li>
-                                                <li>
-                                                    <div class="compare-btn">
-                                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
-                                                            @csrf
-                                                            <input name="quantity" type="hidden" value="1">
-                                                            <a href="javascript:void(0);">
-                                                                <span class="tooltip-label">Add to Cart</span>
-                                                                <button type="submit" class="heartbtn bx bx-cart"></button>
-                                                            </a>
-                                                        </form>
-                                                    </div>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
 
                                     <div class="products-content">
-                                        <h3><a href="#">{{$rs->title}}</a></h3>
+                                        <h3>
+                                            <a href="{{route('paket_product',['id'=>$rs->paket_category->id,'slug'=>$rs->paket_category->slug])}}">
+                                                {{$rs->title}}</a></h3>
+                                        <a href="{{route('paket_product',['id'=>$rs->paket_category->id,'slug'=>$rs->paket_category->slug])}}"
+                                        class="btn default-btn" style="margin: 15px 10px 0 40px; ">
+                                        Seçenekleri Seçin </a>
                                     </div>
                                 </div>
                             </div>

@@ -38,6 +38,7 @@
                                         <th>İlçe</th>
                                         <th>Mahalle</th>
                                         <th>Toplam</th>
+                                        <th>Şipariş Durumu</th>
                                         <th>Şipariş Tarihi</th>
                                         <th>Durum</th>
                                         <th>Şipariş Detayı</th>
@@ -65,6 +66,16 @@
                                             <td>{{$rs->district}}</td>
                                             <td>{{$rs->neighbourhood}}</td>
                                             <td>{{$rs->total}}</td>
+                                            <td><div style="text-align: center;">
+                                                    @if($rs->is_pay=="True")
+                                                        <div class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
+                                                            True
+                                                        </div>
+                                                    @else
+                                                        <div  class="badge rounded-pill text-black bg-danger p-2 text-uppercase px-3">
+                                                            False</div>
+                                                    @endif
+                                                </div></td>
                                             <td>{{$rs->created_at}}</td>
                                             <td>
                                                 <div style="text-align: center;">

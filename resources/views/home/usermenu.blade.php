@@ -36,7 +36,7 @@
     </div>
     <div class="list-group list-group-flush ">
         <a href="{{route('myprofile')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-danger"><b>My
                 Profile</b> <i
                 class='bx bx-user-circle fs-5'></i></a>
         <a href="{{route('user_orders')}}"

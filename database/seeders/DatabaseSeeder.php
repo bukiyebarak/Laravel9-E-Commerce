@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             DistrictSeeder::class,
             NeigbourhoodSeeder::class,
+            PaketCategorySeeder::class,
+            PaketProductSeeder::class,
+            SettingSeeder::class,
+            MessageSeeder::class,
 //    OrderSeeder::class,
 //    OrderItemSeeder::class,
         ]);

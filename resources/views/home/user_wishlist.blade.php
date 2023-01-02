@@ -12,6 +12,7 @@
             /*display: flex;*/
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             margin: 10px;
+            padding-top: 15px;
             width: 250px;
             text-align: center;
             justify-content: center;
@@ -148,7 +149,7 @@
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
-                                                    ({{$countreview}} İnceleme)
+                                                    ({{$countreview}})
                                                 @endif
                                             </div>
                                         </div>

@@ -27,10 +27,11 @@ class ShopCartController extends Controller
     public function index()
     {
         $data="Sepetinizde ürün bulunmamaktadır. Lütfen sepetinize ürün ekleyin.";
+        $name="User Shopcart";
         $datalist = Shopcart::with('product')->where('user_id', Auth::id())->get();
 //dd($datalist);
         if ($datalist->count() == 0) {
-            return view('home.blank_data', ['data' => $data]);
+            return view('home.blank_data', ['data' => $data,'name'=>$name]);
         } else
             return view('home.user_shopcart', ['datalist' => $datalist]);
     }

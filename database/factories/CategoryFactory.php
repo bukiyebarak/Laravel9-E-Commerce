@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         $description=[
-           " Kahve Kapsülleri",
+            " Kahve Kapsülleri",
             "Kapsül ve Öğütülmüş Kahve",
             "Kahve Makineleri",
             "Sıcak İçecekler",
@@ -26,23 +26,24 @@ class CategoryFactory extends Factory
             "Kapsül ve Öğütülmüş Kahve / Delta Kahve Çekirdekleri",
         ];
         $title=[
-           "Paket Kapsül Lavazza MAVİ",
+            "Paket Kapsül Lavazza MAVİ",
             "Delta Kahve Çekirdekleri",
-           " Lavazza Mavi Çay",
+            " Lavazza Mavi Çay",
             "Lavazza Mavi Kapsüller",
             "Modo Mio Kahve Makineleri",
-           " Kahve Aksesuarları",
+            " Kahve Aksesuarları",
             "Kapsül ve Öğütülmüş Kahve",
         ];
 
         return [
-            'parent_id'=>rand(0,5),
+            'parent_id'=>0,
             'title'=>$title[rand(0,6)],
             'keywords'=>$this->faker->word(),
             'image'=>$this->faker->image(),
             'description'=>$description[rand(0,6)],
             'slug'=>$this->faker->slug(),
             'created_at'=>now(),
+            'main_cat_id'=>0,
         ];
     }
 }

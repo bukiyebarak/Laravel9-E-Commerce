@@ -15,12 +15,15 @@ class UserSeed extends Seeder
      */
     public function run()
     {
-         DB::table('users')->insert([
-             'name'=>"admin",
-             'surname'=>"admin",
-             'email'=>"admin@admin.com",
-             'email_verified_at' => now(),
-             'password'=>bcrypt('123456789'),
-         ]);
+        $faker = \Faker\Factory::create('tr_TR');
+        DB::table('users')->insert([
+            'name'=>"admin",
+            'surname'=>"admin",
+            'address' => $faker->address(),
+            'phone' => $faker->numerify('###########'),
+            'email'=>"admin@admin.com",
+            'email_verified_at' => now(),
+            'password'=>bcrypt('123456789'),
+        ]);
     }
 }
