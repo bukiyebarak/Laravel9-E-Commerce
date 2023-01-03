@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('paket_products', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->integer('product_id');
             $table->integer('paket_category_id');
             $table->integer('category_id')->nullable();
             $table->integer('user_id')->nullable();

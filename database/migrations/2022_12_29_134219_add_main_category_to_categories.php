@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->integer('main_cat_id');
+            $table->integer('main_cat_id')->nullable();
         });
     }
 

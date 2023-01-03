@@ -22,7 +22,7 @@ class MessageFactory extends Factory
         return [
             'user_id'=>$user_id->id,
             'name'=>$faker->name(),
-            'phone' => $faker->numerify('##########'),
+            'phone' => $faker->numerify('0##########'),
             'email' => $faker->unique()->safeEmail(),
             'subject'=> $this->faker->words(5,true),
             'message'=>$this->faker->realText(50),

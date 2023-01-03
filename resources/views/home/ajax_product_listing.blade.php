@@ -1,5 +1,15 @@
+@php
+$parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
+@endphp
+<style>
+    .heartbtn {
+        border-style: none;
+        background-color: inherit;
+    }
+
+</style>
 <div id="products-collections-filter" class="row">
- @foreach($datalist as $rs)
+    @foreach($datalist as $rs)
         <div class="col-lg-4 col-md-4 col-sm-4 products-col-item">
             <div class="single-products-box">
                 <div class="products-image">
@@ -47,7 +57,6 @@
                                 </div>
                             </li>
                         </ul>
-
                     </div>
                     @if($rs->is_sale=="Yes")
                         <div class="sale-tag">Sale!</div>
@@ -61,6 +70,11 @@
                 </div>
 
                 <div class="products-content">
+                    @foreach($parentCategoriess as $category)
+                        @if($category->id==$rs->category_id)
+                            <span class="category" style="font-weight: bold;color: deeppink">{{$category->title}}</span>
+                        @endif
+                    @endforeach
                     <h3>
                         <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">{{$rs->title}}</a>
                     </h3>
@@ -89,12 +103,6 @@
                             @endif
                         </div>
                     </div>
-{{--                    <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
-{{--                        @csrf--}}
-{{--                        <input name="quantity" type="hidden" value="1">--}}
-{{--                        <input type="submit" class="add-to-cart default-btn"--}}
-{{--                               style="background-color: whitesmoke" value="Add to Cart">--}}
-{{--                    </form>--}}
                 </div>
             </div>
         </div>

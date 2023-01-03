@@ -1,7 +1,13 @@
 @extends('layouts.admin')
 
 @section('title', 'Edit Category')
-
+@section('javascript')
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+@endsection
 @section('content')
     <!--start page wrapper -->
     <div class="page-wrapper">
@@ -57,6 +63,29 @@
                                     @if ($errors->has('description'))
                                         <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif</div>
+                                <div class="col-md-12">
+                                    <label>Detail</label>
+                                    <textarea id="summernote" name="detail">{{$data->detail}}</textarea>
+                                    <script>
+                                        $('#summernote').summernote({
+                                            placeholder: 'Category Detail',
+                                            tabsize: 2,
+                                            height: 120,
+                                            toolbar: [
+                                                ['style', ['style']],
+                                                ['font', ['bold', 'underline', 'clear']],
+                                                ['color', ['color']],
+                                                ['para', ['ul', 'ol', 'paragraph']],
+                                                ['table', ['table']],
+                                                ['insert', ['link', 'picture', 'video']],
+                                                ['view', ['fullscreen', 'codeview', 'help']]
+                                            ]
+                                        });
+                                    </script>
+                                    @if ($errors->has('detail'))
+                                        <span class="text-danger">{{ $errors->first('detail') }}</span>
+                                    @endif
+                                </div>
                                 <div class="col-md-12">
                                     <label>Slug*</label>
                                     <input type="text" name="slug"  value="{{$data->slug}}" class="form-control">

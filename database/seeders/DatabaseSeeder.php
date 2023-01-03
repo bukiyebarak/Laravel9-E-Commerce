@@ -25,13 +25,16 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             CitySeeder::class,
             DistrictSeeder::class,
-            NeigbourhoodSeeder::class,
+//            NeigbourhoodSeeder::class,
             PaketCategorySeeder::class,
             PaketProductSeeder::class,
             SettingSeeder::class,
             MessageSeeder::class,
-//    OrderSeeder::class,
-//    OrderItemSeeder::class,
+            ImageSeeder::class,
+            WishlistSeeder::class,
+            FAQSeeder::class,
+            OrderSeeder::class,
+            OrderItemSeeder::class,
         ]);
 
     }

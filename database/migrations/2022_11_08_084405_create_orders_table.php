@@ -17,6 +17,11 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->integer('user_id');
             $table->string('name', 100);
+            $table->string('surname', 100);
+            $table->string('city', 100);
+            $table->string('neighbourhood', 100);
+            $table->string('district', 100);
+            $table->string('zipcode', 100);
             $table->string('email', 50);
             $table->string('address', 200);
             $table->string('phone', 20);
@@ -24,6 +29,8 @@ return new class extends Migration
             $table->string('note', 150)->nullable();
             $table->string('IP', 20);
             $table->string('status', 30)->default('New');
+            $table->string('is_pay', 5)->default('False')->nullable();
+            $table->string('payment', 60);
             $table->timestamps();
         });
     }

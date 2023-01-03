@@ -27,7 +27,9 @@ class CategorySeeder extends Seeder
                 'description' => "Kahve Kapsülleri",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at' => now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 0,
@@ -37,7 +39,9 @@ class CategorySeeder extends Seeder
                 'description' => "Kapsül ve Öğütülmüş Kahve",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 0,
@@ -47,7 +51,9 @@ class CategorySeeder extends Seeder
                 'description' => "Kahve Makineleri",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 0,
@@ -57,7 +63,9 @@ class CategorySeeder extends Seeder
                 'description' => "Kahve Aksesuarları",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 0,
@@ -67,7 +75,9 @@ class CategorySeeder extends Seeder
                 'description' => "Sıcak İçecekler",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 1,
@@ -77,7 +87,9 @@ class CategorySeeder extends Seeder
                 'description' => "Lavazza Mavi Kapsüller",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 1,
@@ -87,7 +99,9 @@ class CategorySeeder extends Seeder
                 'description' => "Lavazza A Modo Mio Kapsüller",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 2,
@@ -97,7 +111,9 @@ class CategorySeeder extends Seeder
                 'description' => "Delta Kahve Çekirdekleri",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 3,
@@ -107,7 +123,9 @@ class CategorySeeder extends Seeder
                 'description' => "Modo Mio Kahve Makineleri",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 5,
@@ -117,7 +135,9 @@ class CategorySeeder extends Seeder
                 'description' => "Lavazza Mavi Çay",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
             ],
             [
                 'parent_id' => 5,
@@ -127,7 +147,21 @@ class CategorySeeder extends Seeder
                 'description' => "Lavazza Noktası Çayı",
                 'slug' => $faker->slug(),
                 'created_at' => now(),
+                'updated_at'=> now(),
                 'main_cat_id' => 0,
+                'status'=>"True",
+            ],
+            [
+                'parent_id' => 1,
+                'title' => "Lavazza Espresso Noktası Kapsülleri",
+                'keywords' => "Lavazza Noktası Espresso",
+                'image' => $faker->image(),
+                'description' => "Lavazza Noktası Espresso",
+                'slug' => $faker->slug(),
+                'created_at' => now(),
+                'updated_at'=> now(),
+                'main_cat_id' => 0,
+                'status'=>"True",
             ],
         ]);
     }

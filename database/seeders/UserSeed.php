@@ -20,7 +20,7 @@ class UserSeed extends Seeder
             'name'=>"admin",
             'surname'=>"admin",
             'address' => $faker->address(),
-            'phone' => $faker->numerify('###########'),
+            'phone' => $faker->numerify('0##########'),
             'email'=>"admin@admin.com",
             'email_verified_at' => now(),
             'password'=>bcrypt('123456789'),

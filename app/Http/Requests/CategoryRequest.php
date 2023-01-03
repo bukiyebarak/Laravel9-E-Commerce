@@ -23,7 +23,8 @@ class CategoryRequest extends FormRequest
             'title' => 'Category Title',
             'keywords' => 'Keywords',
             'description' => 'Description',
-            'slug' => 'required',
+            'slug' => 'Slug',
+            'detail' => 'Detail',
         ];
     }
 
@@ -46,6 +47,7 @@ class CategoryRequest extends FormRequest
             'description' => 'required|min:5|max:100',
             'image' => 'nullable',
             'slug' => 'required',
+            'detail' => 'required',
         ];
     }
 }

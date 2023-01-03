@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label>First Name <span class="required">*</span></label>
                                         <input type="text" name="name" value="{{Auth::user()->name}}"
-                                               class="form-control">
+                                               class="form-control" style="text-transform: capitalize;">
                                         @if ($errors->has('name'))
                                             <span class="text-danger">{{ $errors->first('name') }}</span>
                                         @endif
@@ -54,7 +54,7 @@
                                     <div class="form-group">
                                         <label>Last Name <span class="required">*</span></label>
                                         <input type="text" name="surname" class="form-control"
-                                               value="{{Auth::user()->surname}}">
+                                               value="{{Auth::user()->surname}}" style="text-transform: capitalize;">
                                         @if ($errors->has('surname'))
                                             <span class="text-danger">{{ $errors->first('surname') }}</span>
                                         @endif

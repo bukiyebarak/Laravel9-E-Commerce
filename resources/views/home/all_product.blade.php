@@ -8,13 +8,6 @@
 @section('title','All Products' )
 
 @section('content')
-    <style>
-      .heartbtn {
-            border-style: none;
-            background-color: inherit;
-        }
-
-    </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
@@ -86,7 +79,7 @@
                                 @foreach($parentCategories as $rs)
                                     <ul>
                                         <li><a
-                                                href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                                href="{{route('categoryproducts',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
                                             >{{$rs->title}}<i
                                                 ></i></a>
                                             <ul>
@@ -172,7 +165,7 @@
                                     <input hidden name="min_price" id="min_price" value="{{$min_price}}">
                                     <input hidden name="max_price" id="max_price" value="{{$max_price}}">
                                     <div class="products-ordering-list">
-                                        <select name="sort" id="sort" class=" nice-select">
+                                        <select name="sort" id="sort" class="nice-select">
                                             <option selected value="">Default Sorting</option>
                                             <option value="product_lastest"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="product_lastest") selected @endif>

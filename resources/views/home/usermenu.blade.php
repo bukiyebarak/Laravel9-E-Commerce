@@ -29,7 +29,7 @@
     <div class="profile"><i class=" bx bx-user"></i>
     </div>
     <div class="profile-name">
-        <p style="  text-transform: capitalize;">{{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->surname}}</p>
+        <p style="text-transform: capitalize;">{{\Illuminate\Support\Facades\Auth::user()->name}} {{\Illuminate\Support\Facades\Auth::user()->surname}}</p>
     </div>
     <div class="profile-name">
         <p>{{\Illuminate\Support\Facades\Auth::user()->email}} </p>

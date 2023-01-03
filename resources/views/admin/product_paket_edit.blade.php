@@ -57,21 +57,21 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Title</label>
                                     <input type="text" name="title" value="{{$data->title}}" class="form-control">
                                     @if ($errors->has('title'))
                                         <span class="text-danger">{{ $errors->first('title') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Keywords</label>
                                     <input type="text" name="keywords" value="{{$data->keywords}}" class="form-control">
                                     @if ($errors->has('keywords'))
                                         <span class="text-danger">{{ $errors->first('keywords') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Description</label>
                                     <input type="text" name="description" value="{{$data->description}}"
                                            class="form-control">
@@ -79,7 +79,7 @@
                                         <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Price</label>
                                     <input type="number" name="price" value="{{$data->price}}" min="0"
                                            class="form-control">
@@ -87,7 +87,7 @@
                                         <span class="text-danger">{{ $errors->first('price') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Is Sale?</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="is_sale" id="yes" value="Yes" checked>
@@ -107,7 +107,7 @@
                                         <label class="form-check-label" for="no">No</label>
                                     </div>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Quantity</label>
                                     <input type="number" name="quantity" value="{{$data->quantity}}" min="0"
                                            class="form-control">
@@ -115,7 +115,7 @@
                                         <span class="text-danger">{{ $errors->first('quantity') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Minquantity</label>
                                     <input type="number" name="minquantity" value="{{$data->minquantity}}" min="0"
                                            class="form-control" >
@@ -123,14 +123,14 @@
                                         <span class="text-danger">{{ $errors->first('minquantity') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Tax</label>
                                     <input type="number" name="tax" value="{{$data->tax}}" min="0" class="form-control">
                                     @if ($errors->has('tax'))
                                         <span class="text-danger">{{ $errors->first('tax') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Detail</label>
                                     <textarea id="summernote" name="detail">{{$data->detail}}</textarea>
                                     <script>
@@ -153,14 +153,14 @@
                                         <span class="text-danger">{{ $errors->first('detail') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Slug</label>
                                     <input type="text" name="slug" value="{{$data->slug}}" class="form-control">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Image</label>
                                     <input type="file" name="image" value="{{$data->image}}" class="form-control">
 
@@ -173,7 +173,7 @@
                                         <span class="text-danger">{{ $errors->first('image') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <label>Status</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="">{{$data->status}}</option>
@@ -183,7 +183,7 @@
                                                 True
                                             @endif</option>
                                     </select>
-                                </div>
+                                </div><br>
                                 <div class="col-12">
                                     <button class="btn btn-primary" type="submit">Update Product</button>
                                 </div>

@@ -75,6 +75,7 @@ class CategoryController extends Controller
              'keywords' => $request->input('keywords'),
              'description' => $request->input('description'),
              'slug' => $request->input('slug'),
+             'detail' => $request->input('detail'),
              'status' => $request->input('status')
         ]);
 
@@ -132,6 +133,7 @@ class CategoryController extends Controller
         $data->description = $request->input('description');
         $data->slug = $request->input('slug');
         $data->status = $request->input('status');
+        $data->detail = $request->input('detail');
         $data->save();
         return redirect()->route('admin_category')->with('success','Category Update Successfully' );
     }

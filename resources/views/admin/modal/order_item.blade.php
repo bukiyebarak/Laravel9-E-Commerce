@@ -156,7 +156,9 @@
                                 <h6 class="mb-2 nameProduct"><a
                                         href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"
                                         target="_blank"> {{$rs->product->title}}</a>
-                                    <p class="mb- nameProduct">Unit Price: <span>{{$rs->product->price}}₺</span>
+                                    <p class="mb-2 nameProduct">Unit Price: <span>{{$rs->product->price}}₺</span>
+                                    </p>
+                                    <p class="mb-2 nameProduct">Sale Price: <span>{{$rs->product->sale_price}}₺</span>
                                     </p>
                                     <p class="mb-2 nameProduct">Quantity: <span> {{$rs->quantity}}</span>
                                     </p>

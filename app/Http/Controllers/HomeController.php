@@ -257,7 +257,7 @@ class HomeController extends Controller
         return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
     }
 
-    public function main_category_products($id, $slug)
+    public function main_category_products($id,$slug)
     {
         $data2 = Category::where('parent_id', $id)->count();
       //  dd($data2);
@@ -289,7 +289,9 @@ class HomeController extends Controller
                 }
             }
         }
-        $datalist = Product::where('main_category_id', '=', $id);
+
+        $datalist = Product::where(['main_category_id' => $id, 'status' => 'True']);
+        $this->getSort($datalist);
         $datalist = $datalist->paginate(10);
 //        dd($datalist);
         $data = Category::find($id);
@@ -300,7 +302,7 @@ class HomeController extends Controller
     {
 
         $datalist = PaketProduct::where('status','=','True');
-        $this->getSort($datalist);
+//        $this->getSort($datalist);
         $datalist = $datalist->paginate(10);
 //        dd($datalist);
         return view('home.category_main_products_paket', [ 'datalist' => $datalist]);
@@ -337,14 +339,14 @@ class HomeController extends Controller
         $maxprice = Product::max('products.sale_price');
         $min_price = $request->get('min_price');
         $max_price = $request->get('max_price');
-        //  dd($minprice,$maxprice);
+//          dd($minprice,$maxprice);
         if ($request->ajax()) {
             $min_price = $request->get('min_price');
             $max_price = $request->get('max_price');
             $data = $request->all();
-            // echo "<pre>"; print_r($request['sort']); die;
+//             echo "<pre>"; print_r($request['sort']); die;
             $url = $data['url'];
-            //print_r($url);
+//            print_r($url);
             $_GET['sort'] = $data['sort'];
 
             $productCount = Product::where('status', '=', 'True')->count();

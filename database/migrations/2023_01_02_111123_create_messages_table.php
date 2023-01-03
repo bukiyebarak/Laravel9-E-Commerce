@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('message', 200);
             $table->string('note', 200)->nullable();
             $table->string('status', 5)->default('False');
+            $table->string('ip_address',20)->nullable();
             $table->timestamps();
         });
     }

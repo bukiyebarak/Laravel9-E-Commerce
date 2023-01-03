@@ -34,7 +34,15 @@ class PaketCategorySeeder extends Seeder
                 'created_at'=>now(),
                 'status'=>'True',
             ],
-
+            [
+                'paket_parent_id'=>0,
+                'title'=>"Paket Kapsüller Lavazza Espresso Paketi",
+                'keywords'=>"paket lavazza espresso",
+                'description'=>"Paket Kapsüller Espresso Noktası ",
+                'slug'=>"paket-lavazza-espresso-point",
+                'created_at'=>now(),
+                'status'=>'True',
+            ],
         ]);
     }
 }

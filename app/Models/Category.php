@@ -17,6 +17,7 @@ class Category extends Model
         'image',
         'description',
         'slug',
+        'detail',
     ];
 
     protected $appends=[

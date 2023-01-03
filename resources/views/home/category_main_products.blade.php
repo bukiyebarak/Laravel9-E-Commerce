@@ -236,7 +236,7 @@
                                     <div class="products-content">
                                         @foreach($parentCategories as $category)
                                             @if($category->id==$rs->category_id)
-                                                <span class="category">{{$category->title}}</span>
+                                                <span class="category" style="color: deeppink; font-weight:bold;">{{$category->title}}</span>
                                             @endif
                                         @endforeach
                                         <h3><a href="#">{{$rs->title}}</a></h3>
@@ -275,7 +275,10 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
+
+                    aaaaaaaaa
                     <br>
                     <!-- Single Product End-->
                     <div class="d-flex justify-content-center">

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('main_category_id');
+            $table->integer('main_category_id')->nullable();
         });
     }
 
