@@ -292,11 +292,13 @@ class HomeController extends Controller
 
         $datalist = Product::where(['main_category_id' => $id, 'status' => 'True']);
         $this->getSort($datalist);
-        $datalist = $datalist->paginate(10);
-//        dd($datalist);
+        $datalist = $datalist->paginate(9);
+
         $data = Category::find($id);
+//                dd($data->title);
+        $catDetail = Category::where(['id'=>$id])->get();
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
-        return view('home.category_main_products', ['data' => $data, 'datalist' => $datalist,'last' => $last]);
+        return view('home.category_main_products', ['data' => $data, 'datalist' => $datalist,'last' => $last,'catDetail'=>$catDetail]);
     }
     public function main_category_products_paket()
     {

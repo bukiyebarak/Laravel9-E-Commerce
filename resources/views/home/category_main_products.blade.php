@@ -12,6 +12,7 @@
     {{$data->description}}
 @endsection
 @section('keywords',$data->keywords)
+
 @section('content')
     <style>
         .heartbtn {
@@ -159,11 +160,26 @@
                                     <div class="products-ordering-list">
                                         <select name="sort1" id="sort1" class=" nice-select">
                                             <option selected="" value="">Default Sorting</option>
-                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
-                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>
-                                            <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
-                                            <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
-                                            <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
+                                            <option value="product_lastest"
+                                                    @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >
+                                                Sort by: Latest
+                                            </option>
+                                            <option value="price_lowest"
+                                                    @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >
+                                                Sort by Price: Low to High
+                                            </option>
+                                            <option value="price_highest"
+                                                    @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >
+                                                Sort by Price: High to Low
+                                            </option>
+                                            <option value="name_z_a"
+                                                    @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >
+                                                Sort by Name: Name A-Z
+                                            </option>
+                                            <option value="name_a_z"
+                                                    @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >
+                                                Sort by Name: Name Z-A
+                                            </option>
                                         </select>
                                     </div>
                                 </form>
@@ -183,7 +199,8 @@
                                                 <img style="height: 200px; width: 200px"
                                                      src="{{asset('images/'.$rs->image)}}" class="main-image"
                                                      alt="image">
-                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
+                                                <img src="{{asset('images/'.$rs->image)}}" class="hover-image"
+                                                     alt="image">
                                             </a>
                                         </a>
 
@@ -191,11 +208,13 @@
                                             <ul>
                                                 <li>
                                                     <div class="wishlist-btn">
-                                                        <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
+                                                        <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}"
+                                                              method="post">
                                                             @csrf
                                                             <a href="javascript:void(0);">
                                                                 <span class="tooltip-label">Add to Wishlist</span>
-                                                                <button type="submit" class='heartbtn bx bx-heart'></button>
+                                                                <button type="submit"
+                                                                        class='heartbtn bx bx-heart'></button>
                                                             </a>
                                                         </form>
                                                     </div>
@@ -210,12 +229,14 @@
                                                 </li>
                                                 <li>
                                                     <div class="compare-btn">
-                                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">
+                                                        <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}"
+                                                              method="post">
                                                             @csrf
                                                             <input name="quantity" type="hidden" value="1">
                                                             <a href="javascript:void(0);">
                                                                 <span class="tooltip-label">Add to Cart</span>
-                                                                <button type="submit" class="heartbtn bx bx-cart"></button>
+                                                                <button type="submit"
+                                                                        class="heartbtn bx bx-cart"></button>
                                                             </a>
                                                         </form>
                                                     </div>
@@ -236,7 +257,8 @@
                                     <div class="products-content">
                                         @foreach($parentCategories as $category)
                                             @if($category->id==$rs->category_id)
-                                                <span class="category" style="color: deeppink; font-weight:bold;">{{$category->title}}</span>
+                                                <span class="category"
+                                                      style="color: deeppink; font-weight:bold;">{{$category->title}}</span>
                                             @endif
                                         @endforeach
                                         <h3><a href="#">{{$rs->title}}</a></h3>
@@ -260,25 +282,24 @@
                                                 <i class="bx bx-star @if($avgrev>=2) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
-                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}})
+                                                <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>({{$countreview}}
+                                                )
                                             </div>
                                         </div>
                                         <br>
-{{--                                        <div class="btn-box">--}}
-{{--                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
-{{--                                                @csrf--}}
-{{--                                                <input name="quantity" type="hidden" value="1">--}}
-{{--                                                <input type="submit" class="add-to-cart default-btn" style="background-color: #ff87af" value="Add to Cart">--}}
-{{--                                            </form>--}}
-{{--                                        </div>--}}
+                                        {{--                                        <div class="btn-box">--}}
+                                        {{--                                            <form action="{{route('user_shopcart_add',['id'=>$rs->id])}}" method="post">--}}
+                                        {{--                                                @csrf--}}
+                                        {{--                                                <input name="quantity" type="hidden" value="1">--}}
+                                        {{--                                                <input type="submit" class="add-to-cart default-btn" style="background-color: #ff87af" value="Add to Cart">--}}
+                                        {{--                                            </form>--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
 
-                    aaaaaaaaa
                     <br>
                     <!-- Single Product End-->
                     <div class="d-flex justify-content-center">
@@ -287,11 +308,78 @@
                         @else
                             {!! $datalist->links() !!}
                         @endif
-
                     </div>
+
+                </div>
+                <div class="page-title-area" style="margin-top: 20px;">
+                    <div class="container">
+                        <div class="page-title-content">
+                            @foreach($catDetail as $rs)
+                                {!! $rs->detail !!}
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Products Area -->
+
+    <!-- Start Facility Area -->
+    <section class="facility-area pb-70">
+        <div class="container">
+            <div class="facility-slides owl-carousel owl-theme">
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-tracking'></i>
+                    </div>
+                    <h3>Free Shipping Worldwide</h3>
+                </div>
+
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-return'></i>
+                    </div>
+                    <h3>Easy Return Policy</h3>
+                </div>
+
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-shuffle'></i>
+                    </div>
+                    <h3>7 Day Exchange Policy</h3>
+                </div>
+
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-sale'></i>
+                    </div>
+                    <h3>Weekend Discount Coupon</h3>
+                </div>
+
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-credit-card'></i>
+                    </div>
+                    <h3>Secure Payment Methods</h3>
+                </div>
+
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-location'></i>
+                    </div>
+                    <h3>Track Your Package</h3>
+                </div>
+
+                <div class="single-facility-box">
+                    <div class="icon">
+                        <i class='flaticon-customer-service'></i>
+                    </div>
+                    <h3>24/7 Customer Support</h3>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Products Area -->
+    <!-- End Facility Area -->
 @endsection

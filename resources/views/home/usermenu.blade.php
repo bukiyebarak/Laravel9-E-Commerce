@@ -35,24 +35,27 @@
         <p>{{\Illuminate\Support\Facades\Auth::user()->email}} </p>
     </div>
     <div class="list-group list-group-flush ">
+        @php
+            $routeName = \Illuminate\Support\Facades\Route::currentRouteName();
+        @endphp
         <a href="{{route('myprofile')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-danger"><b>My
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent" @if($routeName == 'myprofile') style="color: deeppink" @endif ><b>My
                 Profile</b> <i
                 class='bx bx-user-circle fs-5'></i></a>
         <a href="{{route('user_orders')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent" @if($routeName == 'user_orders') style="color: deeppink" @endif ><b>My
                 Orders</b>
             <i class='bx bx-cart-alt fs-5'></i></a>
         <a href="{{route('myreviews')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent" @if($routeName == 'myreviews') style="color: deeppink" @endif ><b>My
                 Reviews</b>
             <i class='bx bx-comment-check fs-5'></i></a>
         <a href="{{route('user_shopcart')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent" @if($routeName == 'user_shopcart') style="color: deeppink" @endif ><b>My
                 ShopCart</b>
             <i class='bx bx-credit-card fs-5'></i></a>
         <a href="{{route('user_wishlist')}}"
-           class="list-group-item d-flex justify-content-between align-items-center bg-transparent"><b>My
+           class="list-group-item d-flex justify-content-between align-items-center bg-transparent" ><b>My
                 Wishlist</b>
             <i class='bx bx-heart fs-5'></i></a>
 {{--        <a href="{{route('user_products')}}"--}}
