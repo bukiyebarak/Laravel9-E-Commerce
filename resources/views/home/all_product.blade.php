@@ -2,20 +2,17 @@
     $setting=\App\Http\Controllers\HomeController::getsetting();
     $parentCategories=\App\Http\Controllers\HomeController::categorylist();
 @endphp
-
 @extends('layouts.home')
-
-@section('title','All Products' )
-
+@section('title',__('All Products'))
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Product Page</h2>
+                <h2>@lang("Product Page")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Product Page</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Product Page")</li>
                 </ul>
             </div>
         </div>
@@ -32,9 +29,8 @@
                                 @csrf
 
                                 <label>
-                                    <span class="screen-reader-text">Search for:</span>
+                                    <span class="screen-reader-text">@lang("Search for:")</span>
                                     @livewire('searchproduct')
-
                                 </label>
                                 <button type="submit"><i class="bx bx-search-alt"></i></button>
                             </form>
@@ -46,17 +42,15 @@
                         <section class="widget widget_categories">
 
                             <div class="woocommerce-widget brands-list-widget">
-                                <h3 class="widget-title">Price</h3>
-
+                                <h3 class="widget-title">@lang("Price")</h3>
                                 <form id="filter_price" name="filter_price">
                                     <div class="collection-filter-by-price" id="price">
                                         <input class="range_slider" type="text"
                                                name="min_price" id="min_price"> <i>-</i>
                                         <input class="range_slider" type="text"
                                                name="max_price" id="max_price">
-                                        <button class="btn-default" type="submit" id="btn">Filter</button>
+                                        <button class="btn-default" type="submit" id="btn">@lang("Filter")</button>
                                     </div>
-
                                 </form>
                                 {{--                                <form method="post" action="#">--}}
                                 {{--                                    <?php $prices = array('0-100', '100-200', '200-300', '300-400', '400-900') ?>--}}
@@ -73,8 +67,7 @@
                         </section>
                         <br>
                         <section class="widget widget_categories">
-                            <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
-
+                            <a href="{{route('allproducts')}}"><h3 class="widget-title">@lang("Categories")</h3></a>
                             <ul>
                                 @foreach($parentCategories as $rs)
                                     <ul>
@@ -88,27 +81,25 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-
                                     </ul>
                                 @endforeach
                             </ul>
                         </section>
 
                         <section class="widget widget_tag_cloud">
-                            <h3 class="widget-title">Tags</h3>
+                            <h3 class="widget-title">@lang("Tags")</h3>
                             <div class="tagcloud">
                                 @foreach($datalist as $rs)
                                     <a href="javascript:void(0);">{{$rs->keywords}} <span class="tag-link-count"></span></a>
                                 @endforeach
                             </div>
                         </section>
-
                         <section class="widget widget_contact">
                             <div class="text">
                                 <div class="icon">
                                     <i class='bx bx-mail-send'></i>
                                 </div>
-                                <span>Emergency</span>
+                                <span>@lang("Emergency")</span>
                                 <a href="mailto:hello@xton.com">{{$setting->email}}</a>
                             </div>
                         </section>
@@ -121,27 +112,23 @@
                                 <div class="d-lg-flex d-md-flex align-items-center">
                                             <span class="sub-title d-lg-none"><a href="#" data-bs-toggle="modal"
                                                                                  data-bs-target="#productsFilterModal"><i
-                                                        class='bx bx-filter-alt'></i> Filter</a></span>
+                                                        class='bx bx-filter-alt'></i> @lang("Filter")</a></span>
 
-                                    <span class="sub-title d-none d-lg-block d-md-block">View:</span>
-
+                                    <span class="sub-title d-none d-lg-block d-md-block">@lang("View"):</span>
                                     <div class="view-list-row d-none d-lg-block d-md-block">
                                         <div class="view-column">
                                             <a href="#" class="icon-view-one">
                                                 <span></span>
                                             </a>
-
                                             <a href="#" class="icon-view-two active">
                                                 <span></span>
                                                 <span></span>
                                             </a>
-
                                             <a href="#" class="icon-view-three">
                                                 <span></span>
                                                 <span></span>
                                                 <span></span>
                                             </a>
-
                                             <a href="#" class="view-grid-switch">
                                                 <span></span>
                                                 <span></span>
@@ -150,7 +137,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-4 col-md-4">
                                 <div>
                                     Showing {{($datalist->currentpage()-1)* $datalist->perpage()+1}}
@@ -158,7 +144,6 @@
                                     of {{$datalist->total()}} entries
                                 </div>
                             </div>
-
                             <div class="col-lg-4 col-md-4">
                                 <form name="sortproducts" id="sortProducts">
                                     <input type="hidden" name="url" id="url" value="{{$url}}">
@@ -166,40 +151,37 @@
                                     <input hidden name="max_price" id="max_price" value="{{$max_price}}">
                                     <div class="products-ordering-list">
                                         <select name="sort" id="sort" class="nice-select">
-                                            <option selected value="">Default Sorting</option>
+                                            <option selected value="">@lang("Default Sorting") </option>
                                             <option value="product_lastest"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="product_lastest") selected @endif>
-                                                Sort by: Latest
+                                                @lang("Sort by: Latest")
                                             </option>
                                             <option value="price_lowest"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="price_lowest") selected @endif>
-                                                Sort by Price: Low to High
+                                                @lang("Sort by Price: Low to High")
                                             </option>
                                             <option value="price_highest"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="price_highest") selected @endif>
-                                                Sort by Price: High to Low
+                                                @lang("Sort by Price: High to Low")
                                             </option>
                                             <option value="name_z_a"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="name_z_a") selected @endif>
-                                                Sort by Name: Name Z-A
+                                                @lang("Sort by Name: Name Z-A")
                                             </option>
                                             <option value="name_a_z"
                                                     @if(isset($_GET['sort']) && $_GET['sort']=="name_a_z") selected @endif>
-                                                Sort by Name: Name A-Z
+                                                @lang("Sort by Name: Name A-Z")
                                             </option>
                                         </select>
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                     <div class="filter_products">
                         @include('home.ajax_product_listing')
                     </div>
-
                     <br>
-
                 </div>
             </div>
         </div>

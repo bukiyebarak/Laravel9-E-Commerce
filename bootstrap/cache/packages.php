@@ -1,4 +1,11 @@
 <?php return array (
+  'astrotomic/laravel-translatable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Astrotomic\\Translatable\\TranslatableServiceProvider',
+    ),
+  ),
   'jenssegers/agent' => 
   array (
     'providers' => 
@@ -8,6 +15,14 @@
     'aliases' => 
     array (
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
+    ),
+  ),
+  'joedixon/laravel-translation' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'JoeDixon\\Translation\\TranslationServiceProvider',
+      1 => 'JoeDixon\\Translation\\TranslationBindingsServiceProvider',
     ),
   ),
   'laravel/fortify' => 
@@ -22,6 +37,13 @@
     'providers' => 
     array (
       0 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
+    ),
+  ),
+  'laravel/legacy-factories' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Illuminate\\Database\\Eloquent\\LegacyFactoryServiceProvider',
     ),
   ),
   'laravel/sail' => 

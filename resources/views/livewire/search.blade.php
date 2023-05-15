@@ -1,5 +1,5 @@
 <div>
-    <input wire:model="search" name="search" type="text" list="mylist" class="input-search"  placeholder="Search here..." autocomplete="off">
+    <input wire:model="search" name="search" type="text" list="mylist" class="input-search"  placeholder="@lang("Search here")..." autocomplete="off">
 
     @if(!empty($query))
         <datalist id="mylist">

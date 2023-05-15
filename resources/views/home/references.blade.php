@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', $setting->title)
+@section('title', __('Referanslar').'-'.$setting->title)
 @section('description')
     {{$setting->description}}
 @endsection
@@ -14,10 +14,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Referanslar</h2>
+                <h2>@lang("Referanslar")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Referanslar</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Referanslar")</li>
                 </ul>
             </div>
         </div>

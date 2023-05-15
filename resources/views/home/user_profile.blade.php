@@ -3,17 +3,17 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', 'User Profile')
+@section('title', __('User Profile'))
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>User Profile</h2>
+                <h2>@lang("User Profile")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Home</a></li>
-                    <li>User Profile</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("User Profile")</li>
                 </ul>
             </div>
         </div>

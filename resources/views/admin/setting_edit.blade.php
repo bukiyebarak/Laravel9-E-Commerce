@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Setting')
+@section('title', __('Edit Setting'))
 
 @section('javascript')
 
@@ -17,13 +17,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">EDIT SETTING</div>
+                <div class="breadcrumb-title pe-3">@lang("EDIT SETTING")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Setting</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Edit Setting")</li>
                         </ol>
                     </nav>
                 </div>
@@ -31,7 +31,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-0">Edit Setting</h4>
+                    <h4 class="mb-0">@lang("Edit Setting")</h4>
                     <br>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -46,7 +46,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-icon"><i class='bx bxs-home font-18 me-1'></i>
                                                 </div>
-                                                <div class="tab-title">General</div>
+                                                <div class="tab-title">@lang("General")</div>
                                             </div>
                                         </a>
                                     </li>
@@ -57,7 +57,7 @@
                                                 <div class="tab-icon"><i
                                                         class='bx bxs-message-alt-detail font-18 me-1'></i>
                                                 </div>
-                                                <div class="tab-title">Stmp Email</div>
+                                                <div class="tab-title">@lang("Stmp Email")</div>
                                             </div>
                                         </a>
                                     </li>
@@ -67,7 +67,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-icon"><i class='bx bxs-share-alt font-18 me-1'></i>
                                                 </div>
-                                                <div class="tab-title">Social Media</div>
+                                                <div class="tab-title">@lang("Social Media")</div>
                                             </div>
                                         </a>
                                     </li>
@@ -77,7 +77,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-icon"><i class='bx bxs-info-circle font-18 me-1'></i>
                                                 </div>
-                                                <div class="tab-title">About Us</div>
+                                                <div class="tab-title">@lang("About Us")</div>
                                             </div>
                                         </a>
                                     </li>
@@ -87,7 +87,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-icon"><i class='bx bxs-contact font-18 me-1'></i>
                                                 </div>
-                                                <div class="tab-title">Contact Page</div>
+                                                <div class="tab-title">@lang("Contact Page")</div>
                                             </div>
                                         </a>
                                     </li>
@@ -97,7 +97,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="tab-icon"><i class='bx bxs-receipt font-18 me-1'></i>
                                                 </div>
-                                                <div class="tab-title">References</div>
+                                                <div class="tab-title">@lang("References")</div>
                                             </div>
                                         </a>
                                     </li>
@@ -107,47 +107,47 @@
                                         <input type="hidden" id="id" name="id" value="{{$data->id}}"
                                                class="form-control">
                                         <div class="col-md-12">
-                                            <label>Title</label>
+                                            <label>@lang("Title")</label>
                                             <input type="text" id="title" name="title" value="{{$data->title}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Keywords</label>
+                                            <label>@lang("Keywords")</label>
                                             <input type="text" name="keywords" value="{{$data->keywords}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Description</label>
+                                            <label>@lang("Description")</label>
                                             <input type="text" name="description" value="{{$data->description}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Company</label>
+                                            <label>@lang("Company")</label>
                                             <input type="text" name="company" value="{{$data->company}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Address</label>
+                                            <label>@lang("Address")</label>
                                             <input type="text" name="address" value="{{$data->address}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Phone</label>
+                                            <label>@lang("Phone")</label>
                                             <input type="text" name="phone" value="{{$data->phone}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Fax</label>
+                                            <label>@lang("Fax")</label>
                                             <input type="text" name="fax" value="{{$data->fax}}" class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Email</label>
+                                            <label>@lang("Email")</label>
                                             <input type="text" name="email" value="{{$data->email}}"
                                                    class="form-control">
                                         </div>
 
                                         <div class="col-md-12">
-                                            <label>Status</label>
+                                            <label>@lang("Status")</label>
                                             <select class="form-select" name="status" required>
                                                 <option selected="">{{$data->status}}</option>
                                                 <option>@if($data->status=="True")
@@ -161,22 +161,22 @@
                                     </div>
                                     <div class="tab-pane fade" id="stmpemail" role="tabpanel">
                                         <div class="col-md-10">
-                                            <label>Smtp Server</label>
+                                            <label>Smtp @lang("Server")</label>
                                             <input type="text" name="smtpserver" value="{{$data->smtpserver}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-10">
-                                            <label>Smtp Email</label>
+                                            <label>Smtp @lang("Email")</label>
                                             <input type="text" name="smtpemail" value="{{$data->smtpemail}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-10">
-                                            <label>Smtp Password</label>
+                                            <label>Smtp @lang("Password")</label>
                                             <input type="password" name="smtppassword" value="{{$data->smtppassword}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-10">
-                                            <label>Smtp Port</label>
+                                            <label>Smtp @lang("Port")</label>
                                             <input type="number" name="smtpport" value="{{$data->smtpport}}"
                                                    class="form-control">
                                         </div>
@@ -185,22 +185,22 @@
                                     <div class="tab-pane fade" id="socialmedia" role="tabpanel">
 
                                         <div class="col-md-12">
-                                            <label class="text-black">Facebook <i class="lni lni-facebook-oval"></i></label>
+                                            <label class="text-black">@lang("Facebook") <i class="lni lni-facebook-oval"></i></label>
                                             <input type="text" name="facebook" value="{{$data->facebook}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="text-black">Instagram <i class="lni lni-instagram-original"></i></label>
+                                            <label class="text-black">@lang("Instagram") <i class="lni lni-instagram-original"></i></label>
                                             <input type="text" name="instagram" value="{{$data->instagram}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="text-black">Twitter <i class="lni lni-twitter-original"></i></label>
+                                            <label class="text-black">@lang("Twitter") <i class="lni lni-twitter-original"></i></label>
                                             <input type="text" name="twitter" value="{{$data->twitter}}"
                                                    class="form-control">
                                         </div>
                                         <div class="col-md-12">
-                                            <label class="text-black">Linkedin <i class="lni lni-linkedin-original"></i></label>
+                                            <label class="text-black">@lang("Linkedin") <i class="lni lni-linkedin-original"></i></label>
                                             <input type="text" name="linkedin" value="{{$data->linkedin}}"
                                                    class="form-control">
                                         </div>
@@ -208,11 +208,11 @@
 
                                     <div class="tab-pane fade" id="about" role="tabpanel">
                                         <div class="col-md-12">
-                                            <label>About Us</label>
+                                            <label>@lang("About Us")</label>
                                             <textarea id="aboutus" name="aboutus">{{$data->aboutus}}</textarea>
                                             <script>
                                                 $('#references').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: '',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -226,7 +226,7 @@
                                                     ]
                                                 });
                                                 $('#contact').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: '',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -240,7 +240,7 @@
                                                     ]
                                                 });
                                                 $('#aboutus').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: '',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -258,11 +258,11 @@
                                     </div>
                                     <div class="tab-pane fade" id="contactpage" role="tabpanel">
                                         <div class="col-md-12">
-                                            <label>Contact</label>
+                                            <label>@lang("Contact")</label>
                                             <textarea id="contact" name="contact">{{$data->contact}}</textarea>
                                             <script>
                                                 $('#references').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: '',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -276,7 +276,7 @@
                                                     ]
                                                 });
                                                 $('#contact').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: ' ',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -290,7 +290,7 @@
                                                     ]
                                                 });
                                                 $('#aboutus').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: ' ',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -308,11 +308,11 @@
                                     </div>
                                     <div class="tab-pane fade" id="reference" role="tabpanel">
                                         <div class="col-md-12">
-                                            <label>References</label>
+                                            <label>@lang("References")</label>
                                             <textarea id="references" name="references">{{$data->references}}</textarea>
                                             <script>
                                                 $('#references').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: ' ',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -326,7 +326,7 @@
                                                     ]
                                                 });
                                                 $('#contact').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: ' ',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -340,7 +340,7 @@
                                                     ]
                                                 });
                                                 $('#aboutus').summernote({
-                                                    placeholder: 'Hello stand alone ui',
+                                                    placeholder: ' ',
                                                     tabsize: 2,
                                                     height: 120,
                                                     toolbar: [
@@ -358,7 +358,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-success px-5 radius-30" type="submit">Update Setting</button>
+                                    <button class="btn btn-success px-5 radius-30" type="submit">@lang("Update Setting")</button>
                                 </div>
                             </form>
                         </div>

@@ -19,7 +19,7 @@
             <div class="page-title-content">
                 <h4>User Product Edit</h4>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
                     <li>User Product Edit</li>
                 </ul>
             </div>

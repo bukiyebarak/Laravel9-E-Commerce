@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title','My Reviews')
+@section('title',__('Yorumlarım'))
 
 
 @section('content')
@@ -11,10 +11,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Kullanıcı Yorumları</h2>
+                <h2>@lang("Kullanıcı Yorumları")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Kullanıcı Yorumları</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Kullanıcı Yorumları")</li>
                 </ul>
             </div>
         </div>
@@ -25,21 +25,18 @@
         <div class="container">
             <div class="row">
                 @include('home.usermenu')
-
                 <div class="col-lg-10 col-md-12">
-
                     <div class="table-responsive">
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-
-                                <th>Product</th>
-                                <th>Subject</th>
-                                <th>Review</th>
-                                <th>Rate</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Delete</th>
+                                <th>@lang("Product")</th>
+                                <th>@lang("Subject")</th>
+                                <th>@lang("Review")</th>
+                                <th>@lang("Rate")</th>
+                                <th>@lang("Status")</th>
+                                <th>@lang("Date")</th>
+                                <th>@lang("Delete")</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -78,15 +75,12 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>
         </div>
     </section>
-
     <!-- End Customer Service Area -->
-
 @endsection
 @section('footerjs')
 

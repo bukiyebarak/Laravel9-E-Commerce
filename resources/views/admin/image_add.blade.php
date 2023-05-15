@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Image Gallery</title>
+    <title>@lang("Image Gallery")</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
         <!--end breadcrumb-->
         <div class="card">
             <div class="card-body">
-                <h4 class="mb-0">Product: {{$data->title}}</h4>
+                <h4 class="mb-0">@lang("Product"): {{$data->title}}</h4>
                 <hr/>
                 <div class="row gy-3">
                     <div class="col-md-12">
@@ -41,7 +41,7 @@
                               enctype="multipart/form-data">
                             @csrf
                             <div class="col-md-10">
-                                <label>Title</label>
+                                <label>@lang("Title")</label>
                                 <input type="text" name="title" class="form-control" value="{{old('title')}}">
                                 @if ($errors->has('title'))
                                     <span class="text-danger">{{ $errors->first('title') }}</span>
@@ -50,14 +50,14 @@
                             </div>
 
                             <div class="col-md-10">
-                                <label>Image</label>
+                                <label>@lang("Image")</label>
                                 <input type="file" name="image" class="form-control">
                                 @if ($errors->has('image'))
                                     <span class="text-danger">{{ $errors->first('image') }}</span>
                                 @endif
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Add image</button>
+                                <button class="btn btn-primary" type="submit">@lang("Add image")</button>
                             </div>
                         </form>
                         <hr>
@@ -65,9 +65,9 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Title</th>
-                                <th>Image</th>
-                                <th>Actions</th>
+                                <th>@lang("Title")</th>
+                                <th>@lang("Image")</th>
+                                <th>@lang("Actions")</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -82,8 +82,8 @@
                                     </td>
                                     <td>
                                         <a href="{{route('admin_image_delete',['id'=>$rs->id, 'product_id'=>$data->id])}} "
-                                           onclick="return confirm('Record will be Delete! Are you sure?')">
-                                            delete
+                                           onclick="return confirm('{{ __('Delete! Are you sure?') }}')">
+                                            @lang("delete")
                                         </a>
                                     </td>
                                 </tr>

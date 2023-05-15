@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Frequently Asked Question List')
+@section('title', __('Frequently Asked Question List'))
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -24,14 +24,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Frequently Asked Questions</div>
+                <div class="breadcrumb-title pe-3">@lang("Frequently Asked Questions")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">FAQ</li>
-
                         </ol>
                     </nav>
                 </div>
@@ -40,7 +39,7 @@
             @include('sweetalert::alert')
             <div class="card">
                 <div class="card-body">
-                    <a class="btn btn-primary" href="{{route('admin_faq_add')}}">Add Question </a>
+                    <a class="btn btn-primary" href="{{route('admin_faq_add')}}">@lang("Add Question") </a>
                     <hr/>
                     <div class="card-body">
 
@@ -49,11 +48,11 @@
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Question</th>
-                                    <th style="width: 50px">Answer</th>
-                                    <th>Status</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>@lang("Question")</th>
+                                    <th style="width: 50px">@lang("Answer")</th>
+                                    <th>@lang("Status")</th>
+                                    <th>@lang("Edit")</th>
+                                    <th>@lang("Delete")</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -85,13 +84,12 @@
                                                 <a href="{{route('admin_faq_edit',['id'=>$rs->id])}} "
                                                    class=" text-primary bg-light-primary border-0">
                                                     <i class="bx bxs-edit"></i></a></div>
-
                                         </td>
                                         <td>
                                             <div class="d-flex order-actions">
                                                 <a href="{{route('admin_faq_delete',['id'=>$rs->id])}} "
                                                    class="text-danger bg-light-danger border-0"
-                                                   onclick="return confirm('Delete! Are you Sure')"><i
+                                                   onclick="return confirm('{{ __('Delete! Are you sure?') }}')"><i
                                                         class="bx bxs-trash"></i></a>
                                             </div>
                                         </td>
@@ -101,10 +99,8 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="row gy-3">
                         <div class="col-md-10">
-
                         </div>
                     </div>
                     <div class="form-row mt-3">

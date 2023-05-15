@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/style.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/dark.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/responsive.css">
-    <link rel="icon" type="image/png" href="{{asset('assets')}}/home/assets/img/favicon.png">
+    <link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32-gnc.png" type="image/png"/>
     <link href="{{asset('assets')}}/admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 
 

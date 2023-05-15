@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +18,7 @@ class ImageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -23,9 +28,9 @@ class ImageController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create($product_id)
+    public function create($product_id): Application|Factory|View
     {
         $data = Product::find($product_id);
         $images=DB::table('images')->where('product_id','=', $product_id)->get();
@@ -37,9 +42,9 @@ class ImageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request,$product_id)
+    public function store(Request $request,$product_id): RedirectResponse
     {
         $data = new Image;
         $data->title = $request->input('title');
@@ -52,8 +57,8 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @param Image $image
+     * @return Response
      */
     public function show(Image $image)
     {
@@ -63,8 +68,8 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @param Image $image
+     * @return Response
      */
     public function edit(Image $image)
     {
@@ -75,8 +80,8 @@ class ImageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @param Image $image
+     * @return Response
      */
     public function update(Request $request, Image $image)
     {
@@ -86,12 +91,11 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
+     * @param Image $image
+     * @return RedirectResponse
      */
-    public function destroy(Image $image,$id,$product_id)
+    public function destroy(Image $image,$id,$product_id): RedirectResponse
     {
-        //
         $data = Image::find($id);
         $data->delete();
         return redirect()->back();

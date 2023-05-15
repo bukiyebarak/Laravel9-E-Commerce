@@ -11,7 +11,7 @@
             <div class="col-lg-12 col-md-12">
                 <div class="form-group">
                     <input type="text" wire:model="subject"
-                           placeholder="Enter your review a title"
+                           placeholder="@lang("Enter your review a title")"
                            class="form-control">
                     @error('subject')<span class="text-danger">{{$message}}</span>@enderror
                 </div>
@@ -19,14 +19,14 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="form-group">
                     <textarea wire:model="review" cols="30" rows="6"
-                              placeholder="Write your comments here"
+                              placeholder="@lang("Write your comments here")"
                               class="form-control"></textarea>
                         @error('review')<span class="text-danger">{{$message}}</span>@enderror
                     </div>
                 </div>
                 <br>
                 <div class="col-lg-12 col-md-12">
-                    <label>Rating (1-5)</label>
+                    <label>@lang("Rating") (1-5)</label>
 
                     <div class="review-title">
                         <div class="rating">
@@ -42,9 +42,9 @@
                 <br>
                 <div class="col-lg-12 col-md-12">
                     @auth
-                        <button type="submit" class="default-btn">Submit Review</button>
+                        <button type="submit" class="default-btn">@lang("Submit Review")</button>
                     @else
-                        <a href="/login" class="default-btn"> Please Login</a>
+                        <a href="/login" class="default-btn"> @lang("Please Login")</a>
                     @endauth
                 </div>
             </div>

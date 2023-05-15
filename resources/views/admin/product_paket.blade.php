@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Product List')
+@section('title', __('Product List'))
 
 @section('content')
     <!--start page wrapper -->
@@ -8,13 +8,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Product</div>
+                <div class="breadcrumb-title pe-3">@lang("Product")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Product List</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Product List")</li>
 
                         </ol>
                     </nav>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-body">
                     <a class="btn btn-primary" href="{{route('admin_product_add')}}"> <i
-                            class="bx bxs-plus-circle"></i>Add Product</a>
+                            class="bx bxs-plus-circle"></i>@lang("Add Product")</a>
                     <a class="btn btn-primary" href="{{route('admin_paket_product_add')}}"> <i
-                            class="bx bxs-plus-circle"></i>Add Paket Product</a>
+                            class="bx bxs-plus-circle"></i>@lang("Add Paket Product")</a>
 
                     <hr>
                     <div class="table-responsive">
@@ -34,17 +34,17 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Category</th>
-                                <th>Title</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Discount</th>
-                                <th>Discount Price</th>
-                                <th>Image</th>
-                                <th>Gallery</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>@lang("Category")</th>
+                                <th>@lang("Title")</th>
+                                <th>@lang("Quantity")</th>
+                                <th>@lang("Price")</th>
+                                <th>@lang("Discount")</th>
+                                <th>@lang("Discount Price")</th>
+                                <th>@lang("Image")</th>
+                                <th>@lang("Gallery")</th>
+                                <th>@lang("Status")</th>
+                                <th>@lang("Edit")</th>
+                                <th>@lang("Delete")</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -56,20 +56,20 @@
                                     </td>
                                     <td>{{$rs->title}}</td>
                                     <td style="text-align: center">{{$rs->quantity}}</td>
-                                    <td style="text-align: center">{{$rs->price}}€</td>
+                                    <td style="text-align: center">{{$rs->price}}₺</td>
                                     <td style="text-align: center">
                                         @if($rs->is_sale=="Yes")
                                             <b style="color: green">{{$rs->is_sale}}</b><br>
-                                            <p><b><u>Sale</u></b> :<b> %{{$rs->sale}}</b></p>
+                                            <p><b><u>@lang("Sale")</u></b> :<b> %{{$rs->sale}}</b></p>
                                         @else
                                             <b style="color:red">{{$rs->is_sale}}</b>
                                         @endif
                                     </td>
                                     <td style="text-align: center">
                                         @if($rs->sale_price)
-                                            {{$rs->sale_price}}€
+                                            {{$rs->sale_price}}₺
                                         @else
-                                            <b>Not Discount</b>
+                                            <b>@lang("Not Discount")</b>
                                         @endif
 
                                     </td>
@@ -108,13 +108,12 @@
                                             <a href="{{route('admin_paket_product_edit',['id'=>$rs->id])}}"
                                                class=" text-primary bg-light-primary border-0">
                                                 <i class="bx bxs-edit"></i></a></div>
-
                                     </td>
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{route('admin_paket_product_delete',['id'=>$rs->id])}} "
                                                class="text-danger bg-light-danger border-0"
-                                               onclick="return confirm('Delete! Are you Sure')"><i
+                                               onclick="return confirm('{{ __('Delete! Are you sure?') }}')"><i
                                                     class="bx bxs-trash"></i></a>
                                         </div>
                                     </td>

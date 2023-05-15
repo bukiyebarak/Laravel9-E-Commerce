@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', $setting->title)
+@section('title',__('İletişim').'-'.$setting->title)
 @section('description')
     {{$setting->description}}
 @endsection
@@ -14,10 +14,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>İletişim</h2>
+                <h2>@lang("İletişim")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>İletişim</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("İletişim")</li>
                 </ul>
             </div>
         </div>
@@ -30,24 +30,23 @@
             <div class="customer-service-content">
                 <div class="row">
                     <div class="col-md-5">
-                        <h4 style="text-align: center">İletişim Bilgileri</h4>
+                        <h4 style="text-align: center">@lang("İletişim Bilgileri")</h4>
                         {!! $setting->contact !!}
                     </div>
 
                     <div class="col-lg-7 col-md-12">
                         <div class="contact-form">
-                            <h3 style="text-align: center">İletişim Formu</h3>
-                            <p>Tüm sorularınızı yanıtlamaktan veya size bir tahminde bulunmaktan mutluluk duyarız.
-                                Aklınıza takılan sorular için aşağıdaki formdan bize mesaj göndermeniz yeterli.</p>
-
+                            <h3 style="text-align: center">@lang("İletişim Formu")</h3>
+                            <p>@lang("Tüm sorularınızı yanıtlamaktan veya size bir tahminde bulunmaktan mutluluk duyarız.
+                                Aklınıza takılan sorular için aşağıdaki formdan bize mesaj göndermeniz yeterli.")</p>
                             <form action="{{route('sendmessage')}}" method="post" autocomplete="off">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
-                                            <label>İsim & Soyisim <span>*</span></label>
+                                            <label>@lang("İsim & Soyisim") <span>*</span></label>
                                             <input type="text" name="name" class="form-control"
-                                                   data-error="Please enter your name" value="{{old('name')}}" placeholder="İsminizi ve soyadınızı giriniz">
+                                                   data-error="Please enter your name" value="{{old('name')}}" placeholder="@lang("İsminizi ve Soyisminizi giriniz")">
                                             <div class="help-block with-errors"></div>
                                             @if ($errors->has('name'))
                                                 <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -57,24 +56,23 @@
 
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
-                                            <label>Email <span>*</span></label>
+                                            <label>@lang("Email") <span>*</span></label>
                                             <input type="text" name="email" value="{{old('email')}}"  class="form-control"
                                                    data-error="Please enter your email"
-                                                   placeholder="Email Adresiniz">
+                                                   placeholder="example@example.com">
                                             <div class="help-block with-errors"></div>
                                             @if ($errors->has('email'))
-                                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                            @endif
+                                                <span class="text-danger">{{ $errors->first('email') }}</span> @endif
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Telefon Numarası <span>*</span></label>
+                                            <label>@lang("Telefon Numarası") <span>*</span></label>
                                             <input type="text" name="phone" value="{{old('phone')}}"
                                                    class="form-control"
                                                    data-error="Please enter your phone number"
-                                                   placeholder="Telefon Numarası">
+                                                   placeholder="05** *** ** **">
                                             @if ($errors->has('phone'))
                                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                                             @endif
@@ -83,9 +81,9 @@
                                     </div>
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
-                                            <label>Konu <span>*</span></label>
+                                            <label>@lang("Konu") <span>*</span></label>
                                             <input type="text" name="subject" value="{{old('subject')}}"  class="form-control"
-                                                   data-error="Please enter your name" placeholder="Konu">
+                                                   data-error="Please enter your name" placeholder="@lang("Konuyu Giriniz")">
                                             @if ($errors->has('subject'))
                                                 <span class="text-danger">{{ $errors->first('subject') }}</span>
                                             @endif
@@ -94,10 +92,10 @@
                                     </div>
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <label>Mesajınız <span>*</span></label>
+                                            <label>@lang("Mesaj") <span>*</span></label>
                                             <textarea name="message" id="message" cols="30" rows="5"
                                                       data-error="Please enter your message" class="form-control"
-                                                      placeholder="Write your message...">{{old('message')}}</textarea>
+                                                      placeholder="@lang("Mesajınızı yazınız.")">{{old('message')}}</textarea>
                                             @if ($errors->has('message'))
                                                 <span class="text-danger">{{ $errors->first('message') }}</span>
                                             @endif
@@ -107,11 +105,11 @@
 
                                     <div class="col-lg-12 col-md-12">
                                         @auth
-                                            <button type="submit" class="default-btn">Gönder</button>
+                                            <button type="submit" class="default-btn">@lang("Gönder")</button>
                                             <div id="msgSubmit" class="h3 text-center hidden"></div>
                                             <div class="clearfix"></div>
                                         @else
-                                            <a href="/login" class="default-btn"> Please Login</a>
+                                            <a href="/login" class="default-btn"> @lang("Lütfen Giriş Yapınız")</a>
                                         @endauth
 
                                     </div>

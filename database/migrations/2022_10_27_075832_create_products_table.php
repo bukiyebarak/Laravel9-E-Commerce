@@ -15,19 +15,31 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('title',150);
-            $table->string('keywords')->nullable();
+            $table->string('title_tr',150);
+            $table->string('keywords_tr');
+            $table->text('detail_tr');
+            $table->string('description_tr');
+            $table->string('title_en',150);
+            $table->string('keywords_en');
+            $table->text('detail_en');
+            $table->string('description_en');
             $table->string('image',75)->nullable();
-            $table->string('description')->nullable();
             $table->integer('category_id')->nullable();
-            $table->text('detail')->nullable();
-            $table->float('price')->nullable();
+            $table->decimal('price',20, 2)->default(0)->nullable();
+            $table->decimal('sale_price',20, 2)->default(0)->nullable();
+            $table->float('sale')->nullable();
+            $table->string('is_sale',3)->nullable()->default('No');
             $table->integer('quantity')->default(1);
             $table->integer('minquantity')->default(5);
             $table->integer('tax')->default(10);
+            $table->integer('main_category_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->string('slug',100)->nullable();
             $table->string('status',5)->nullable()->default('False');
+            $table->string('title',150);
+            $table->string('keywords');
+            $table->text('detail');
+            $table->string('description');
             $table->timestamps();
         });
     }

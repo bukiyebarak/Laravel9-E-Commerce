@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -32,7 +33,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/laravel', function () {
     return view('welcome');
 });
-
+Route::get('lang/{lang}', [LocaleController::class, 'switchLang'])->name('lang.switch');
+Route::get('lang-admin/{lang}', [LocaleController::class, 'switchLangAdmin'])->name('lang.switch.admin');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');

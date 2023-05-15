@@ -16,8 +16,8 @@
             <div class="page-title-content">
                 <h4>{{$data->paket_category->title}}</h4>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Ürün Detayı</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Ürün Detayı")</li>
                 </ul>
             </div>
         </div>
@@ -42,7 +42,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-7 col-md-12">
                     <div class="products-details-desc">
                         <h3>{{$data->title}}</h3>
@@ -65,27 +64,27 @@
                             <li><span>Availability:</span> <a href="javascript:void(0);">
                                     @if($data->quantity<=5 && $data->quantity>0)
                                         <span
-                                            style="color:darkgreen">In stock (End {{$data->quantity}} items)!!! </span>
+                                            style="color:darkgreen">@lang("In stock") (@lang("End") {{$data->quantity}} @lang("items"))!!! </span>
                                     @endif
                                     @if($data->quantity)
-                                        <span style="background-color: rgba(143,255,61,0.44)">In stock
+                                        <span style="background-color: rgba(143,255,61,0.44)">@lang("In stock")
                                         </span>
                                     @else
                                         <span
-                                            style="background-color: rgba(226,41,23,0.96);  text-decoration: line-through; color: black "> In stock</span>
-                                        ({{$data->quantity}} items)
+                                            style="background-color: rgba(226,41,23,0.96);  text-decoration: line-through; color: black "> @lang("In stock")</span>
+                                        ({{$data->quantity}} @lang("items"))
                                     @endif
                                 </a></li>
-                            <li><span>Products Type:</span> <a
+                            <li><span>@lang("Products Type"):</span> <a
                                     href="javascript:void(0);"> {{$data->category->title}}</a></li>
-                            <li><span>Products Description:</span> <a
+                            <li><span>@lang("Products Description"):</span> <a
                                     href="javascript:void(0);"> {{$data->description}}</a></li>
                         </ul>
                         <br>
                         <div class="products-info-btn">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#productsShippingModal"><i
-                                    class='bx bxs-truck'></i> Shipping</a>
-                            <a href="{{route('contact')}}"><i class='bx bx-envelope'></i> Ask about this products</a>
+                                    class='bx bxs-truck'></i> @lang("Shipping")</a>
+                            <a href="{{route('contact')}}"><i class='bx bx-envelope'></i> @lang("Ask about this products")</a>
                         </div>
                         <br>
                         <div class="row">{{$data->paket_category_id}}
@@ -130,7 +129,6 @@
                         </div>
                         <br>
                         <div class="products-add-to-cart">
-
                             <form action="#" >
                                 @csrf
                                 <div class="input-counter">
@@ -139,16 +137,12 @@
                                            readonly>
                                     <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                 </div>
-
                                 <input type="submit" class="default-btn" value="Add to Cart">
-
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
-
             {{--            <div class="tab products-details-tab">--}}
             {{--                <ul class="tabs">--}}
             {{--                    <li><a href="#">--}}
@@ -269,10 +263,8 @@
             {{--                </div>--}}
             {{--            </div>--}}
         </div>
-
     </section>
     <!-- End Product Details Area -->
-
     <!-- Start Facility Area -->
     <section class="facility-area pb-70">
         <div class="container">
@@ -281,48 +273,45 @@
                     <div class="icon">
                         <i class='flaticon-tracking'></i>
                     </div>
-                    <h3>Free Shipping Worldwide</h3>
+                    <h3>@lang("Free Shipping Worldwide")</h3>
                 </div>
-
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-return'></i>
                     </div>
-                    <h3>Easy Return Policy</h3>
+                    <h3>@lang("Easy Return Policy")</h3>
                 </div>
-
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-shuffle'></i>
                     </div>
-                    <h3>7 Day Exchange Policy</h3>
+                    <h3>@lang("7 Day Exchange Policy")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-sale'></i>
                     </div>
-                    <h3>Weekend Discount Coupon</h3>
+                    <h3>@lang("Weekend Discount Coupon")</h3>
                 </div>
-
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-credit-card'></i>
                     </div>
-                    <h3>Secure Payment Methods</h3>
+                    <h3>@lang("Secure Payment Methods")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-location'></i>
                     </div>
-                    <h3>Track Your Package</h3>
+                    <h3>@lang("Track Your Package")</h3>
                 </div>
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-customer-service'></i>
                     </div>
-                    <h3>24/7 Customer Support</h3>
+                    <h3>@lang("24/7 Customer Support")</h3>
                 </div>
             </div>
         </div>
@@ -336,9 +325,8 @@
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class='bx bx-x'></i></span>
                 </button>
-
                 <div class="shipping-content">
-                    <h3>Shipping</h3>
+                    <h3>@lang("Shipping")</h3>
                     <ul>
                         <li>Complimentary ground shipping within 1 to 7 business days</li>
                         <li>In-store collection available within 1 to 7 business days</li>
@@ -347,7 +335,6 @@
                         </li>
                         <li>See the delivery FAQs for details on shipping methods, costs and delivery times</li>
                     </ul>
-
                     <h3>Returns and Exchanges</h3>
                     <ul>
                         <li>Easy and complimentary, within 14 days</li>

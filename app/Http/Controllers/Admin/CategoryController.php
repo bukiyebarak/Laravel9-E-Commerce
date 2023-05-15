@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\PaketCategory;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -18,16 +22,19 @@ class CategoryController extends Controller
         'getParentsTree',
 
     ];
-
-
     public static function getParentsTree($category, $title)
     {
         //recursive mantığı.Bulunca durur.
         if ($category->parent_id == 0) {
             return $title;
         }
+        $lang1=Session::get('applocale');
+        $lang2=config('app.locale');
         $parent = Category::find($category->parent_id);
-        $title = $parent->title . ' / ' . $title;
+        if ($lang1=="en" or $lang2=="en")
+            $title =$parent->title_en . ' / ' . $title;
+        elseif ($lang1=="tr" or $lang2=="tr")
+            $title =$parent->title_tr . ' / ' . $title;
 
         return CategoryController::getParentsTree($parent, $title);
     }
@@ -36,9 +43,9 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
         $datalist = Category::with('children')->get();
         $data=PaketCategory::all();
@@ -46,18 +53,16 @@ class CategoryController extends Controller
         //print_r($datalist);
         //exit();
         return view('admin.category', ['datalist' => $datalist,'data'=>$data]);
-
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function add()
+    public function add(): View|Factory|Application
     {
         $datalist = Category::with('children')->get();
-
         //dd($datalist);
         return view('admin.category_add', ['datalist' => $datalist]);
     }
@@ -67,19 +72,25 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function create(CategoryRequest $request)
+    public function create(CategoryRequest $request): \Illuminate\Http\RedirectResponse
     {
-         Category::create([
-             'parent_id' => $request->input('parent_id'),
-             'title' => $request->input('title'),
-             'keywords' => $request->input('keywords'),
-             'description' => $request->input('description'),
-             'slug' => $request->input('slug'),
-             'detail' => $request->input('detail'),
-             'status' => $request->input('status')
-        ]);
-
-        return redirect()->route('admin_category')->with('success','Category Add Successfully' );
+        $category = new Category();
+        $category->parent_id = $request->input('parent_id');
+        $category->title_tr = $request->input('title_tr');
+        $category->keywords_tr = $request->input('keywords_tr');
+        $category->description_tr = $request->input('description_tr');
+        $category->detail_tr = $request->input('detail_tr');
+        $category->title_en = $request->input('title_en');
+        $category->keywords_en = $request->input('keywords_en');
+        $category->description_en = $request->input('description_en');
+        $category->detail_en = $request->input('detail_en');
+        $category->title_tr = $request->input('title_tr');
+        $category->title_tr = $request->input('title_tr');
+        $category->slug = $request->input('slug');
+        $category->status = $request->input('status');
+        $category->save();
+        $message=__('Category Add Successfully');
+        return redirect()->route('admin_category')->with('success', $message);
     }
 
     /**
@@ -108,9 +119,9 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit($id): View|Factory|Application
     {
         $data = Category::find($id);
         $datalist = Category::with('children')->get();
@@ -124,18 +135,25 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, $id): \Illuminate\Http\RedirectResponse
     {
-        $data = Category::find($id);
-        $data->parent_id = $request->input('parent_id');
-        $data->title = $request->input('title');
-        $data->keywords = $request->input('keywords');
-        $data->description = $request->input('description');
-        $data->slug = $request->input('slug');
-        $data->status = $request->input('status');
-        $data->detail = $request->input('detail');
-        $data->save();
-        return redirect()->route('admin_category')->with('success','Category Update Successfully' );
+        $category = Category::find($id);
+        $category->parent_id = $request->input('parent_id');
+        $category->title_tr = $request->input('title_tr');
+        $category->keywords_tr = $request->input('keywords_tr');
+        $category->description_tr = $request->input('description_tr');
+        $category->detail_tr = $request->input('detail_tr');
+        $category->title_en = $request->input('title_en');
+        $category->keywords_en = $request->input('keywords_en');
+        $category->description_en = $request->input('description_en');
+        $category->detail_en = $request->input('detail_en');
+        $category->title_tr = $request->input('title_tr');
+        $category->title_tr = $request->input('title_tr');
+        $category->slug = $request->input('slug');
+        $category->status = $request->input('status');
+        $category->save();
+        $message=__('Category Update Successfully' );
+        return redirect()->route('admin_category')->with('success',$message);
     }
 
     /**
@@ -144,9 +162,10 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\RedirectResponse
     {
         DB::table('categories')->where('id', '=', $id)->delete();
-        return redirect()->route('admin_category')->with('toast_success','Category Deleted Successfully!');
+        $message=__('Category Deleted Successfully!');
+        return redirect()->route('admin_category')->with('toast_success',$message);
     }
 }

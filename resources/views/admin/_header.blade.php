@@ -32,8 +32,37 @@
                             class='bx bx-x'></i></span>
                 </div>
             </div>
-
-
+            <div class="user-box dropdown">
+                <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img style="width: 42px;height: 25px" src=" @if(Session::get('applocale')=="fr" or config('app.locale')=="fr")
+                                {{asset('assets')}}/home/assets/img/france-flag.jpg
+                                 @elseif(Session::get('applocale')=="tr" or config('app.locale')=="tr")
+                                 {{asset('assets')}}/home/assets/img/tr-flag1.jpg
+                                  @elseif(Session::get('applocale')=="en" or config('app.locale')=="en")
+                                  {{asset('assets')}}/home/assets/img/us-flag.jpg
+                                  @endif
+                                " alt="image">
+                    <span style="color: white;padding-left: 5px">  {{ Config::get('languages')[App::getLocale()] }} <i class='bx bx-chevron-down'></i></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
+                    @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                            <li>
+                            <a class="dropdown-item" href="{{ route('lang.switch.admin', $lang) }}">
+                                <img src=" @if($lang=="fr")
+                                {{asset('assets')}}/home/assets/img/france-flag.jpg
+                                 @elseif($lang=="tr")
+                                 {{asset('assets')}}/home/assets/img/tr-flag1.jpg
+                                  @elseif($lang=="en")
+                                  {{asset('assets')}}/home/assets/img/us-flag.jpg
+                                  @endif
+                                " alt="image" style="width: 42px;height: 25px" >
+                                <span>{{$language}}</span>
+                            </a></li>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center">
                     <!--Bildirimler-->
@@ -56,7 +85,7 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="javascript:;">
                                 <div class="msg-header">
-                                    <h6 class="msg-header-title">Messages</h6>
+                                    <h6 class="msg-header-title">@lang("Messages")</h6>
                                 </div>
                             </a>
                             <div class="header-message-list">
@@ -78,7 +107,7 @@
 
                             </div>
                             <a href="{{route('admin_messages')}}">
-                                <div class="text-center msg-footer">View All Messages</div>
+                                <div class="text-center msg-footer">@lang("View All Messages")</div>
                             </a>
                         </div>
                     </li>

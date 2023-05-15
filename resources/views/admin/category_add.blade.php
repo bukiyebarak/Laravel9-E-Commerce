@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Category')
+@section('title', __('Add Category'))
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -14,13 +14,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">ADD CATEGORY</div>
+                <div class="breadcrumb-title pe-3">@lang("ADD CATEGORY")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Add Category")</li>
                         </ol>
                     </nav>
                 </div>
@@ -28,8 +28,8 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <span class="float-end">* : Zorunlu girilmesi gereken yerler</span>
-                    <h4 class="mb-0">Add Category</h4>
+                    <span class="float-end">* : @lang("Zorunlu girilmesi gereken yerler")</span>
+                    <h4 class="mb-0">@lang("Add Category")</h4>
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -39,7 +39,7 @@
                                 <div class="col-md-12">
                                     <label>Parent *</label>
                                     <select class="form-select" name="parent_id" required>
-                                        <option value="0" selected="">Main Category</option>
+                                        <option value="0" selected="">@lang("Main Category")</option>
                                         @foreach($datalist as $rs)
                                             <option
                                                 value="{{$rs->id}}"> {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title) }}
@@ -47,33 +47,33 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-122">
-                                    <label>Title *</label>
-                                    <input type="text" name="title" class="form-control" value=" {{old('title')}}" >
-                                    @if ($errors->has('title'))
-                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                <div class="col-md-12">
+                                    <label>@lang("Title") (@lang("Türkçe"))*</label>
+                                    <input type="text" name="title_tr" class="form-control" value=" {{old('title_tr')}}" >
+                                    @if ($errors->has('title_tr'))
+                                        <span class="text-danger">{{ $errors->first('title_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Keywords *</label>
-                                    <input type="text" name="keywords" class="form-control" value=" {{old('keywords')}}" >
-                                    @if ($errors->has('keywords'))
-                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>
+                                    <label>@lang("Keywords") (@lang("Türkçe"))*</label>
+                                    <input type="text" name="keywords_tr" class="form-control" value=" {{old('keywords_tr')}}" >
+                                    @if ($errors->has('keywords_tr'))
+                                        <span class="text-danger">{{ $errors->first('keywords_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Description *</label>
-                                    <input type="text" name="description" class="form-control" id="validationCustom02" value=" {{old('description')}}" >
-                                    @if ($errors->has('description'))
-                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    <label>@lang("Description") (@lang("Türkçe"))*</label>
+                                    <input type="text" name="description_tr" class="form-control" value=" {{old('description_tr')}}" >
+                                    @if ($errors->has('description_tr'))
+                                        <span class="text-danger">{{ $errors->first('description_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Detail*</label>
-                                    <textarea id="summernote" name="detail">{{old('detail')}}</textarea>
+                                    <label>@lang("Detail") (@lang("Türkçe"))*</label>
+                                    <textarea id="summernote" name="detail_tr">{{old('detail_tr')}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
-                                            placeholder: 'Category Detail',
+                                            placeholder:  ' ' ,
                                             tabsize: 2,
                                             height: 120,
                                             toolbar: [
@@ -87,26 +87,70 @@
                                             ]
                                         });
                                     </script>
-                                    @if ($errors->has('detail'))
-                                        <span class="text-danger">{{ $errors->first('detail') }}</span>
+                                    @if ($errors->has('detail_tr'))
+                                        <span class="text-danger">{{ $errors->first('detail_tr') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-122">
+                                    <label>@lang("Title") (@lang("İngilizce"))*</label>
+                                    <input type="text" name="title_en" class="form-control" value=" {{old('title_en')}}" >
+                                    @if ($errors->has('title_en'))
+                                        <span class="text-danger">{{ $errors->first('title_en') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Slug *</label>
+                                    <label>@lang("Keywords") (@lang("İngilizce"))*</label>
+                                    <input type="text" name="keywords_en" class="form-control" value=" {{old('keywords_en')}}" >
+                                    @if ($errors->has('keywords_en'))
+                                        <span class="text-danger">{{ $errors->first('keywords_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Description") (@lang("İngilizce")) *</label>
+                                    <input type="text" name="description_en" class="form-control"  value=" {{old('description_en')}}" >
+                                    @if ($errors->has('description_en'))
+                                        <span class="text-danger">{{ $errors->first('description_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="summernote1">@lang("Detail") (@lang("İngilizce"))*</label>
+                                    <textarea id="summernote1" name="detail_en">{{old('detail_en')}}</textarea>
+                                    <script>
+                                        $('#summernote1').summernote({
+                                            placeholder:  ' ',
+                                            tabsize: 2,
+                                            height: 120,
+                                            toolbar: [
+                                                ['style', ['style']],
+                                                ['font', ['bold', 'underline', 'clear']],
+                                                ['color', ['color']],
+                                                ['para', ['ul', 'ol', 'paragraph']],
+                                                ['table', ['table']],
+                                                ['insert', ['link', 'picture', 'video']],
+                                                ['view', ['fullscreen', 'codeview', 'help']]
+                                            ]
+                                        });
+                                    </script>
+                                    @if ($errors->has('detail_en'))
+                                        <span class="text-danger">{{ $errors->first('detail_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Slug") *</label>
                                     <input type="text" name="slug" class="form-control" value=" {{old('slug')}}">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Status</label>
+                                    <label>@lang("Status")</label>
                                     <select class="form-select" name="status" >
                                         <option selected="">False</option>
                                         <option>True</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary" type="submit">Add Category</button>
+                                    <button class="btn btn-primary" type="submit">@lang("Add Category")</button>
                                 </div>
                             </form>
                         </div>

@@ -197,7 +197,7 @@
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: center;">
-                                                        Kahve Lezzeti</p>
+                                                        @lang("Kahve Lezzeti") </p>
                                                 </div>
 
                                             </td>
@@ -314,7 +314,7 @@
                                                         <span
                                                             style="font-family: arial, helvetica, sans-serif; font-size: 32px; line-height: 41.6px;"><strong><span
                                                                     style="line-height: 41.6px; font-size: 32px;"><span
-                                                                        style="line-height: 41.6px; font-size: 32px;">Şiparişinizi Aldık</span></span></strong></span>
+                                                                        style="line-height: 41.6px; font-size: 32px;">@lang("Şiparişinizi Aldık")</span></span></strong></span>
                                                     </p>
                                                 </div>
 
@@ -335,11 +335,11 @@
                                                     <p style="line-height: 170%; text-align: center; font-size: 14px;">
                                                         <span
                                                             style="font-family: arial, helvetica, sans-serif; font-size: 14px; line-height: 23.8px;"><span
-                                                                style="font-size: 16px; line-height: 27.2px;">Merhaba {{$order->name}},</span></span>
+                                                                style="font-size: 16px; line-height: 27.2px;">@lang("Merhaba") {{$order->name}},</span></span>
                                                     </p>
                                                     <p style="line-height: 170%; text-align: center; font-size: 14px;">
-                                                        Siparişinizi başarılı bir şekilde aldık! Siparişiniz
-                                                        gönderildiğinde size başka bir e-posta göndereceğiz.</p>
+                                                        @lang("Siparişinizi başarılı bir şekilde aldık! Siparişiniz
+                                                        gönderildiğinde size başka bir e-posta göndereceğiz.")  </p>
                                                 </div>
 
                                             </td>
@@ -371,7 +371,7 @@
                                                     <a href="{{route('user_order_show',['id'=>$order->id])}}" target="_blank" class="v-button"
                                                        style="box-sizing: border-box;display: inline-block;font-family:arial,helvetica,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #e03e2d; border-radius: 8px;-webkit-border-radius: 8px; -moz-border-radius: 8px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-width: 0px; border-top-style: solid; border-top-color: #CCC; border-left-width: 0px; border-left-style: solid; border-left-color: #CCC; border-right-width: 0px; border-right-style: solid; border-right-color: #CCC; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: #CCC;">
                                                         <span style="display:block;padding:10px 20px;line-height:120%;"><span
-                                                                style="font-size: 14px; line-height: 16.8px;">Şipariş Detayı</span></span>
+                                                                style="font-size: 14px; line-height: 16.8px;">@lang("Şipariş Detayı")</span></span>
                                                     </a>
                                                     <!--[if mso]></center></v:roundrect><![endif]-->
                                                 </div>
@@ -426,7 +426,7 @@
                                                 <div class="v-text-align"
                                                      style="color: #ffffff; line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%;"><span
-                                                            style="font-size: 16px; line-height: 22.4px; color: #000000;"><strong>Ürün Detayı</strong></span>
+                                                            style="font-size: 16px; line-height: 22.4px; color: #000000;"><strong>@lang("Ürün Detayı")</strong></span>
                                                     </p>
                                                 </div>
 
@@ -569,8 +569,7 @@
 
                                                     <div class="v-text-align"
                                                          style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                        <p style="font-size: 14px; line-height: 140%;"><strong>Ürün
-                                                                İsmi: </strong>
+                                                        <p style="font-size: 14px; line-height: 140%;"><strong>@lang("Ürün İsmi"): </strong>
                                                             <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
                                                         </p>
                                                     </div>
@@ -586,31 +585,26 @@
                                             <tr>
                                                 <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 20px;font-family:arial,helvetica,sans-serif;"
                                                     align="left">
-
                                                     <div class="v-text-align"
                                                          style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                         <p style="font-size: 14px; line-height: 140%;">
-                                                            <strong>Miktarı: </strong>{{$rs->quantity}}</p>
+                                                            <strong>@lang("Miktarı"): </strong>{{$rs->quantity}}</p>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
-
                                         <table style="font-family:arial,helvetica,sans-serif;" role="presentation"
                                                cellpadding="0" cellspacing="0" width="100%" border="0">
                                             <tbody>
                                             <tr>
                                                 <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 20px;font-family:arial,helvetica,sans-serif;"
                                                     align="left">
-
                                                     <div class="v-text-align"
                                                          style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                         <p style="font-size: 14px; line-height: 140%;">
-                                                            <strong>Fiyatı: </strong>{{$rs->price*$rs->quantity}}₺</p>
+                                                            <strong>@lang("Fiyatı"): </strong>{{$rs->price*$rs->quantity}}₺</p>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -682,8 +676,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="u-row-container" style="padding: 0px;background-color: transparent">
                 <div class="u-row"
                      style="Margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
@@ -721,7 +713,7 @@
                                                     <p style="font-size: 14px; line-height: 140%; text-align: left;">
                                                         <span
                                                             style="font-size: 14px; line-height: 19.6px;"><strong><span
-                                                                    style="line-height: 19.6px; font-size: 14px;">Ara Toplam:</span></strong></span>
+                                                                    style="line-height: 19.6px; font-size: 14px;">@lang("Ara Toplam"):</span></strong></span>
                                                     </p>
                                                 </div>
 
@@ -772,8 +764,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="u-row-container" style="padding: 0px;background-color: transparent">
                 <div class="u-row"
                      style="Margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
@@ -798,7 +788,6 @@
                                 <div
                                     style="height: 100%; padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
                                     <!--<![endif]-->
-
                                     <table style="font-family:arial,helvetica,sans-serif;" role="presentation"
                                            cellpadding="0" cellspacing="0" width="100%" border="0">
                                         <tbody>
@@ -809,14 +798,12 @@
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: left;">
-                                                        <strong>Kargo Ücreti:</strong></p>
+                                                        <strong>@lang("Kargo Ücreti"):</strong></p>
                                                 </div>
-
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
-
                                     <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
                             </div>
                         </div>
@@ -861,8 +848,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="u-row-container" style="padding: 0px;background-color: transparent">
                 <div class="u-row"
                      style="Margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
@@ -894,19 +879,16 @@
                                         <tr>
                                             <td style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 10px 25px;font-family:arial,helvetica,sans-serif;"
                                                 align="left">
-
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: left;">
-                                                        <span style="font-size: 14px; line-height: 19.6px;"><strong>Toplam Fiyat:</strong></span>
+                                                        <span style="font-size: 14px; line-height: 19.6px;"><strong>@lang("Toplam Fiyat"):</strong></span>
                                                     </p>
                                                 </div>
-
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
-
                                     <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
                             </div>
                         </div>
@@ -923,7 +905,6 @@
                                 <div
                                     style="height: 100%; padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
                                     <!--<![endif]-->
-
                                     <table style="font-family:arial,helvetica,sans-serif;" role="presentation"
                                            cellpadding="0" cellspacing="0" width="100%" border="0">
                                         <tbody>
@@ -942,7 +923,6 @@
                                         </tr>
                                         </tbody>
                                     </table>
-
                                     <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
                             </div>
                         </div>
@@ -951,8 +931,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="u-row-container" style="padding: 0px;background-color: transparent">
                 <div class="u-row"
                      style="Margin: 0 auto;min-width: 320px;max-width: 640px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
@@ -1171,8 +1149,8 @@
 
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-size: 14px; line-height: 140%;">Herhangi bir sorunuz
-                                                        varsa lütfen bizimle iletişime geçmekten çekinmeyin.</p>
+                                                    <p style="font-size: 14px; line-height: 140%;">@lang("Herhangi bir sorunuz
+                                                        varsa lütfen bizimle iletişime geçmekten çekinmeyin.")</p>
                                                 </div>
 
                                             </td>
@@ -1189,8 +1167,8 @@
 
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                    <p style="font-size: 14px; line-height: 140%;">Bizi Tercih Ettiğiniz
-                                                        için Teşekkür Ederiz</p>
+                                                    <p style="font-size: 14px; line-height: 140%;">@lang("Bizi Tercih Ettiğiniz
+                                                        için Teşekkür Ederiz")</p>
                                                     <p style="font-size: 14px; line-height: 140%;">GNC Holding</p>
                                                 </div>
 
@@ -1246,7 +1224,7 @@
                                                 <div class="v-text-align"
                                                      style="line-height: 140%; text-align: left; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 140%; text-align: center;">
-                                                        E-Posta adresimiz:</p>
+                                                        @lang("E-Posta adresimiz:")</p>
                                                     <p style="font-size: 14px; line-height: 140%; text-align: center;">
                                                         <span
                                                             style="font-size: 14px; line-height: 19.6px;">

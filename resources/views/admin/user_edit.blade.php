@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit User')
+@section('title', __('Edit User'))
 
 @section('javascript')
 
@@ -17,13 +17,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">EDIT USER</div>
+                <div class="breadcrumb-title pe-3">@lang("EDIT USER")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Edit User")</li>
                         </ol>
                     </nav>
                 </div>
@@ -31,7 +31,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-0">Edit User</h4>
+                    <h4 class="mb-0">@lang("Edit User")</h4>
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -40,28 +40,28 @@
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-10">
-                                    <label>Name</label>
+                                    <label>@lang("Name")</label>
                                     <input type="text" name="name" value="{{$data->name}}" class="form-control">
                                     @if ($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Surname</label>
+                                    <label>@lang("Surname")</label>
                                     <input type="text" name="surname" value="{{$data->surname}}" class="form-control">
                                     @if ($errors->has('surname'))
                                         <span class="text-danger">{{ $errors->first('surname') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Email</label>
+                                    <label>@lang("Email")</label>
                                     <input type="text" name="email" value="{{$data->email}}" class="form-control">
                                     @if ($errors->has('email'))
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Phone</label>
+                                    <label>@lang("Phone")</label>
                                     <input type="text" name="phone" value="{{$data->phone}}"
                                            class="form-control">
                                     @if ($errors->has('phone'))
@@ -69,7 +69,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Address</label>
+                                    <label>@lang("Address")</label>
                                     <input type="text" name="address" value="{{$data->address}}"
                                            class="form-control">
                                     @if ($errors->has('address'))
@@ -85,7 +85,7 @@
 {{--                                    @endif--}}
 {{--                                </div>--}}
                                 <div class="col-12">
-                                    <button class="btn btn-primary" type="submit">Update User</button>
+                                    <button class="btn btn-primary" type="submit">@lang("Update User")</button>
                                 </div>
                             </form>
                         </div>

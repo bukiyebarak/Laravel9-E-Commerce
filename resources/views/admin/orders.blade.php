@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Orders')
+@section('title', __('Admin Orders'))
 
 @section('content')
     <!--start page wrapper -->
@@ -8,13 +8,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Order List</div>
+                <div class="breadcrumb-title pe-3">@lang("Order List")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Order List</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Order List")</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,19 +29,19 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Kullanıcı İsmi-Soyisim</th>
-                                        <th>Şipariş Ver. İsim-Soyisim</th>
-                                        <th>Email</th>
-                                        <th>Telefon</th>
-                                        <th>Adres</th>
-                                        <th>İl</th>
-                                        <th>İlçe</th>
-                                        <th>Mahalle</th>
-                                        <th>Toplam</th>
-                                        <th>Şipariş Durumu</th>
-                                        <th>Şipariş Tarihi</th>
-                                        <th>Durum</th>
-                                        <th>Şipariş Detayı</th>
+                                        <th>@lang("Kullanıcı İsmi-Soyisim")</th>
+                                        <th>@lang("Şipariş Ver. İsim-Soyisim")</th>
+                                        <th>@lang("Email")</th>
+                                        <th>@lang("Telefon")</th>
+                                        <th>@lang("Adres")</th>
+                                        <th>@lang("İl")</th>
+                                        <th>@lang("İlçe")</th>
+                                        <th>@lang("Mahalle")</th>
+                                        <th>@lang("Toplam")</th>
+                                        <th>@lang("Şipariş Durumu")</th>
+                                        <th>@lang("Şipariş Tarihi")</th>
+                                        <th>@lang("Durum")</th>
+                                        <th>@lang("Şipariş Detayı")</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -81,23 +81,23 @@
                                                 <div style="text-align: center;">
                                                     @if($rs->status=="Shipping")
                                                         <div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
-                                                          Shipping
+                                                          @lang("Shipping")
                                                         </div>
                                                     @elseif($rs->status=="Accepted")
                                                         <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-                                                           Accepted
+                                                           @lang("Accepted")
                                                         </div>
                                                     @elseif($rs->status=="Completed")
                                                         <div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
-                                                           Completed
+                                                           @lang("Completed")
                                                         </div>
                                                     @elseif($rs->status=="Canceled")
                                                         <div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3">
-                                                           Canceled
+                                                           @lang("Canceled")
                                                         </div>
                                                     @else
                                                         <div  class="badge rounded-pill text-black bg-success p-2 text-uppercase px-3">
-                                                            New</div>
+                                                            @lang("New")</div>
                                                     @endif
                                                 </div>
                                             </td>
@@ -106,7 +106,6 @@
                                                    class="btn btn-primary" data-bs-toggle="modal"
                                                    data-bs-target="#exampleExtraLargeModal{{$rs->id}}"><i
                                                         class="lni lni-eye"></i></a>
-
                                                 {{--                                                <a href="{{route('admin_order_show',['id'=>$rs->id])}}"--}}
                                                 {{--                                                   onclick="return !window.open(this.href, '','top=20 left=50 width=1000 height=800')">--}}
                                                 {{--                                                    --}}

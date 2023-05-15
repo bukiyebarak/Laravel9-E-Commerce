@@ -3,9 +3,8 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">User Detail</h5>
+                <h5 class="modal-title">@lang("User Detail")</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -17,7 +16,7 @@
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label>Name Surname</label>
+                            <label>@lang("Name Surname")</label>
                             <input type="text" name="title" value="{{$dataUser->name}} {{$dataUser->surname}}"
                                    class="form-control" disabled>
                         </div>
@@ -25,28 +24,28 @@
 
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label>Phone</label>
+                            <label>@lang("Phone")</label>
                             <a href="tel:+01321654214"><input type="text" name="phone" disabled
                                                               value="{{$dataUser->phone}}" class="form-control"></a>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label>Email</label>
+                            <label>@lang("Email")</label>
                             <a href="tel:+01321654214"><input type="text" name="phone" disabled
                                                               value="{{$dataUser->email}}" class="form-control"></a>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label>Address</label>
+                            <label>@lang("Address")</label>
                             <input type="text" name="title" value="{{$dataUser->address}}" class="form-control"
                                    disabled>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
-                            <label>Date</label>
+                            <label>@lang("Date")</label>
                             <input type="text" name="created_at" value="{{$dataUser->created_at}}" class="form-control"
                                    disabled>
                         </div>
@@ -54,7 +53,7 @@
                     <div class="col-sm-6 col-md-6">
                         <br>
                         <div class="row ">
-                            <label><b>Roles</b><br></label>
+                            <label><b>@lang("Roles")</b><br></label>
                             @foreach($dataUser->roles as $row)
                                 <div class="col-md-4">
                                  <a href="{{route('admin_user_role_delete',['userid'=>$dataUser->id,'roleid'=>$row->id])}} "
@@ -72,7 +71,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-8">
-                                    <label>Status</label>
+                                    <label>@lang("Status")</label>
                                     <br><select class="form-select form-select mb-3"
                                                 aria-label=".form-select-lg example"
                                                 name="roleid">
@@ -81,18 +80,15 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                                 <div class="col-md-4" style="margin-top: 20px; text-align: center">
-                                    <button type="submit" class="btn btn-danger "> <i class="bx bxs-plus-circle"></i>Add Role</button>
+                                    <button type="submit" class="btn btn-danger "> <i class="bx bxs-plus-circle"></i>@lang("Add Role")</button>
                                 </div>
                             </div>
                         </form>
                         <br> <br>
                     </div>
-
                     <div class="modal-footer">
-
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang("Close")</button>
                     </div>
                 </div>
             </div>

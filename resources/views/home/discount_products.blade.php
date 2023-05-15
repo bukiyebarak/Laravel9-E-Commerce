@@ -5,7 +5,7 @@
 
 @extends('layouts.home')
 
-@section('title', 'Discount Products List')
+@section('title', __('Discount Products List'))
 
 @section('content')
     <style>
@@ -18,10 +18,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h5>Discount Product Page</h5>
+                <h5>@lang("İndirimli Ürünler Sayfası")</h5>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Ürün Listesi</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Ürün Listesi")</li>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,6 @@
                         <section class="widget widget_search">
                             <form class="search-form" action="{{route('getproduct')}}" method="post">
                                 @csrf
-
                                 <label>
                                     <span class="screen-reader-text">Search for:</span>
                                     @livewire('searchproduct')
@@ -50,8 +49,7 @@
                         </section>
                         <section class="widget widget_categories">
                             <div class="woocommerce-widget price-list-widget">
-                                <h3 class="widget-title">Price</h3>
-
+                                <h3 class="widget-title">@lang("Price")</h3>
                                 <div class="collection-filter-by-price">
                                     <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
                                            name="filter_by_price" data-step="10">
@@ -61,12 +59,10 @@
                         <br>
                         <section class="widget widget_categories">
                             <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
-
                             <ul>
                                 @foreach($parentCategories as $rs)
                                     <ul>
-                                        <li><a
-                                                href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
+                                        <li><a href="{{route('main_category_products',['id'=>$rs->id, 'slug'=>$rs->slug])}}"
                                             >{{$rs->title}}<i
                                                 ></i></a>
                                             <ul>
@@ -80,22 +76,20 @@
                                 @endforeach
                             </ul>
                         </section>
-
                         <section class="widget widget_tag_cloud">
-                            <h3 class="widget-title">Tags</h3>
+                            <h3 class="widget-title">@lang("Etiketler")</h3>
                             <div class="tagcloud">
                                 @foreach($datalist as $rs)
                                     <a href="#">{{$rs->keywords}} <span class="tag-link-count"></span></a>
                                 @endforeach
                             </div>
                         </section>
-
                         <section class="widget widget_contact">
                             <div class="text">
                                 <div class="icon">
                                     <i class='bx bx-mail-send'></i>
                                 </div>
-                                <span>Emergency</span>
+                                <span>@lang("Acil")</span>
                                 <a href="mailto:hello@xton.com">{{$setting->email}}</a>
                             </div>
                         </section>
@@ -109,9 +103,9 @@
                                 <div class="d-lg-flex d-md-flex align-items-center">
                                     <span class="sub-title d-lg-none"><a href="#" data-bs-toggle="modal"
                                                                          data-bs-target="#productsFilterModal"><i
-                                                class='bx bx-filter-alt'></i> Filter</a></span>
+                                                class='bx bx-filter-alt'></i> @lang("Filter")</a></span>
 
-                                    <span class="sub-title d-none d-lg-block d-md-block">View:</span>
+                                    <span class="sub-title d-none d-lg-block d-md-block">@lang("View"):</span>
 
                                     <div class="view-list-row d-none d-lg-block d-md-block">
                                         <div class="view-column">
@@ -152,26 +146,26 @@
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
                                         <select name="sort1" id="sort1" class=" nice-select">
-                                            <option selected="" value="">Default Sorting</option>
+                                            <option selected="" value="">@lang("Default Sorting")</option>
                                             <option value="product_lastest"
                                                     @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >
-                                                Sort by: Latest
+                                                @lang("Sort by: Latest")
                                             </option>
                                             <option value="price_lowest"
                                                     @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >
-                                                Sort by Price: Low to High
+                                                @lang("Sort by Price: Low to High")
                                             </option>
                                             <option value="price_highest"
                                                     @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >
-                                                Sort by Price: High to Low
+                                                @lang("Sort by Price: High to Low")
                                             </option>
                                             <option value="name_z_a"
                                                     @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >
-                                                Sort by Name: Name A-Z
+                                                @lang("Sort by Name: Name A-Z")
                                             </option>
                                             <option value="name_a_z"
                                                     @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >
-                                                Sort by Name: Name Z-A
+                                                @lang("Sort by Name: Name Z-A")
                                             </option>
                                         </select>
                                     </div>
@@ -192,9 +186,7 @@
                                                  class="main-image"
                                                  alt="image">
                                             <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
-
                                         </a>
-
                                         <div class="products-button">
                                             <ul>
                                                 <li>
@@ -203,7 +195,7 @@
                                                               method="post">
                                                             @csrf
                                                             <a href="javascript:void(0);">
-                                                                <span class="tooltip-label">Add to Wishlist</span>
+                                                                <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                                                 <button type="submit"
                                                                         class='heartbtn bx bx-heart'></button>
                                                             </a>
@@ -215,7 +207,7 @@
                                                     <div class="quick-view-btn">
                                                         <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                             <i class='bx bx-search-alt'></i>
-                                                            <span class="tooltip-label">Quick View</span>
+                                                            <span class="tooltip-label">@lang("Quick View")</span>
                                                         </a>
                                                     </div>
                                                 </li>
@@ -226,7 +218,7 @@
                                                             @csrf
                                                             <input name="quantity" type="hidden" value="1">
                                                             <a href="javascript:void(0);">
-                                                                <span class="tooltip-label">Add to Cart</span>
+                                                                <span class="tooltip-label">@lang("Add to Cart")</span>
                                                                 <button type="submit"
                                                                         class="heartbtn bx bx-cart"></button>
                                                             </a>
@@ -237,7 +229,7 @@
                                         </div>
                                         @foreach($last as $data)
                                             @if($rs->id==$data->id)
-                                                <div class="new-tag">New!</div>
+                                                <div class="new-tag">@lang("New")!</div>
                                             @endif
                                         @endforeach
 
@@ -259,7 +251,7 @@
                                                 <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                                 <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
-                                                    ({{$countreview}} İnceleme)
+                                                    ({{$countreview}} @lang("İnceleme"))
                                                 @endif
                                             </div>
                                         </div>

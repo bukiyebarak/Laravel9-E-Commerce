@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Contact Messages List')
+@section('title', __('Contact Messages List'))
 
 @section('content')
     <!--start page wrapper -->
@@ -8,13 +8,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Contact Messages</div>
+                <div class="breadcrumb-title pe-3">@lang("Contact Messages")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Message List</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Message List")</li>
                         </ol>
                     </nav>
                 </div>
@@ -31,17 +31,17 @@
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>User Name-Surname</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Subject</th>
-                                        <th>Message</th>
-                                        <th>Admin Note</th>
-                                        <th>Status</th>
-                                        <th>IP Addresses</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>@lang("User Name-Surname")</th>
+                                        <th>@lang("Name")</th>
+                                        <th>@lang("Email")</th>
+                                        <th>@lang("Phone")</th>
+                                        <th>@lang("Subject")</th>
+                                        <th>@lang("Message")</th>
+                                        <th>@lang("Admin Note") </th>
+                                        <th>@lang("Status")</th>
+                                        <th>@lang("IP Addresses")</th>
+                                        <th>@lang("Edit")</th>
+                                        <th>@lang("Delete")</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -51,9 +51,6 @@
                                             <td>
                                                 <a href="#" data-bs-toggle="modal"
                                                    data-bs-target="#exampleLargeModal{{$rs->user->id}}">{{$rs->user->name}} {{$rs->user->surname}}</a>
-                                            {{--                                                <a href="{{route('admin_user_show',['id'=>\Illuminate\Support\Facades\Auth::user()->id])}}"--}}
-                                            {{--                                                   onclick="return !window.open(this.href, '', 'top=20 left=50 width=800 height=700')">--}}
-                                            {{--                                                    {{$rs->user->name}}  {{$rs->user->surname}}</a></td></td>--}}
                                             <td>{{$rs->name}}</td>
                                             <td><a href="mailto:hello@xton.com">{{$rs->email}}</a></td>
                                             <td><a href="tel:+01321654214">{{$rs->phone}}</a></td>
@@ -78,12 +75,11 @@
                                                     <a href="{{route('admin_message_edit',['id'=>$rs->id])}}" data-bs-toggle="modal"  class=" text-primary bg-light-primary border-0"
                                                        data-bs-target="#exampleModal{{$rs->id}}">
                                                         <i class="bx bxs-edit"></i></a></div>
-
                                             </td>
                                             <td><div class="d-flex order-actions">
                                                     <a href="{{route('admin_message_delete',['id'=>$rs->id])}} "
                                                        class="text-danger bg-light-danger border-0"
-                                                       onclick="return confirm('Delete! Are you Sure')"><i class="bx bxs-trash"></i></a>
+                                                       onclick="return confirm('{{ __('Delete! Are you sure?') }}')"><i class="bx bxs-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

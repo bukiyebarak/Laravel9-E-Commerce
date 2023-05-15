@@ -7,6 +7,9 @@ use App\Models\Category;
 use App\Models\PaketCategory;
 use App\Models\PaketProduct;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -16,21 +19,20 @@ class PaketProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
         $datalist = PaketProduct::with('category')->get();
-
         return view('admin.product_paket', ['datalist' => $datalist]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Application|Factory|View
     {
         $datalist = Category::with('children')->get();
         $data=PaketCategory::all();
@@ -42,9 +44,9 @@ class PaketProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $data = new PaketProduct;
         $data->keywords = $request->input('keywords');
@@ -71,7 +73,8 @@ class PaketProductController extends Controller
         }
         //$data->image = Storage::putFile('images', $request->file('image')); //file upload
         $data->save();
-        return redirect()->route('admin_paket_products')->with('success', 'Paket Product Add Successfully');
+        $message=__('Paket Product Add Successfully');
+        return redirect()->route('admin_paket_products')->with('success',$message );
     }
 
     /**
@@ -89,9 +92,9 @@ class PaketProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function edit(Product $product,$id)
+    public function edit(Product $product,$id): Application|Factory|View
     {
         $data = PaketProduct::find($id);
         $dataCat=PaketCategory::all();
@@ -105,9 +108,9 @@ class PaketProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request,$id)
+    public function update(Request $request,$id): \Illuminate\Http\RedirectResponse
     {
         $data = PaketProduct::find($id);
         $data->keywords = $request->input('keywords');
@@ -134,19 +137,21 @@ class PaketProductController extends Controller
         }
         //$data->image = Storage::putFile('images', $request->file('image')); //file upload
         $data->save();
-        return redirect()->route('admin_paket_products')->with('success', 'Paket Product Update Successfully');
+        $message=__('Paket Product Update Successfully');
+        return redirect()->route('admin_paket_products')->with('success',$message );
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Product $product,$id)
+    public function destroy(Product $product,$id): \Illuminate\Http\RedirectResponse
     {
         $data = PaketProduct::find($id);
         $data->delete();
-        return redirect()->route('admin_paket_products')->with('toast_success', 'Paket Product is Deleted.');
+        $message=__('Paket Product is Deleted.');
+        return redirect()->route('admin_paket_products')->with('toast_success', $message);
     }
 }

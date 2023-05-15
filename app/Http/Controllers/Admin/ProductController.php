@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,21 +21,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         $datalist = Product::with('category')->get();
-
         return view('admin.product', ['datalist' => $datalist]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         $datalist = Category::with('children')->get();
         return view('admin.product_add', ['datalist' => $datalist]);
@@ -40,10 +43,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param ProductRequest $request
+     * @return RedirectResponse
      */
-    public function store(ProductRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(ProductRequest $request): RedirectResponse
     {
         $price = $request->get('price');
         $sale = $request->get('sale');
@@ -52,13 +55,17 @@ class ProductController extends Controller
         $totalsale = $price - $totalsale;
 
         $data = new Product;
-        $data->keywords = $request->input('keywords');
-        $data->title = $request->input('title');
-        $data->description = $request->input('description');
+        $data->keywords_tr = $request->input('keywords_tr');
+        $data->title_tr = $request->input('title_tr');
+        $data->description_tr = $request->input('description_tr');
+        $data->detail_tr = $request->input('detail_tr');
+        $data->keywords_en = $request->input('keywords_en');
+        $data->title_en = $request->input('title_en');
+        $data->description_en = $request->input('description_en');
+        $data->detail_en = $request->input('detail_en');
         $data->slug = $request->input('slug');
         $data->status = $request->input('status');
         $data->category_id = $request->input('category_id');
-        $data->detail = $request->input('detail');
         $data->price = $request->input('price');
         $data->quantity = $request->input('quantity');
         $data->minquantity = $request->input('minquantity');
@@ -70,7 +77,6 @@ class ProductController extends Controller
         }
         else
             $data->sale_price =$request->input('price') ;
-
         $data->tax = $request->input('tax');
         $data->user_id = Auth::id();
         if ($request->hasfile('image')) {
@@ -82,16 +88,14 @@ class ProductController extends Controller
             $data->image = $filename;
         }
         //$data->image = Storage::putFile('images', $request->file('image')); //file upload
-
         $data->save();
-
         return redirect()->route('admin_products')->with('success', 'Product Add Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Product $product
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -102,10 +106,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param Product $product
+     * @return Application|Factory|View
      */
-    public function edit(Product $product, $id)
+    public function edit(Product $product, $id): View|Factory|Application
     {
         $data = Product::find($id);
         $datalist = Category::with('children')->get();
@@ -115,17 +119,21 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'title' => 'required|min:3',
-            'keywords' => 'required|min:3|max:60',
-            'description' => 'required|min:5|max:100',
-            'detail' => 'required|min:5',
+            'title_tr' => 'required|min:3',
+            'keywords_tr' => 'required|min:3|max:60',
+            'description_tr' => 'required|min:5|max:100',
+            'detail_tr' => 'required|min:5',
+            'title_en' => 'required|min:3',
+            'keywords_en' => 'required|min:3|max:60',
+            'description_en' => 'required|min:5|max:100',
+            'detail_en' => 'required|min:5',
             'price' => 'required|min:0',
             'quantity' => 'required|numeric|min:1',
             'minquantity' => 'required|numeric|min:1',
@@ -134,23 +142,24 @@ class ProductController extends Controller
             'sale' => 'required_if:is_sale,Yes',
             'is_sale' => 'nullable',
         ]);
-
         $price = $request->get('price');
         $sale = $request->get('sale');
         $salee = $price * $sale;
         $totalsale = $salee / 100;
         $totalsale = $price - $totalsale;
-
 //        dd($price,$sale,$totalsale);
         $data = Product::find($id);
-
-        $data->keywords = $request->input('keywords');
-        $data->title = $request->input('title');
-        $data->description = $request->input('description');
+        $data->keywords_tr = $request->input('keywords_tr');
+        $data->title_tr = $request->input('title_tr');
+        $data->description_tr = $request->input('description_tr');
+        $data->detail_tr = $request->input('detail_tr');
+        $data->keywords_en = $request->input('keywords_en');
+        $data->title_en = $request->input('title_en');
+        $data->description_en = $request->input('description_en');
+        $data->detail_en = $request->input('detail_en');
         $data->slug = $request->input('slug');
         $data->status = $request->input('status');
         $data->category_id = $request->input('category_id');
-        $data->detail = $request->input('detail');
         $data->price = $request->input('price');
         $data->quantity = $request->input('quantity');
         $data->minquantity = $request->input('minquantity');
@@ -162,7 +171,6 @@ class ProductController extends Controller
         }
         else
             $data->sale_price = $request->input('price');
-
         $data->user_id = Auth::id();
         if ($request->hasFile('image')) {
             $destination = 'images/' . $data->image;
@@ -177,19 +185,22 @@ class ProductController extends Controller
             $data->image = $filename;
         }
         $data->save();
-        return redirect()->route('admin_products')->with('success', 'Product Update Successfully');
+        $message=__('Product Update Successfully');
+        return redirect()->route('admin_products')->with('success', $message );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Product $product
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy(Product $product, $id)
+    public function destroy(Product $product, $id): RedirectResponse
     {
         $data = Product::find($id);
         $data->delete();
-        return redirect()->route('admin_products')->with('toast_success', 'Product is Deleted.');
+        $message=__( 'Product is Deleted.');
+        return redirect()->route('admin_products')->with('toast_success', $message);
     }
 }

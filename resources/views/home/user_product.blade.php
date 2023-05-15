@@ -3,17 +3,17 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', 'My Product')
+@section('title', __('My Product'))
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>User Product</h2>
+                <h2>@lang("User Product")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>User Product</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("User Product")</li>
                 </ul>
             </div>
         </div>
@@ -32,15 +32,15 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Category</th>
-                                <th>Title</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Image</th>
-                                <th>Image Gallery</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>@lang("Category")</th>
+                                <th>@lang("Title")</th>
+                                <th>@lang("Quantity")</th>
+                                <th>@lang("Price")</th>
+                                <th>@lang("Image")</th>
+                                <th>@lang("Image Gallery")</th>
+                                <th>@lang("Status")</th>
+                                <th>@lang("Edit")</th>
+                                <th>@lang("Delete")</th>
                             </tr>
                             </thead>
                             <tbody>

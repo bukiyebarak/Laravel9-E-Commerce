@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', $setting->title)
+@section('title', __('SSS').'-'.$setting->title)
 @section('description')
     {{$setting->description}}
 @endsection
@@ -14,10 +14,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Frequently Asked Question</h2>
+                <h2>@lang("Sıkça Sorulan Sorular")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Home</a></li>
-                    <li>FQAS</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("SSS")</li>
                 </ul>
             </div>
         </div>
@@ -38,7 +38,6 @@
                                                 <i class='bx bx-chevron-down'></i>
                                                 {{$rs->question}}
                                             </a>
-
                                             <div class="accordion-content">
                                                 <p><b>{!! $rs->answer !!}</b></p>
                                             </div>
@@ -49,7 +48,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -63,49 +61,49 @@
                     <div class="icon">
                         <i class='flaticon-tracking'></i>
                     </div>
-                    <h3>Free Shipping Worldwide</h3>
+                    <h3>@lang("Shipping") </h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-return'></i>
                     </div>
-                    <h3>Easy Return Policy</h3>
+                    <h3>@lang("Easy Return Policy")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-shuffle'></i>
                     </div>
-                    <h3>7 Day Exchange Policy</h3>
+                    <h3>@lang("7 Day Exchange Policy")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-sale'></i>
                     </div>
-                    <h3>Weekend Discount Coupon</h3>
+                    <h3>@lang("Weekend Discount Coupon")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-credit-card'></i>
                     </div>
-                    <h3>Secure Payment Methods</h3>
+                    <h3>@lang("Secure Payment Methods")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-location'></i>
                     </div>
-                    <h3>Track Your Package</h3>
+                    <h3>@lang("Track Your Package")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-customer-service'></i>
                     </div>
-                    <h3>24/7 Customer Support</h3>
+                    <h3>@lang("24/7 Customer Support")</h3>
                 </div>
             </div>
         </div>

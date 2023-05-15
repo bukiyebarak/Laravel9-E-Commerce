@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Product')
+@section('title', __('Edit FAQ'))
 
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -16,13 +16,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">EDIT FAQ</div>
+                <div class="breadcrumb-title pe-3">@lang("EDIT FAQ")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Faq</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Edit Faq")</li>
                         </ol>
                     </nav>
                 </div>
@@ -30,7 +30,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-0">Edit Faq</h4>
+                    <h4 class="mb-0">@lang("Edit Faq")</h4>
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -38,14 +38,14 @@
                                   action="{{route('admin_faq_update',['id'=>$data->id])}}" method="post" >
                                 @csrf
                                 <div class="col-md-10">
-                                    <label>Question</label>
+                                    <label>@lang("Question")</label>
                                     <input type="text" name="question" value="{{$data->question}}" class="form-control">
                                     @if ($errors->has('question'))
                                         <span class="text-danger">{{ $errors->first('question') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Answer</label>
+                                    <label>@lang("Answer")</label>
                                     <textarea id="summernote" name="answer">{{$data->answer}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
@@ -68,7 +68,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label>Status</label>
+                                    <label>@lang("Status")</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="">{{$data->status}}</option>
                                         <option>@if($data->status=="True")
@@ -79,7 +79,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary" type="submit">Update Faq</button>
+                                    <button class="btn btn-primary" type="submit">@lang("Update Faq")</button>
                                 </div>
                             </form>
                         </div>

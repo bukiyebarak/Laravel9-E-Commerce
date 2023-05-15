@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', 'User Order Items')
+@section('title', __('User Order Items'))
 @section('content')
     <style>
         div.scroll {
@@ -19,10 +19,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Order Items</h2>
+                <h2>@lang("Order Items")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Order Items</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Order Items")</li>
                 </ul>
             </div>
         </div>
@@ -39,20 +39,15 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Product</th>
-                                <th >Name</th>
-                                <th>Unit Price</th>
-                                <th style="text-align: center">Note</th>
-                                <th style="text-align: center">Status</th>
-
+                                <th>@lang("Product")</th>
+                                <th>@lang("Name")</th>
+                                <th>@lang("Unit Price")</th>
+                                <th style="text-align: center">@lang("Note")</th>
+                                <th style="text-align: center">@lang("Status")</th>
                             </tr>
                             </thead>
-
                             <tbody>
-                            @php
-                                $total=0;
-                            @endphp
-
+                            @php $total=0;   @endphp
                             @foreach($datalist as $rs)
                                 <tr>
                                     <td class="product-thumbnail">
@@ -61,18 +56,16 @@
                                                  style="height: 90px;" alt="">
                                         @endif
                                     </td>
-
                                     <td class="product-name">
                                         <a href="{{route('product',['id'=>$rs->product->id,'slug'=>$rs->product->slug])}}"> {{$rs->product->title}}</a>
                                         <ul>
-                                            <li>Received Quantity: <span> {{$rs->quantity}}</span></li>
-
+                                            <li>@lang("Received Quantity"): <span> {{$rs->quantity}}</span></li>
                                         </ul>
                                     </td>
                                     <td class="product-name">
                                         <span class="unit-amount">{{$rs->price}}₺</span>
                                         <ul>
-                                            <li>Total: <span> {{$rs->price*$rs->quantity}}₺</span></li>
+                                            <li>@lang("Total"): <span> {{$rs->price*$rs->quantity}}₺</span></li>
                                         </ul>
                                     </td>
                                     <td><div class="scroll">
@@ -82,23 +75,23 @@
                                          <div style="text-align: center;">
                                             @if($rs->status=="Shipping")
                                                     <button class="badge rounded-pill text-white bg-warning p-2 text-uppercase px-3">
-                                                    Shipping
+                                                        @lang("Shipping")
                                                 </button>
                                                 @elseif($rs->status=="Accepted")
                                                     <button class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
-                                                    Accepted
+                                                        @lang("Accepted")
                                                 </button>
                                                 @elseif($rs->status=="Completed")
                                                     <button class="badge rounded-pill text-white bg-info p-2 text-uppercase px-3">
-                                                    Completed
+                                                        @lang("Completed")
                                                 </button>
                                                 @elseif($rs->status=="Canceled")
                                                     <button class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
-                                                    Canceled
+                                                        @lang("Canceled")
                                                 </button>
                                                 @else
                                                     <button  class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
-                                                    New</button>
+                                                        @lang("New") </button>
                                                 @endif
                                         </div>
                                     </td>
@@ -109,14 +102,12 @@
                         </table>
                     </div>
                     <div class="cart-totals">
-                        <h3>Cart Totals</h3>
-
+                        <h3>@lang("Cart Totals")</h3>
                         <ul>
-                            <li>Subtotal <span>{{$rs->total-30}}₺</span></li>
-                            <li>Shipping <span>30 ₺</span></li>
-                            <li>Total <span>{{$rs->total}}₺</span></li>
+                            <li>@lang("Subtotal") <span>{{$rs->total-30}}₺</span></li>
+                            <li>@lang("Shipping") <span>30 ₺</span></li>
+                            <li>@lang("Total") <span>{{$rs->total}}₺</span></li>
                         </ul>
-
 {{--                        <form action="{{route('user_order_add')}}" method="post">--}}
 {{--                            @csrf--}}
 {{--                            <input type="hidden" name="total" value="{{$total}}">--}}

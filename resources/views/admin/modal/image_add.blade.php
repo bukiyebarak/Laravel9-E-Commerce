@@ -12,23 +12,23 @@
                     @csrf
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
-                            <label>Title</label>
-                            <input type="text" name="title" class="form-control" value="{{old('title')}}">
+                            <label for="title" >@lang("Title")</label>
+                            <input id="title" type="text" name="title" class="form-control" value="{{old('title')}}">
                             @if ($errors->has('title'))
                                 <span class="text-danger">{{ $errors->first('title') }}</span>
                             @endif
                         </div>
 
                         <div class="col-sm-12 col-md-12">
-                            <label>Image</label>
-                            <input type="file" name="image" class="form-control">
+                            <label for="image">@lang("Image")</label>
+                            <input id="image" type="file" name="image" class="form-control">
                             @if ($errors->has('image'))
                                 <span class="text-danger">{{ $errors->first('image') }}</span>
                             @endif
                         </div>
 
                         <div class="col-sm-6 col-md-6"><br>
-                            <button type="submit" class="btn btn-primary">Update Image</button>
+                            <button type="submit" class="btn btn-primary">@lang("Update Image")</button>
                         </div>
                     </div>
                     <br>
@@ -36,7 +36,7 @@
                 <div class="col">
                     <div class="card text-center">
                         <div class="card-body">
-                            <div class="text-danger rounded">Product Image(s)</div>
+                            <div class="text-danger rounded">@lang("Product Image(s)")</div>
                         </div>
                     </div>
                 </div>
@@ -47,21 +47,18 @@
                                 @if($rs->image)
                                     <img src="{{asset('images/'.$rs->image)}}" height="60" alt="">&nbsp;
                                 @endif
-                                <b>ID:</b> {{$rs->id}}  <b>Title:</b> {{$rs->title}} &nbsp;
-
+                                <b>ID:</b> {{$rs->id}}  <b>@lang("Title"):</b> {{$rs->title}} &nbsp;
                                     <a href="{{route('admin_image_delete',['id'=>$rs->id, 'product_id'=>$data->id])}} "
                                    class="text-danger btn bg-light-danger border-0 "
                                    onclick="return confirm('Delete! Are you Sure')"><i
                                         class="bx bxs-trash fs-6"></i></a>
-
                             </p><br>
-
                         </div>
                         @endforeach
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang("Close")</button>
             </div>
         </div>
     </div>

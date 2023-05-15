@@ -12,18 +12,45 @@ class Category extends Model
 
     protected $fillable = [
         'parent_id',
-        'title',
-        'keywords',
-        'image',
-        'description',
+        'title_en',
+        'keywords_en',
+        'detail_en',
+        'description_en',
+        'title_tr',
+        'keywords_tr',
+        'detail_tr',
+        'description_tr',
         'slug',
-        'detail',
+       'image',
     ];
-
     protected $appends=[
-        'parent',
+        'parent','title', 'keywords', 'description','detail'
     ];
 
+    public function getTitleAttribute()
+    {
+        $language = app()->getLocale();
+        $titleColumn = 'title_' . $language; // Doğru dil sütununun adı
+        return $this->{$titleColumn};
+    }
+    public function getKeywordsAttribute()
+    {
+        $language = app()->getLocale();
+        $titleColumn = 'keywords_' . $language; // Doğru dil sütununun adı
+        return $this->{$titleColumn};
+    }
+    public function getDescriptionAttribute()
+    {
+        $language = app()->getLocale();
+        $titleColumn = 'description_' . $language; // Doğru dil sütununun adı
+        return $this->{$titleColumn};
+    }
+    public function getDetailAttribute()
+    {
+        $language = app()->getLocale();
+        $titleColumn = 'detail_' . $language; // Doğru dil sütununun adı
+        return $this->{$titleColumn};
+    }
     //One to Many
     public function products()
     {

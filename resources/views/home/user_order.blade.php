@@ -3,17 +3,17 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', 'My Orders')
+@section('title', __('My Orders'))
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>User Order</h2>
+                <h2>@lang("User Order")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>User Order</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("User Order")</li>
                 </ul>
             </div>
         </div>
@@ -29,22 +29,21 @@
                         <table id="example2" class="table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
-                                <th>İsim</th>
-                                <th>Soyisim</th>
-                                <th>Email</th>
-                                <th>Telefon</th>
-                                <th>Adres</th>
-                                <th>İl</th>
-                                <th>İlçe</th>
-                                <th>Mahalle</th>
-                                <th>Toplam</th>
-                                <th>Şipariş Tarihi</th>
-                                <th>Durum</th>
-                                <th>Şipariş Detayı</th>
+                                <th>@lang("İsim")</th>
+                                <th>@lang("Soyisim")</th>
+                                <th>@lang("Email")</th>
+                                <th>@lang("Telefon")</th>
+                                <th>@lang("Adres")</th>
+                                <th>@lang("İl")</th>
+                                <th>@lang("İlçe")</th>
+                                <th>@lang("Mahalle")</th>
+                                <th>@lang("Toplam")</th>
+                                <th>@lang("Şipariş Tarihi")</th>
+                                <th>@lang("Durum")</th>
+                                <th>@lang("Şipariş Detayı")</th>
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach($datalist as $rs)
                                 @if($rs->is_pay=="True")
                                 <tr>
@@ -55,30 +54,30 @@
                                     <td>{{$rs->address}}</td>
                                     <td>{{$rs->city}}</td>
                                     <td>{{$rs->district}}</td>
-                                    <td>{{$rs->neighbourhood}} Mah.</td>
+                                    <td>{{$rs->neighbourhood}} @lang("Mah.")</td>
                                     <td>{{$rs->total}}</td>
                                     <td>{{$rs->created_at}}</td>
                                     <td>
                                         <div style="text-align: center;">
                                             @if($rs->status=="Shipping")
                                                 <button class="badge rounded-pill text-white bg-warning p-2 text-uppercase px-3">
-                                                    Shipping
+                                                    @lang("Shipping")
                                                 </button>
                                             @elseif($rs->status=="Accepted")
                                                 <button class="badge rounded-pill text-white bg-success p-2 text-uppercase px-3">
-                                                    Accepted
+                                                    @lang("Accepted")
                                                 </button>
                                             @elseif($rs->status=="Completed")
                                                 <button class="badge rounded-pill text-white bg-info p-2 text-uppercase px-3">
-                                                    Completed
+                                                    @lang("Completed")
                                                 </button>
                                             @elseif($rs->status=="Canceled")
                                                 <button class="badge rounded-pill text-white bg-danger p-2 text-uppercase px-3">
-                                                    Canceled
+                                                    @lang("Canceled")
                                                 </button>
                                             @else
                                                 <button  class="badge rounded-pill text-white btn-secondary p-2 text-uppercase px-3">
-                                                    New</button>
+                                                    @lang("New")</button>
                                             @endif
                                         </div>
                                     </td>

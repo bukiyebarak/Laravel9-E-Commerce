@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Review List')
+@section('title', __('Review List'))
 
 @section('content')
     <!--start page wrapper -->
@@ -8,13 +8,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Reviews</div>
+                <div class="breadcrumb-title pe-3">@lang("Reviews")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Reviews Detail</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Reviews Detail")</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,15 +29,15 @@
                                 <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Product</th>
-                                    <th>Subject</th>
-                                    <th>Review</th>
-                                    <th>Rate</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>@lang("Name")</th>
+                                    <th>@lang("Product")</th>
+                                    <th>@lang("Subject")</th>
+                                    <th>@lang("Review")</th>
+                                    <th>@lang("Rate")</th>
+                                    <th>@lang("Status")</th>
+                                    <th>@lang("Date")</th>
+                                    <th>@lang("Edit")</th>
+                                    <th>@lang("Delete")</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,7 +87,7 @@
                                                 <i class="bx bxs-edit"></i></a></div>
                                         </td>
                                         <td><div class="d-flex order-actions">
-                                            <a href="{{route('admin_review_delete',['id'=>$rs->id])}}" class="text-danger bg-light-danger border-0"  onclick="return confirm('Delete! Are you Sure')"><i class="bx bxs-trash"></i></a>
+                                            <a href="{{route('admin_review_delete',['id'=>$rs->id])}}" class="text-danger bg-light-danger border-0"  onclick="return confirm('{{ __('Delete! Are you sure?') }}')"><i class="bx bxs-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>

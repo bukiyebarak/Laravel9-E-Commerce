@@ -18,9 +18,9 @@
                     </div>
                     <div class="col-lg-4 col-md-12 " align="center">
                         <img src="{{asset('assets')}}/home/assets/img/iyzico-failed.png"><br><br>
-                        <h5>Satın alma işleminde sorun oluştu.</h5><br>
-                        <h5>Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.</h5><br>
-                        <a href="{{route('user_shopcart')}}" class="default-btn">SEPETİM</a>
+                        <h5>@lang("Satın alma işleminde sorun oluştu.")</h5><br>
+                        <h5>@lang("Lütfen bilgilerinizi kontrol edin ve tekrar deneyin.")</h5><br>
+                        <a href="{{route('user_shopcart')}}" class="default-btn">@lang("SEPETİM")</a>
                     </div>
                     <div class="col-lg-4 col-md-12">
                     </div>

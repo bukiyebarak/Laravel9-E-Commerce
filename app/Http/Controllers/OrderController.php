@@ -17,6 +17,10 @@ use App\Models\Orderitem;
 use App\Models\Product;
 use App\Models\Shopcart;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,13 +34,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 class OrderController extends Controller
 {
 
-    /**
-     * Create a new message instance.
-     *
-     *
-     * @return void
-     */
-
     public static function orderitemmail($id)
     {
         return Orderitem::where('user_id', Auth::id())->where('order_id', $id)->get();
@@ -45,12 +42,12 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
-        $name="User Orders";
-        $data="Şipariş bulunumadı. Keyifli alışverişler dileriz. ";
+        $name=__("User Orders");
+        $data= __("Şipariş bulunumadı. Keyifli alışverişler dileriz. ");
         $datalist = Order::where('user_id', Auth::id())->get();
         if($datalist->count()==0){
             return view('home.blank_data', ['data' => $data,'name'=>$name]);
@@ -62,9 +59,9 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function create(Request $request)
+    public function create(Request $request): Application|Factory|View
     {
         $total = $request->input('total');
 
@@ -76,7 +73,7 @@ class OrderController extends Controller
     {
         $cid = $request->post('cid');
         $getdistrict = DB::table('district')->where('ilce_sehirkey', '=', $cid)->orderBy('ilce_key', 'asc')->get();
-        $html = '<option value="">İlçe Seçiniz</option>';
+        $html = '<option value="">'. __('İlçe Seçiniz') . '</option>';
         foreach ($getdistrict as $rs) {
             $html .= '<option value="' . $rs->ilce_key . '">' . $rs->ilce_title . '</option>';
         }
@@ -87,7 +84,7 @@ class OrderController extends Controller
     {
         $did = $request->post('did');
         $getneighbourhood = DB::table('neighbourhood')->where('mahalle_ilcekey', '=', $did)->orderBy('mahalle_key', 'asc')->get();
-        $html = '<option value="">Mahalle Seçiniz</option>';
+        $html = '<option value="">'. __(' Mahalle Seçiniz') . '</option>';
         foreach ($getneighbourhood as $rs) {
             $html .= '<option value="' . $rs->mahalle_key . '">' . $rs->mahalle_title . '</option>';
         }
@@ -97,7 +94,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CheckoutRequest $request)
@@ -180,12 +177,12 @@ class OrderController extends Controller
         // return redirect()->back()->with('success','Product Add Successfully' );
     }
 
-    public function paymentSuccess()
+    public function paymentSuccess(): Factory|View|Application
     {
         return view('home.payment_success');
     }
 
-    public function paymentFail()
+    public function paymentFail(): Factory|View|Application
     {
         return view('home.payment_fail');
     }
@@ -193,10 +190,10 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function callback(Request $request, User $user)
+    public function callback(Request $request, User $user): RedirectResponse
     {
         if (!auth()->check()) {
             dd('callbackdggg');
@@ -242,9 +239,9 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Order $order
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function show(Order $order, $id)
+    public function show(Order $order, $id): View|Factory|Application
     {
         $datalist = Orderitem::where('user_id', Auth::id())->where('order_id', $id)->get();
 
@@ -265,7 +262,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */

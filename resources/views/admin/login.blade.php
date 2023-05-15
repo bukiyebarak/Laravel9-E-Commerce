@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32.png" type="image/png"/>
+    <link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32-gnc.png" type="image/png"/>
     <!--plugins-->
     <link href="{{asset('assets')}}/admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
     <link href="{{asset('assets')}}/admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
@@ -20,10 +20,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="{{asset('assets')}}/admin/assets/css/app.css" rel="stylesheet">
     <link href="{{asset('assets')}}/admin/assets/css/icons.css" rel="stylesheet">
-    <title>Login</title>
+    <title>@lang("Login")</title>
 </head>
 
 <body>
+<style>
+    .authentication-header {
+        position: absolute;
+        background: rgb(243, 63, 133);
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+    }
+</style>
 <!--wrapper-->
 <div class="wrapper">
     <div class="authentication-header"></div>
@@ -38,8 +48,8 @@
                         <div class="card-body">
                             <div class="p-4 rounded">
                                 <div class="text-center">
-                                    <h3 class="">Sign in</h3>
-                                    <p>Don't have an account yet? <a href="/register">Sign up here</a>
+                                    <h3 class="">@lang("Sign in")</h3>
+                                    <p >@lang("Don't have an account yet? ")<a style="color: rgb(243, 63, 133)" href="/register">@lang("Sign up here")</a>
                                     </p>
                                    @include('home.message')
                                 </div>
@@ -48,35 +58,35 @@
                                     <form class="row g-3" action="{{route('admin_logincheck')}}" method="post">
                                         @csrf
                                         <div class="col-12">
-                                            <label for="inputEmailAddress" class="form-label">Email Address</label>
+                                            <label for="inputEmailAddress" class="form-label">@lang("Email Address")</label>
                                             <input type="email" name="email" class="form-control" id="inputEmailAddress"
-                                                   placeholder="Email Address">
+                                                   placeholder="example@example.com">
                                         </div>
                                         <div class="col-12">
-                                            <label for="inputChoosePassword" class="form-label">Enter Password</label>
+                                            <label for="inputChoosePassword" class="form-label">@lang("Enter Password")</label>
                                             <div class="input-group" id="show_hide_password">
                                                 <input type="password" name="password" class="form-control border-end-0"
                                                        id="inputChoosePassword"
-                                                       placeholder="Enter Password">
+                                                       placeholder="********">
                                                 <a href="javascript:;"   class="input-group-text bg-transparent"><i
                                                         class='bx bx-hide'></i></a>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox"
-                                                       id="flexSwitchCheckChecked" checked>
-                                                <label class="form-check-label" for="flexSwitchCheckChecked">Remember
-                                                    Me</label>
-                                            </div>
+{{--                                            <div class="form-check form-switch" >--}}
+{{--                                                <input class="form-check-input" type="checkbox"--}}
+{{--                                                       id="flexSwitchCheckChecked" style="color: rgb(243, 63, 133)" checked>--}}
+{{--                                                <label class="form-check-label" for="flexSwitchCheckChecked">Remember--}}
+{{--                                                    Me</label>--}}
+{{--                                            </div>--}}
                                         </div>
-                                        <div class="col-md-6 text-end"><a href="{{ route('password.request') }}">Forgot
-                                                Password ?</a>
+                                        <div   class="col-md-6 text-end"><a style="color:rgb(243, 63, 133) " href="{{ route('password.request') }}">@lang("Forgot
+                                                Password ?")</a>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary"><i
-                                                        class="bx bxs-lock-open"></i>Sign in
+                                        <div class="col-12" style="background-color:rgb(243, 63, 133) ">
+                                            <div class="d-grid" style="background-color:rgb(243, 63, 133) ">
+                                                <button style="background-color:rgb(243, 63, 133);border-color: rgb(243, 63, 133); " type="submit" class="btn btn-primary"><i
+                                                        class="bx bxs-lock-open"></i>@lang("Sign in")
                                                 </button>
                                             </div>
                                         </div>

@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h3>About The Store</h3>
+                    <h3>@lang("About The Store")</h3>
 
                     <div class="about-the-store">
-                        <p>One of the most popular on the web is shopping.</p>
+                        <p>@lang("One of the most popular on the web is shopping.")</p>
                         <ul class="footer-contact-info">
                             <li><i class='bx bx-map'></i> <a href="#" target="_blank">{{$setting->address}}</a></li>
                             <li><i class='bx bx-phone-call'></i> <a href="tel:+01321654214">{{$setting->phone}}</a></li>
@@ -15,9 +15,7 @@
                             </li>
                         </ul>
                     </div>
-
                     <ul class="social-link">
-
                         @if($setting->facebook !=null)
                             <li><a href="{{$setting->facebook}}" class="d-block" target="_blank"><i
                                         class='bx bxl-facebook'></i></a></li>
@@ -37,48 +35,42 @@
                     </ul>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="single-footer-widget pl-4">
-                    <h3>Quick Links</h3>
-
+                    <h3>@lang("Quick Links")</h3>
                     <ul class="quick-links">
-                        <li><a href="{{route('aboutus')}}">About Us</a></li>
-                        <li><a href="{{route('home')}}">Shop Now!</a></li>
-                        <li><a href="{{route('references')}}">References</a></li>
-                        <li><a href="{{route('faq')}}">FAQ's</a></li>
-                        <li><a href="{{route('contact')}}">Contact Us</a></li>
-                        <li><a href="customer-service.html">Customer Services</a></li>
+                        <li><a href="{{route('aboutus')}}">@lang("About Us")</a></li>
+                        <li><a href="{{route('home')}}">@lang("Shop Now")!</a></li>
+                        <li><a href="{{route('references')}}">@lang("References")</a></li>
+                        <li><a href="{{route('faq')}}">@lang("FAQ's")</a></li>
+                        <li><a href="{{route('contact')}}">@lang("Contact Us")</a></li>
+                        <li><a href="customer-service.html">@lang("Customer Services")</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h3>Customer Support</h3>
-
+                    <h3>@lang("Customer Support")</h3>
                     <ul class="customer-support">
-                        <li><a href="{{route('myprofile')}}">My Account</a></li>
-                        <li><a href="{{route('user_shopcart')}}">Cart</a></li>
-                        <li><a href="{{route('faq')}}">FAQ's</a></li>
-                        <li><a href="track-order.html">Order Tracking</a></li>
-                        <li><a href="{{route('contact')}}">Help & Support</a></li>
+                        <li><a href="{{route('myprofile')}}">@lang("My Account")</a></li>
+                        <li><a href="{{route('user_shopcart')}}">@lang("Cart")</a></li>
+                        <li><a href="{{route('faq')}}">@lang("FAQ's")</a></li>
+                        <li><a href="track-order.html">@lang("Order Tracking")</a></li>
+                        <li><a href="{{route('contact')}}">@lang("Help & Support")</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="single-footer-widget">
-                    <h3>Newsletter</h3>
-
+                    <h3>@lang("Newsletter")</h3>
                     <div class="footer-newsletter-box">
-                        <p>To get the latest news and latest updates from us.</p>
-
+                        <p>@lang("To get the latest news and latest updates from us.")</p>
                         <form class="newsletter-form" data-bs-toggle="validator">
-                            <label>Your E-mail Address:</label>
-                            <input type="email" class="input-newsletter" placeholder="Enter your email" name="EMAIL"
+                            <label>@lang("Your E-mail Address:")</label>
+                            <input type="email" class="input-newsletter" placeholder="example@example.com" name="EMAIL"
                                    required autocomplete="off">
-                            <button type="submit">Subscribe</button>
+                            <button type="submit">@lang("Subscribe")</button>
                             <div id="validator-newsletter" class="form-result"></div>
                         </form>
                     </div>
@@ -89,7 +81,7 @@
         <div class="footer-bottom-area">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
-                    <p>© {{$setting->title}} 2022 Tüm Hakları Saklıdır, Kopyalanamaz </p>
+                    <p>© {{$setting->title}} 2023 @lang("Tüm Hakları Saklıdır, Kopyalanamaz.")  </p>
                     <p>V:1.0.1</p>
                 </div>
 
@@ -113,7 +105,6 @@
             </div>
         </div>
     </div>
-
     <div class="lines">
         <div class="line"></div>
         <div class="line"></div>

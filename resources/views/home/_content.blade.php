@@ -37,21 +37,21 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6">
                                 <div class="main-banner-content">
-                                    <span class="sub-title animate__animated animate__fadeInUp" style="opacity: 1;">🤎Coffee Time...🤎</span>
+                                    <span class="sub-title animate__animated animate__fadeInUp" style="opacity: 1;">🤎@lang('Coffee Time')...🤎</span>
                                     <br>
-                                    <span class="sub-title animate__animated animate__fadeInUp" style="opacity: 1;">Limited Time Offer!</span>
+                                    <span class="sub-title animate__animated animate__fadeInUp" style="opacity: 1;">@lang('Limited Time Offer')!</span>
                                     <h1 class="animate__animated animate__fadeInUp"
                                         style="opacity: 1;">{{$rs->title}}</h1>
-                                    <p> {{$rs->category}}</p>
+                                    <p style="color: rgba(243,63,133,0.94);font-weight: bold"> {{$rs->category->title}}</p>
                                     <p class="animate__animated animate__fadeInUp" style="opacity: 1;">
                                         @if($rs->is_sale=="Yes")
-                                            Take off {{$rs->sale}}% Off 'Sale Must-Haves'
-                                        @endif
+                                            @lang('Take off') {{$rs->sale}}% @lang("Off 'Sale Must-Haves'")
+                                            @endif
                                     </p>
                                     </p>
                                     <div style="text-align: center" class="btn-box">
                                         <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}"
-                                           class="default-btn">Shop Now</a>
+                                           class="default-btn">@lang("Shop Now") </a>
                                     </div>
                                 </div>
                             </div>
@@ -81,9 +81,9 @@
                     <img src="{{asset('assets')}}/home/assets/img/coffee2.jpg" alt="image" style="width: 750vm;height: 500vm;">
 
                     <div class="content text-white">
-                        <span>Build your own package</span>
-                        <h3>Now is the time</h3>
-                        <a href="{{route('main_category_products_paket')}}" class="default-btn">Discover Now</a>
+                        <span>@lang("Build your own package")</span>
+                        <h3>@lang("Now is the time")</h3>
+                        <a href="{{route('main_category_products_paket')}}" class="default-btn">@lang("Discover Now")</a>
                     </div>
                     <a href="{{route('main_category_products_paket')}}" class="link-btn"></a>
                 </div>
@@ -92,11 +92,10 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="single-categories-box">
                     <img src="{{asset('assets')}}/home/assets/img/coffee.jpg" alt="image" style="height: 500vm;">
-
                     <div class="content">
-                        <span>New Collection</span>
-                        <h3>Need Now</h3>
-                        <a href="{{route('new_products')}}" class="default-btn">Discover Now</a>
+                        <span>@lang("New Collection")</span>
+                        <h3>@lang("Need Now")</h3>
+                        <a href="{{route('new_products')}}" class="default-btn">@lang("Discover Now")</a>
                     </div>
                     <a href="{{route('new_products')}}" class="link-btn"></a>
                 </div>
@@ -110,13 +109,12 @@
 <section class="products-area pb-70">
     <div class="container">
         <div class="section-title">
-            <span class="sub-title">See Our Collection</span>
-            <h2>En Yeniler</h2>
+            <span class="sub-title">@lang("See Our Collection")</span>
+            <h2>@lang("En Yeniler")</h2>
         </div>
 
         <div class="row">
             @foreach($last as $rs)
-
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="single-productsBox">
                         <div class="products-image">
@@ -124,9 +122,7 @@
                                 <img style="height: 200px" src="{{asset('images/'.$rs->image)}}" class="main-image"
                                      alt="image">
                                 <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
-
                             </a>
-
                             <div class="products-button">
                                 <ul>
                                     <li>
@@ -134,18 +130,17 @@
                                             <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
                                                 @csrf
                                                 <a href="javascript:void(0);">
-                                                    <span class="tooltip-label">Add to Wishlist</span>
+                                                    <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                                     <button type="submit" class='heartbtn bx bx-heart'></button>
                                                 </a>
                                             </form>
                                         </div>
                                     </li>
-
                                     <li>
                                         <div class="quick-view-btn">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                 <i class='bx bx-search-alt'></i>
-                                                <span class="tooltip-label">Quick View</span>
+                                                <span class="tooltip-label">@lang("Quick View")</span>
                                             </a>
                                         </div>
                                     </li>
@@ -155,7 +150,7 @@
                                                 @csrf
                                                 <input name="quantity" type="hidden" value="1">
                                                 <a href="javascript:void(0);">
-                                                    <span class="tooltip-label">Add to Cart</span>
+                                                    <span class="tooltip-label">@lang("Add to Cart")</span>
                                                     <button type="submit" class="heartbtn bx bx-cart"></button>
                                                 </a>
                                             </form>
@@ -164,9 +159,9 @@
                                 </ul>
                             </div>
                             @if($rs->is_sale=="Yes")
-                                <div class="sale-tag">Sale!</div>
+                                <div class="sale-tag" style="font-size: 11px">@lang("Sale")!</div>
                             @else
-                                <div class="new-tag">New!</div>
+                                <div class="new-tag">@lang("New")!</div>
                             @endif
 
                         </div>
@@ -190,11 +185,10 @@
                                     <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i> @if($countreview>0)
-                                        ({{$countreview}} İnceleme)
+                                        ({{$countreview}} @lang("İnceleme"))
                                     @endif
                                 </div>
                             </div>
-
                             @if($rs->is_sale=="No")
                                 <div class="price">
                                     <span class="new-price">{{$rs->price}}₺</span>
@@ -211,14 +205,11 @@
 {{--                                <button type="submit" class="add-to-cart btn default-btn">Add to Cart</button>--}}
 {{--                            </form>--}}
                         </div>
-
-
                         @if($rs->is_sale=="Yes")
                             <span class="products-discount">
-                            <span> {{$rs->sale}}% OFF </span>
+                            <span> {{$rs->sale}}% @lang("OFF") </span>
                         </span>
                         @endif
-
                     </div>
                 </div>
 
@@ -234,22 +225,20 @@
         <div class="offer-products-slides owl-carousel owl-theme">
             <div class="single-offer-products">
                 <div class="content">
-                    <h3><a href="{{route('new_products')}}">New Collections!</a></h3>
-                    <p>Stylist Allison Taylor take on the summer season's trends.</p>
-                    <a href="{{route('new_products')}}" class="default-btn">Discover Now!</a>
+                    <h3><a href="{{route('new_products')}}">@lang("New Collections")!</a></h3>
+                    <p>@lang("Stylist Allison Taylor take on the summer season's trends.")</p>
+                    <a href="{{route('new_products')}}" class="default-btn">@lang("Discover Now")!</a>
                 </div>
-
                 <div class="image">
                     <a href="{{route('new_products')}}"><img
                             src="{{asset('assets')}}/home/assets/img/offer/img1.jpg" alt="image"></a>
                 </div>
             </div>
-
             <div class="single-offer-products">
                 <div class="content">
-                    <h3><a href="{{route('allproducts')}}">All Products</a></h3>
-                    <p>Stylist Allison Taylor take on the summer season's trends.</p>
-                    <a href="{{route('allproducts')}}" class="default-btn">Discover Now!</a>
+                    <h3><a href="{{route('allproducts')}}">@lang("All Products")</a></h3>
+                    <p>@lang("Stylist Allison Taylor take on the summer season's trends.")</p>
+                    <a href="{{route('allproducts')}}" class="default-btn">@lang("Discover Now")!</a>
                 </div>
 
                 <div class="image">
@@ -260,9 +249,9 @@
 
             <div class="single-offer-products">
                 <div class="content">
-                    <h3><a href="{{route('discount_products')}}">Discount Products</a></h3>
-                    <p>Stylist Allison Taylor take on the summer season's trends.</p>
-                    <a href="{{route('discount_products')}}" class="default-btn">Discover Now!</a>
+                    <h3><a href="{{route('discount_products')}}">@lang("Discount Products")</a></h3>
+                    <p>@lang("Stylist Allison Taylor take on the summer season's trends").</p>
+                    <a href="{{route('discount_products')}}" class="default-btn">@lang("Discover Now")!</a>
                 </div>
 
                 <div class="image">
@@ -282,9 +271,9 @@
         <section class="products-area pt-100 pb-70">
             <div class="container">
                 <div class="section-title text-start">
-                    <span class="sub-title">See Our Collection</span>
-                    <h2>Recent Products</h2>
-                    <a href="{{route('allproducts')}}" class="default-btn">Shop More</a>
+                    <span class="sub-title">@lang("See Our Collection")</span>
+                    <h2>@lang("Recent Products")</h2>
+                    <a href="{{route('allproducts')}}" class="default-btn">@lang("Shop More")</a>
                 </div>
 
                 <div class="products-slides owl-carousel owl-theme">
@@ -306,7 +295,7 @@
                                                       method="post">
                                                     @csrf
                                                     <a href="javascript:void(0);">
-                                                        <span class="tooltip-label">Add to Wishlist</span>
+                                                        <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                                         <button type="submit" class='heartbtn bx bx-heart'></button>
                                                     </a>
                                                 </form>
@@ -316,7 +305,7 @@
                                             <div class="quick-view-btn">
                                                 <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                     <i class='bx bx-search-alt'></i>
-                                                    <span class="tooltip-label">Quick View</span>
+                                                    <span class="tooltip-label">@lang("Quick View")</span>
                                                 </a>
                                             </div>
                                         </li>
@@ -326,7 +315,7 @@
                                                     @csrf
                                                     <input name="quantity" type="hidden" value="1">
                                                     <a href="javascript:void(0);">
-                                                        <span class="tooltip-label">Add to Cart</span>
+                                                        <span class="tooltip-label">@lang("Add to Cart")</span>
                                                         <button type="submit" class="heartbtn bx bx-cart"></button>
                                                     </a>
                                                 </form>
@@ -365,7 +354,7 @@
                                         <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                         <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                         <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
-                                            ({{$countreview}} İnceleme)
+                                            ({{$countreview}} @lang("İnceleme"))
                                         @endif
                                     </div>
                                 </div>
@@ -390,8 +379,8 @@
 <section class="products-area pt-100 pb-70">
     <div class="container">
         <div class="section-title">
-            <span class="sub-title">See Our Collection</span>
-            <h2>Popular Products</h2>
+            <span class="sub-title">@lang("See Our Collection")</span>
+            <h2>@lang("Popular Products")</h2>
         </div>
 
         <div class="row">
@@ -404,19 +393,16 @@
                                      alt="image" >
                                 <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                             </a>
-
                             <div class="products-button">
                                 <ul>
                                     <li>
-
                                         <div class="wishlist-btn">
                                             <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
                                                 @csrf
                                                 <a href="javascript:void(0);">
-                                                    <span class="tooltip-label">Add to Wishlist</span>
+                                                    <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                                     <button type="submit" class='heartbtn bx bx-heart'></button>
                                                 </a>
-
                                             </form>
                                         </div>
                                     </li>
@@ -424,7 +410,7 @@
                                         <div class="quick-view-btn">
                                             <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                 <i class='bx bx-search-alt'></i>
-                                                <span class="tooltip-label">Quick View</span>
+                                                <span class="tooltip-label">@lang("Quick View")</span>
                                             </a>
                                         </div>
                                     </li>
@@ -434,7 +420,7 @@
                                             @csrf
                                             <input name="quantity" type="hidden" value="1">
                                             <a href="javascript:void(0);">
-                                                <span class="tooltip-label">Add to Cart</span>
+                                                <span class="tooltip-label">@lang("Add to Cart")</span>
                                                 <button type="submit" class="heartbtn bx bx-cart"></button>
                                             </a>
                                             </form>
@@ -444,11 +430,11 @@
                             </div>
 
                             @if($rs->is_sale=="Yes")
-                                <div class="sale-tag">Sale!</div>
+                                <div class="sale-tag" style="font-size: 11px">@lang("Sale")!</div>
                             @else
                                 @foreach($last as $data)
                                     @if($rs->id==$data->id)
-                                        <div class="new-tag">New!</div>
+                                        <div class="new-tag">@lang("New")!</div>
                                     @endif
                                 @endforeach
                             @endif
@@ -456,7 +442,6 @@
 
                         <div class="products-content">
                             @foreach($parentCategories as $category)
-
                                 @if($category->id==$rs->category_id)
                                     <span class="category">{{$category->title}}</span>
                                 @endif
@@ -473,7 +458,7 @@
                                     <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                     <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
-                                        ({{$countreview}} İnceleme)
+                                        ({{$countreview}} @lang("İnceleme"))
                                     @endif
                                 </div>
                             </div>
@@ -495,7 +480,7 @@
                         </div>
                         @if($rs->is_sale=="Yes")
                             <span class="products-discount">
-                            <span> {{$rs->sale}}% OFF </span>
+                            <span> {{$rs->sale}}% @lang("OFF") </span>
                         </span>
                         @endif
                     </div>
@@ -514,49 +499,48 @@
                 <div class="icon">
                     <i class='flaticon-tracking'></i>
                 </div>
-                <h3>Free Shipping Worldwide</h3>
+                <h3>@lang("Kargo")</h3>
             </div>
 
             <div class="single-facility-box">
                 <div class="icon">
                     <i class='flaticon-return'></i>
                 </div>
-                <h3>Easy Return Policy</h3>
+                <h3>@lang("Easy Return Policy")</h3>
             </div>
 
             <div class="single-facility-box">
                 <div class="icon">
                     <i class='flaticon-shuffle'></i>
                 </div>
-                <h3>7 Day Exchange Policy</h3>
+                <h3>@lang("7 Day Exchange Policy") </h3>
             </div>
 
             <div class="single-facility-box">
                 <div class="icon">
                     <i class='flaticon-sale'></i>
                 </div>
-                <h3>Weekend Discount Coupon</h3>
+                <h3>@lang("Weekend Discount Coupon")</h3>
             </div>
-
             <div class="single-facility-box">
                 <div class="icon">
                     <i class='flaticon-credit-card'></i>
                 </div>
-                <h3>Secure Payment Methods</h3>
+                <h3>@lang("Secure Payment Methods")</h3>
             </div>
 
             <div class="single-facility-box">
                 <div class="icon">
                     <i class='flaticon-location'></i>
                 </div>
-                <h3>Track Your Package</h3>
+                <h3>@lang("Track Your Package")</h3>
             </div>
 
             <div class="single-facility-box">
                 <div class="icon">
                     <i class='flaticon-customer-service'></i>
                 </div>
-                <h3>24/7 Customer Support</h3>
+                <h3>@lang("24/7 Customer Support") </h3>
             </div>
         </div>
     </div>
@@ -567,8 +551,8 @@
 <section class="products-area pb-70">
     <div class="container">
         <div class="section-title">
-            <span class="sub-title">See Our Collection</span>
-            <h2>Daily Products</h2>
+            <span class="sub-title">@lang("See Our Collection")</span>
+            <h2>@lang("Daily Products")</h2>
         </div>
 
         <div class="row">
@@ -582,7 +566,6 @@
                                          alt="image">
                                     <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                                 </a>
-
                                 <div class="products-button">
                                     <ul>
                                         <li>
@@ -591,7 +574,7 @@
                                                       method="post">
                                                     @csrf
                                                     <a href="javascript:void(0);">
-                                                        <span class="tooltip-label">Add to Wishlist</span>
+                                                        <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                                         <button type="submit" class='heartbtn bx bx-heart'></button>
                                                     </a>
                                                 </form>
@@ -601,7 +584,7 @@
                                             <div class="quick-view-btn">
                                                 <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                     <i class='bx bx-search-alt'></i>
-                                                    <span class="tooltip-label">Quick View</span>
+                                                    <span class="tooltip-label">@lang("Quick View")</span>
                                                 </a>
                                             </div>
                                         </li>
@@ -611,7 +594,7 @@
                                                     @csrf
                                                     <input name="quantity" type="hidden" value="1">
                                                     <a href="javascript:void(0);">
-                                                        <span class="tooltip-label">Add to Cart</span>
+                                                        <span class="tooltip-label">@lang("Add to Cart")</span>
                                                         <button type="submit" class="heartbtn bx bx-cart"></button>
                                                     </a>
                                                 </form>
@@ -620,11 +603,11 @@
                                     </ul>
                                 </div>
                                 @if($rs->is_sale=="Yes")
-                                    <div class="sale-tag">Sale!</div>
+                                    <div class="sale-tag" style="font-size: 11px">@lang("Sale")!</div>
                                 @else
                                     @foreach($last as $data)
                                         @if($rs->id==$data->id)
-                                            <div class="new-tag">New!</div>
+                                            <div class="new-tag">@lang("New")!</div>
                                         @endif
                                     @endforeach
                                 @endif
@@ -648,7 +631,7 @@
                                         <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                                         <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                         <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
-                                            ({{$countreview}} İnceleme)
+                                            ({{$countreview}} @lang("İnceleme"))
                                         @endif
                                     </div>
                                 </div>
@@ -670,7 +653,7 @@
                             </div>
                             @if($rs->is_sale=="Yes")
                                 <span class="products-discount">
-                            <span> {{$rs->sale}}% OFF </span>
+                            <span> {{$rs->sale}}% @lang("OFF")  </span>
                         </span>
                             @endif
                         </div>
@@ -687,7 +670,7 @@
 <div class="brand-area ptb-70">
     <div class="container">
         <div class="section-title">
-            <h2>Shop By Brand</h2>
+            <h2>@lang("Shop By Brand")</h2>
         </div>
 
         <div class="brand-slides owl-carousel owl-theme">

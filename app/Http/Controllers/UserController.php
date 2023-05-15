@@ -12,17 +12,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         return view('home.user_profile');
     }
 
-    public function myreviews()
+    public function myreviews(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        $data="Yaptığınız yorumları burada görebilirsiniz. Daha önce yapılan yorum sayısı sıfır.";
-        $name="User Reviews";
+        $data= __("Yaptığınız yorumları burada görebilirsiniz. Daha önce yapılan yorum sayısı sıfır.");
+        $name=__("User Reviews");
         $datalist = Review::where('user_id', '=', Auth::user()->id)->get();
 
         if($datalist->count()==0){
@@ -32,11 +32,12 @@ class UserController extends Controller
             return view('home.user_reviews', ['datalist' => $datalist]);
     }
 
-    public function destroymyreview(Review $review, $id)
+    public function destroymyreview(Review $review, $id): \Illuminate\Http\RedirectResponse
     {
         $data = Review::find($id);
         $data->delete();
-        return redirect()->back()->with('success', 'Review Deleted');
+        $message= __('Review Deleted');
+        return redirect()->back()->with('success', $message);
     }
 
     /**

@@ -3,71 +3,68 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Message Edit</h5>
+                <h5 class="modal-title">@lang("Message Edit")</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
             <div class="modal-body">
                 <form action="{{route('admin_message_update',['id'=>$dataMessage->id])}}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
-                            <label>Name Surname</label>
-                            <input type="text" name="title"
+                            <label for="name">@lang("Name Surname")</label>
+                            <input id="name" type="text" name="name"
                                    value="{{$dataMessage->user->name}} {{$dataMessage->user->surname}}"
                                    class="form-control" disabled>
                         </div>
                         <div class="col-sm-6 col-md-6">
-                                <label>Id</label>
-                                <input type="text" name="title" value="{{$dataMessage->id}}" class="form-control"
+                                <label for="id">Id</label>
+                                <input id="id" type="text" name="title" value="{{$dataMessage->id}}" class="form-control"
                                        disabled>
                         </div>
                         <div class="col-sm-6 col-md-6">
-                            <label>IP</label>
-                            <input type="text" name="phone" disabled value="{{$dataMessage->ip_address}}"
+                            <label for="ip">IP</label>
+                            <input id="ip" type="text" name="phone" disabled value="{{$dataMessage->ip_address}}"
                                    class="form-control">
                         </div>
 
                         <div class="col-sm-6 col-md-6">
-                                <label>Phone</label>
-                                <a href="tel:+01321654214"><input type="text" name="phone" disabled
+                                <label for="phone">@lang("Phone")</label>
+                                <a href="tel:+01321654214"><input id="phone" type="text" name="phone" disabled
                                                                   value="{{$dataMessage->phone}}" class="form-control"></a>
                         </div>
                         <div class="col-sm-6 col-md-6">
-                                <label>Email</label>
-                                <a href="tel:+01321654214"><input type="text" name="phone" disabled
+                                <label for="email">@lang("Email")</label>
+                                <a href="tel:+01321654214"><input id="email" type="text" name="email" disabled
                                                                   value="{{$dataMessage->email}}" class="form-control"></a>
                         </div>
-
                         <div class="col-sm-6 col-md-6">
-                                <label>Created Date</label>
-                                <input type="text" name="created_at" value="{{$dataMessage->created_at}}"
+                                <label for="date">@lang("Created Date")</label>
+                                <input id="date" type="text" name="created_at" value="{{$dataMessage->created_at}}"
                                        class="form-control"
                                        disabled>
                         </div>
                         <div class="col-sm-6 col-md-6">
-                            <label>Updated Date</label>
-                            <input type="text" name="created_at" value="{{$dataMessage->updated_at}}"
+                            <label for="date1">@lang("Updated Date")</label>
+                            <input id="date1" type="text" name="created_at" value="{{$dataMessage->updated_at}}"
                                    class="form-control"
                                    disabled>
                         </div>
                         <div class="col-md-12">
-                                <label>Subject</label> <input type="text" name="phone" disabled value="{{$dataMessage->message}}"
+                                <label for="subject">@lang("Subject")</label> <input id="subject" type="text" name="phone" disabled value="{{$dataMessage->message}}"
                                                               class="form-control">
-
                         </div>
                         <div class="col-md-12">
-                                <label>Message</label>
-                                <textarea type="text" name="phone" disabled value=""
+                                <label for="message">@lang("Message")</label>
+                                <textarea id="message" type="text" name="phone" disabled value=""
                                           class="form-control">{{$dataMessage->subject}}</textarea>
                             <br></div>
                         <div class="col-md-12">
-                            <label>Admin Note</label>
+                            <label for="note">@lang("Admin Note")</label>
                             @if(empty($dataMessage->note))
-                                <textarea name="note" cols="30" rows="5" class="form-control"
+                                <textarea id="note" name="note" cols="30" rows="5" class="form-control"
                                           placeholder="Write your message..."></textarea>
                             @else
-                                <textarea name="note" cols="30" rows="5"
+                                <textarea id="note" name="note" cols="30" rows="5"
                                           required data-error="Please enter your message"
                                           class="form-control"
                                 >{{$dataMessage->note}}</textarea>
@@ -75,23 +72,22 @@
                             <br>
                         </div>
                         <div class="col-md-12 ">
-                            <label>Status</label>
+                            <label for="status">@lang("Status")</label>
                             <br>
-                            <select class="form-select form-select mb-3" aria-label=".form-select-lg example"
+                            <select id="status" class="form-select form-select mb-3" aria-label=".form-select-lg example"
                                     name="status">
                                 <option selected>{{$dataMessage->status}}</option>
                                 <option>@if($dataMessage->status=="New")
-                                        Read
+                                        @lang("Read")
                                     @else
-                                        New
+                                        @lang("New")
                                     @endif</option>
 
                             </select> <br><br>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Update Message</button>
-
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">@lang("Update Message")</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang("Close")</button>
                         </div>
                     </div>
                 </form>

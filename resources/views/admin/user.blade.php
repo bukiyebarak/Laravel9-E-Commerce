@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'User List')
+@section('title', __('User List'))
 
 @section('content')
     <!--start page wrapper -->
@@ -8,13 +8,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Users</div>
+                <div class="breadcrumb-title pe-3">@lang("Users")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">User</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("User")</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,14 +29,14 @@
                                 <tr>
                                     <th>Id</th>
                                     {{--                                    <th>Image</th>--}}
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Roles</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>@lang("Name")</th>
+                                    <th>@lang("Surname")</th>
+                                    <th>@lang("Email")</th>
+                                    <th>@lang("Phone")</th>
+                                    <th>@lang("Address")</th>
+                                    <th>@lang("Roles")</th>
+                                    <th>@lang("Edit")</th>
+                                    <th>@lang("Delete")</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +83,7 @@
                                             <div class="d-flex order-actions">
                                                 <a href="{{route('admin_user_delete',['id'=>$rs->id])}}  "
                                                    class="text-danger bg-light-danger border-0"
-                                                   onclick="return confirm('Delete! Are you Sure')"><i
+                                                   onclick="return confirm('{{ __('Delete! Are you sure?') }}')"><i
                                                         class="bx bxs-trash"></i></a>
                                             </div>
                                         </td>

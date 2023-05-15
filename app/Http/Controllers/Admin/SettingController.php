@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         $data=Setting::first();
         // print_r($data);
@@ -31,7 +36,7 @@ class SettingController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -41,8 +46,8 @@ class SettingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -52,8 +57,8 @@ class SettingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
+     * @param Setting $setting
+     * @return Response
      */
     public function show(Setting $setting)
     {
@@ -63,8 +68,8 @@ class SettingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
+     * @param Setting $setting
+     * @return Response
      */
     public function edit(Setting $setting)
     {
@@ -74,15 +79,13 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Setting $setting
+     * @return RedirectResponse
      */
-    public function update(Request $request, Setting $setting)
+    public function update(Request $request, Setting $setting): RedirectResponse
     {
-
         $id=$request->input('id');
-
         $data = Setting::find($id);
         $data->keywords = $request->input('keywords');
         $data->title = $request->input('title');
@@ -105,14 +108,15 @@ class SettingController extends Controller
         $data->references =$request->input('references');
         $data->status = $request->input('status');
         $data->save();
-        return redirect()->route('admin_setting')->with('success','Setting Update Successfully');
+        $message=__('Setting Update Successfully');
+        return redirect()->route('admin_setting')->with('success',$message);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
+     * @param Setting $setting
+     * @return Response
      */
     public function destroy(Setting $setting)
     {

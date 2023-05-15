@@ -14,6 +14,9 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Shopcart;
 use App\Models\Wishlist;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -69,11 +72,19 @@ class HomeController extends Controller
         return Product::select('id', 'image', 'slug', 'is_sale', 'sale', 'status')->where(['status' => 'True'])->limit(4)->orderByDesc('id')->get();
         // dd($datalist);
     }
-
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Application|Factory|View
+     */
+    public function index(): View|Factory|Application
     {
         $setting = Setting::first();
-        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status', 'sale', 'is_sale',)->where('status', '=', 'True')->limit(4)->get();
+        $slider = Product::select('id', 'title', 'image', 'price', 'slug', 'status', 'sale', 'is_sale','category_id')
+            ->where('status', '=', 'True')
+            ->with('category')
+            ->limit(4)
+            ->get();
         $daily = Product::where('status', '=', 'True')->limit(6)->inRandomOrder()->get();
         $last = Product::where('status', '=', 'True')->limit(6)->orderByDesc('id')->get();
         $picked = Product::where('status', '=', 'True')->limit(6)->inRandomOrder()->get();
@@ -89,19 +100,19 @@ class HomeController extends Controller
     }
 
 
-    public function header()
+    public function header(): Factory|View|Application
     {
         $datalist = Shopcart::with('product')->where('user_id', Auth::id())->get();
         return view('home._header', ['datalist' => $datalist]);
     }
 
 
-    public function login()
+    public function login(): Factory|View|Application
     {
         return view('admin.login');
     }
 
-    public function logincheck(Request $request)
+    public function logincheck(Request $request): Factory|View|\Illuminate\Http\RedirectResponse|Application
     {
         if ($request->isMethod('post')) {
             $credentials = $request->only('email', 'password');
@@ -119,7 +130,7 @@ class HomeController extends Controller
         }
     }
 
-    public function logoutt(Request $request)
+    public function logoutt(Request $request): \Illuminate\Routing\Redirector|Application|\Illuminate\Http\RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
@@ -127,33 +138,33 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function aboutus()
+    public function aboutus(): Factory|View|Application
     {
         $setting = Setting::first();
 
         return view('home.about', ['setting' => $setting]);
     }
 
-    public function contact()
+    public function contact(): Factory|View|Application
     {
         $setting = Setting::first();
         return view('home.contact', ['setting' => $setting]);
     }
 
-    public function faq()
+    public function faq(): Factory|View|Application
     {
         $datalist = Faq::all()->sortBy('position');
 
         return view('home.faq', ['datalist' => $datalist]);
     }
 
-    public function references()
+    public function references(): Factory|View|Application
     {
         $setting = Setting::first();
         return view('home.references', ['setting' => $setting]);
     }
 
-    public function sendmessage(ContactRequest $request)
+    public function sendmessage(ContactRequest $request): \Illuminate\Http\RedirectResponse
     {
         $message = Message::create([
             'name' => $request->input('name'),
@@ -167,7 +178,8 @@ class HomeController extends Controller
         ]);
         $this->sendContactMessageMailAdmin($message);
 
-        return redirect()->route('contact')->with('success', 'Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
+        $message= __('Mesajınız Kaydedilmiştir. Teşekkür Ederiz.');
+        return redirect()->route('contact')->with('success', $message);
     }
 
     public function sendContactMessageMailAdmin($contact)
@@ -177,23 +189,24 @@ class HomeController extends Controller
 
 
     #region Search
-    public function getproduct(Request $request)
+    public function getproduct(Request $request): \Illuminate\Http\RedirectResponse
     {
         $search = $request->input('search');
         $count = Product::where('title', 'like', '%' . $search . '%')->get()->count();
-        $data1 = Product::where('title', 'like', '%' . $search . '%')->get()->count();
+//        $data1 = Product::where('title', 'like', '%' . $search . '%')->get()->count();
         if ($count == 1) {
             $data = Product::where('title', 'like', '%' . $search . '%')->first();
             return redirect()->route('product', ['id' => $data->id, 'slug' => $data->slug]);
         } elseif ($count == 0)
-            return redirect()->back()->with('toast_error', 'Please,re-enter the product you want to search.');
+        {
+            $message= __('Please,re-enter the product you want to search.');
+            return redirect()->back()->with('toast_error', $message);
+        }
         else
             return redirect()->route('productlist', ['search' => $search]);
-
-
     }
 
-    public function productlist($search)
+    public function productlist($search): Factory|View|Application
     {
         $datalist = Product::where('title', 'like', '%' . $search . '%');
         $this->getSort($datalist);
@@ -205,7 +218,7 @@ class HomeController extends Controller
 
     #endregion
 
-    public function product($id)
+    public function product($id): Factory|View|Application
     {
         $data = Product::find($id);
         $datalist = Image::where('product_id', $id)->get();
@@ -213,9 +226,8 @@ class HomeController extends Controller
         return view('home.product_detail', ['data' => $data, 'datalist' => $datalist, 'reviews' => $reviews]);
     }
 
-    public function paket_product($id, $slug)
+    public function paket_product($id, $slug): Factory|View|Application|\Illuminate\Http\RedirectResponse
     {
-//
         $data = PaketProduct::where(['paket_category_id' => $id, 'status' => 'True'])->first();
         $dataid = PaketProduct::where('paket_category_id', '=', $id)->select('category_id')->first();
         if ($data) {
@@ -224,13 +236,13 @@ class HomeController extends Controller
 //        $datalist = Image::where('product_id', $id)->get();
 //        $reviews = Review::where(['product_id'=>$id, 'status'=>'True'])->get();
             return view('home.paket_product_detail', ['data' => $data, 'products' => $products]);
-        } else
-            return redirect()->back()->with('toast_error', 'Not Find Product');
-    }
+        } else {
+            $message=__('Not Find Product');
+            return redirect()->back()->with('toast_error', $message );
+        }    }
 
-    public function paket_product_update_cart(Request $request, $id, $slug)
+    public function paket_product_update_cart(Request $request, $id, $slug): Factory|View|Application
     {
-
         $data = PaketProduct::where('paket_category_id', '=', $id)->first();
         $dataid = PaketProduct::where('paket_category_id', '=', $id)->select('category_id')->first();
         $products = Product::where('category_id', '=', $dataid->category_id)->get();
@@ -244,10 +256,9 @@ class HomeController extends Controller
 
 
     //alt kategori ürün bulma
-    public function categoryproducts(Request $request, $id, $slug)
+    public function categoryproducts(Request $request, $id, $slug): Factory|View|Application
     {
         $datalist = Product::where('category_id', $id);
-
         //checking for sort
         $this->getSort($datalist);
         // dd($datalist);
@@ -257,7 +268,7 @@ class HomeController extends Controller
         return view('home.category_products', ['data' => $data, 'datalist' => $datalist, 'last' => $last]);
     }
 
-    public function main_category_products($id,$slug)
+    public function main_category_products($id,$slug): Factory|View|Application
     {
         $data2 = Category::where('parent_id', $id)->count();
       //  dd($data2);
@@ -300,7 +311,7 @@ class HomeController extends Controller
         $last = Product::select('id')->limit(6)->orderByDesc('id')->get();
         return view('home.category_main_products', ['data' => $data, 'datalist' => $datalist,'last' => $last,'catDetail'=>$catDetail]);
     }
-    public function main_category_products_paket()
+    public function main_category_products_paket(): Factory|View|Application
     {
 
         $datalist = PaketProduct::where('status','=','True');
@@ -322,7 +333,7 @@ class HomeController extends Controller
         return view('home.discount_products', ['datalist' => $datalist, 'last' => $last]);
     }
 
-    public function new_products()
+    public function new_products(): Factory|View|Application
     {
         $datalist = Product::where(['status' => 'True'])->limit(6);
         // dd($datalist);

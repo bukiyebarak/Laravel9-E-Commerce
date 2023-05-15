@@ -4,7 +4,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title', 'User Wishlist')
+@section('title', __('User Wishlist'))
 @section('content')
     <style>
         .flex-container {
@@ -36,19 +36,15 @@
             align-items: center;
             justify-content: center;
             font-weight:bold ;
-
         }
-
         div .wishlist-btn-cart:hover {
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
             color: palevioletred;
         }
-
         div .wishlist-btn-delete:hover {
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
             color: #C0C0C8;
         }
-
         div .wishlist-btn-delete {
             border-radius: 100%;
             position: absolute;
@@ -63,9 +59,7 @@
             align-items: center;
             justify-content: center;
             font-weight:bold ;
-
         }
-
         .products-discount{
             background-color: rgba(226,47,30,0.88);
             padding: 6px 12px 6px 12px;
@@ -75,7 +69,6 @@
             letter-spacing: 1px;
             color: wheat;
         }
-
         @media only screen and (max-device-width: 525px) {
             .flex-container {
                 margin-left: 50px;
@@ -84,7 +77,6 @@
                 justify-content: center;
             }
         }
-
         @media only screen and (min-device-width: 750px)and (max-device-width: 1500px) {
             .flex-container {
                 margin-left: 25px;
@@ -98,10 +90,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>My Wish list</h2>
+                <h2>@lang("Favorilerim") </h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Wish list</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Favorilerim")</li>
                 </ul>
             </div>
         </div>
@@ -125,7 +117,7 @@
 
                                     </div><br>
                                     @if($rs->product->is_sale=="Yes")
-                                        <span class="products-discount"> <span> {{$rs->product->sale}}% OFF </span></span>
+                                        <span class="products-discount"> <span> {{$rs->product->sale}}% @lang("OFF") </span></span>
                                     @endif
                                     <div class="products-content">
                                         @foreach($parentCategories as $category)
@@ -175,23 +167,18 @@
                                         @csrf
                                         <input name="quantity" type="hidden" value="1">
                                         <a href="javascript:void(0);">
-                                            <button type="submit" class="wishlist-btn-cart">Add to Cart</button>
+                                            <button type="submit" class="wishlist-btn-cart">@lang("Add to Cart")</button>
                                         </a>
                                     </form>
 {{--                                    <a href="#" class=" wishlist-btn-cart">Add to Cart</a>--}}
                                     <a href="{{route('user_wishlist_delete',['id'=>$rs->id])}}"
-                                       onclick="return confirm('Delete! Are you sure?')" class="wishlist-btn-delete">
-                                        Delete
+                                       onclick="return confirm('{{ __('Delete! Are you sure?') }}')" class="wishlist-btn-delete">
+                                        @lang("Delete")
                                     </a>
-
-
                                 </div>
-
                             </div>
-
                         @endforeach
                     </div>
-
                     <div class="pagination-area text-center">
                         @if(isset($_GET['sort1']))
                             {!! $datalist->appends(['sort1'=>$_GET['sort1']])->links() !!}

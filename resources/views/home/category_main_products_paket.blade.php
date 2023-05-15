@@ -3,11 +3,8 @@
     $parentCategoriesdata=\App\Http\Controllers\HomeController::categorylist();
     $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
-
-
 @extends('layouts.home')
-
-@section('title',"Package Products")
+@section('title',__("Package Products"))
 @section('content')
     <style>
         .heartbtn {
@@ -22,8 +19,8 @@
             <div class="page-title-content">
                 <h5>Package Products</h5>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Ürün Listesi</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Ürün Listesi")</li>
                 </ul>
             </div>
         </div>
@@ -38,11 +35,9 @@
                         <section class="widget widget_search">
                             <form class="search-form" action="{{route('getproduct')}}" method="post">
                                 @csrf
-
                                 <label>
-                                    <span class="screen-reader-text">Search for:</span>
+                                    <span class="screen-reader-text">@lang("Search for"):</span>
                                     @livewire('searchproduct')
-
                                 </label>
                                 <button type="submit"><i class="bx bx-search-alt"></i></button>
                             </form>
@@ -52,8 +47,7 @@
                         </section>
                         <section class="widget widget_categories">
                             <div class="woocommerce-widget price-list-widget">
-                                <h3 class="widget-title">Price</h3>
-
+                                <h3 class="widget-title">@lang("Price")</h3>
                                 <div class="collection-filter-by-price">
                                     <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
                                            name="filter_by_price" data-step="10">
@@ -62,8 +56,7 @@
                         </section>
                         <br>
                         <section class="widget widget_categories">
-                            <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
-
+                            <a href="{{route('allproducts')}}"><h3 class="widget-title">@lang("Kategoriler")</h3></a>
                             <ul>
                                 @foreach($parentCategoriesdata as $rs)
                                     <ul>
@@ -77,14 +70,13 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-
                                     </ul>
                                 @endforeach
                             </ul>
                         </section>
 
                         <section class="widget widget_tag_cloud">
-                            <h3 class="widget-title">Tags</h3>
+                            <h3 class="widget-title">@lang("Etiketler")</h3>
                             <div class="tagcloud">
                                 @foreach($datalist as $rs)
                                     <a href="#">{{$rs->keywords}} <span class="tag-link-count"></span></a>
@@ -97,13 +89,12 @@
                                 <div class="icon">
                                     <i class='bx bx-mail-send'></i>
                                 </div>
-                                <span>Emergency</span>
+                                <span>@lang("Acil")</span>
                                 <a href="mailto:hello@xton.com">{{$setting->email}}</a>
                             </div>
                         </section>
                     </aside>
                 </div>
-
                 <div class="col-lg-8 col-md-12">
                     <div class="products-filter-options">
                         <div class="row align-items-center">
@@ -111,30 +102,25 @@
                                 <div class="d-lg-flex d-md-flex align-items-center">
                                     <span class="sub-title d-lg-none"><a href="#" data-bs-toggle="modal"
                                                                          data-bs-target="#productsFilterModal"><i
-                                                class='bx bx-filter-alt'></i> Filter</a></span>
-
-                                    <span class="sub-title d-none d-lg-block d-md-block">View:</span>
-
+                                                class='bx bx-filter-alt'></i> @lang("Filter")</a></span>
+                                    <span class="sub-title d-none d-lg-block d-md-block">@lang("View"):</span>
                                     <div class="view-list-row d-none d-lg-block d-md-block">
                                         <div class="view-column">
                                             <a href="#" class="icon-view-two">
                                                 <span></span>
                                                 <span></span>
                                             </a>
-
                                             <a href="#" class="icon-view-three active">
                                                 <span></span>
                                                 <span></span>
                                                 <span></span>
                                             </a>
-
                                             <a href="#" class="icon-view-four">
                                                 <span></span>
                                                 <span></span>
                                                 <span></span>
                                                 <span></span>
                                             </a>
-
                                             <a href="#" class="view-grid-switch">
                                                 <span></span>
                                                 <span></span>
@@ -143,19 +129,13 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-4 col-md-4">
-
                             </div>
-
                             <div class="col-lg-4 col-md-4">
-
                             </div>
-
                         </div>
                     </div>
                     <!-- Single Product Start-->
-
                     <div id="products-collections-filter" class="row">
                         @foreach($datalist as $rs)
                             <div class="col-lg-4 col-md-6 col-sm-6 products-col-item"
@@ -172,28 +152,26 @@
                                                 <img src="{{asset('images/'.$rs->image)}}" class="hover-image" alt="image">
                                             </a>
                                         </a>
-
                                         <div class="products-button">
                                             <ul>
                                                 <li>
                                                     <div class="quick-view-btn">
                                                         <a href="{{route('paket_product',['id'=>$rs->paket_category->id,'slug'=>$rs->paket_category->slug])}}">
                                                             <i class='bx bx-search-alt'></i>
-                                                            <span class="tooltip-label">Quick View</span>
+                                                            <span class="tooltip-label">@lang("Quick View")</span>
                                                         </a>
                                                     </div>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-
                                     <div class="products-content">
                                         <h3>
                                             <a href="{{route('paket_product',['id'=>$rs->paket_category->id,'slug'=>$rs->paket_category->slug])}}">
                                                 {{$rs->title}}</a></h3>
                                         <a href="{{route('paket_product',['id'=>$rs->paket_category->id,'slug'=>$rs->paket_category->slug])}}"
                                         class="btn default-btn" style="margin: 15px 10px 0 40px; ">
-                                        Seçenekleri Seçin </a>
+                                            @lang("Seçenekleri Seçin ")</a>
                                     </div>
                                 </div>
                             </div>

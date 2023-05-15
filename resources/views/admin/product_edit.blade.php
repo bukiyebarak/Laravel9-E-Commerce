@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Product')
+@section('title', __('Edit Product'))
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -14,13 +14,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">EDIT PRODUCT</div>
+                <div class="breadcrumb-title pe-3">@lang("EDIT PRODUCT")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Edit Product")</li>
                         </ol>
                     </nav>
                 </div>
@@ -28,7 +28,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-0">Edit Product</h4>
+                    <h4 class="mb-0">@lang("Edit Product")</h4>
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -36,7 +36,7 @@
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-12">
-                                    <label>Category</label>
+                                    <label>@lang("Category")</label>
                                     <select class="form-select" name="category_id">
                                         @foreach($datalist as $rs)
                                             <option value="{{$rs->id}}"
@@ -45,84 +45,33 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Title</label>
-                                    <input type="text" name="title" value="{{$data->title}}" class="form-control">
-                                    @if ($errors->has('title'))
-                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                    <label>@lang("Title") (@lang("Türkçe"))</label>
+                                    <input type="text" name="title_tr" value="{{$data->title_tr}}" class="form-control">
+                                    @if ($errors->has('title_tr'))
+                                        <span class="text-danger">{{ $errors->first('title_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Keywords</label>
-                                    <input type="text" name="keywords" value="{{$data->keywords}}" class="form-control">
-                                    @if ($errors->has('keywords'))
-                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>
+                                    <label>@lang("Keywords") (@lang("Türkçe"))</label>
+                                    <input type="text" name="keywords_tr" value="{{$data->keywords_tr}}" class="form-control">
+                                    @if ($errors->has('keywords_tr'))
+                                        <span class="text-danger">{{ $errors->first('keywords_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Description</label>
-                                    <input type="text" name="description" value="{{$data->description}}"
+                                    <label>@lang("Description") (@lang("Türkçe"))</label>
+                                    <input type="text" name="description_tr" value="{{$data->description_tr}}"
                                            class="form-control">
-                                    @if ($errors->has('description'))
-                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @if ($errors->has('description_tr'))
+                                        <span class="text-danger">{{ $errors->first('description_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Price</label>
-                                    <input type="number" name="price" value="{{$data->price}}" min="0"
-                                           class="form-control">
-                                    @if ($errors->has('price'))
-                                        <span class="text-danger">{{ $errors->first('price') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Is Sale?</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="yes" value="Yes" checked>
-                                        <label class="form-check-label" for="yes">Yes</label>
-                                        <br>
-                                    <div id="sale" >
-                                        <label>How many percent discount is there? (Example:% sale)</label>
-                                        <input type="number" name="sale" value="{{$data->sale}}" class="form-control" >
-                                        @if ($errors->has('sale'))
-                                            <span class="text-danger">{{ $errors->first('sale') }}</span>
-                                        @endif
-                                        <br>
-                                    </div>
-                                    </div>
-                                    <div class="form-check ">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="no" value="No">
-                                        <label class="form-check-label" for="no">No</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Quantity</label>
-                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="0"
-                                           class="form-control">
-                                    @if ($errors->has('quantity'))
-                                        <span class="text-danger">{{ $errors->first('quantity') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Minquantity</label>
-                                    <input type="number" name="minquantity" value="{{$data->minquantity}}" min="0"
-                                           class="form-control" >
-                                    @if ($errors->has('minquantity'))
-                                        <span class="text-danger">{{ $errors->first('minquantity') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Tax</label>
-                                    <input type="number" name="tax" value="{{$data->tax}}" min="0" class="form-control">
-                                    @if ($errors->has('tax'))
-                                        <span class="text-danger">{{ $errors->first('tax') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Detail</label>
-                                    <textarea id="summernote" name="detail">{{$data->detail}}</textarea>
+                                    <label>@lang("Detail") (@lang("Türkçe"))</label>
+                                    <textarea id="summernote" name="detail_tr">{{$data->detail_tr}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
-                                            placeholder: 'Product Detail',
+                                            placeholder:  " " ,
                                             tabsize: 2,
                                             height: 120,
                                             toolbar: [
@@ -136,19 +85,115 @@
                                             ]
                                         });
                                     </script>
-                                    @if ($errors->has('detail'))
-                                        <span class="text-danger">{{ $errors->first('detail') }}</span>
+                                    @if ($errors->has('detail_tr'))
+                                        <span class="text-danger">{{ $errors->first('detail_tr') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Slug</label>
+                                    <label>@lang("Title") (@lang("İngilizce"))</label>
+                                    <input type="text" name="title_en" value="{{$data->title_en}}" class="form-control">
+                                    @if ($errors->has('title_en'))
+                                        <span class="text-danger">{{ $errors->first('title_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Keywords") (@lang("İngilizce"))</label>
+                                    <input type="text" name="keywords_en" value="{{$data->keywords_en}}" class="form-control">
+                                    @if ($errors->has('keywords_en'))
+                                        <span class="text-danger">{{ $errors->first('keywords_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Description") (@lang("İngilizce"))</label>
+                                    <input type="text" name="description_en" value="{{$data->description_en}}"
+                                           class="form-control">
+                                    @if ($errors->has('description_en'))
+                                        <span class="text-danger">{{ $errors->first('description_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Detail") (@lang("İngilizce"))</label>
+                                    <textarea id="summernote1" name="detail_en">{{$data->detail_en}}</textarea>
+                                    <script>
+                                        $('#summernote1').summernote({
+                                            placeholder:  " " ,
+                                            tabsize: 2,
+                                            height: 120,
+                                            toolbar: [
+                                                ['style', ['style']],
+                                                ['font', ['bold', 'underline', 'clear']],
+                                                ['color', ['color']],
+                                                ['para', ['ul', 'ol', 'paragraph']],
+                                                ['table', ['table']],
+                                                ['insert', ['link', 'picture', 'video']],
+                                                ['view', ['fullscreen', 'codeview', 'help']]
+                                            ]
+                                        });
+                                    </script>
+                                    @if ($errors->has('detail_en'))
+                                        <span class="text-danger">{{ $errors->first('detail_en') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Price")</label>
+                                    <input type="number" name="price" value="{{$data->price}}" min="0"
+                                           class="form-control">
+                                    @if ($errors->has('price'))
+                                        <span class="text-danger">{{ $errors->first('price') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Is Sale?")</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_sale" id="yes" value="Yes" checked>
+                                        <label class="form-check-label" for="yes">Yes</label>
+                                        <br>
+                                    <div id="sale" >
+                                        <label>@lang("How many percent discount is there? (Example:% sale)")</label>
+                                        <input type="number" name="sale" value="{{$data->sale}}" class="form-control" >
+                                        @if ($errors->has('sale'))
+                                            <span class="text-danger">{{ $errors->first('sale') }}</span>
+                                        @endif
+                                        <br>
+                                    </div>
+                                    </div>
+                                    <div class="form-check ">
+                                        <input class="form-check-input" type="radio" name="is_sale" id="no" value="No">
+                                        <label class="form-check-label" for="no">@lang("No")</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Quantity")</label>
+                                    <input type="number" name="quantity" value="{{$data->quantity}}" min="0"
+                                           class="form-control">
+                                    @if ($errors->has('quantity'))
+                                        <span class="text-danger">{{ $errors->first('quantity') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Minquantity")</label>
+                                    <input type="number" name="minquantity" value="{{$data->minquantity}}" min="0"
+                                           class="form-control" >
+                                    @if ($errors->has('minquantity'))
+                                        <span class="text-danger">{{ $errors->first('minquantity') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Tax")</label>
+                                    <input type="number" name="tax" value="{{$data->tax}}" min="0" class="form-control">
+                                    @if ($errors->has('tax'))
+                                        <span class="text-danger">{{ $errors->first('tax') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Slug")</label>
                                     <input type="text" name="slug" value="{{$data->slug}}" class="form-control">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Image</label>
+                                    <label>@lang("Image")</label>
                                     <input type="file" name="image" value="{{$data->image}}" class="form-control">
 
                                     @if($data->image)
@@ -161,7 +206,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Status</label>
+                                    <label>@lang("Status")</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="">{{$data->status}}</option>
                                         <option>@if($data->status=="True")
@@ -172,7 +217,7 @@
                                     </select>
                                 </div><br>
                                 <div class="col-12">
-                                    <button class="btn btn-primary" type="submit">Update Product</button>
+                                    <button class="btn btn-primary" type="submit">@lang("Update Product")</button>
                                 </div>
                             </form>
                         </div>

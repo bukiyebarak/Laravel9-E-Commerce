@@ -7,18 +7,16 @@
 
 @extends('layouts.home')
 
-@section('title', $data->title. '  Products List')
+@section('title', $data->title. __('  Products List'))
 @section('description')
     {{$data->description}}
 @endsection
-@section('keywords',$data->keywords)
 @section('content')
     <style>
         .heartbtn {
             border-style: none;
             background-color: inherit;
         }
-
     </style>
     <!-- Start Page Title -->
     <div class="page-title-area">
@@ -26,8 +24,8 @@
             <div class="page-title-content">
                 <h5>{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($data,$data->title) }}</h5>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Ürün Listesi</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Ürün Listesi")</li>
                 </ul>
             </div>
         </div>
@@ -44,9 +42,8 @@
                                 @csrf
 
                                 <label>
-                                    <span class="screen-reader-text">Search for:</span>
+                                    <span class="screen-reader-text">@lang("Search for"):</span>
                                     @livewire('searchproduct')
-
                                 </label>
                                 <button type="submit"><i class="bx bx-search-alt"></i></button>
                             </form>
@@ -56,7 +53,7 @@
                         </section>
                         <section class="widget widget_categories">
                             <div class="woocommerce-widget price-list-widget">
-                                <h3 class="widget-title">Price</h3>
+                                <h3 class="widget-title">@lang("Price")</h3>
 
                                 <div class="collection-filter-by-price">
                                     <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
@@ -66,8 +63,7 @@
                         </section>
                         <br>
                         <section class="widget widget_categories">
-                            <a href="{{route('allproducts')}}"><h3 class="widget-title">Categories</h3></a>
-
+                            <a href="{{route('allproducts')}}"><h3 class="widget-title">@lang("Categories")</h3></a>
                             <ul>
                                 @foreach($parentCategoriesdata as $rs)
                                     <ul>
@@ -81,14 +77,13 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-
                                     </ul>
                                 @endforeach
                             </ul>
                         </section>
 
                         <section class="widget widget_tag_cloud">
-                            <h3 class="widget-title">Tags</h3>
+                            <h3 class="widget-title">@lang("Tags")</h3>
                             <div class="tagcloud">
                                 @foreach($datalist as $rs)
                                     <a href="#">{{$rs->keywords}} <span class="tag-link-count"></span></a>
@@ -101,7 +96,7 @@
                                 <div class="icon">
                                     <i class='bx bx-mail-send'></i>
                                 </div>
-                                <span>Emergency</span>
+                                <span>@lang("Emergency")</span>
                                 <a href="mailto:hello@xton.com">{{$setting->email}}</a>
                             </div>
                         </section>
@@ -115,9 +110,9 @@
                                 <div class="d-lg-flex d-md-flex align-items-center">
                                     <span class="sub-title d-lg-none"><a href="#" data-bs-toggle="modal"
                                                                          data-bs-target="#productsFilterModal"><i
-                                                class='bx bx-filter-alt'></i> Filter</a></span>
+                                                class='bx bx-filter-alt'></i>@lang("Filter") </a></span>
 
-                                    <span class="sub-title d-none d-lg-block d-md-block">View:</span>
+                                    <span class="sub-title d-none d-lg-block d-md-block">@lang("View"):</span>
 
                                     <div class="view-list-row d-none d-lg-block d-md-block">
                                         <div class="view-column">
@@ -158,12 +153,12 @@
                                 <form name="sortproducts" id="sortProducts">
                                     <div class="products-ordering-list">
                                         <select name="sort1" id="sort1" class=" nice-select">
-                                            <option selected="" value="">Default Sorting</option>
-                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >Sort by: Latest</option>
-                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif >Sort by Price: Low to High</option>
-                                            <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif >Sort by Price: High to Low</option>
-                                            <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif >Sort by Name: Name A-Z</option>
-                                            <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif >Sort by Name: Name Z-A</option>
+                                            <option selected="" value="">@lang("Default Sorting")</option>
+                                            <option value="product_lastest" @if(isset($_GET['sort1']) && $_GET['sort1']=="product_lastest") selected="" @endif >@lang("Sort by: Latest")</option>
+                                            <option value="price_lowest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_lowest") selected="" @endif > @lang("Sort by Price: Low to High")</option>
+                                            <option value="price_highest" @if(isset($_GET['sort1']) && $_GET['sort1']=="price_highest") selected @endif > @lang("Sort by Price: High to Low")</option>
+                                            <option value="name_z_a" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_z_a") selected @endif > @lang("Sort by Name: Name A-Z")</option>
+                                            <option value="name_a_z" @if(isset($_GET['sort1']) && $_GET['sort1']=="name_a_z") selected @endif > @lang("Sort by Name: Name Z-A")</option>
                                         </select>
                                     </div>
                                 </form>
@@ -194,7 +189,7 @@
                                                         <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
                                                             @csrf
                                                             <a href="javascript:void(0);">
-                                                                <span class="tooltip-label">Add to Wishlist</span>
+                                                                <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                                                 <button type="submit" class='heartbtn bx bx-heart'></button>
                                                             </a>
                                                         </form>
@@ -204,7 +199,7 @@
                                                     <div class="quick-view-btn">
                                                         <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                                             <i class='bx bx-search-alt'></i>
-                                                            <span class="tooltip-label">Quick View</span>
+                                                            <span class="tooltip-label">@lang("Quick View")</span>
                                                         </a>
                                                     </div>
                                                 </li>
@@ -214,7 +209,7 @@
                                                             @csrf
                                                             <input name="quantity" type="hidden" value="1">
                                                             <a href="javascript:void(0);">
-                                                                <span class="tooltip-label">Add to Cart</span>
+                                                                <span class="tooltip-label">@lang("Add to Cart")</span>
                                                                 <button type="submit" class="heartbtn bx bx-cart"></button>
                                                             </a>
                                                         </form>
@@ -223,11 +218,11 @@
                                             </ul>
                                         </div>
                                         @if($rs->is_sale=="Yes")
-                                            <div class="sale-tag">Sale!</div>
+                                            <div class="sale-tag" style="font-size: 11px">@lang("Sale")!</div>
                                         @else
                                             @foreach($last as $data)
                                                 @if($rs->id==$data->id)
-                                                    <div class="new-tag">New!</div>
+                                                    <div class="new-tag">@lang("New")!</div>
                                                 @endif
                                             @endforeach
                                         @endif

@@ -16,8 +16,8 @@
             <div class="page-title-content">
                 <h4>{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($data->category,$data->category->title)}}</h4>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Ürün Detayı</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Ürün Detayı")</li>
                 </ul>
             </div>
         </div>
@@ -25,19 +25,16 @@
     <!-- End Page Title -->
     <!-- Start Product Details Area -->
     <section class="product-details-area pt-100 pb-70">
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-12">
                     <div class="products-details-image">
-
                         <ul class="products-details-image-slides">
                             <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
                             @foreach($datalist as $rs)
                                 <li><img src="{{asset('images/'.$rs->image)}}" alt="image"></li>
                             @endforeach
                         </ul>
-
                         <div class="slick-thumbs">
                             <ul>
                                 <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
@@ -48,12 +45,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-7 col-md-12">
                     <div class="products-details-desc">
                         <h3>{{$data->title}}</h3>
                         @if($data->is_sale=="Yes")
-                            <h5><b style="color:darkred"><i class="bx bxs-discount fs-5"> SALE! %{{$data->sale}}</i></b>
+                            <h5><b style="color:darkred"><i class="bx bxs-discount fs-5">@lang("SALE")! %{{$data->sale}}</i></b>
                             </h5>
                         @endif
                         @if($data->is_sale=="No")
@@ -66,8 +62,6 @@
                                 <span class="new-price">{{$data->sale_price}} &#8378; </span>
                             </div>
                         @endif
-
-
                         @php
                             $avgrev=\App\Http\Controllers\HomeController::avrgreview($data->id);
                             $countreview=\App\Http\Controllers\HomeController::countreview($data->id);
@@ -80,39 +74,38 @@
                                 <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                                 <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>
                             </div>
-                            <a href="#review" class="rating-count">{{$countreview}} Review(s) {{$avgrev}}</a>
+                            <a href="#review" class="rating-count">{{$countreview}} @lang("Review(s)") {{$avgrev}}</a>
                         </div>
-
                         <ul class="products-info">
-                            <li><span>Availability:</span> <a href="javascript:void(0);">
+                            <li><span>@lang("Availability"):</span> <a href="javascript:void(0);">
                                     @if($data->quantity<=5 && $data->quantity>0)
-                                        <span style="color:darkgreen">In stock (End {{$data->quantity}} items)!!! </span>
+                                        <span style="color:darkgreen">@lang("In stock") (End {{$data->quantity}} @lang("items"))!!! </span>
                                     @endif
                                     @if($data->quantity)
-                                        <span style="background-color: rgba(143,255,61,0.44)">In stock
+                                        <span style="background-color: rgba(143,255,61,0.44)">@lang("In stock")
                                         </span>
                                     @else
                                         <span
-                                            style="background-color: rgba(226,41,23,0.96);  text-decoration: line-through; color: black "> In stock</span>
-                                        ({{$data->quantity}} items)
+                                            style="background-color: rgba(226,41,23,0.96);  text-decoration: line-through; color: black "> @lang("In stock")</span>
+                                        ({{$data->quantity}} @lang("items"))
                                     @endif
 
 
                                 </a></li>
-                            <li><span>Products Type:</span> <a
-                                    href="{{route('main_category_products',['id'=>$data->category->id, 'slug'=>$data->category->slug])}}"> {{$data->category->title}}</a></li>
-                            <li><span>Products Description:</span> <a
+                            <li><span>@lang("Products Type"):</span> <a
+                                    href="{{route('main_category_products',['id'=>$data->category->id, 'slug'=>$data->category->slug])}}">
+                                        {{$data->category->title }}
+                                     </a></li>
+                            <li><span>@lang("Products Description"):</span> <a
                                     href="javascript:void(0);"> {{$data->description}}</a></li>
                         </ul>
                         <br>
                         <div class="products-info-btn">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#productsShippingModal"><i
-                                    class='bx bxs-truck'></i> Shipping</a>
-                            <a href="{{route('contact')}}"><i class='bx bx-envelope'></i> Ask about this products</a>
+                                    class='bx bxs-truck'></i>@lang("SHIPPING") </a>
+                            <a href="{{route('contact')}}"><i class='bx bx-envelope'></i> @lang("Ask about this products")</a>
                         </div>
-
                         <div class="products-add-to-cart">
-
                             <form action="{{route('user_shopcart_add',['id'=>$data->id])}}" method="post">
                                 @csrf
                                 <div class="input-counter">
@@ -121,52 +114,44 @@
                                            readonly>
                                     <span class="plus-btn"><i class='bx bx-plus'></i></span>
                                 </div>
-
-                                <input type="submit" class="default-btn" value="Add to Cart">
-
+                                <input type="submit" class="default-btn" value="@lang("Add to Cart")">
                             </form>
-
                         </div>
                         <div class="wishlist-compare-btn">
                             <form action="{{route('user_wishlist_add',['id'=>$data->id])}}" method="post">
                                 @csrf
-                                <button type="submit" class='optional-btn'><i class="bx bx-heart"></i> Add to Wishlist
+                                <button type="submit" class='optional-btn'><i class="bx bx-heart"></i>@lang("Add to Wishlist")
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="tab products-details-tab">
                 <ul class="tabs">
                     <li><a href="#">
                             <div class="dot"></div>
-                            Ürün Detayı
+                            @lang("Ürün Detayı")
                         </a></li>
                     <li><a href="#">
                             <div class="dot"></div>
-                            Kargo
+                            @lang("Kargo")
                         </a></li>
-
                     <li><a href="#">
                             <div class="dot"></div>
-                            Neden Bizden Satın Alın
+                            @lang("Neden Bizden Satın Alın")
                         </a></li>
-
                     <li><a href="#">
                             <div class="dot" id="review"></div>
-                            Yorumlar ({{$countreview}})
+                            @lang("Yorumlar") ({{$countreview}})
                         </a></li>
                 </ul>
-
                 <div class="tab-content">
                     <div class="tabs-item">
                         <div class="products-details-tab-content">
                             <p>{!! $data->detail !!}</p>
                         </div>
                     </div>
-
                     <div class="tabs-item">
                         <div class="products-details-tab-content">
                             <div class="table-responsive">
@@ -245,7 +230,7 @@
                                     </div>
                                     <div class="col-lg-5 col-md-12">
                                         <div class="review-form">
-                                            <h3>Write a Review</h3>
+                                            <h3>@lang("Write a Review")</h3>
 
                                             @livewire('review', ['id'=> $data->id])
 
@@ -270,48 +255,46 @@
                     <div class="icon">
                         <i class='flaticon-tracking'></i>
                     </div>
-                    <h3>Free Shipping Worldwide</h3>
+                    <h3>@lang("Free Shipping Worldwide")</h3>
                 </div>
-
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-return'></i>
                     </div>
-                    <h3>Easy Return Policy</h3>
+                    <h3>@lang("Easy Return Policy")</h3>
                 </div>
-
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-shuffle'></i>
                     </div>
-                    <h3>7 Day Exchange Policy</h3>
+                    <h3>@lang("7 Day Exchange Policy")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-sale'></i>
                     </div>
-                    <h3>Weekend Discount Coupon</h3>
+                    <h3>@lang("Weekend Discount Coupon")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-credit-card'></i>
                     </div>
-                    <h3>Secure Payment Methods</h3>
+                    <h3>@lang("Secure Payment Methods")</h3>
                 </div>
 
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-location'></i>
                     </div>
-                    <h3>Track Your Package</h3>
+                    <h3>@lang("Track Your Package")</h3>
                 </div>
                 <div class="single-facility-box">
                     <div class="icon">
                         <i class='flaticon-customer-service'></i>
                     </div>
-                    <h3>24/7 Customer Support</h3>
+                    <h3>@lang("24/7 Customer Support")</h3>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Category')
+@section('title', __('Edit Category'))
 
 @section('content')
     <!--start page wrapper -->
@@ -8,13 +8,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">EDIT PAKET CATEGORY</div>
+                <div class="breadcrumb-title pe-3">@lang("EDIT PAKET CATEGORY")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Paket Category</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Edit Paket Category")</li>
                         </ol>
                     </nav>
                 </div>
@@ -22,7 +22,7 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-0">Edit Category</h4>
+                    <h4 class="mb-0">@lang("Edit Category")</h4>
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -30,35 +30,35 @@
                                   action="{{route('admin_category_paket_update', ['id'=>$data->id])}}" method="post">
                                 @csrf
                                 <div class="col-md-12">
-                                    <label>Title*</label>
+                                    <label>@lang("Title")*</label>
                                     <input type="text" name="title" value="{{$data->title}}" class="form-control">
 {{--                                    @if ($errors->has('title'))--}}
 {{--                                        <span class="text-danger">{{ $errors->first('title') }}</span>--}}
 {{--                                    @endif--}}
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Keywords*</label>
+                                    <label>@lang("Keywords")*</label>
                                     <input type="text" name="keywords" value="{{$data->keywords}}" class="form-control" >
 {{--                                    @if ($errors->has('keywords'))--}}
 {{--                                        <span class="text-danger">{{ $errors->first('keywords') }}</span>--}}
 {{--                                    @endif --}}
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Description*</label>
+                                    <label>@lang("Description")*</label>
                                     <input type="text" name="description"  value="{{$data->description}}" class="form-control" >
 {{--                                    @if ($errors->has('description'))--}}
 {{--                                        <span class="text-danger">{{ $errors->first('description') }}</span>--}}
 {{--                                    @endif--}}
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Slug*</label>
+                                    <label>@lang("Slug")*</label>
                                     <input type="text" name="slug"  value="{{$data->slug}}" class="form-control">
 {{--                                    @if ($errors->has('slug'))--}}
 {{--                                        <span class="text-danger">{{ $errors->first('slug') }}</span>--}}
 {{--                                    @endif--}}
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Status</label>
+                                    <label>@lang("Status")</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="selected">{{$data->status}}</option>
                                         <option>@if($data->status=="True")
@@ -69,7 +69,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary" type="submit">Update Paket Category</button>
+                                    <button class="btn btn-primary" type="submit">@lang("Update Paket Category")</button>
                                 </div>
                             </form>
                         </div>

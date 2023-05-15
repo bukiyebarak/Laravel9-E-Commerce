@@ -16,7 +16,7 @@
                                 $countorder=\App\Http\Controllers\Admin\HomeController::countOrder()
                             @endphp
                             <div>
-                                <p class="mb-0 text-white">Total Orders</p>
+                                <p class="mb-0 text-white">@lang("Total Orders")</p>
                                 <h5 class="mb-0 text-white">{{$countorder}}</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-cart font-30'></i>
@@ -36,7 +36,7 @@
                                 $sumOrderTotal=\App\Http\Controllers\Admin\HomeController::sumOrderTotal()
                             @endphp
                             <div>
-                                <p class="mb-0 text-white">Total Income</p>
+                                <p class="mb-0 text-white">@lang("Total Income")</p>
                                 <h5 class="mb-0 text-white">{{$sumOrderTotal}}€</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-wallet font-30'></i>
@@ -56,7 +56,7 @@
                                 $countuser=\App\Http\Controllers\Admin\HomeController::countUser()
                             @endphp
                             <div>
-                                <p class="mb-0 text-white">Total Users</p>
+                                <p class="mb-0 text-white">@lang("Total Users")</p>
                                 <h5 class="mb-0 text-white">{{$countuser}}</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-user font-30'></i>
@@ -76,7 +76,7 @@
                                 $countmessage=\App\Http\Controllers\Admin\HomeController::countMessage()
                             @endphp
                             <div>
-                                <p class="mb-0 text-white">Comments</p>
+                                <p class="mb-0 text-white">@lang("Comments")</p>
                                 <h5 class="mb-0 text-white">{{$countmessage}}</h5>
                             </div>
                             <div class="ms-auto text-white"><i class='bx bx-chat font-30'></i>
@@ -94,19 +94,19 @@
             <div class="card-header border-bottom-0 bg-transparent">
                 <div class="d-lg-flex align-items-center">
                     <div>
-                        <h6 class="font-weight-bold mb-2 mb-lg-0">Monthly Revenue</h6>
+                        <h6 class="font-weight-bold mb-2 mb-lg-0">@lang("Monthly Revenue")</h6>
                     </div>
                     <div class="ms-lg-auto mb-2 mb-lg-0">
                         <div class="btn-group-round">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-white">Day</button>
-                                <button type="button" class="btn btn-white">Week</button>
-                                <button type="button" class="btn btn-white">Month</button>
+                                <button type="button" class="btn btn-white">@lang("Day")</button>
+                                <button type="button" class="btn btn-white">@lang("Week")</button>
+                                <button type="button" class="btn btn-white">@lang("Month")</button>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary radius-10 ms-lg-3">Download CSV</button>
+                        <button type="button" class="btn btn-primary radius-10 ms-lg-3">@lang("Download CSV")</button>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                     <div class="card-header border-bottom-0 bg-transparent">
                         <div class="d-lg-flex align-items-center">
                             <div>
-                                <h6 class="font-weight-bold mb-2 mb-lg-0">Historical Analytics</h6>
+                                <h6 class="font-weight-bold mb-2 mb-lg-0">@lang("Historical Analytics")</h6>
                             </div>
                             <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
                             </div>
@@ -128,9 +128,9 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex align-items-center ms-auto font-13 gap-2">
-                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-danger me-1"></i>Visitors</span>
-                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-success me-1"></i>Chats</span>
-                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-info me-1"></i>Page Views</span>
+                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-danger me-1"></i>@lang("Visitors")</span>
+                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-success me-1"></i>@lang("Chats")</span>
+                            <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-info me-1"></i>@lang("Page Views")</span>
                         </div>
                         <div id="chart2"></div>
                     </div>
@@ -139,7 +139,7 @@
             <div class="col-12 col-lg-4">
                 <div class="card radius-10 bg-primary">
                     <div class="card-body">
-                        <h6 class="text-white">Active Visitors</h6>
+                        <h6 class="text-white">@lang("Active Visitors")</h6>
                         <h4 class="font-weight-bold text-white">3467</h4>
                         <p class="font-13 text-white">Page view per minute</p>
                         <div id="chart3"></div>

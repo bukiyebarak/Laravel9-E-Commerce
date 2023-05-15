@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-lg-4 col-md-12 " align="center">
                         <img src="{{asset('assets')}}/home/assets/img/iyzico-success.png"><br><br>
-                        <h5>Satın alma işlemi başarıyla tamamlanmıştır.</h5><br>
-                        <a href="{{route('user_orders')}}" class="default-btn">SİPARİŞLERİM</a>
+                        <h5>@lang("Satın alma işlemi başarıyla tamamlanmıştır.")</h5><br>
+                        <a href="{{route('user_orders')}}" class="default-btn">@lang("SİPARİŞLERİM")</a>
                     </div>
                     <div class="col-lg-4 col-md-12">
                     </div>

@@ -6,17 +6,17 @@
 
 @extends('layouts.home')
 
-@section('title', 'User Order')
+@section('title', __('User Order'))
 
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Billing Detail</h2>
+                <h2>@lang("Billing Detail")</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Billing Detail</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Billing Detail")</li>
                 </ul>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="container">
             <div class="user-actions">
                 <i class='bx bx-log-in'></i>
-                <span>Returning customer? <a href="{{route('adminlogin')}}">Click here to login</a></span>
+                <span>@lang("Returning customer?") <a href="{{route('adminlogin')}}">@lang("Click here to login")</a></span>
             </div>
 
             <form action="{{route('user_order_store')}}" method="post">
@@ -36,12 +36,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <div class="billing-details">
-                            <h3 class="title">Billing Details </h3>
-
+                            <h3 class="title">@lang("Billing Details") </h3>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label>First Name <span class="required">*</span></label>
+                                        <label>@lang("First Name") <span class="required">*</span></label>
                                         <input type="text" name="name" value="{{Auth::user()->name}}"
                                                class="form-control" style="text-transform: capitalize;">
                                         @if ($errors->has('name'))
@@ -49,10 +48,9 @@
                                         @endif
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label>Last Name <span class="required">*</span></label>
+                                        <label>@lang("Last Name") <span class="required">*</span></label>
                                         <input type="text" name="surname" class="form-control"
                                                value="{{Auth::user()->surname}}" style="text-transform: capitalize;">
                                         @if ($errors->has('surname'))
@@ -60,23 +58,19 @@
                                         @endif
                                     </div>
                                 </div>
-
-
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label>Email Address <span class="required">*</span></label>
+                                        <label>@lang("Email Address") <span class="required">*</span></label>
                                         <input type="email" value="{{\Illuminate\Support\Facades\Auth::user()->email}}"
                                                name="email" class="form-control">
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
-
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label>Phone <span class="required">*</span></label>
+                                        <label>@lang("Phone") <span class="required">*</span></label>
                                         <input type="text" value="{{\Illuminate\Support\Facades\Auth::user()->phone}}"
                                                name="phone" class="form-control">
                                         @if ($errors->has('phone'))
@@ -84,14 +78,12 @@
                                         @endif
                                     </div>
                                 </div>
-
-
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label>İL</label>
+                                        <label>@lang("İl")</label>
                                         <div class="select-box">
                                             <select id="city" name="city" class="form-control nice-select">
-                                                <option value="">İl Seçiniz</option>
+                                                <option value="">@lang("İl Seçiniz")</option>
                                                 @foreach($getcity as $rs)
                                                     <option value="{{$rs->sehir_key}}">{{$rs->sehir_title}}</option>
                                                 @endforeach
@@ -106,9 +98,9 @@
 
                                     <div class="form-group">
                                         <div class="select-box">
-                                            <label>İLÇE <span class="required">*</span></label>
+                                            <label>@lang("İLÇE") <span class="required">*</span></label>
                                             <select id="district" name="district" class="form-control nice-select">
-                                                <option value="">İlçe Seçiniz</option>
+                                                <option value="">@lang("İlçe Seçiniz")</option>
                                             </select>
                                             @if ($errors->has('district'))
                                                 <span class="text-danger">{{ $errors->first('district') }}</span>
@@ -117,14 +109,12 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-
                                     <div class="form-group">
                                         <div class="select-box">
-                                            <label>MAHALLE <span class="required">*</span></label>
+                                            <label>@lang("MAHALLE") <span class="required">*</span></label>
                                             <select id="neighbourhood" name="neighbourhood" class="single-select nice-select form-control">
-                                                <option value="">Mahalle Seçiniz</option>
+                                                <option value="">@lang("Mahalle Seçiniz")</option>
                                             </select>
-
                                             @if ($errors->has('neighbourhood'))
                                                 <span class="text-danger">{{ $errors->first('neighbourhood') }}</span>
                                             @endif
@@ -132,31 +122,28 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-
                                     <div class="form-group">
-                                        <label>POSTA KODU <span class="required">*</span></label>
+                                        <label>@lang("POSTA KODU") <span class="required">*</span></label>
                                         <input type="text" name="zipcode" class="form-control" value="{{old('zipcode')}}">
                                         @if ($errors->has('zipcode'))
                                             <span class="text-danger">{{ $errors->first('zipcode') }}</span>
                                         @endif
                                     </div>
                                 </div>
-
                                 <div class="col-lg-12 col-md-6">
                                     <div class="form-group">
-                                        <label>Address <span class="required">*</span></label>
+                                        <label>@lang("Address") <span class="required">*</span></label>
                                         <textarea cols="30" rows="4"
                                                   name="address" class="form-control"
-                                                  placeholder="Tam Adres Yazınız.">{{old('address')}}</textarea>
+                                                  placeholder="@lang("Tam Adres Yazınız.")">{{old('address')}}</textarea>
                                         @if ($errors->has('address'))
                                             <span class="text-danger">{{ $errors->first('address') }}</span>
                                         @endif
                                     </div>
                                 </div>
-
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
-                                        <textarea name="note" id="notes" cols="30" rows="3" placeholder="Şipariş Notu"
+                                        <textarea name="note" id="notes" cols="30" rows="3" placeholder="@lang("Şipariş Notu")"
                                                   class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -166,21 +153,18 @@
 
                     <div class="col-lg-6 col-md-12">
                         <div class="order-details">
-                            <h3 class="title">Your Order {{$total}}€</h3>
+                            <h3 class="title">@lang("Your Order") {{$total}}€</h3>
                             <div class="input">
                                 <input type="hidden" name="total" value="{{$total}}">
-
                             </div>
-
                             <div class="order-table table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Product Name</th>
-                                        <th scope="col">Total</th>
+                                        <th scope="col">@lang("Product Name")</th>
+                                        <th scope="col">@lang("Total")</th>
                                     </tr>
                                     </thead>
-
                                     <tbody>
                                     @php
                                         $total=0;
@@ -216,7 +200,7 @@
                                     @endforeach
                                     <tr>
                                         <td class="order-subtotal">
-                                            <span>Cart Subtotal</span>
+                                            <span>@lang("Cart Subtotal")</span>
                                         </td>
 
                                         <td class="order-subtotal-price">
@@ -226,7 +210,7 @@
 
                                     <tr>
                                         <td class="order-shipping">
-                                            <span>Shipping</span>
+                                            <span>@lang("Shipping")</span>
                                         </td>
 
                                         <td class="shipping-price">
@@ -238,9 +222,8 @@
                                     @endphp
                                     <tr>
                                         <td class="total-price">
-                                            <span>Order Total</span>
+                                            <span>@lang("Order Total")</span>
                                         </td>
-
                                         <td class="product-subtotal">
                                             <span class="subtotal-amount">{{$total}}€</span>
                                         </td>
@@ -248,7 +231,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="payment-box">
 {{--                                <div class="payment-method">--}}
 
@@ -272,19 +254,14 @@
                                     <p>
                                         <input type="radio" id="bank" name="payment" value="bank">
                                         <label for="bank">Kuveyt Türk</label>
-
                                     </p>
-
                                 </div>
-
                                 @if ($errors->has('payment'))
                                     <span class="text-danger">{{ $errors->first('payment') }}</span>
                                 @endif
-                                <button type="submit" class="default-btn">Place Order</button>
+                                <button type="submit" class="default-btn">@lang("Place Order")</button>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </form>

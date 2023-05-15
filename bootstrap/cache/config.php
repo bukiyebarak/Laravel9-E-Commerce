@@ -7,7 +7,7 @@
     'url' => 'http://gnc.demo',
     'asset_url' => NULL,
     'timezone' => 'Turkey',
-    'locale' => 'en',
+    'locale' => 'tr',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
     'key' => 'base64:Jy/hQAomT7nWQwLW7tHjxFYK6Soz23ma+myWzWils6k=',
@@ -478,6 +478,11 @@
     'auth_session' => 'Laravel\\Jetstream\\Http\\Middleware\\AuthenticateSession',
     'guard' => 'sanctum',
   ),
+  'languages' => 
+  array (
+    'tr' => 'Türkçe',
+    'en' => 'English',
+  ),
   'logging' => 
   array (
     'default' => 'stack',
@@ -789,6 +794,36 @@
       'footer' => NULL,
     ),
   ),
+  'translation' => 
+  array (
+    'driver' => 'file',
+    'route_group_config' => 
+    array (
+      'middleware' => 
+      array (
+        0 => 'web',
+        1 => 'admin',
+      ),
+    ),
+    'translation_methods' => 
+    array (
+      0 => 'trans',
+      1 => '__',
+      2 => '@lang',
+    ),
+    'scan_paths' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\Laravel9J\\app',
+      1 => 'C:\\xampp\\htdocs\\Laravel9J\\resources',
+    ),
+    'ui_url' => 'languages',
+    'database' => 
+    array (
+      'connection' => '',
+      'languages_table' => 'languages',
+      'translations_table' => 'translations',
+    ),
+  ),
   'view' => 
   array (
     'paths' => 
@@ -796,6 +831,34 @@
       0 => 'C:\\xampp\\htdocs\\Laravel9J\\resources\\views',
     ),
     'compiled' => 'C:\\xampp\\htdocs\\Laravel9J\\storage\\framework\\views',
+  ),
+  'translatable' => 
+  array (
+    'locales' => 
+    array (
+      0 => 'en',
+      1 => 'fr',
+      'es' => 
+      array (
+        0 => 'MX',
+        1 => 'CO',
+      ),
+    ),
+    'locale_separator' => '-',
+    'locale' => NULL,
+    'use_fallback' => false,
+    'use_property_fallback' => true,
+    'fallback_locale' => 'en',
+    'translation_model_namespace' => NULL,
+    'translation_suffix' => 'Translation',
+    'locale_key' => 'locale',
+    'to_array_always_loads_translations' => true,
+    'rule_factory' => 
+    array (
+      'format' => 1,
+      'prefix' => '%',
+      'suffix' => '%',
+    ),
   ),
   'livewire' => 
   array (

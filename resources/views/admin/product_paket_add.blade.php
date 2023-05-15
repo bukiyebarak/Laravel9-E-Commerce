@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Add Product')
+@section('title', __('Add Product'))
 
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -16,13 +16,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">ADD PRODUCT</div>
+                <div class="breadcrumb-title pe-3">@lang("ADD PRODUCT")</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="{{route('adminhome')}}"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Add Paket Product</li>
+                            <li class="breadcrumb-item active" aria-current="page">@lang("Add Paket Product")</li>
                         </ol>
                     </nav>
                 </div>
@@ -30,8 +30,8 @@
             <!--end breadcrumb-->
             <div class="card">
                 <div class="card-body">
-                    <span class="float-end">* : Zorunlu girilmesi gereken yerler</span>
-                    <h4 class="mb-0">Add Product</h4>
+                    <span class="float-end">* : @lang("Zorunlu girilmesi gereken yerler")</span>
+                    <h4 class="mb-0">@lang("Add Product")</h4>
                     <hr/>
                     <div class="row gy-3">
                         <div class="col-md-12">
@@ -39,8 +39,7 @@
                                   action="{{route('admin_paket_product_store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-12">
-                                    <label>Paket Category*</label>
-
+                                    <label>@lang("Paket Category")*</label>
                                     <select class="form-select" name="paket_category_id" required>
                                         @foreach($data as $rs)
                                             <option
@@ -49,31 +48,34 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Product Category*</label>
-
+                                    <label>@lang("Product Category")*</label>
                                     <select class="form-select" name="category_id" required>
                                         @foreach($datalist as $rs)
                                             <option
-                                                value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}} </option>
+                                                value="{{$rs->id}}"> @if(Session::get('applocale')=="tr" or config('app.locale')=="tr")
+                                                    {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title_tr)}}
+                                                @elseif( Session::get('applocale')=="en" or config('app.locale')=="en")
+                                                    {{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title_en)}}
+                                                @endif </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Title*</label>
+                                    <label>@lang("Title")*</label>
                                     <input type="text" name="title" class="form-control" value="{{old('title')}}">
                                     @if ($errors->has('title'))
                                         <span class="text-danger">{{ $errors->first('title') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Keywords*</label>
+                                    <label>@lang("Keywords")*</label>
                                     <input type="text" name="keywords" class="form-control" value="{{old('keywords')}}">
                                     @if ($errors->has('keywords'))
                                         <span class="text-danger">{{ $errors->first('keywords') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Description*</label>
+                                    <label>@lang("Description")*</label>
                                     <input type="text" name="description" class="form-control"
                                            value="{{old('description')}}">
                                     @if ($errors->has('description'))
@@ -81,7 +83,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Price*</label>
+                                    <label>@lang("Price")*</label>
                                     <input type="number" min="0" name="price" class="form-control"
                                            value="{{old('price')}}">
                                     @if ($errors->has('price'))
@@ -90,14 +92,14 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Is Sale?</label>
+                                    <label>@lang("Is Sale?")</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="is_sale"
                                                id="flexRadioDefault1" value="Yes">
                                         <label class="form-check-label" for="flexRadioDefault1">Yes</label>
                                         <br></div>
                                     <div id="sale">
-                                        <label>How many percent discount is there? (Example:% sale)</label>
+                                        <label>@lang("How many percent discount is there? (Example:% sale)")</label>
                                         <input type="number" name="sale" min="0" class="form-control">
                                         @if ($errors->has('sale'))
                                             <span class="text-danger">{{ $errors->first('sale') }}</span>
@@ -107,11 +109,11 @@
                                     <div class="form-check col-md-12">
                                         <input class="form-check-input" type="radio" name="is_sale"
                                                id="flexRadioDefault2" value="No" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">No</label>
+                                        <label class="form-check-label" for="flexRadioDefault2">@lang("No")</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Quantity* (Kapsul Quantity)</label>
+                                    <label>@lang("Quantity* (Kapsul Quantity)")</label>
                                     <input type="number" min="0" name="quantity" class="form-control"
                                            value="{{old('quantity')}}">
                                     @if ($errors->has('quantity'))
@@ -119,18 +121,18 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Tax*</label>
+                                    <label>@lang("Tax")*</label>
                                     <input type="number" name="tax" min="0" class="form-control" value="{{old('tax')}}">
                                     @if ($errors->has('tax'))
                                         <span class="text-danger">{{ $errors->first('tax') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Detail*</label>
+                                    <label>@lang("Detail")*</label>
                                     <textarea id="summernote" name="detail">{{old('detail')}}</textarea>
                                     <script>
                                         $('#summernote').summernote({
-                                            placeholder: 'Product Detail',
+                                            placeholder: " " ,
                                             tabsize: 2,
                                             height: 120,
                                             toolbar: [
@@ -149,14 +151,14 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Slug*</label>
+                                    <label>@lang("Slug")*</label>
                                     <input type="text" name="slug" class="form-control" value="{{old('slug')}}">
                                     @if ($errors->has('slug'))
                                         <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Image*</label>
+                                    <label>@lang("Image")*</label>
                                     <input type="file" name="image" class="form-control">
                                     @if ($errors->has('image'))
                                         <span class="text-danger">{{ $errors->first('image') }}</span>
@@ -164,14 +166,14 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Status</label>
+                                    <label>@lang("Status")</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="">False</option>
                                         <option>True</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary" type="submit">Add Product</button>
+                                    <button class="btn btn-primary" type="submit">@lang("Add Product")</button>
                                 </div>
                             </form>
                         </div>

@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Order;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,9 +23,9 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
         $datalist=Message::all();
         return view('admin.messages',['datalist'=>$datalist]);
@@ -51,7 +55,7 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Message  $message
+     * @param Message $message
      * @return \Illuminate\Http\Response
      */
     public function show(Message $message)
@@ -62,10 +66,11 @@ class MessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
+     * @param Message $message
+     * @param $id
+     * @return Application|Factory|View
      */
-    public function edit(Message $message,$id)
+    public function edit(Message $message,$id): Application|Factory|View
     {
        $data=Message::find($id);
        $data->status='Read';
@@ -76,29 +81,33 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Message $message
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, Message $message,$id)
+    public function update(Request $request, Message $message,$id): RedirectResponse
     {
         $data = Message::find($id);
         $data->note = $request->input('note');
         $data->status=$request->input('status');
         $data->save();
-        return back()->with('toast_success','Message Updated');
+        $message1=__('Message Updated');
+        return back()->with('toast_success',$message1);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Http\Response
+     * @param Message $message
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy(Message $message,$id)
+    public function destroy(Message $message,$id): RedirectResponse
     {
         $data = Message::find($id);
         $data->delete();
-        return redirect()->route('admin_messages')->with('toast_success', 'Mesaj Başarıyla Silindi.');
+        $message1=__('Mesaj Başarıyla Silindi.');
+        return redirect()->route('admin_messages')->with('toast_success', $message1);
     }
 }

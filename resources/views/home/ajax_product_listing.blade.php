@@ -30,7 +30,7 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
                                     <form action="{{route('user_wishlist_add',['id'=>$rs->id])}}" method="post">
                                         @csrf
                                         <a href="javascript:void(0);">
-                                            <span class="tooltip-label">Add to Wishlist</span>
+                                            <span class="tooltip-label">@lang("Add to Wishlist")</span>
                                             <button type="submit" class='heartbtn bx bx-heart'></button>
                                         </a>
                                     </form>
@@ -40,7 +40,7 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
                                 <div class="quick-view-btn">
                                     <a href="{{route('product',['id'=>$rs->id,'slug'=>$rs->slug])}}">
                                         <i class='bx bx-search-alt'></i>
-                                        <span class="tooltip-label">Quick View</span>
+                                        <span class="tooltip-label">@lang("Quick View")</span>
                                     </a>
                                 </div>
                             </li>
@@ -50,7 +50,7 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
                                         @csrf
                                         <input name="quantity" type="hidden" value="1">
                                         <a href="javascript:void(0);">
-                                            <span class="tooltip-label">Add to Cart</span>
+                                            <span class="tooltip-label">@lang("Add to Cart")</span>
                                             <button type="submit" class="heartbtn bx bx-cart"></button>
                                         </a>
                                     </form>
@@ -59,16 +59,15 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
                         </ul>
                     </div>
                     @if($rs->is_sale=="Yes")
-                        <div class="sale-tag">Sale!</div>
+                        <div class="sale-tag" style="font-size: 11px">@lang("Sale")!</div>
                     @else
                         @foreach($last as $data)
                             @if($rs->id==$data->id)
-                                <div class="new-tag">New!</div>
+                                <div class="new-tag">@lang("New")!</div>
                             @endif
                         @endforeach
                     @endif
                 </div>
-
                 <div class="products-content">
                     @foreach($parentCategoriess as $category)
                         @if($category->id==$rs->category_id)
@@ -99,7 +98,7 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
                             <i class="bx bx-star @if($avgrev>=3) bx bxs-star  @endif "></i>
                             <i class="bx bx-star @if($avgrev>=4) bx bxs-star @endif "></i>
                             <i class="bx bx-star @if($avgrev>=5) bx bxs-star @endif "></i>@if($countreview>0)
-                                ({{$countreview}} İnceleme)
+                                ({{$countreview}} @lang("İnceleme") )
                             @endif
                         </div>
                     </div>
@@ -109,10 +108,8 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
     @endforeach
 </div>
 <br>
-
 {{-- Pagination --}}
 <div class="d-flex justify-content-center">
-
     @if(isset($data['sort']))
         {!! $datalist->appends(['sort'=>$data['sort']])->links() !!}
     @elseif(isset($_GET['sort']))
@@ -120,5 +117,4 @@ $parentCategoriess=\App\Http\Controllers\HomeController::categorylistall();
     @else
         {!! $datalist->links() !!}
     @endif
-
 </div>

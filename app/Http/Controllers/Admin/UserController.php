@@ -6,7 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,9 +20,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
         $datalist=User::all();
         return view('admin.user',['datalist'=>$datalist]);
@@ -26,7 +31,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -37,7 +42,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -47,10 +52,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @param $id
+     * @return Application|Factory|View
      */
-    public function show(User $user,$id)
+    public function show(User $user,$id): Application|Factory|View
     {
         $data = User::find($id);
         $datalist= Role::all()->sortBy('name');
@@ -60,63 +66,43 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @param $id
+     * @return Application|Factory|View
      */
-    public function edit(User $user,$id)
+    public function edit(User $user,$id): Application|Factory|View
     {
         $data = User::find($id);
-
         return view('admin.user_edit', ['data' => $data]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     * @param User $user
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(UserRequest $request, User $user,$id)
+    public function update(UserRequest $request, User $user,$id): RedirectResponse
     {
         $data = User::find($id);
         $data->name = $request->input('name');
         $data->email = $request->input('email');
         $data->phone = $request->input('phone');
         $data->address = $request->input('address');
-//
-//        if ($request->hasFile('image'))
-//        {
-//            $destination='images/profile'.$data->image;
-//            if(File::exists($destination)){
-//                File::delete($destination);
-//            }
-//
-//            $file=$request->file('image');
-//            $extension=$file->getClientOriginalExtension();
-//            $filename= time().'.'.$extension;
-//            $file->move('images',$filename);
-//            $data->image=$filename;
-//        }
-//        if ($request->file('image')!=null)
-//        {
-//            $file=$request->file('image');
-//            $extension=$file->getClientOriginalExtension();
-//            $filename= time().'.'.$extension;
-//            $file->move('images/profile',$filename);
-//            $data->profile_photo_path =$filename;//file upload
-//        }
         $data->save();
-        return redirect()->route('admin_users')->with('success','User Information Updated');
+        $message=__('User Information Updated');
+        return redirect()->route('admin_users')->with('success',$message);
     }
-    public function user_roles(User $user, $id)
+    public function user_roles(User $user, $id): Factory|View|Application
     {
         $data=User::find($id);
         $datalist= Role::all()->sortBy('name');
         return view('admin.user_role', ['data'=>$data,'datalist'=>$datalist]);
     }
 
-    public function user_role_store(Request $request,User $user, $id)
+    public function user_role_store(Request $request,User $user, $id): RedirectResponse
     {
         $user=User::find($id);
         $roleid=$request->input('roleid');
@@ -124,7 +110,7 @@ class UserController extends Controller
         return redirect()->back()->with('success','Role added to user');
     }
 
-    public function user_role_delete(Request $request,User $user, $userid,$roleid)
+    public function user_role_delete(Request $request,User $user, $userid,$roleid): RedirectResponse
     {
         $user=User::find($userid);
         $user->roles()->detach($roleid); #Many to Many ilişkisinden verilen rolu siler
@@ -134,13 +120,15 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy(User $user,$id)
+    public function destroy(User $user,$id): RedirectResponse
     {
         $data = User::find($id);
         $data->delete();
-        return redirect()->back()->with('toast_success', 'User Deleted');
+        $message=__('User Deleted');
+        return redirect()->back()->with('toast_success',$message );
     }
 }

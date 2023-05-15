@@ -2,22 +2,20 @@
     $setting=\App\Http\Controllers\HomeController::getsetting()
 @endphp
 @extends('layouts.home')
-
-@section('title','About Us-'.$setting->title)
+@section('title', __('About Us').'-'.$setting->title)
 @section('description')
     {{$setting->description}}
 @endsection
 @section('keywords',$setting->keywords)
-
 @section('content')
     <!-- Start Page Title -->
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h2>Hakkımızda</h2>
+                <h2>@lang('Hakkımızda')</h2>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>Hakkımızda</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("Hakkımızda")</li>
                 </ul>
             </div>
         </div>
@@ -30,6 +28,7 @@
                 {!!$setting->aboutus!!}
             </div>
         </div>
+
     </section>
     <!-- End Customer Service Area -->
 

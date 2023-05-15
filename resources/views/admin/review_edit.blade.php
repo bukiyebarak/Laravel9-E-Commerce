@@ -1,5 +1,5 @@
 <!--favicon-->
-<link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32.png" type="image/png"/>
+<link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32-gnc.png" type="image/png"/>
 <!--plugins-->
 <link href="{{asset('assets')}}/admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
 <link href="{{asset('assets')}}/admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
@@ -17,8 +17,7 @@
 <div class="page-wrapper">
     <div class="card">
         <div class="card-body">      @include('sweetalert::alert')
-            <h4 class="mb-0">Review Detail</h4>
-
+            <h4 class="mb-0">@lang("Review Detail")</h4>
             <hr/>
             <div class="row gy-3">
                 <div class="col-md-12">
@@ -34,40 +33,40 @@
                                     <td>{{$data->id}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>@lang("Name")</th>
                                     <td>{{$data->user->name}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>@lang("Product")</th>
                                     <td>{{$data->product->title}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Subject</th>
+                                    <th>@lang("Subject")</th>
                                     <td>{{$data->subject}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Review</th>
+                                    <th>@lang("Review")</th>
                                     <td>{{$data->review}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Rate</th>
+                                    <th>@lang("Rate")</th>
                                     <td>{{$data->rate}}</td>
                                 </tr>
                                 <tr>
-                                    <th>IP</th>
+                                    <th>@lang("IP")</th>
                                     <td>{{$data->IP}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Created Data</th>
+                                    <th>@lang("Created Date")</th>
                                     <td>{{$data->created_at}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Update Data</th>
+                                    <th>@lang("Update Date")</th>
                                     <td>{{$data->updated_at}}</td>
                                 </tr>
 
                                 <tr>
-                                    <th> Status</th>
+                                    <th>@lang("Status") </th>
                                     <td>
                                         <select name="status">
                                             <option>{{$data->status}}</option>
@@ -83,7 +82,7 @@
                                     <td></td>
                                     <td>
                                         <div class="col-12">
-                                            <button class="btn btn-danger" type="submit">Update Review</button>
+                                            <button class="btn btn-danger" type="submit">@lang("Update Review")</button>
                                         </div>
                                     </td>
                                 </tr>

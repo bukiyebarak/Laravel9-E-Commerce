@@ -4,7 +4,7 @@
 <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 <!--End Back To Top Button-->
 <footer class="page-footer">
-    <p class="mb-0"> © E Commerce 2022 Tüm Hakları Saklıdır, Kopyalanamaz</p>
+    <p class="mb-0"> © @lang("E-Ticaret 2023 Tüm Hakları Saklıdır, Kopyalanamaz")</p>
     <p>V:1.0.1</p>
 </footer>
 </div>
@@ -15,7 +15,7 @@
     </div>
     <div class="switcher-body">
         <div class="d-flex align-items-center">
-            <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+            <h5 class="mb-0 text-uppercase">@lang("Theme Customizer") </h5>
             <button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
         </div>
         <hr/>

@@ -17,11 +17,25 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-      $userRoles = Auth::user()->roles->pluck('name');
-        #dd($userRoles);
-        if (!$userRoles->contains('admin')){
-            return redirect(route('adminlogin'))->with('error','You do not have permission');
+        if (Auth::check()) {
+            $userRoles = Auth::user()->roles->pluck('name');
+//            dd($userRoles);
+            if (!$userRoles->contains('admin')){
+                $message = __('You do not have permission');
+                alert()->error($message)->toToast()->timerProgressBar();
+                return redirect(route('adminlogin'));
+            }
+        } else {
+            $message = __('You must be logged in to access this page');
+            alert()->error($message)->toToast()->timerProgressBar();
+            return redirect(route('adminlogin'));
         }
+
+//        $userRoles = Auth::user()->roles->pluck('name');
+//        #dd($userRoles);
+//        if (!$userRoles->contains('admin')){
+//            return redirect(route('adminlogin'))->with('error','You do not have permission');
+//        }
         return $next($request);
     }
 }

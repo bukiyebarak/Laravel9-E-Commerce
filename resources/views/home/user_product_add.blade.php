@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.home')
 
-@section('title','User Product ADD')
+@section('title', __('User Product Add'))
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -17,10 +17,10 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h4>User Product Add</h4>
+                <h4>@lang("User Product Add")</h4>
                 <ul>
-                    <li><a href="{{route('home')}}">Anasayfa</a></li>
-                    <li>User Product add</li>
+                    <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
+                    <li>@lang("User Product add")</li>
                 </ul>
             </div>
         </div>
@@ -36,49 +36,48 @@
                       enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <h6>Category</h6>
+                        <h6>@lang("Category")</h6>
                         <select class="form-select" name="category_id">
                             @foreach($datalist as $rs)
                                 <option value="{{$rs->id}}">{{\App\Http\Controllers\Admin\CategoryController::getParentsTree($rs,$rs->title)}} </option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <h6>Title</h6>
+                        <h6>@lang("Title")</h6>
                         <input type="text" name="title"  class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <h6>Keywords</h6>
+                        <h6>@lang("Keywords")</h6>
                         <input type="text" name="keywords" class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Description</h6>
+                        <h6>@lang("Description")</h6>
                         <input type="text" name="description"
                                class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Price</h6>
+                        <h6>@lang("Price")</h6>
                         <input type="number" name="price" value="0"
                                class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Stock</h6>
+                        <h6>@lang("Stock")</h6>
                         <input type="number" name="quantity" value="2" class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Minquantity</h6>
+                        <h6>@lang("Minquantity")</h6>
                         <input type="number" name="minquantity" value="1"
                                class="form-control"
                         >
                     </div>
                     <div class="form-group">
-                        <h6>Tax</h6>
+                        <h6>@lang("Tax")</h6>
                         <input type="number" name="tax" value="18" class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Detail</h6>
+                        <h6>@lang("Detail")</h6>
                         <textarea id="summernote" name="detail"></textarea>
                         <script>
                             $('#summernote').summernote({
@@ -99,23 +98,21 @@
                     </div>
 
                     <div class="form-group">
-                        <h6>Slug</h6>
+                        <h6>@lang("Slug")</h6>
                         <input type="text" name="slug" class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Image</h6>
+                        <h6>@lang("Image")</h6>
                         <input type="file" name="image" class="form-control">
                     </div>
                     <div class="form-group">
-                        <h6>Status</h6>
+                        <h6>@lang("Status")</h6>
                         <select class="form-select" name="status" required>
                             <option selected="selected">False</option>
                             <option>True</option>
-
                         </select>
                     </div><br>
-                    <button class="default-btn" type="submit">Add Product</button>
-
+                    <button class="default-btn" type="submit">@lang("Add Product")</button>
                 </form>
                 </div>
             </div>
