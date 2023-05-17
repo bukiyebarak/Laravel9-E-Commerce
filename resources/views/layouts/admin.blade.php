@@ -12,10 +12,9 @@
     <link href="{{asset('assets')}}/admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
     <link href="{{asset('assets')}}/admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet"/>
     <link href="{{asset('assets')}}/admin/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
-    <link href="{{asset('assets')}}/admin/assets/plugins/fullcalendar/css/main.min.css" rel="stylesheet"/>
+{{--    <link href="{{asset('assets')}}/admin/assets/plugins/fullcalendar/css/main.min.css" rel="stylesheet"/>--}}
     <!-- loader-->
     <link href="{{asset('assets')}}/admin/assets/css/pace.min.css" rel="stylesheet"/>
-    <link href="{{asset('assets')}}/admin/assets/plugins/fullcalendar/main.css" rel="stylesheet"/>
     <script src="{{asset('assets')}}/admin/assets/js/pace.min.js"></script>
     <!-- Bootstrap CSS -->
     <link href="{{asset('assets')}}/admin/assets/css/bootstrap.min.css" rel="stylesheet">

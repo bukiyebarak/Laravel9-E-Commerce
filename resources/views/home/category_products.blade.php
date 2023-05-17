@@ -3,14 +3,12 @@
     $parentCategoriesdata=\App\Http\Controllers\HomeController::categorylist();
     $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
-
-
 @extends('layouts.home')
-
 @section('title', $data->title. __('  Products List'))
 @section('description')
     {{$data->description}}
 @endsection
+
 @section('content')
     <style>
         .heartbtn {
@@ -54,7 +52,6 @@
                         <section class="widget widget_categories">
                             <div class="woocommerce-widget price-list-widget">
                                 <h3 class="widget-title">@lang("Price")</h3>
-
                                 <div class="collection-filter-by-price">
                                     <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
                                            name="filter_by_price" data-step="10">

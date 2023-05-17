@@ -30,11 +30,9 @@
             <div class="row">
                 <div class="col-lg-5 col-md-12">
                     <div class="products-details-image">
-
                         <ul class="products-details-image-slides">
                             <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
                         </ul>
-
                         <div class="slick-thumbs">
                             <ul>
                                 <li><img src="{{asset('images/'.$data->image)}}" alt="image"></li>
@@ -58,8 +56,6 @@
                         {{--                                <span class="old-price">{{$data->price}} &#8378; </span>--}}
                         {{--                                <span class="new-price">{{$data->sale_price}} &#8378; </span>--}}
                         {{--                            </div>--}}
-
-
                         <ul class="products-info">
                             <li><span>Availability:</span> <a href="javascript:void(0);">
                                     @if($data->quantity<=5 && $data->quantity>0)
@@ -78,12 +74,12 @@
                             <li><span>@lang("Products Type"):</span> <a
                                     href="javascript:void(0);"> {{$data->category->title}}</a></li>
                             <li><span>@lang("Products Description"):</span> <a
-                                    href="javascript:void(0);"> {{$data->description}}</a></li>
+                                    href="javascript:void(0);">{{$data->description}}</a></li>
                         </ul>
                         <br>
                         <div class="products-info-btn">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#productsShippingModal"><i
-                                    class='bx bxs-truck'></i> @lang("Shipping")</a>
+                                    class='bx bxs-truck'></i> @lang("Shippingg")</a>
                             <a href="{{route('contact')}}"><i class='bx bx-envelope'></i> @lang("Ask about this products")</a>
                         </div>
                         <br>

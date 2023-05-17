@@ -1,9 +1,9 @@
 <?php return array (
-  'astrotomic/laravel-translatable' => 
+  'cviebrock/eloquent-sluggable' => 
   array (
     'providers' => 
     array (
-      0 => 'Astrotomic\\Translatable\\TranslatableServiceProvider',
+      0 => 'Cviebrock\\EloquentSluggable\\ServiceProvider',
     ),
   ),
   'jenssegers/agent' => 

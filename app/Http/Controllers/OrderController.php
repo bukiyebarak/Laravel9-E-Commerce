@@ -48,7 +48,7 @@ class OrderController extends Controller
     {
         $name=__("User Orders");
         $data= __("Şipariş bulunumadı. Keyifli alışverişler dileriz. ");
-        $datalist = Order::where('user_id', Auth::id())->get();
+        $datalist = Order::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         if($datalist->count()==0){
             return view('home.blank_data', ['data' => $data,'name'=>$name]);
         }
@@ -61,7 +61,7 @@ class OrderController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create(Request $request): Application|Factory|View
+    public function create(Request $request)
     {
         $total = $request->input('total');
 
@@ -84,7 +84,7 @@ class OrderController extends Controller
     {
         $did = $request->post('did');
         $getneighbourhood = DB::table('neighbourhood')->where('mahalle_ilcekey', '=', $did)->orderBy('mahalle_key', 'asc')->get();
-        $html = '<option value="">'. __(' Mahalle Seçiniz') . '</option>';
+        $html = '<option value="">'. __('Mahalle Seçiniz') . '</option>';
         foreach ($getneighbourhood as $rs) {
             $html .= '<option value="' . $rs->mahalle_key . '">' . $rs->mahalle_title . '</option>';
         }

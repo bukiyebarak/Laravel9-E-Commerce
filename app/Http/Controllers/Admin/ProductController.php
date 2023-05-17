@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Psy\Util\Str;
 
 class ProductController extends Controller
 {
@@ -72,11 +74,10 @@ class ProductController extends Controller
         $data->is_sale = $request->input('is_sale');
         $data->sale = $request->input('sale');
 
-        if ( $request->input('is_sale')=="Yes"){
+        if ($request->input('is_sale') == "Yes") {
             $data->sale_price = $totalsale;
-        }
-        else
-            $data->sale_price =$request->input('price') ;
+        } else
+            $data->sale_price = $request->input('price');
         $data->tax = $request->input('tax');
         $data->user_id = Auth::id();
         if ($request->hasfile('image')) {
@@ -100,7 +101,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-      //
+        //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Product::class, 'slug', $request->title_tr);
+        return response()->json(['slug' => $slug]);
     }
 
     /**
@@ -166,10 +173,9 @@ class ProductController extends Controller
         $data->tax = (int)$request->input('tax');
         $data->is_sale = $request->input('is_sale');
         $data->sale = $request->input('sale');
-        if ( $request->input('is_sale')=="Yes"){
+        if ($request->input('is_sale') == "Yes") {
             $data->sale_price = $totalsale;
-        }
-        else
+        } else
             $data->sale_price = $request->input('price');
         $data->user_id = Auth::id();
         if ($request->hasFile('image')) {
@@ -185,8 +191,8 @@ class ProductController extends Controller
             $data->image = $filename;
         }
         $data->save();
-        $message=__('Product Update Successfully');
-        return redirect()->route('admin_products')->with('success', $message );
+        $message = __('Product Update Successfully');
+        return redirect()->route('admin_products')->with('success', $message);
     }
 
     /**
@@ -200,7 +206,7 @@ class ProductController extends Controller
     {
         $data = Product::find($id);
         $data->delete();
-        $message=__( 'Product is Deleted.');
+        $message = __('Product is Deleted.');
         return redirect()->route('admin_products')->with('toast_success', $message);
     }
 }

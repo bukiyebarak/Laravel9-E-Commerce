@@ -2,17 +2,26 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory,Sluggable;
 
     protected $appends = ['title', 'keywords', 'description','detail'];
     protected $fillable = [
        'title_tr', 'keywords_tr', 'description_tr', 'title_en', 'keywords_en', 'description_en', 'image', 'detail', 'price', 'quantity', 'minquantity', 'tax', 'slug','category_id','slug','status'
     ];
+
+    public function scopeIsSearch( $query, $search)
+    {
+        $locale = app()->getLocale();
+        return $query->where('title_'.$locale, 'like', '%' . $search . '%');
+    }
     public function getTitleAttribute()
     {
         $language = app()->getLocale();
@@ -59,5 +68,18 @@ class Product extends Model
     public function orderitem()
     {
         return $this->hasMany(Orderitem::class);
+    }
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title_tr'
+            ]
+        ];
     }
 }

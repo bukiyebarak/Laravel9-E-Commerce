@@ -3,18 +3,22 @@
 namespace Illuminate\Support\Facades;
 
 /**
+ * @method static bool has(string $key)
+ * @method static mixed get(array|string $key, mixed $default = null)
+ * @method static array getMany(array $keys)
+ * @method static void set(array|string $key, mixed $value = null)
+ * @method static void prepend(string $key, mixed $value)
+ * @method static void push(string $key, mixed $value)
  * @method static array all()
- * @method static bool has($key)
- * @method static mixed get($key, $default = null)
- * @method static void prepend($key, $value)
- * @method static void push($key, $value)
- * @method static void set($key, $value = null)
+ * @method static void macro(string $name, object|callable $macro)
+ * @method static void mixin(object $mixin, bool $replace = true)
+ * @method static bool hasMacro(string $name)
+ * @method static void flushMacros()
  *
  * @see \Illuminate\Config\Repository
  */
 class Config extends Facade
 {
-
     /**
      * Get the registered name of the component.
      *
@@ -22,9 +26,6 @@ class Config extends Facade
      */
     protected static function getFacadeAccessor()
     {
-
-//        setcookie('same-site-cookie', 'http://127.0.0.1:8000/', ['samesite' => 'Lax']);
-//        setcookie('cross-site-cookie', 'https://sandbox-merchant.iyzipay.com/', ['samesite' => 'None', 'secure' => true]);
         return 'config';
     }
 }

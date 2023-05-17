@@ -79,7 +79,7 @@ class ProductRequest extends FormRequest
             'quantity' => 'required|numeric|min:0',
             'minquantity' => 'required|numeric|min:0',
             'tax' => 'required|numeric|min:0',
-            'slug' => 'required',
+            'slug' => ['required','alpha_dash', 'unique:products'],
             'sale' => 'required_if:is_sale,Yes',
             'is_sale' => 'nullable',
         ];

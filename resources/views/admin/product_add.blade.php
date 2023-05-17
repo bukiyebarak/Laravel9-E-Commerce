@@ -49,9 +49,16 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>@lang("Title") (@lang("Türkçe"))*</label>
-                                    <input type="text" name="title_tr" class="form-control" value="{{old('title_tr')}}">
+                                    <input type="text" id="title" name="title_tr" class="form-control" value="{{old('title_tr')}}">
                                     @if ($errors->has('title_tr'))
                                         <span class="text-danger">{{ $errors->first('title_tr') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Slug")*</label>
+                                    <input type="text" id="slug" name="slug" class="form-control" value="{{old('slug')}}">
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
@@ -139,7 +146,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>@lang("Price")*</label>
-                                    <input type="number" min="0" name="price" class="form-control"
+                                    <input type="number" min="0" name="price" class="form-control" autocomplete="off"
                                            value="{{old('price')}}">
                                     @if ($errors->has('price'))
                                         <span class="text-danger">{{ $errors->first('price') }}</span>
@@ -189,13 +196,7 @@
                                         <span class="text-danger">{{ $errors->first('tax') }}</span>
                                     @endif
                                 </div>
-                                <div class="col-md-12">
-                                    <label>@lang("Slug")*</label>
-                                    <input type="text" name="slug" class="form-control" value="{{old('slug')}}">
-                                    @if ($errors->has('slug'))
-                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
-                                    @endif
-                                </div>
+
                                 <div class="col-md-12">
                                     <label>@lang("Image")*</label>
                                     <input type="file" name="image" value="{{old('image')}}" class="form-control">
@@ -232,7 +233,14 @@
 
 @section('footer')
     <script>
-
+        $('#title').change(function (e){
+            $.get('{{route('checkSlug')}}',
+                {'title_tr':$(this).val()},
+                function (data){
+                $('#slug').val(data.slug);
+                }
+            );
+        });
         $(document).ready(function () {
             $('#sale').hide();
             $('input[type="radio"]').click(function () {

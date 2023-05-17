@@ -20,7 +20,9 @@
             </div>
         </div>
     </div>
-
+    @php
+        $routeName = \Illuminate\Support\Facades\Route::currentRouteName();
+    @endphp
     <div class="xton-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
@@ -28,22 +30,21 @@
                     <img src="{{asset('assets')}}/home/assets/img/logognc.jpg" style="height: 70px; width: 90px"
                          class="white-logo" alt="logo">
                 </a>
-
                 <div class="collapse navbar-collapse mean-menu">
                     <ul class="navbar-nav">
-                        <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">@lang("Anasayfa")
+                        <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link"  @if($routeName == 'home') style="color: deeppink" @endif >@lang("Anasayfa")
                             </a>
                         </li>
-                        <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">@lang("Kampanyalar")</a>
+                        <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link" @if($routeName == 'discount_products') style="color: deeppink" @endif >@lang("Kampanyalar")</a>
                         </li>
                         <li class="nav-item"><a href="#" class="nav-link">@lang("Kategoriler") <i class='bx bx-chevron-down'></i></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a
-                                        href="{{route('allproducts')}}"
-                                        class="nav-link">@lang("Tüm Ürünler")</a>
+                                        href="{{route('allproducts')}}" @if($routeName == 'allproducts') style="color: deeppink" @endif
+                                    class="nav-link">@lang("Tüm Ürünler")</a>
                                 </li>
-                                <li class="nav-item"><a
-                                        href="{{route('main_category_products_paket')}}"
+                                <li class="nav-item"><a @if($routeName == 'main_category_products_paket') style="color: deeppink" @endif
+                                    href="{{route('main_category_products_paket')}}"
                                         class="nav-link">@lang("Paket")<i
                                             class='bx bx-chevron-left'></i></a>
                                     <ul class="dropdown-menu">
@@ -67,13 +68,13 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="nav-item megamenu"><a href="{{route('new_products')}}" class="nav-link">@lang("Yeni Ürünler") </a></li>
-                        <li class="nav-item megamenu"><a href="{{route('aboutus')}}" class="nav-link">@lang("Hakkımızda")</a>
+                        <li class="nav-item megamenu"><a href="{{route('new_products')}}" @if($routeName == 'new_products') style="color: deeppink" @endif  class="nav-link">@lang("Yeni Ürünler") </a></li>
+                        <li class="nav-item megamenu"><a href="{{route('aboutus')}}" @if($routeName == 'aboutus') style="color: deeppink" @endif class="nav-link">@lang("Hakkımızda")</a>
                         </li>
-                        <li class="nav-item megamenu"><a href="{{route('references')}}" class="nav-link">@lang("Referanslar")</a>
+                        <li class="nav-item megamenu"><a href="{{route('references')}}" @if($routeName == 'references') style="color: deeppink" @endif  class="nav-link">@lang("Referanslar")</a>
                         </li>
-                        <li class="nav-item megamenu"><a href="{{route('faq')}}" class="nav-link">@lang("Sıkça Sorulan Sorular")  </a></li>
-                        <li class="nav-item megamenu"><a href="{{route('contact')}}" class="nav-link">@lang("İletişim")</a></li>
+                        <li class="nav-item megamenu"><a href="{{route('faq')}}" @if($routeName == 'faq') style="color: deeppink" @endif  class="nav-link">@lang("Sıkça Sorulan Sorular")  </a></li>
+                        <li class="nav-item megamenu"><a href="{{route('contact')}}" @if($routeName == 'contact') style="color: deeppink" @endif class="nav-link">@lang("İletişim")</a></li>
                     </ul>
                     <div class="others-option">
                         <div class="option-item">
@@ -113,7 +114,7 @@
                 <div class="collapse navbar-collapse mean-menu">
                     <ul class="navbar-nav">
                         <ul class="navbar-nav">
-                            <li class="nav-item megamenu"><a href="{{route('home')}}" class="nav-link">@lang("Anasayfa")
+                            <li class="nav-item megamenu" ><a href="{{route('home')}}"  class="nav-link ">@lang("Anasayfa")
                                 </a>
                             </li>
                             <li class="nav-item megamenu"><a href="{{route('discount_products')}}" class="nav-link">@lang("Kampanyalar")</a>
@@ -183,10 +184,14 @@
                 <form action="{{route('getproduct')}}" method="post">
                     @csrf
                     @livewire('search')
+
                     <button type="submit"><i class='bx bx-search-alt'></i></button>
                 </form>
+
                 @section('footerjs')
+
                     @livewireScripts
+
                 @endsection
             </div>
         </div>

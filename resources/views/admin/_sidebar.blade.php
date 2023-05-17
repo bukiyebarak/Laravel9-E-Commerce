@@ -101,7 +101,14 @@
                 &nbsp;@lang("Users")
             </a>
         </li>
-
+        <li class="menu-label">@lang("ROLES")</li>
+        <li>
+            <a href="{{route('roles')}}">
+                <div class="parent-icon"><i class="bx bx-task"></i>
+                </div>
+                &nbsp;@lang("Roles")
+            </a>
+        </li>
         <li class="menu-label">@lang("DİL AYARLARI")</li>
         <li>
             <a href="/languages" target="_blank">

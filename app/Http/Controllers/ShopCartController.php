@@ -51,9 +51,9 @@ class ShopCartController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $id): \Illuminate\Http\Response
+    public function store(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
         $data = Shopcart::where('product_id', $id)->where('user_id', Auth::id())->first();
         if ($data) {

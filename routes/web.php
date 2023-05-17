@@ -15,6 +15,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShopCartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
@@ -77,6 +78,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->prefix('admin')->group(function () {
     #admin roles system
     Route::middleware('admin')->group(function () {
+        Route::prefix('role')->group(function () {
+            //Route assigned name "admin_users"...
+            Route::get('/', [ RoleController::class, 'index'])->name('roles');
+            Route::post('/add-role',[RoleController::class,'store'])->name('role_store');
+            Route::put('update/{id}', [ RoleController::class, 'update'])->name('admin_role_update');
+            Route::delete('delete/{id}', [ RoleController::class, 'destroy'])->name('admin_role_delete');
+        });
         Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('adminhome');
 
         #Category
@@ -107,7 +115,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::post('update/{id}', [ProductController::class, 'update'])->name('admin_product_update');
             Route::get('delete/{id}', [ProductController::class, 'destroy'])->name('admin_product_delete');
             Route::get('show', [ProductController::class, 'show'])->name('admin_product_show');
-
+            Route::get('checkSlug', [ProductController::class, 'checkSlug'])->name('checkSlug');
             #paket product
             Route::prefix('paket')->group(function () {
                 Route::get('/', [PaketProductController::class, 'index'])->name('admin_paket_products');

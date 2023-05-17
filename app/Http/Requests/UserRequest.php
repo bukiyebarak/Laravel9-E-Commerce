@@ -45,7 +45,7 @@ class UserRequest extends FormRequest
             'name' => 'required|min:3',
             'surname' => 'required|min:3',
             'email' => 'required|email|max:255',
-            'phone' => 'required|digits:11',
+            'phone' => 'nullable|digits:11',
             'address' => 'required|min:5|max:100',
         ];
     }

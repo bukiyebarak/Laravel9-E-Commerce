@@ -429,13 +429,37 @@
       'login' => 'login',
       'two-factor' => 'two-factor',
     ),
+    'paths' => 
+    array (
+      'login' => NULL,
+      'logout' => NULL,
+      'password.request' => NULL,
+      'password.reset' => NULL,
+      'password.email' => NULL,
+      'password.update' => NULL,
+      'register' => NULL,
+      'verification.notice' => NULL,
+      'verification.verify' => NULL,
+      'verification.send' => NULL,
+      'user-profile-information.update' => NULL,
+      'user-password.update' => NULL,
+      'password.confirm' => NULL,
+      'password.confirmation' => NULL,
+      'two-factor.login' => NULL,
+      'two-factor.enable' => NULL,
+      'two-factor.confirm' => NULL,
+      'two-factor.disable' => NULL,
+      'two-factor.qr-code' => NULL,
+      'two-factor.secret-key' => NULL,
+      'two-factor.recovery-codes' => NULL,
+    ),
     'redirects' => 
     array (
-      'login' => 'login',
+      'login' => NULL,
       'logout' => NULL,
       'password-confirmation' => NULL,
-      'register' => 'login',
-      'email-verification' => 'myaccount',
+      'register' => NULL,
+      'email-verification' => NULL,
       'password-reset' => NULL,
     ),
     'features' => 
@@ -751,6 +775,23 @@
     'http_only' => true,
     'same_site' => NULL,
   ),
+  'sluggable' => 
+  array (
+    'source' => NULL,
+    'maxLength' => NULL,
+    'maxLengthKeepWords' => true,
+    'method' => NULL,
+    'separator' => '-',
+    'unique' => true,
+    'uniqueSuffix' => NULL,
+    'firstUniqueSuffix' => 2,
+    'includeTrashed' => false,
+    'reserved' => NULL,
+    'onUpdate' => false,
+    'slugEngineOptions' => 
+    array (
+    ),
+  ),
   'sweetalert' => 
   array (
     'cdn' => NULL,
@@ -831,34 +872,6 @@
       0 => 'C:\\xampp\\htdocs\\Laravel9J\\resources\\views',
     ),
     'compiled' => 'C:\\xampp\\htdocs\\Laravel9J\\storage\\framework\\views',
-  ),
-  'translatable' => 
-  array (
-    'locales' => 
-    array (
-      0 => 'en',
-      1 => 'fr',
-      'es' => 
-      array (
-        0 => 'MX',
-        1 => 'CO',
-      ),
-    ),
-    'locale_separator' => '-',
-    'locale' => NULL,
-    'use_fallback' => false,
-    'use_property_fallback' => true,
-    'fallback_locale' => 'en',
-    'translation_model_namespace' => NULL,
-    'translation_suffix' => 'Translation',
-    'locale_key' => 'locale',
-    'to_array_always_loads_translations' => true,
-    'rule_factory' => 
-    array (
-      'format' => 1,
-      'prefix' => '%',
-      'suffix' => '%',
-    ),
   ),
   'livewire' => 
   array (

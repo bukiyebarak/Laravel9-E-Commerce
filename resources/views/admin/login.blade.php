@@ -27,7 +27,7 @@
 <style>
     .authentication-header {
         position: absolute;
-        background: rgb(243, 63, 133);
+        background: rgb(175, 175, 185);
         top: 0;
         left: 0;
         right: 0;

@@ -192,10 +192,10 @@ class HomeController extends Controller
     public function getproduct(Request $request): \Illuminate\Http\RedirectResponse
     {
         $search = $request->input('search');
-        $count = Product::where('title', 'like', '%' . $search . '%')->get()->count();
+        $count = Product::IsSearch($search)->get()->count();
 //        $data1 = Product::where('title', 'like', '%' . $search . '%')->get()->count();
         if ($count == 1) {
-            $data = Product::where('title', 'like', '%' . $search . '%')->first();
+            $data = Product::IsSearch($search)->first();
             return redirect()->route('product', ['id' => $data->id, 'slug' => $data->slug]);
         } elseif ($count == 0)
         {
@@ -208,7 +208,7 @@ class HomeController extends Controller
 
     public function productlist($search): Factory|View|Application
     {
-        $datalist = Product::where('title', 'like', '%' . $search . '%');
+        $datalist = Product::IsSearch($search);
         $this->getSort($datalist);
         // dd($datalist);
         $datalist = $datalist->paginate(5);

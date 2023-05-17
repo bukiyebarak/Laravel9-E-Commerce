@@ -46,9 +46,16 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>@lang("Title") (@lang("Türkçe"))</label>
-                                    <input type="text" name="title_tr" value="{{$data->title_tr}}" class="form-control">
+                                    <input type="text" id="title" name="title_tr" value="{{$data->title_tr}}" class="form-control">
                                     @if ($errors->has('title_tr'))
                                         <span class="text-danger">{{ $errors->first('title_tr') }}</span>
+                                    @endif
+                                </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Slug")</label>
+                                    <input type="text" id="slug" name="slug" value="{{$data->slug}}" class="form-control">
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
@@ -144,8 +151,9 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>@lang("Is Sale?")</label>
+                                    <input type="hidden" id="is_sale_value"  value="{{$data->is_sale}}">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="yes" value="Yes" checked>
+                                        <input class="form-check-input" type="radio" name="is_sale" id="yes" value="Yes" @if($data->is_sale=="Yes") checked @endif >
                                         <label class="form-check-label" for="yes">Yes</label>
                                         <br>
                                     <div id="sale" >
@@ -158,7 +166,7 @@
                                     </div>
                                     </div>
                                     <div class="form-check ">
-                                        <input class="form-check-input" type="radio" name="is_sale" id="no" value="No">
+                                        <input class="form-check-input" type="radio" name="is_sale" id="no" value="No" @if($data->is_sale=="No") checked @endif >
                                         <label class="form-check-label" for="no">@lang("No")</label>
                                     </div>
                                 </div>
@@ -183,13 +191,6 @@
                                     <input type="number" name="tax" value="{{$data->tax}}" min="0" class="form-control">
                                     @if ($errors->has('tax'))
                                         <span class="text-danger">{{ $errors->first('tax') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-12">
-                                    <label>@lang("Slug")</label>
-                                    <input type="text" name="slug" value="{{$data->slug}}" class="form-control">
-                                    @if ($errors->has('slug'))
-                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-md-12">
@@ -236,9 +237,18 @@
 
 @section('footer')
     <script>
-
+        $('#title').change(function (e){
+            $.get('{{route('checkSlug')}}',
+                {'title_tr':$(this).val()},
+                function (data){
+                    $('#slug').val(data.slug);
+                }
+            );
+        });
         $(document).ready(function() {
             $('#sale').hide();
+            if($('#is_sale_value').val()=="Yes")
+                $('#sale').show();
             $('input[type="radio"]').click(function () {
                 if ($(this).attr("value") == "Yes") {
                     $('#sale').show();
@@ -246,9 +256,7 @@
                 if ($(this).attr("value") == "No") {
                     $('#sale').hide();
                 }
-
             });
         });
-        $('input[type="radio"]').trigger('click');
     </script>
 @endsection

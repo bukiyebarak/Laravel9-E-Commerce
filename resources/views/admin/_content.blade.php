@@ -715,3 +715,5 @@
     </div>
 </div>
 <!--end page wrapper -->
+
+<script src="{{asset('assets')}}/admin/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>

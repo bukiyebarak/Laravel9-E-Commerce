@@ -4,7 +4,7 @@
     $parentCategories=\App\Http\Controllers\HomeController::categorylistall()
 @endphp
 @extends('layouts.home')
-@section('title',__("Package Products"))
+@section('title',__('Package Products'))
 @section('content')
     <style>
         .heartbtn {
@@ -17,7 +17,7 @@
     <div class="page-title-area">
         <div class="container">
             <div class="page-title-content">
-                <h5>Package Products</h5>
+                <h5>@lang("Package Products")</h5>
                 <ul>
                     <li><a href="{{route('home')}}">@lang("Anasayfa")</a></li>
                     <li>@lang("Ürün Listesi")</li>
@@ -44,15 +44,6 @@
                             @section('footerjs')
                                 @livewireScripts
                             @endsection
-                        </section>
-                        <section class="widget widget_categories">
-                            <div class="woocommerce-widget price-list-widget">
-                                <h3 class="widget-title">@lang("Price")</h3>
-                                <div class="collection-filter-by-price">
-                                    <input class="js-range-of-price" type="text" data-min="0" data-max="1055"
-                                           name="filter_by_price" data-step="10">
-                                </div>
-                            </div>
                         </section>
                         <br>
                         <section class="widget widget_categories">

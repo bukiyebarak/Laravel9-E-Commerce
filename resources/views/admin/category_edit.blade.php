@@ -36,7 +36,7 @@
                                   action="{{route('admin_category_update', ['id'=>$data->id])}}" method="post">
                                 @csrf
                                 <div class="col-md-12">
-                                    <label>@lang("Parent")*</label>
+                                    <label>@lang("Parent") *</label>
                                     <select class="form-select" name="parent_id" style="...">
                                         <option value="0">@lang("Main Category")</option>
                                       @foreach($datalist as $rs)
@@ -46,11 +46,17 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label>@lang("Title") (@lang("Türkçe"))*</label>
-                                    <input type="text" name="title_tr" value="{{$data->title_tr}}" class="form-control">
+                                    <input type="text" id="title" name="title_tr" value="{{$data->title_tr}}" class="form-control">
                                     @if ($errors->has('title_tr'))
                                         <span class="text-danger">{{ $errors->first('title_tr') }}</span>
                                     @endif
                                 </div>
+                                <div class="col-md-12">
+                                    <label>@lang("Slug")*</label>
+                                    <input type="text" id="slug" name="slug" value="{{$data->slug}}" class="form-control">
+                                    @if ($errors->has('slug'))
+                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
+                                    @endif</div>
                                 <div class="col-md-12">
                                     <label>@lang("Keywords") (@lang("Türkçe"))*</label>
                                     <input type="text" name="keywords_tr" value="{{$data->keywords_tr}}" class="form-control" >
@@ -129,12 +135,6 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12">
-                                    <label>@lang("Slug")*</label>
-                                    <input type="text" name="slug"  value="{{$data->slug}}" class="form-control">
-                                    @if ($errors->has('slug'))
-                                        <span class="text-danger">{{ $errors->first('slug') }}</span>
-                                    @endif</div>
-                                <div class="col-md-12">
                                     <label>@lang("Status")</label>
                                     <select class="form-select" name="status" required>
                                         <option selected="selected">{{$data->status}}</option>
@@ -163,3 +163,16 @@
 
     <!--end page wrapper -->
 @endsection
+
+ @section('footer')
+     <script>
+         $('#title').change(function (e) {
+             $.get('{{route('checkSlug')}}',
+                 {'title_tr': $(this).val()},
+                 function (data) {
+                     $('#slug').val(data.slug);
+                 }
+             );
+         });
+     </script>
+ @endsection

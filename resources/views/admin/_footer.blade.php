@@ -112,12 +112,11 @@
 <script src="{{asset('assets')}}/admin/assets/plugins/simplebar/js/simplebar.min.js"></script>
 <script src="{{asset('assets')}}/admin/assets/plugins/metismenu/js/metisMenu.min.js"></script>
 <script src="{{asset('assets')}}/admin/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-<script src="{{asset('assets')}}/admin/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 <script src="{{asset('assets')}}/admin/assets/js/index3.js"></script>
 <script>
-    new PerfectScrollbar('.best-selling-products');
-    new PerfectScrollbar('.recent-reviews');
-    new PerfectScrollbar('.support-list');
+    // new PerfectScrollbar('.best-selling-products');
+    // new PerfectScrollbar('.recent-reviews');
+    // new PerfectScrollbar('.support-list');
 </script>
 <!--app JS-->
 <script src="{{asset('assets')}}/admin/assets/js/app.js"></script>
