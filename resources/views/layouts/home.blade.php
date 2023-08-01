@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/style.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/dark.css">
     <link rel="stylesheet" href="{{asset('assets')}}/home/assets/css/responsive.css">
-    <link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32-gnc.png" type="image/png"/>
+    <link rel="icon" href="{{asset('assets')}}/admin/assets/images/favicon-32x32.png" type="image/png"/>
     <link href="{{asset('assets')}}/admin/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <script src="{{asset('assets')}}/home/assets/js/custom.js"></script>
     <script src="{{asset('assets')}}/home/assets/js/customnotajax.js"></script>
